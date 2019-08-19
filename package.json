@@ -4,7 +4,9 @@
   "description": "pcoroneos portfolio using next.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,14 @@
   },
   "homepage": "https://github.com/PaulACoroneos/pcoroneos-nextjs#readme",
   "dependencies": {
+    "eslint": "^6.2.0",
     "next": "^9.0.3",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2"
   }
 }
