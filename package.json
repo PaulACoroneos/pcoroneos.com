@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "export": "next export",
-    "deploy": "npm run build && npm run export",
-    "start": "next start"
+    "build": "next build && next export",
+    "start": "serve ./out"
   },
   "repository": {
     "type": "git",
