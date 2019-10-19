@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Header } from '../components';
+import { Header } from '../src/components';
 
-const Aboutpage: React.FC = () => (
-  <div className="container">
+const About: React.FC = () => (
+  <>
     <Header />
-  </div>
+  </>
 );
 
-export default Aboutpage;
+export default About;
