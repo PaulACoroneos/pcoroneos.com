@@ -10,11 +10,11 @@ interface BlogpostProps {
   blogpost: Blogpost;
 }
 export const Blogpost: React.FC<BlogpostProps> = ({
-  blogpost: { header, date, body },
+  blogpost: { header, date, body }
 }) => (
-    <BlogpostWrapper>
-      <h2>{header}</h2>
-      <h3>{`Date Posted: ${date}`}</h3>
-      <p>{body}</p>
-    </BlogpostWrapper>
-  );
+  <BlogpostWrapper>
+    <h2>{header}</h2>
+    <h3>{`Date Posted: ${date}`}</h3>
+    <p>{body}</p>
+  </BlogpostWrapper>
+);

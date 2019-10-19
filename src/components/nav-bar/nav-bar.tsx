@@ -1,5 +1,5 @@
-import * as React from "react";
-import { StyledNavbar, StyledAnchor } from "./nav-bar.styles";
+import * as React from 'react';
+import { StyledNavbar, StyledAnchor } from './nav-bar.styles';
 
 export const NavBar: React.FC = () => (
   <StyledNavbar>
