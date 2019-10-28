@@ -11,18 +11,10 @@ export const About: React.FC = () => (
     </Head>
     <style jsx global>{`
       body {
-        max-width: 800px;
-        margin: 0 auto;
-        background: #0e1111;
-        color: #fff;
-        width: 100%;
+        color: #000;
+        margin: 0px;
+        padding: 0px;
         font-size: 16px;
-      }
-      header {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 8px;
       }
     `}</style>
     <Header />

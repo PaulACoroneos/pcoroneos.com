@@ -6,4 +6,5 @@ export const StyledNavbar = styled.nav``;
 export const StyledAnchor = styled.a`
   text-decoration: none;
   padding: ${rem('8px')};
+  color: inherit;
 `;

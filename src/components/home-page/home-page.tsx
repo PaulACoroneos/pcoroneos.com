@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { HomePageWrapper, StyledSection } from './home-page.styles';
+import {
+  HomePageWrapper,
+  StyledSection,
+  AboutMe,
+  StyledProfileImg,
+  AboutMeDescription
+} from './home-page.styles';
 import { Blogpost } from '..';
 
 const blogPosts = [
@@ -12,16 +18,24 @@ const blogPosts = [
 ];
 
 export const HomePage: React.FC = () => (
-  <HomePageWrapper>
-    <section>
-      Hello there! My name is Paul. I am a front-end developer with a passion
-      for solving difficult problems and learning along the way.
-    </section>
-    <StyledSection>
-      <h2>Recent Blog Posts</h2>
-      {blogPosts.map((blogpost, index) => (
-        <Blogpost key={index} blogpost={blogpost} />
-      ))}
-    </StyledSection>
-  </HomePageWrapper>
+  <>
+    <AboutMe>
+      <StyledProfileImg
+        src="/paulcoroneos.jpg"
+        alt="Paul Coroneos Profile image"
+      />
+      <AboutMeDescription>
+        Hello there! My name is Paul. I am a front-end developer with a passion
+        for solving difficult problems and learning along the way.
+      </AboutMeDescription>
+    </AboutMe>
+    <HomePageWrapper>
+      <StyledSection>
+        <h2>Recent Blog Posts</h2>
+        {blogPosts.map((blogpost, index) => (
+          <Blogpost key={index} blogpost={blogpost} />
+        ))}
+      </StyledSection>
+    </HomePageWrapper>
+  </>
 );

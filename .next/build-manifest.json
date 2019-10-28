@@ -4,15 +4,7 @@
     "static/development/dll/dll_492c97d20afdca23aa1f.js.map"
   ],
   "pages": {
-    "/About": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/Blog": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/Portfolio": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
