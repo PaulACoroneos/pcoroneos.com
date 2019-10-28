@@ -38,8 +38,8 @@ module.exports = {
     rules: {
         "prettier/prettier": [0,
             {
-                "semi": false,
-                "singleQuote": true,
+                "semi": true,
+                "singleQuote": false,
                 "trailingComma": "es5",
                 "printWidth": 100,
                 "tabWidth": 2,
