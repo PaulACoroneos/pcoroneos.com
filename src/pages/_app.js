@@ -1,12 +1,15 @@
-/* eslint-ignore-file */
 import App from 'next/app';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const theme = {
   colors: {
-    primary: '#0070f3',
-    secondary: '#FFFFFF'
+    primary: '#666699',
+    secondary: '#2e3532',
+    tertiary: '#c7cedb',
+    quaternary: '#a0aab2',
+    quinary: '#122932'
+
   },
   breakpoints: {
     small: 320,

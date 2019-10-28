@@ -38,7 +38,7 @@ module.exports = {
     rules: {
         "prettier/prettier": [0,
             {
-                "semi": true,
+                "semi": false,
                 "singleQuote": true,
                 "trailingComma": "es5",
                 "printWidth": 100,
@@ -52,7 +52,7 @@ module.exports = {
         "semi": 0,
         "eqeqeq": [1, "always"],
         "quotes": [1, "single"],
-        "jsx-quotes": [2, "prefer-double"],
+        "jsx-quotes": [1, "prefer-single"],
         "no-undef": 0,
         "no-console": 1,
         "no-unused-vars": 0,

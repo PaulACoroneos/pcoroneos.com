@@ -5,8 +5,8 @@ import Head from 'next/head';
 export const About: React.FC = () =>
   <>
     <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta charSet="utf-8" />
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <meta charSet='utf-8' />
       <title>Paul Coroneos</title>
     </Head>
     <style jsx global>{`
@@ -18,6 +18,7 @@ export const About: React.FC = () =>
       }
     `}</style>
     <Header />
+    <span>Check back soon!</span>
   </>
   ;
 
