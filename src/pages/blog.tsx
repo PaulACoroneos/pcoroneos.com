@@ -3,7 +3,7 @@ import * as React from 'react';
 import { HomePage } from '../components/home-page';
 import Head from 'next/head';
 
-const Blog: React.FC = () => (
+const Blog: React.FC = () =>
   <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,6 @@ const Blog: React.FC = () => (
     <Header />
     <HomePage />
   </>
-);
+  ;
 
 export default Blog;

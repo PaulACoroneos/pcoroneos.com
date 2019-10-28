@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Header } from '../components';
 import Head from 'next/head';
 
-export const Portfolio: React.FC = () => (
+export const Portfolio: React.FC = () =>
   <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,6 @@ export const Portfolio: React.FC = () => (
     `}</style>
     <Header />
   </>
-);
+  ;
 
 export default Portfolio;
