@@ -1,6 +1,6 @@
 export const FULL_NAME = 'Paul Coroneos';
 
-//footer
+// footer
 const GITHUB = {
   img: 'github',
   alt: `${FULL_NAME} Github repository`,
