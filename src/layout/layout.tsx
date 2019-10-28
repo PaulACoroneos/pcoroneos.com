@@ -10,4 +10,5 @@ export const Layout: React.FC = ({ children }) =>
       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css' />
       <title>Paul Coroneos</title>
     </Head>
-    <Header />{children} </>
+    <Header />{children}
+  </>
