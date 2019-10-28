@@ -21,12 +21,14 @@ export const HomePage: React.FC = () =>
   <>
     <AboutMe>
       <StyledProfileImg
-        src="/paulcoroneos.jpg"
-        alt="Paul Coroneos Profile image"
+        src='/paulcoroneos.jpg'
+        alt='Paul Coroneos Profile image'
         />
       <AboutMeDescription>
-        Hello there! My name is Paul. I am a front-end developer with a passion
-        for solving difficult problems and learning along the way.
+        <span>Howdy!</span><br /><br />
+        <span>My name is Paul. I am a front-end developer with a passion
+       for solving problems.
+       </span>
       </AboutMeDescription>
     </AboutMe>
     <HomePageWrapper>

@@ -13,8 +13,8 @@ export const Blogpost: React.FC<BlogpostProps> = ({
   blogpost: { header, date, body }
 }) =>
   <BlogpostWrapper>
-    <h2>{header}</h2>
-    <h3>{`Date Posted: ${date}`}</h3>
+    <h3>{header}</h3>
+    <h4>{`Date Posted: ${date}`}</h4>
     <p>{body}</p>
   </BlogpostWrapper>
   ;
