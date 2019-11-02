@@ -3,7 +3,7 @@ import media from 'styled-media-query';
 import { rem } from 'polished';
 
 export const AboutMe = styled.section`
-  background: #666699;
+  background: ${props => props.theme.color.secondary};
   padding: 8px;
   color: #fff;
   font-size: 16px;
