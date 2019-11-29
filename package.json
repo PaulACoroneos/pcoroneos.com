@@ -68,12 +68,13 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run --silent lint:ts:fix",
+      "npm run test",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged & npm run test"
+      "pre-commit": "lint-staged"
     }
   }
 }
