@@ -1,10 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { HomePage } from '..';
+import { renderWithTheme } from '../../../utils'
 
 describe('<HomePage />', () => {
-  test('Expect header with text content Recent Blog Posts', () => {
-    const { getByText } = render(<HomePage />);
+  test('Expect HomePage to render', () => {
+    const { getByText } = renderWithTheme(<HomePage />);
     expect(getByText('Recent Blog Posts')).toBeInTheDocument();
   });
 });

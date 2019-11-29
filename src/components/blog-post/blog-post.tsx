@@ -15,6 +15,6 @@ export const Blogpost: React.FC<BlogpostProps> = ({
   <BlogpostWrapper>
     <h3>{header}</h3>
     <h4>{`Date Posted: ${date}`}</h4>
-    {body.map(part => <p key={date}>{part}</p>)}
+    {body.map((part, index) => <p key={index}>{part}</p>)}
   </BlogpostWrapper >
   ;

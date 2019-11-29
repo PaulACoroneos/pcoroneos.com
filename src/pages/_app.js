@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Layout } from '../layout'
 
-const theme = {
+export const theme = {
   color: {
     primary: '#6A85B7',
     secondary: '#094074',
