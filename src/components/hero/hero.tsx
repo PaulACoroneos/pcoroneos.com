@@ -8,11 +8,9 @@ export const Hero: React.FC = () =>
             alt='Paul Coroneos Profile image'
             />
         <AboutMeDescription>
-            <span>Howdy!</span>
-            <br />
-            <br />
-            <span>My name is Paul. I am a front-end developer with a passion
+            <h1>Howdy!</h1>
+            <h2>My name is Paul. I am a front-end developer with a passion
            for solving problems.
-            </span>
+            </h2>
         </AboutMeDescription>
     </AboutMe>

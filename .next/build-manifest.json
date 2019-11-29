@@ -8,10 +8,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/About": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -25,10 +21,6 @@
       "static/runtime/polyfills.js.map"
     ],
     "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/next/dist/pages/_error": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
