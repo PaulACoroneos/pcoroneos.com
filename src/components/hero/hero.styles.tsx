@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { rem } from 'polished';
 
-export const AboutMe = styled.section`
+export const AboutMe = styled.hgroup`
   background: ${props => props.theme.color.secondary};
   padding: 8px;
   color: #fff;
