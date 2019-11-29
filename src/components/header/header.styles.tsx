@@ -3,7 +3,7 @@ import { rem } from 'polished';
 import media from 'styled-media-query';
 
 export const StyledHeader = styled.header`
-  background: #2e3532;
+  background: ${props => props.theme.color.quaternary};
   color: #fff;
   display: flex;
   justify-content: space-between;

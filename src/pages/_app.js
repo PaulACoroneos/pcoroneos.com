@@ -4,12 +4,12 @@ import { ThemeProvider } from 'styled-components';
 import { Layout } from '../layout'
 
 const theme = {
-  colors: {
-    primary: '#666699',
-    secondary: '#2e3532',
-    tertiary: '#c7cedb',
-    quaternary: '#a0aab2',
-    quinary: '#122932'
+  color: {
+    primary: '#6A85B7',
+    secondary: '#094074',
+    tertiary: '#0D1321',
+    quaternary: '#1D2D44',
+    quinary: '#3e5c76'
 
   },
   breakpoints: {
