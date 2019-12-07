@@ -9,6 +9,7 @@ interface Blogpost {
 interface BlogpostProps {
   blogpost: Blogpost;
 }
+
 export const Blogpost: React.FC<BlogpostProps> = ({
   blogpost: { header, date, body }
 }) =>
