@@ -19,3 +19,8 @@ export const StyledHeader = styled.header`
 `}
 
 `;
+
+export const StyledName = styled.a`
+  text-decoration:none;
+  color: #fff;
+`

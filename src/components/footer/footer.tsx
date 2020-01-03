@@ -1,4 +1,4 @@
 import * as React from 'react';
 import { StyledFooter } from './footer.styles';
 
-export const Footer: React.FC = () => <StyledFooter />;
+export const Footer: React.FC = () => <StyledFooter>Paul Coroneos</StyledFooter>;

@@ -9,7 +9,6 @@ export const AboutMe = styled.hgroup`
   font-size: ${rem('16px')};
   border-radius: ${rem('10px')};
   display: flex;
-  justify-content: space-between;
   align-items: center;
   text-align:left;
 
@@ -73,7 +72,7 @@ ${
     }
 
     h2 {
-    font-size:${rem('24px')};
+    font-size:${rem('20px')};
   }
 `}
 `;

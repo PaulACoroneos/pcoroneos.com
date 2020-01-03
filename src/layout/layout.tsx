@@ -12,10 +12,14 @@ export const Layout: React.FC = ({ children }) =>
       <title>Paul Coroneos</title>
     </Head>
     <style jsx global>{`
+      html {
+        height:100%
+      }
       body { 
         font-size: 16px;
         font-family: 'Lora', serif;
         color:#1d1d1d;
+        min-height:100vh;
       }
       h1{
         font-size:48px;

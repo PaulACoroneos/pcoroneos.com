@@ -8,17 +8,17 @@ import { HelloWorld } from '../blog-posts/hello-world';
 import { ParseInt } from '../blog-posts/parse-int';
 import { RoleTab } from '../blog-posts/role-tab';
 
-export const HomePage: React.FC = () =>
-  <>
+const header = 'Howdy!';
+const subHeader = 'My name is Paul. I am a front-end developer with a passion for solving problems.';
 
-    <HomePageWrapper>
-      <Hero />
-      <StyledSection>
-        <h2>Recent Blog Posts</h2>
-        <RoleTab />
-        <ParseInt />
-        <HelloWorld />
-      </StyledSection>
-    </HomePageWrapper>
-  </>
+export const HomePage: React.FC = () =>
+  <HomePageWrapper>
+    <Hero header={header} subHeader={subHeader} />
+    <StyledSection>
+      <h2>Recent Blog Posts</h2>
+      <RoleTab />
+      <ParseInt />
+      <HelloWorld />
+    </StyledSection>
+  </HomePageWrapper>
   ;
