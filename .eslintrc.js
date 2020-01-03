@@ -117,7 +117,6 @@ module.exports = {
         "react/jsx-indent": 0,
         "react/jsx-boolean-value": 0,
         "react/jsx-closing-tag-location": 0,
-        "react/jsx-closing-bracket-location": [2, { selfClosing: 'props-aligned', nonEmpty: 'after-props' }],
         "react/button-has-type": 0,
         "react/prop-types": 0,
         "react/button-has-type": 0,

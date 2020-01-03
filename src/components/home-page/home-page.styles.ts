@@ -5,6 +5,7 @@ export const HomePageWrapper = styled.section`
   padding: ${rem('8px')};
   margin: 0 auto;
   max-width: 800px;
+  height:100%;
 `;
 
 export const StyledSection = styled.section`
