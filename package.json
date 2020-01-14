@@ -1,8 +1,7 @@
 {
-  "name": "pcoroneos-nextjs",
+  "name": "pcoroneos.com",
   "version": "1.0.0",
-  "description": "pcoroneos portfolio using next.js",
-  "main": "index.js",
+  "description": "The portfolio site for Paul Coroneos",
   "scripts": {
     "analyze": "ANALYZE=true npm run build",
     "dev": "next",
@@ -71,7 +70,7 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint:ts:fix",
-      "npm run test ",
+      "cross-env NODE_ENV=test jest --bail --findRelatedTests",
       "git add"
     ]
   },
