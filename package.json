@@ -27,7 +27,7 @@
   "homepage": "https://github.com/PaulACoroneos/pcoroneos-nextjs#readme",
   "dependencies": {
     "global": "^4.4.0",
-    "next": "^9.1.6",
+    "next": "^9.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "^3.3.0",
