@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
+import media from 'styled-media-query';
 
 export const AboutWrapper = styled.section`
   padding: ${rem('8px')};
@@ -28,13 +29,11 @@ export const CaptionedImageContainer = styled.div`
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  border: 5px solid ${props => props.theme.color.primary};
-  border-radius:5px;
   padding:8px;
-  max-width:450px;
+  max-width:300px;
 
   img {
-    max-width:375px;
+    max-width:284px;
     margin:8px;
     align-self: center;
   }
@@ -42,4 +41,23 @@ export const CaptionedImageContainer = styled.div`
   span {
     font-size:16px;
   }
+
+  ${media.greaterThan('medium')`
+  max-width:425px;
+
+  img {
+    max-width:400px;
+  }
+
+  `}
+
+  ${media.greaterThan('large')`
+  max-width:600px;
+
+  img {
+    max-width:575px;
+    margin:8px;
+    align-self: center;
+  }
+`}
 `;
