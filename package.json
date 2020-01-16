@@ -70,7 +70,6 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint:ts:fix",
-      "cross-env NODE_ENV=test jest --bail --findRelatedTests",
       "git add"
     ]
   },
