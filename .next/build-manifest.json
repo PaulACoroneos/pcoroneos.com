@@ -8,9 +8,18 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/_app": [
+    "/About": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
+    ],
+    "/Portfolio": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/_app": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js",
+      "static/development/_buildManifest.js"
     ],
     "/_error": [
       "static/runtime/webpack.js",
@@ -21,6 +30,10 @@
       "static/runtime/polyfills.js.map"
     ],
     "/index": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/next/dist/pages/_error": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
