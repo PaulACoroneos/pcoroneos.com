@@ -31,7 +31,7 @@ export const Layout: React.FC = ({ children }) =>
         font-size:24px;
       }
       h4{
-        font-size:20px;
+        font-size:18px;
       }
     `}</style>
     <Header />{children}

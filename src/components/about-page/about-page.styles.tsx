@@ -15,7 +15,8 @@ export const AboutMeContent = styled.div`
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:${props => props.theme.color.white};
+  border-radius:5px;
+  background:#FAFAFA;
   padding:8px;
   margin: 8px 0px;
   font-size:18px;
