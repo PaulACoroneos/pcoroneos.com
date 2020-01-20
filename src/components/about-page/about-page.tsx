@@ -2,12 +2,9 @@ import * as React from 'react';
 import { AboutWrapper, AboutMeContent, CaptionedImageContainer } from './about-page.styles';
 import { Hero } from '../hero';
 
-const header = 'About Me';
-const subHeader = 'A little bit about myself.'
-
 export const AboutPage: React.FC = () =>
   <AboutWrapper>
-    <Hero header={header} subHeader={subHeader} />
+    <Hero header='About Me' subHeader='A little bit about myself.' />
     <AboutMeContent>
       <h2>
         My journey. And my history!
@@ -32,5 +29,4 @@ export const AboutPage: React.FC = () =>
       </CaptionedImageContainer>
       <p style={{ textAlign: 'center' }}>To be continued!</p>
     </AboutMeContent>
-
   </AboutWrapper>;
