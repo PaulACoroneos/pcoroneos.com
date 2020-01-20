@@ -10,12 +10,9 @@ import { RoleTab } from '../blog-posts/role-tab';
 import { UpdatingBootcamp } from '../blog-posts/updating-bootcamp'
 import { Stack } from '../blog-posts/stack'
 
-const header = 'Howdy!';
-const subHeader = 'My name is Paul. I am a front-end developer with a passion for solving problems.';
-
 export const HomePage: React.FC = () =>
   <HomePageWrapper>
-    <Hero header={header} subHeader={subHeader} />
+    <Hero header='Howdy!' subHeader='My name is Paul. I am a front-end developer with a passion for solving problems.' />
     <StyledSection>
       <h2>Recent Blog Posts</h2>
       <Stack />

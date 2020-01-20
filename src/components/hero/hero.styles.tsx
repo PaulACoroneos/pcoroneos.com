@@ -50,6 +50,7 @@ h1 {
 
 h2 {
   font-size: ${rem('16px')};;
+  font-weight: lighter;
 }
 
 ${
@@ -61,6 +62,7 @@ ${
 
     h2 {
     font-size:${rem('20px')};
+    font-weight: lighter;
   }
   `}
 
@@ -73,6 +75,7 @@ ${
 
     h2 {
     font-size:${rem('20px')};
+    font-weight: lighter;
   }
 `}
 `;
