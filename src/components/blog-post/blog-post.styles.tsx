@@ -22,7 +22,13 @@ export const StyledImage = styled.img`
   margin: 0 auto;
 `;
 
-export const StyledBlogLinkTitle = styled.h3``;
+export const StyledBlogLinkTitle = styled.h3`
+  cursor: pointer;
+
+  :hover {
+    color: ${ props => props.theme.color.primary}
+  }
+`;
 
 export const BlogContent = styled.section`
   display:flex;
@@ -42,4 +48,13 @@ export const BlogContent = styled.section`
     margin: 8px 0;
   }
   
+`;
+
+export const StyledBackLink = styled.button`
+  padding:0;
+  margin:0;
+  text-decoration:none;
+  border:none;
+  background:none;
+  cursor:pointer;
 `;
