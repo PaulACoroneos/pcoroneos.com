@@ -6,7 +6,7 @@ export const AboutWrapper = styled.section`
   padding: ${rem('8px')};
   margin: 0 auto;
   max-width: 800px;
-  height:100%;
+  flex: 1 0 auto;
 `;
 
 

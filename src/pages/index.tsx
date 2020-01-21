@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HomePage } from '../components/home-page';
 
-const Blog: React.FC = () => <HomePage />
+const Home: React.FC = () => <HomePage />
 
-export default Blog;
+export default Home;
