@@ -21,3 +21,25 @@ export const StyledImage = styled.img`
   width:100%;
   margin: 0 auto;
 `;
+
+export const StyledBlogLinkTitle = styled.h3``;
+
+export const BlogContent = styled.section`
+  display:flex;
+  flex-direction:column;
+  align-items:start;
+  border-radius:5px;
+  background:#FAFAFA;
+  padding:8px;
+  margin: 8px 0px;
+  font-size:18px;
+  
+  h3 {
+    margin:16px 0;
+  }
+
+  p {
+    margin: 8px 0;
+  }
+  
+`;
