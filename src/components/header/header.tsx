@@ -5,7 +5,7 @@ import { FULL_NAME } from '../../constants/constants';
 
 export const Header: React.FC = () =>
   <StyledHeader >
-    <StyledName href='./'>{FULL_NAME}</StyledName>
+    <StyledName href='/'>{FULL_NAME}</StyledName>
     <NavBar />
   </StyledHeader>
   ;
