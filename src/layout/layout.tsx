@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Head from 'next/head';
-import { Header } from '../components';
+import { Header, Footer } from '../components';
 
 export const Layout: React.FC = ({ children }) =>
   <>
@@ -13,13 +13,15 @@ export const Layout: React.FC = ({ children }) =>
     </Head>
     <style jsx global>{`
       html {
-        height:100%
+        height:100vh;
       }
       body { 
         font-size: 16px;
         font-family: 'Lora', serif;
         color:#1d1d1d;
-        min-height:100vh;
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
       }
       h1{
         font-size:48px;
@@ -33,6 +35,11 @@ export const Layout: React.FC = ({ children }) =>
       h4{
         font-size:18px;
       }
+      #__next {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
     `}</style>
-    <Header />{children}
+    <Header />{children}<Footer />
   </>
