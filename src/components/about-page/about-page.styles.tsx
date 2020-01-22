@@ -17,7 +17,7 @@ export const AboutMeContent = styled.div`
   align-items:center;
   border-radius:5px;
   background:#FAFAFA;
-  padding:8px;
+  padding:16px;
   margin: 8px 0px;
   font-size:18px;
 `;

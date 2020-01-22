@@ -1,9 +1,22 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const BlogWrapper = styled.div`
-  margin: 8px auto;
-  max-width: 800px;
+  display:flex;
+  flex-direction:column;
+  margin:8px;
+  justify-content:center;
   flex: 1 0 auto;
+
+  ${media.greaterThan('medium')`
+    margin:8px auto;
+    max-width: 600px;
+
+  `}
+
+  ${media.greaterThan('large')`
+    max-width: 800px;
+  `}
 `;
 
 export const BlogpostWrapper = styled.article`
@@ -11,9 +24,18 @@ export const BlogpostWrapper = styled.article`
     border-radius:5px;
     background:#FAFAFA;
     border-radius:10px;
-    padding:8px;
-    margin: 32px 0px;
+    margin: 32px 8px;
     font-size:18px;
+
+
+    a,a:visited, a:active {
+      color: #6A85B7;
+      text-decoration:none
+    }
+    a:hover {
+      color:#1D2D44;
+      transition: all 0.3s ease-in-out 0s;
+    }
 `;
 
 export const StyledImage = styled.img`
@@ -36,7 +58,7 @@ export const BlogContent = styled.section`
   align-items:start;
   border-radius:5px;
   background:#FAFAFA;
-  padding:8px;
+  padding:16px;
   margin: 8px 0px;
   font-size:18px;
   
@@ -46,6 +68,15 @@ export const BlogContent = styled.section`
 
   p {
     margin: 8px 0;
+  }
+
+  a,a:visited, a:active {
+      color:inherit;
+      text-decoration:none
+    }
+  a:hover {
+    color:#6A85B7;
+    transition: all 0.3s ease-in-out 0s;
   }
   
 `;
@@ -62,6 +93,11 @@ export const StyledBackLink = styled.button`
 export const BlogPostImage = styled.div`
   display:flex;
   flex-direction:column;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   p {
     margin: 4px auto;
   }
