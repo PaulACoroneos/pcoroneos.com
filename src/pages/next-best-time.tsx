@@ -14,9 +14,9 @@ const NextBestTime = () => <BlogPost header='The next best time is now' date='20
   <p>{'Finally working on that idea you\'ve had for ages is hard. Trust me. It took me almost 4 years from realization I no longer wanted to be an electrical engineer to become a front end developer. It should have happened much sooner than that. But all I can focus on is what I can do now that I am here and with passion for what I do. And I hope you too can pursue your ideas with the passion I try to pursue mine.'}</p>
   <p>
     <span>{'I want to give a shoutout to '}</span>
-    <a href='https://twitter.com/swyx'>@swyx</a>
+    <a href='https://twitter.com/swyx' target='_blank' rel='noopener noreferrer'>@swyx</a>
     <span>{' as a large part of the motivation for this post. His message of '}</span>
-    <a href='https://www.swyx.io/writing/learn-in-public/'>Learn in public</a>
+    <a href='https://www.swyx.io/writing/learn-in-public/' target='_blank' rel='noopener noreferrer'>Learn in public</a>
     <span>{' really hit home for me. I suggest you read his article to learn more about what he means by this. Best of luck with your ideas! '}</span>
   </p>
 </BlogPost>
