@@ -20,6 +20,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ children, header, date, src, alt, d
       </BlogPostImage>
       {children}
       <StyledBackLink onClick={() => window.history.back()}>Return to previous page</StyledBackLink>
-    </BlogpostWrapper></BlogWrapper>
+    </BlogpostWrapper>
+  </BlogWrapper>
 
 export default BlogPost;

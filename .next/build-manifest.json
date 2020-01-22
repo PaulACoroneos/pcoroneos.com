@@ -21,7 +21,11 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
-    "/hello-world": [
+    "/about": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/blog": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
@@ -29,11 +33,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/next/dist/pages/_error": [
+    "/next-best-time": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/parse-int": [
+    "/portfolio": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],

@@ -14,7 +14,7 @@ const BlogLink: React.FC<BlogLinkProps> = ({ href, date, description, title }) =
     <Link href={href}><StyledBlogLinkTitle><a>{title}</a></StyledBlogLinkTitle></Link>
     <p>{`Date Posted: ${date}`}</p>
     <p>{description}</p>
-    <Link href={href}><a>Read more</a></Link>
+    <Link href={href}><a>{'Read more >>>'}</a></Link>
   </>
 
 export default BlogLink;
