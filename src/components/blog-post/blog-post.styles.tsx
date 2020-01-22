@@ -26,7 +26,7 @@ export const BlogpostWrapper = styled.article`
     border-radius:10px;
     margin: 32px 8px;
     font-size:18px;
-
+    padding:16px;
 
     a,a:visited, a:active {
       color: #6A85B7;
