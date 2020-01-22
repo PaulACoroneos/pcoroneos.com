@@ -2,7 +2,7 @@ import * as React from 'react';
 import BlogPost from '../components/blog-post/blog-post';
 
 const NextBestTime = () => <BlogPost header='The next best time is now' date='2020-01-22' src='frustration.jpg' alt='man frustrated in front of laptop' desc='Probably what I look like on a daily basis'>
-  <p>{'Procrastination and imposter theory are real things. It\'s so easy to convince yourself you aren\'t ready for something. But these are simply excuses. The best time to have started something is yesterday. The next best time is now.'}</p>
+  <p>{'Procrastination and imposter theory are real things. It\'s so easy to convince yourself you aren\'t ready for something. But these are simply excuses. The best time to have started something was yesterday. The next best time is now.'}</p>
   <p>{'For over a decade I told myself I would build a blog and write articles that people might read. At this time I was a budding electrical engineer. I was ready to start working on my circuit design and post articles about what I learned. I came up with grandiose ideas of what such a blog might look like. And I was all in on the idea of picking up HTML/CSS/JS to accomplish this.'}</p>
   <p style={{textAlign:'center',fontWeight:'bold', fontSize:'28px'}}>{'Instead I did nothing'}</p>
   <p>{'You see it turns out gradiose ideas without implementation are just grandiose ideas. They are fragments that reside in your head that will not result in anything. Until an idea is physically formed and put into practice (a writer writing, an artist painting, or even as developer coding) it is useless to both the person with the idea and the people who might benefit.'}</p>
