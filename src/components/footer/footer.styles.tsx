@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const StyledFooter = styled.footer`
 
@@ -7,8 +8,12 @@ export const StyledFooter = styled.footer`
   flex-shrink: 0;
   width:100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content:center;
   align-items: center;
+  ${
+  media.greaterThan('medium')`
+    justify-content:flex-end;
+  `}
 `;
 
 export const SocialMediaContainer = styled.div`
