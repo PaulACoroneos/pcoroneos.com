@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const BlogWrapper = styled.div`
   margin: 8px auto;
   max-width: 800px;
-  height:100%;
+  flex: 1 0 auto;
 `;
 
 export const BlogpostWrapper = styled.article`
@@ -57,4 +57,12 @@ export const StyledBackLink = styled.button`
   border:none;
   background:none;
   cursor:pointer;
+`;
+
+export const BlogPostImage = styled.div`
+  display:flex;
+  flex-direction:column;
+  p {
+    margin: 4px auto;
+  }
 `;

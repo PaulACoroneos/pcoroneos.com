@@ -5,7 +5,7 @@ import { StyledImage } from '../components/blog-post/blog-post.styles';
 
 
 
-const Stack: React.FC = () => <BlogPost header='My first stack' date='2020-01-15'>
+const Stack: React.FC = () => <BlogPost header='My first stack' date='2020-01-15' src='stack-wood.jpg' alt='A stack of chopped firewood' desc='Chopping firewood is a lot harder than implementing your own stack'>
   <p>{'For a long time i\'ve wanted to learn data structures and algorithms. I decided with the new year it was finally time to get started. After all the best time to start something is yesterday. The next best time is today.'}</p>
   <p>{'The first stop in learning data structures is stacks. You can technically use an array as the base of building a stack in JavaScript but I instead elected to start with an object. This is my version of the implementation:'}</p>
   <StyledImage alt='My implementation of a stack with explanation below' src='/stack.png' />
@@ -21,6 +21,6 @@ const Stack: React.FC = () => <BlogPost header='My first stack' date='2020-01-15
   <p>{'Finally pop() as it implies removes an item from the stack and returns it. After the value is removed from the stack we then immediately decrement _length. So for example if we call pop() on our stack it will return the word "world" and length will update to a value of one. An additional pop will return a value of "Hello" and set _length to a value of 0. Finally another pop will yield the value of undefined. This is because in javascript you cannot return a value with an object for an index that does not exit (less than 0) so instead javascript tells you that such as value is undefined.'}</p>
   <p>{'Now a shrewd reader would point out that this stack implementation has a fatal flaw. If the stack is already of length of 0 we really should be trying to pop values because our _length value will become negative and subsequently pushing on the stack will place values at negative indices which doesnt really make sense. A small change is to simply add a check of _length at the beginning of the pop() function to valid _length is at least 0.'}</p>
   <p>{'I hope you found this description helpful! As I implement more data structures I will also work to describe their fundamentals as well!'}</p>
-</BlogPost>
+</BlogPost >
 
 export default Stack;
