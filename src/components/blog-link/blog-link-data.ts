@@ -1,5 +1,5 @@
 export const BLOG_POST_LINK_DATA = [{
-  href: 'ctci-is-unqiue',
+  href: 'ctci-is-unique',
   date: '2020-01-24',
   title: 'Cracking the Code Interview - IsUnique',
   description: 'A nice warmup to understanding algorithms in JavaScript by solving Cracking the Code Interview\'s question 1.1 isUnique.'
