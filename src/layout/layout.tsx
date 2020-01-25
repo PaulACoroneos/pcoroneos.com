@@ -13,7 +13,7 @@ export const Layout: React.FC = ({ children }) =>
     </Head>
     <style jsx global>{`
       html {
-        height:100vh;
+        min-height: 100vh;
       }
       body { 
         font-size: 16px;
@@ -36,7 +36,7 @@ export const Layout: React.FC = ({ children }) =>
         font-size:18px;
       }
       #__next {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
       }
