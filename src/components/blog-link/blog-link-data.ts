@@ -1,4 +1,9 @@
 export const BLOG_POST_LINK_DATA = [{
+  href: 'ctci-is-unqiue',
+  date: '2020-01-24',
+  title: 'Cracking the Code Interview - IsUnique',
+  description: 'A nice warmup to understanding algorithms in JavaScript by solving Cracking the Code Interview\'s question 1.1 isUnique.'
+}, {
   href: 'next-best-time',
   date: '2020-01-22',
   title: 'The next best time is now',
@@ -28,6 +33,6 @@ export const BLOG_POST_LINK_DATA = [{
   title: 'Big trouble with parseInt()',
   description: 'The need for input validation is important. In my case I was wanting to validate that a URL parameter was infact a valid integer. I went on MDN and found a handy function called parseInt(). I pushed the feature and it appeared to work just fine.'
 },
-{href:'hello-world',date:'2019-08-19',title:'Hello World',description:'Hi there. My name is Paul. I am a fairly new web developer with a primary focus on front end. My background before becoming a full-time software dev was 7.5 years in the semiconductor industry as a test engineer.'}
+{ href: 'hello-world', date: '2019-08-19', title: 'Hello World', description: 'Hi there. My name is Paul. I am a fairly new web developer with a primary focus on front end. My background before becoming a full-time software dev was 7.5 years in the semiconductor industry as a test engineer.' }
 ];
 
