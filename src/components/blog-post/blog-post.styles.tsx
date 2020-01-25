@@ -95,7 +95,7 @@ export const BlogPostImage = styled.div`
   flex-direction:column;
   img {
     display: block;
-    width: auto;
+    width: 100%;
     height: auto;
   }
   p {

@@ -21,11 +21,11 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
-    "/index": [
+    "/ctci-is-unique": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/stack": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
