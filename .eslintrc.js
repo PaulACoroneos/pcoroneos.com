@@ -13,7 +13,8 @@ module.exports = {
         'prettier',
         'prettier/react',
         'prettier/@typescript-eslint',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
+        "plugin:mdx/recommended"
     ],
     globals: {
         Atomics: 'readonly',
