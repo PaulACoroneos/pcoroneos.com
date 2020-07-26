@@ -1,83 +1,29 @@
 {
-  "name": "pcoroneos.com",
+  "name": "pcoroneos-nextjs",
   "version": "1.0.0",
-  "description": "The portfolio site for Paul Coroneos",
+  "private": true,
   "scripts": {
-    "build:rss": "node ./.next/server/scripts/build-rss.js",
-    "build": "next build && next export && npm run build:rss",
     "dev": "next dev",
-    "format-check": "prettier --list-different \"./**/*.{ts,js,json,md}\"",
-    "format": "prettier --write \"./**/*.{ts,js,json,md}\"",
-    "lint:ts:fix": "npm run lint:ts -- --fix",
-    "lint:ts": "eslint . --ext=jsx,ts,tsx src",
-    "pre-commit": "npm run lint-staged",
-    "pre-push": "npm run format-check",
+    "build": "next build && next export && npm run build:rss",
     "start": "next start",
-    "test": "jest --collect-coverage"
+    "build:rss": "node ./.next/server/scripts/build-rss.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PaulACoroneos/pcoroneos-nextjs.git"
-  },
-  "author": "paul coroneos",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PaulACoroneos/pcoroneos-nextjs/issues"
-  },
-  "homepage": "https://github.com/PaulACoroneos/pcoroneos-nextjs#readme",
   "dependencies": {
     "@mapbox/rehype-prism": "^0.5.0",
     "@mdx-js/loader": "^1.6.6",
     "@next/mdx": "^9.4.4",
-    "@tailwindcss/ui": "^0.3.1",
-    "autoprefixer": "^9.8.5",
-    "file-loader": "^6.0.0",
-    "next": "^9.4.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rss": "^1.2.2",
-    "simple-functional-loader": "^1.2.1",
-    "tailwindcss": "^1.4.6",
-    "tinytime": "^0.2.6"
+    "@tailwindcss/ui": "^0.3.0",
+    "autoprefixer": "^9.8.4",
+    "dayjs": "^1.8.29",
+    "next": "9.4.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^9.4.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^13.13.14",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
-    "cypress": "^3.8.3",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-react": "^1.1.7",
-    "eslint-plugin-cypress": "^2.11.1",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-eslint-plugin": "^2.3.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^23.18.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-mdx": "^1.7.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^2.5.1",
-    "husky": "^3.1.0",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.5.0",
-    "npm-check-updates": "^4.1.2",
-    "prettier": "^1.19.1",
-    "typescript": "^3.9.6"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "npm run lint:ts:fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "file-loader": "^6.0.0",
+    "rss": "^1.2.2",
+    "simple-functional-loader": "^1.2.1"
   }
 }

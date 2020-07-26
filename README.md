@@ -1,26 +1,30 @@
-# pcoroneos-nextjs
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/76f8165d-2485-494a-aa96-af62cdfc6314/deploy-status)](https://app.netlify.com/sites/pacman326/deploys)
+## Getting Started
 
-## Contributors
+First, run the development server:
 
-Paul Coroneos <paul@pcoroneos.com>
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-## Core Technologies
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### React
-### NextJs
-### Styled Components
-### Testing Library/react
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Goals
+## Learn More
 
-The goal of my portfolio isn't really to just display some things I have worked on outside work. It's to share with other developers or even learners my perspective and lessoned learned as to help not only reinforce concepts for myself but also to pay back a little to the community who helped bring me to where I am today.
+To learn more about Next.js, take a look at the following resources:
 
-## Page Structure
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-The site consists of 4 main pages 
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-1) Home - This page contains my latest blog posts (~5 most recent)
-2) Portfolio - WIP showing completed projects I have done or DS/Algorithm implementations
-3) About Me - WIP A history of my professional/academic career up until today.
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

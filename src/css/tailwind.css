@@ -1,0 +1,14 @@
+:root {
+  --color-primary: #5c6ac4;
+  --color-secondary: #094074;
+  --color-tertiary: #0d1321;
+  --color-quaternary: #1d2d44;
+  --color-quinary: #3e5c76;
+  --color-white: #fff;
+}
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+
+@tailwind utilities;
+@tailwind components;
