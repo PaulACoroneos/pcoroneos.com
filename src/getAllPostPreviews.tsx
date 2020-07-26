@@ -1,7 +1,7 @@
 function importAll(r) {
   return r
     .keys()
-    .map((fileName) => ({
+    .map(fileName => ({
       link: fileName.substr(1).replace(/\/index\.mdx$/, ''),
       module: r(fileName),
     }))
@@ -13,8 +13,8 @@ function dateSortDesc(a, b) {
   return 0
 }
 
-export default function getAllPostPreviews() {
-  return importAll(require.context('./pages/?preview', true, /\.mdx$/)).sort((a, b) =>
+const getAllPostPreviews = () => importAll(require.context('./pages/?preview', true, /\.mdx$/)).sort((a, b) =>
     dateSortDesc(a.module.meta.date, b.module.meta.date)
   )
-}
+
+export default getAllPostPreviews

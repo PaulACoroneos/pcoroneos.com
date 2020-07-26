@@ -4,7 +4,5 @@ jest.config.js
 fixtures
 shared-fixtures
 coverage
-pages/_App.js
-pages/_document.js
-
-packages/eslint-plugin-tslint/tests
+src/pages/**/*.mdx
+next.config.js

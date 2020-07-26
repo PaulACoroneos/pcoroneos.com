@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const defaultTheme = require('tailwindcss/defaultTheme')
 const mdx = require('@mdx-js/mdx')
 
 module.exports = {
   purge: {
     mode: 'all',
-    content: ['./src/**/*.{js,mdx}', './next.config.js'],
+    content: ['./src/**/*.{js,jsx,ts,tsx,mdx}', './next.config.js'],
     options: {
       extractors: [
         {
           extensions: ['mdx'],
-          extractor: (content) => {
+          extractor: content => {
             content = mdx.sync(content)
 
             // Capture as liberally as possible, including things like `h-(screen-1.5)`

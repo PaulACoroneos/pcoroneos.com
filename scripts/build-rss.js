@@ -15,7 +15,7 @@ getAllPostPreviews().forEach(({ link, module: { meta } }) => {
     url: `https://pcoroneos.com${link}`,
     date: meta.date,
     description: meta.description,
-    custom_elements: [].concat(meta.authors.map((author) => ({ author: [{ name: author.name }] }))),
+    custom_elements: [].concat(meta.authors.map(author => ({ author: [{ name: author.name }] }))),
   })
 })
 

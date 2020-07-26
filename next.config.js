@@ -20,7 +20,7 @@ const tokenClassNames = {
 }
 
 module.exports = withBundleAnalyzer({
-  pageExtensions: ['js', 'jsx', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'mdx','ts','tsx'],
   experimental: {
     modern: true,
   },
@@ -45,16 +45,14 @@ module.exports = withBundleAnalyzer({
         options: {
           rehypePlugins: [
             rehypePrism,
-            () => {
-              return (tree) => {
+            () => tree => {
                 visit(tree, 'element', (node, index, parent) => {
                   let [token, type] = node.properties.className || []
                   if (token === 'token') {
                     node.properties.className = [tokenClassNames[type]]
                   }
                 })
-              }
-            },
+              },
           ],
         },
       },
@@ -83,8 +81,8 @@ module.exports = withBundleAnalyzer({
             ...mdx,
             createLoader(function (src) {
               const content = [
-                'import Post from "@/components/Post"',
-                'export { getStaticProps } from "@/getStaticProps"',
+                'import Post from "src/components/Post"',
+                'export { getStaticProps } from "src/getStaticProps"',
                 src,
                 'export default (props) => <Post meta={meta} {...props} />',
               ].join('\n')
@@ -104,7 +102,7 @@ module.exports = withBundleAnalyzer({
       const originalEntry = config.entry
 
       config.entry = async () => {
-        const entries = { ...(await originalEntry()) }
+        const entries = { ...await originalEntry() }
         entries['./scripts/build-rss.js'] = './scripts/build-rss.js'
         return entries
       }
