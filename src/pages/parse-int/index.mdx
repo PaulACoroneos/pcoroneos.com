@@ -1,11 +1,11 @@
-import { paulcoroneos } from '@/authors'
+import { paulcoroneos } from "../../authors";
 
 export const meta = {
-  title: 'Big trouble with parseInt()',
+  title: "Big trouble with parseInt()",
   description: `My hello world post for my blog.`,
-  date: '2019-11-28',
+  date: "2019-11-28",
   authors: [paulcoroneos],
-}
+};
 
 The need for input validation is important. In my case I was wanting to validate that a URL parameter was infact a valid integer. I went on MDN and found a handy function called parseInt(). I pushed the feature and it appeared to work just fine.
 

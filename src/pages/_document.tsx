@@ -1,6 +1,8 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
+import * as React from 'react'
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import * as fs from 'fs'
 import * as path from 'path'
+import { NextPageContext } from 'next'
 
 class InlineStylesHead extends Head {
   getCssLinks() {
@@ -12,8 +14,8 @@ class InlineStylesHead extends Head {
     if (!files || files.length === 0) return null
 
     return files
-      .filter((file) => /\.css$/.test(file))
-      .map((file) => (
+      .filter(file => /\.css$/.test(file))
+      .map(file => 
         <style
           key={file}
           nonce={this.props.nonce}
@@ -22,26 +24,26 @@ class InlineStylesHead extends Head {
             __html: fs.readFileSync(path.join(process.cwd(), '.next', file), 'utf-8'),
           }}
         />
-      ))
+      )
   }
 }
 
 export default class Document extends NextDocument {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx:DocumentContext) {
     const initialProps = await NextDocument.getInitialProps(ctx)
     return { ...initialProps }
   }
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang='en'>
         <InlineStylesHead>
           <link
-            rel="preload"
-            href="/fonts/Inter-roman.var-latin.woff2?3.13"
-            as="font"
-            type="font/woff2"
-            crossOrigin="true"
+            rel='preload'
+            href='/fonts/Inter-roman.var-latin.woff2?3.13'
+            as='font'
+            type='font/woff2'
+            crossOrigin='true'
           />
         </InlineStylesHead>
         <body>
