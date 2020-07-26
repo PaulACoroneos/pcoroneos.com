@@ -19,6 +19,8 @@ _length;
 
 \_storage represents an empty object. This will be our primary data storage element. Whenever we take an action to add, remove or view data from the stack this will hold the data. \_length represents the amount of elements inside the \_storage object. This is useful as it allows us to index elements throughout the class. Now that we've covered the constructor variables we can move onto the methods!
 
+<!--more-->
+
 First up is push(). The push method takes a value and simply adds it to our \_storage object at the end of the "length" of the stack. We then increase our length by one by immediately incrementing \_length after we use it to mark where are putting it in the \_storage object. So for example if I push("hello") and push("world") my stack will contain {"hello","world"}. Stacks are known as LIFO or last in, first out data structures. We will see why in a moment.
 
 Peek() does what it sort of implies. It allows us to look at the last element in our \_storage object. This is a pretty useful operation as you may want to see what value it at the top of your stack but not necessarily want to remove it.
