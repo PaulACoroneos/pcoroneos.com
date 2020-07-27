@@ -49,7 +49,7 @@ const Post:React.FC<PostProps> = ({ meta, children, posts }) => {
               <dt className='sr-only'>Published on</dt>
               <dd className='text-base leading-6 font-medium text-gray-500'>
                 <time dateTime={meta.date}>
-                  {dayjs(meta.date).format('MMMM DD, YYYY')}
+                  {meta.date && dayjs(meta.date).format('MMMM DD, YYYY')}
                 </time>
               </dd>
             </div>
