@@ -32,7 +32,7 @@ const Home:React.FC = () =>
         </p>
       </div>
       <ul className='divide-y divide-gray-200'>
-        {posts.map(({ link, module: { default: Component, meta } }) => 
+        {posts.filter(post => post.module.meta.date).map(({ link, module: { default: Component, meta } }) => 
             <li key={link} className='py-12'>
               <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
                 <dl>
