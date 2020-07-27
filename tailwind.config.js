@@ -37,7 +37,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
-      textColor: {
+      colors: {
           primary: 'var(--color-primary)',
           secondary: 'var(--color-secondary)',
           tertiary: 'var(--color-tertiary)',
