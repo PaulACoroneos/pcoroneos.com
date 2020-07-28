@@ -6,9 +6,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { MDXProvider } from '@mdx-js/react'
 
+//TODO Paul. Figure out why I cant override code terminal bg color
 const mdxComponents = {
   pre: ({ className, ...props }) => 
-    <pre className={`${className} rounded-md bg-gray-800 py-3 px-4 overflow-x-auto`} {...props} />
+    <pre className={`${className} rounded-md py-3 px-4 overflow-x-auto`} {...props} />
   ,
   'pre.code': ({ className, ...props }) => 
     <code className={`${className} text-gray-200`} {...props} />
@@ -49,7 +50,7 @@ const Post:React.FC<PostProps> = ({ meta, children, posts }) => {
               <dt className='sr-only'>Published on</dt>
               <dd className='text-base leading-6 font-medium text-gray-500'>
                 <time dateTime={meta.date}>
-                  {meta.date && dayjs(meta.date).format('MMMM DD, YYYY')}
+                  {dayjs(meta.date).format('MMMM DD, YYYY')}
                 </time>
               </dd>
             </div>
