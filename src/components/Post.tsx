@@ -95,13 +95,24 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
                   <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
                     <dt className='sr-only'>Name</dt>
                     <dd className='text-gray-900'>{author.name}</dd>
-                    <dt className='sr-only'>Twitter</dt>
-                    <dd>
-                      <a
+                    <dd className='inline-block'>
+                    <dt className='inline-block'>Twitter:</dt>
+                    {' '}
+                    <a
                         href={`https://twitter.com/${author.twitter}`}
                         className='text-secondary hover:text-primary'
                       >
                         {author.twitter}
+                      </a>
+                    </dd>
+                    <dd>
+                      <dt className='inline-block'>Github:</dt>
+                      {' '}
+                      <a
+                        href={`https://github.com/${author.github}`}
+                        className='text-secondary hover:text-primary'
+                      >
+                        {author.github}
                       </a>
                     </dd>
                   </dl>
