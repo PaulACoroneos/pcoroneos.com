@@ -29,10 +29,6 @@
     "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/leetcode-two-sum": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

@@ -20,9 +20,7 @@ const App:React.FC<AppProps> = ({ Component, pageProps }) =>
         <meta name='theme-color' content='#ffffff' />
         <link rel='alternate' type='application/rss+xml' href='/feed.xml' />
       </Head>
-      <SectionContainer>
-        <Header />
-      </SectionContainer>
+      <Header />
       <SectionContainer>
         <main>
           <Component {...pageProps} />
