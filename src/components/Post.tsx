@@ -85,32 +85,32 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
               {meta.authors.map(author => 
                 <li
                   key={author.twitter}
-                  className='flex items-center space-x-2'
+                  className='flex w-100 space-x-2'
                 >
                   <img
                     src={author.avatar}
                     alt=''
-                    className='w-10 h-10 rounded-full'
+                    className='w-10 h-10 rounded-full flex-grow-0 mt-1'
                   />
                   <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
                     <dt className='sr-only'>Name</dt>
-                    <dd className='text-gray-900'>{author.name}</dd>
+                    <dd className='text-gray-900 text-lg'>{author.name}</dd>
                     <dd className='inline-block'>
-                    <dt className='inline-block'>Twitter:</dt>
+                    <dt className='inline-block text-md'>Twitter:</dt>
                     {' '}
                     <a
                         href={`https://twitter.com/${author.twitter}`}
-                        className='text-secondary hover:text-primary'
+                        className='text-secondary hover:text-primary text-md'
                       >
                         {author.twitter}
                       </a>
                     </dd>
                     <dd>
-                      <dt className='inline-block'>Github:</dt>
+                      <dt className='inline-block text-md'>Github:</dt>
                       {' '}
                       <a
                         href={`https://github.com/${author.github}`}
-                        className='text-secondary hover:text-primary'
+                        className='text-secondary hover:text-primary text-md'
                       >
                         {author.github}
                       </a>
