@@ -23,7 +23,7 @@ const Home:React.FC = () =>
         <meta property='og:image' content={`https://pcoroneos.com${twitterCard}`} />
         <title>Blog – Paul Coroneos</title>
       </Head>
-      <div className='pt-6 pb-8 space-y-2 md:space-y-5'>
+      <div className='pt-4 md:pt-6 pb-4 md:pb-8 space-y-2 md:space-y-5'>
         <h1 className='text-3xl leading-9 font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14'>
           Latest Blog Posts
         </h1>
@@ -33,7 +33,7 @@ const Home:React.FC = () =>
       </div>
       <ul className='divide-y divide-gray-200'>
         {posts.filter(post => post.module.meta.date).map(({ link, module: { default: Component, meta } }) => 
-            <li key={link} className='py-12'>
+            <li key={link} className='py-4 md:py-12'>
               <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
                 <dl>
                   <dt className='sr-only'>Published on</dt>
