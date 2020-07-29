@@ -1,0 +1,233 @@
+import { paulcoroneos } from "../../authors";
+
+export const meta = {
+  title: "Solving Leetcode 8 - String to Integer (atoi) (JavaScript)",
+  description: `My solution and explanation of leetcode number 8 - String to Integer (atoi()) using JavaScript.`,
+  date: "2020-07-29",
+  authors: [paulcoroneos],
+};
+
+**atoi()** is a very classic C library function that converts character string into an integer. Otherwise if it is unable to do so it returns the integer 0. Now of course if you've visited Mozilla's famous [MDN website](https://developer.mozilla.org/en-US/) to get help on web technologies atoi conspiculously returns no results. Because as it turns out we have other methods/practices for converting numbers to string (and vice versa). But to me the real challenge of this problem is not necessarily figuring out how to convert a string to a number but rather all the corner cases one must consider to implement an atoi() function in JavaScript.
+
+<!--more-->
+
+Before we get too deep into the implementation (and some of the consideration we need to make) let's first look at the requirements of [Leetcode 8 - String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
+
+> The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+
+> The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+
+> If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
+
+> If no valid conversion could be performed, a zero value is returned.
+
+**Notes:**
+
+> Only the space character ' ' is considered as whitespace character.
+
+> Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31, 2^31− 1]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.
+
+So again this seems like a trivial task at first. **But look at all the corners listed above!** When I first looked at this problem I trivialized the above notes (big mistake). So I jotted down a simple implementation plan on paper (good), thought of a few test cases(good), and then pushed the submit button (bad). I would say I had an initial implementation within _20 minutes_ of starting. But then I spent the next **40 minutes** figuring out all the corners I had missed. 🤦‍♂️
+
+## Let's talk about corners
+
+Instead of rushing to an implementation like I did instead I think we should walk through the corners one by one and strategize for them. This is what I should have done and you should too as you approach these algorithmic problems. By going through them one by one (and thinking of test cases) we can avoid the dreaded **wrong answer** after submission.
+
+### Ignore whitespaces
+
+This corner of the function is pretty straightfordward. What the intention of this part of the prompt is to say that if your string has preceeding or succeeding whitespaces that we should remove them. Note this does not mean removing any whitespaces interal to the string itself. Luckily JavaScript has a handy method built into the String prototype called [trim()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim).
+
+**🖐️ CAUTION!** Remember that strings are immutable in JavaScript. So remember to assign the result of this call to a variable to use later in the program.
+
+So trim() will take care of those pesky whitespaces. If we can't use trim built in methods I suppose my next tool might be to use [substring()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring) in conjunction with [indexOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf). But I believe trim() is a reasonable choice here.
+
+### Test cases
+
+My test case(s) for this corner would be
+
+```js
+"   hello   ";
+" +42";
+" 42";
+" split world 42";
+" 42 words";
+```
+
+### Optional polarity sign (+/-)
+
+The next critical corner of this problem is that it requires us to handle an optional +/- sign. Now the kicker that burned me 🔥 is that **you can have a +/- character, but any subsequent characters including another +/- sign should cause atoi() to return 0.** So given this our method should check the first character after the whitespace has been removed from the string and check if it is a +/- character. If it is we want to store this polarity and then work with the rest of the string when we get to actually parsing the string to integer.
+
+Now we need to make two considerations here as well
+
+- If the first character is not a number and also not a +/- this is not a valid number for atoi(). We should return zero
+- If we detect a +/- sign we must then check that second character must be a number. If it's not we have violated the rules (only an optional +/- is allowed and only once!)
+
+### Test Cases
+
+```js
+"   +hello   ";
+"+-42";
+```
+
+### Characters after numbers in string
+
+This one is pretty straightforward thankfully. What this requirement says is if there are extra (trailing characters) after a number is parsed we should ignore them without throwing an error (returning 0).
+
+Thankfully we have a nice tool in the JavaScript toolkit called [parseInt()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt). Essentially what it does for us given some numerical base (10 is default for most browers after IE9 but you can also specify just in case). And it thankfully ignored anything after numbers are detected.
+
+### Test Cases
+
+```js
+"   +49hello   ";
+"49hello";
+```
+
+### Integer min/max (2^32)
+
+This a bit of a weird one. The problem says that we should handle integer overflows. If you are unfamilar with the concept of overflows essentially recall that computers have finite memory. Therefore languages like c/c++/java implement finite limits for integers. In the case of the problem it references this limit which consists of -2^31 and 2^31 -1. In JavaScript these limits are actually quite higher. In fact you can reference these constants by using [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER). But in short for JavaScript the limit jumps to 2^53.
+
+But in the spirit of the problem we will leverage 2^31. I define these values as constants and place into my code. So in terms of implementations of this check we need to check after a number has been successfully parsed to see whether the number would cause an overflow (be either greater or less than the maximum or minimum value respectively). We will see how this is implemented shortly.
+
+### Test Cases
+
+```js
+"-203842098347345345342093842";
+"9978967875687587568765";
+```
+
+### My implementation
+
+Now that we have gotten all the "pre-work" out of the way let's go ahead and review my implementation:
+
+```js
+/**
+ * @param {string} str
+ * @return {number}
+ */
+
+//These don't hold true in JS. But lets store these per requirements
+const MAX_SAFE_INTEGER_PROBLEM = 2 ** 31 - 1;
+const MIN_SAFE_INTEGER_PROBLEM = -1 * 2 ** 31;
+
+const getSanitizedValue = (parsedStr, polarity) => {
+  const val = parseInt(parsedStr, 10);
+  if (polarity === -1) {
+    return -1 * val < MIN_SAFE_INTEGER_PROBLEM
+      ? MIN_SAFE_INTEGER_PROBLEM
+      : -1 * val;
+  }
+  return val > MAX_SAFE_INTEGER_PROBLEM ? MAX_SAFE_INTEGER_PROBLEM : val;
+};
+
+var myAtoi = function (str) {
+  let parsedStr = str.trim();
+  let polarity = null;
+  const validOperators = ["+", "-"];
+  const firstChar = parsedStr[0];
+  const secondChar = parsedStr[1];
+  const firstCharNum = parseInt(firstChar, 10);
+  const secondCharNum = parseInt(secondChar, 10);
+
+  //base case (length of 1 and num). If not a num then 0
+  if (parsedStr.length === 1) {
+    return firstCharNum ? firstCharNum : 0;
+  }
+
+  //handle having a polarity sign
+  if (isNaN(firstCharNum)) {
+    if (validOperators.includes(firstChar)) {
+      polarity = firstChar === "-" ? -1 : 1;
+    } else return 0; //we didnt have a +/-. or the number would cause overflow, bail out
+
+    //case 2. We have more characters after polarity sign (corner)
+    if (isNaN(secondCharNum)) {
+      return 0;
+    }
+  }
+
+  //now handle return
+  if (polarity != null) {
+    return getSanitizedValue(parsedStr.slice(1), polarity);
+  } else {
+    return getSanitizedValue(parsedStr, polarity);
+  }
+};
+```
+
+There's a lot going on here so let's try to break it down a bit.
+
+```js
+let parsedStr = str.trim();
+let polarity = null;
+const validOperators = ["+", "-"];
+const firstChar = parsedStr[0];
+const secondChar = parsedStr[1];
+const firstCharNum = parseInt(firstChar, 10);
+const secondCharNum = parseInt(secondChar, 10);
+```
+
+First off I define several variables that I will use throughout the function. Technically you could get away with just using the values directly. But when writing an algorithm I prefer to be declarative so that others (and myself in a few weeks) can look at the code and infer what's happening without having to use the debugger too much.
+
+I start out by creating a copy of the original string without whitespaces. I then declare a polarity variable which I set to null (essentially start with no polarity character). I then declare an array of valid operators. I generally like to do this when only allowing a certain set of "options" because you can then use [Array.prototype.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) as a kind of logical lookup. Finally I capture the first and second characters after whitespaces have been removed and parse the chars into integers (using base 10).
+
+```js
+//base case (length of 1 and num). If not a num then 0
+if (parsedStr.length === 1) {
+  return firstCharNum ? firstCharNum : 0;
+}
+```
+
+In this section I handle our base case. If the length of the string is one then it better only be a number. If the value is anything but a number (even a +/- sign) then its invalid and we should return 0.
+
+```js
+//handle having a polarity sign
+if (isNaN(firstCharNum)) {
+  if (validOperators.includes(firstChar)) {
+    polarity = firstChar === "-" ? -1 : 1;
+  } else return 0; //we didnt have a +/-. or the number would cause overflow, bail out
+
+  //case 2. We have more characters after polarity sign (corner)
+  if (isNaN(secondCharNum)) {
+    return 0;
+  }
+}
+```
+
+Now we are going to handle the optional polarity sign. If the first character is a polarity sign we then set the polarity variable to 1 or -1. There's no real rhyme or reason why I use an integer to represent the sign but it makes generated the final answer a bit easier later. If the first character is a character that isnt one of these we bail out by returning zero.
+
+Now if a +/- sign is detected we must ensure that at least the second character in the string is a number. We use the handy isNaN() method to check for this. If it's another character (again even a +/-) we violate our constraints and return a 0.
+
+```js
+//now handle return
+if (polarity != null) {
+  return getSanitizedValue(parsedStr.slice(1), polarity);
+} else {
+  return getSanitizedValue(parsedStr, polarity);
+}
+```
+
+If we've made it this far then we are pretty darn close to having an answer. We really need to handle the case of there being a formal polarity sign or no sign at all. In the case of a polarity sign we need to handle appending a negative sign to the parsed number. Otherwise if polarity doesnt exist we just parse the remaining string as is.
+
+```js
+//These don't hold true in JS. But lets store these per requirements
+const MAX_SAFE_INTEGER_PROBLEM = 2 ** 31 - 1;
+const MIN_SAFE_INTEGER_PROBLEM = -1 * 2 ** 31;
+
+const getSanitizedValue = (parsedStr, polarity) => {
+  const val = parseInt(parsedStr, 10);
+  if (polarity === -1) {
+    return -1 * val < MIN_SAFE_INTEGER_PROBLEM
+      ? MIN_SAFE_INTEGER_PROBLEM
+      : -1 * val;
+  }
+  return val > MAX_SAFE_INTEGER_PROBLEM ? MAX_SAFE_INTEGER_PROBLEM : val;
+};
+```
+
+getSantizedValue() takes in parsed string lacking an optional operator (or whitespace) and the polarity of the number provided in the string (1,-1). We start out by first parsing the remaining string value to gets its number. If the polarity of the number is negative we first check to see whether is is smaller than our minimum safe integer (-2^31). If it's safe we return the parsed value multiplied by a -1. Otherwise the polarity is positive and we check the number against the maximum safe integer (2^31). If it's safe we return the number.
+
+Now if we exceed either of the safe number constraints we instead return the theoretical max values as per the requirements.
+
+### Conclusion
+
+I hope you have learn as I did a little bit about atoi() and one possible implementation using JavaScript. Several methods used here are pretty common in solving JavaScript problems and will see repeated use in future blogposts. Until next time best of luck solving algorithms! 👋

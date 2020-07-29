@@ -8,6 +8,11 @@
 }
 /* purgecss start ignore */
 @tailwind base;
+
+div > div > blockquote {
+  @apply ml-8 border-secondary border-l-4 pl-4 bg-indigo-100 rounded text-gray-800;
+}
+
 /* purgecss end ignore */
 
 @tailwind utilities;
