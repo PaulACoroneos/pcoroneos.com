@@ -4,6 +4,8 @@ const visit = require('unist-util-visit')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+const images = require('remark-images')
+const emoji = require('remark-emoji')
 
 const tokenClassNames = {
   tag: 'text-code-red',
@@ -54,6 +56,7 @@ module.exports = withBundleAnalyzer({
                 })
               },
           ],
+          remarkPlugins: [images, emoji]
         },
       },
     ]
