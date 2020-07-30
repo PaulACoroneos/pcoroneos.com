@@ -14,17 +14,17 @@ export const meta = {
 Before we get too deep into the implementation (and some of the consideration we need to make) let's first look at the requirements of [Leetcode 8 - String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
 
 > The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
-
+>
 > The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
-
+>
 > If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
-
+>
 > If no valid conversion could be performed, a zero value is returned.
-
-**Notes:**
-
+>
+> **Notes:**
+>
 > Only the space character ' ' is considered as whitespace character.
-
+>
 > Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31, 2^31− 1]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.
 
 So again this seems like a trivial task at first. **But look at all the corners listed above!** When I first looked at this problem I trivialized the above notes (big mistake). So I jotted down a simple implementation plan on paper (good), thought of a few test cases(good), and then pushed the submit button (bad). I would say I had an initial implementation within _20 minutes_ of starting. But then I spent the next **40 minutes** figuring out all the corners I had missed. 🤦‍♂️
