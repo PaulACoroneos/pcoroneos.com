@@ -22,10 +22,6 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/atoi": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/climbing-stairs": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
