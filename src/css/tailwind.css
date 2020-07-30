@@ -14,7 +14,14 @@ div > div > blockquote {
 }
 
 table {
-  @apply mb-6;
+  @apply mb-6 text-sm mx-auto;
+  table-layout: fixed;
+}
+
+@screen md {
+  table {
+    @apply text-base;
+  }
 }
 
 /* Tables */
