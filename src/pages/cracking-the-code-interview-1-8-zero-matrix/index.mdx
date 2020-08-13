@@ -1,0 +1,148 @@
+import { paulcoroneos } from "../../authors";
+
+export const meta = {
+  title: "Cracking the Code Interview 1-8 Zero Matrix (JavaScript)",
+  description: `My solution and explanation of Cracking the Code Interview 1-8 - Zero Matrix. (JavaScript)`,
+  date: "2020-08-13",
+  authors: [paulcoroneos],
+};
+
+Let's talk about zeroing out rows and columns in a matrix when a 0 is found in today's post about Cracking the Code Interview 1-8 Zero Matrix.
+
+<!--more-->
+
+Hi everyone! Hope y'all have been having a good week. Today let's get right into it and look at the description of the problem:
+
+> Write an algorithm such that if an element is an MxN matrix is zero, its entire > row and column are also set to zero.
+
+While this problem looks deceptively simple there are a few intricacies we need to think through on our approach.
+
+## Talking through our approach
+
+Alright so lets start by diving into what the algorithm is actually asking us to do. First off we need figure out a way to find 0's in a MxN matrix. That seems simple enough. We simple would worst case need to loop once through every row and then also loop through each column index for said row. So two loops. Easy! ✅
+
+Part two of the problem then asks for every zero found in the matrix we need to "zero out" the corresponding row and column for said index we find the zero. What that **does not mean** is that in term each new 0 that we generate also nulls out its corresponding row and column. Otherwise we would always end up with a zero matrix anytime at least one zero showed up in the matrix. 😱
+
+So in psuedocode what we are really looking at for this problem using an iterative approach is
+
+```ts
+//generate a "boolean" representation of the matrix all set to false
+
+//for every row in the matrix
+//for every column in a row
+
+//is the value at this index zero?
+//if yes flip the values in the boolean matrix to true for this row/column
+
+//after looping is done return the modified matrix with new zeros depending on result of boolean matrix
+```
+
+Now why do we have to generate a boolean matrix and modify that first rather than just directly modify the matrix itself. Well for example we could actually have **two zeroes** in the same row. Even though 1 zero will trigger a zeroing of the entire row **we must still 0 out the columns corresponding to all instances of zero in the original matrix**. So in the case having a mapper is very beneficial to keeping ones sanity while iteration occurs.
+
+## Implementation
+
+Implementation for this problem is pretty straightfoward suprisingly and is broken up into several functions
+
+```ts
+const updateOriginalMatrixWithZeroes = (
+  booleanMatrix: boolean[][],
+  matrix: number[][]
+) => {
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (booleanMatrix[i][j] === true) matrix[i][j] = 0;
+    }
+  }
+};
+const zeroOutCol = (col: number, matrix: boolean[][]) => {
+  //for a fixed column set each row value to true
+  for (let i = 0; i < matrix.length; i++) {
+    matrix[i][col] = true;
+  }
+};
+
+const zeroOutRow = (row: number, matrix: boolean[][]) => {
+  //for a fixed row set each column value to true
+  for (let i = 0; i < matrix[0].length; i++) {
+    matrix[row][i] = true;
+  }
+};
+
+//generate an mxn matrix filled with falses
+const generateBooleanMatrix = (matrix: number[][]) => {
+  const booleanMatrix = [];
+  let rowMatrix;
+  for (let i = 0; i < matrix.length; i++) {
+    rowMatrix = [];
+    for (let j = 0; j < matrix[0].length; j++) {
+      rowMatrix[j] = false;
+    }
+    booleanMatrix.push(rowMatrix);
+  }
+  return booleanMatrix;
+};
+/**
+ Do not return anything, modify matrix in-place instead.
+ */
+function setZeroes(matrix: number[][]): void {
+  //base case. 0 or 1 sized matrix
+  if (matrix.length < 1 || matrix[0].length < 1) return;
+
+  const booleanMatrix = generateBooleanMatrix(matrix);
+  //now lets loop through each row finding zeroes
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 0) {
+        zeroOutCol(j, booleanMatrix);
+        zeroOutRow(i, booleanMatrix);
+      }
+    }
+  }
+  //now iterate back through our boolean matrix and update our original matrix in place
+  updateOriginalMatrixWithZeroes(booleanMatrix, matrix);
+}
+```
+
+**updateOriginalMatrixWithZeroes()** iterates through the original matrix by making a comparison to our boolean matrix row by row for each column and basically if it finds a true replaces the value in spot in our original matrix with the value zero.
+
+**generateBooleanMatrix** generates a map of whether the value in the original matrix should be set to either zero or left to its original value. This is what gets modified as we loop through the matrix checking for zeroes.
+
+**zeroOutRow()** for a given row number will replace the value in each column of a given row with a zero value. Note we always start with the first column (0th index) because we have to zero out the entire row regardless of where the zero if first found in the row.
+
+**zeroOutColumn()** for a given row number will replace the value in each row of a given column with a zero value. Note we always start with the first row (0th index) because we have to zero out the entire column regardless of where the zero if first found in the column.
+
+Our main function **setZeroes()** starts by first checking to see whether the matrix is 1x1 or less. In either case theres no need to do any work because there are no additional rows/columns to modify. So we just escape out of the function. After this we initialize the boolean matrix of size MxN to all false values.
+
+Once this setup is done we then start the iteration checking every matrix entry for a zero. If one is found we set all the corresponding row/column values for where we locate the zero to **true**. Once we have finished iterating through the entire matrx we then call **updateOriginalMatrixWithZeroes()** which will use the boolean matrix to update the values in the original matrix **in place** to zero depending if the corresponding value in the boolean matrix is true.
+
+## Complexity analysis
+
+At minimum our complexity for this problem is O(MxN). This is because at the end of the day we have to check every row and column in the matrix to hunt for zeroes. In terms of space complexity we have done a pretty poor job. We actually create a second MxN matrix to act as a mapper. In very large matrix scenarios (or low system memory) this could take up unncessary space. So what might be a workaround?
+
+## Using the matrix itself to indicate whether it should be zeroe'd out.
+
+It turns out there is quite a clever way to eliminate the need for an entirely separate tracking matrix. Recall if that we ever find a zero the entire corresponding row and column for that index must be zeroed out. That means at a certain point irregardless of what values are in every row/column at the end of the algorithm they are going to be wiped out. **In other words, what if we simply use part of the matrix to store where the remainder of the row/column should be zeroed out?** Confused? 🤔Let's do a quick example.
+
+Suppose for example we have a matrix
+
+<div>1 | 0 | 1 </div>
+<div>0 | 1 | 1 </div>
+<div>1 | 1 | 1 </div>
+
+Even before we start coding what do we intuitively see here? Well... regardless of the rest of the values in row 1 since we already have a zero in the first column for that row the rest of the column is going to be zeroed out. Similarly we see that even though index 0,0 is a one index 0,1 will end up zeroing it out anyways. So the key here is **why dont we just use the first row/column of the matrix to represent the zeroing status we need to do at the end?** So let's look at what this might look like in psuedocode
+
+1. Loop through every row
+2. For each row check the value in the first (0th) column. If we find a zero we need to go set the entire first column to be zero later
+3. Then loop through the rest of the column for a row starting with the first column
+4. If any of the column values in the row is a zero, set the first column value for that row to zero
+5. After we have finished iterating through the entire matrix now iterate again through the matrix settings rows and columns to zero depending on the status of the first row/column
+6. specifically check if index 0,0 is set to zero. If it is then the entire first column should be set to zero
+7. if our first column ever had an initial zero value then go ahead and set the entire first column to 0 as well
+
+Now I don't have an implementation of this (will leave that to you the reader, I may follow up with an example implementation at a later date). But again effectively we just use the first row/column as a kind of go/no-go for determining whether to zero out all the values. Two special cases (any zeroes in initial column or index 0,0 being a zero) are then handled separately.
+
+## Complexity Analysis
+
+Complexity of the worn needed does not change O(MxN) because at the end of the day we still need to iterate through ever matrix value to determine whether zeros exist. However our space complexity now is a stellar O(1) because we use the existing matrix to determine status and only have to enlist 1 helper variable to watch the zero status of the first column.
+
+Thank you as always and best of luck solving algorithms!
