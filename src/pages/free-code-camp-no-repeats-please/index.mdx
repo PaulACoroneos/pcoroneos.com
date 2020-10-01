@@ -1,0 +1,152 @@
+import { paulcoroneos } from "../../authors.ts";
+
+export const meta = {
+  title: "Free Code Camp (FCC) - No Repeats Please (Heap's algorithm)",
+  description: `A solution to Free Code Camp's (FCC) No Repeats Please through the use of Heap's algorithm to calculate all combinations of a list.`,
+  date: "2020-10-01",
+  authors: [paulcoroneos],
+};
+
+Hey everyone! Sorry it's been a while. I need to take a short break after working through several algorithms. I hope to get back to regularly solving algorithms and contributing posts! A good start today will be solving Free Code Camp's No Repeats Please problem throug the use of Heap's Algorithm.
+
+<!--more-->
+
+As always let's start with the problem statement:
+
+> Return the number of total permutations of the provided string that don't have repeated consecutive letters. Assume that all characters in the provided string are each unique.
+
+> For example, aab should return 2 because it has 6 total permutations (aab, aab, aba, aba, baa, baa), but only 2 of them (aba and aba) don't have the same letter (in this case a) repeating.
+
+As previously mentioned I do not have a background in computer science and I am mostly self taught when it comes to software development (that's why these posts are getting written after all)! So basically I had no idea how to approach this problem in an efficient manner. From a naive standpoint we could for every single character in the string manuallt generate the permutations through the use of nested for loops. But that would get pretty messy quickly.
+
+Anyways for this problem I pretty quickly reached for the kind hints that FCC provides. In this case the first hint points to a very famous (and entirely unintuitive) algorithm by [Heap](https://en.wikipedia.org/wiki/Heap%27s_algorithm). The linked wikipedia article's implementation is what I will base my solution off of. But in no way am I prepared to explain the proof or chart out how exactly Heap's algorithm works. Maybe in the future when I am more comfortable with induction I can write a follow-up. 😃
+
+Alright without further ado let's talk about how to solve this problem (recursive solution).
+
+## Implementation
+
+First off Heap's algorithm works off a list (array). As such since the FCC problem gives us a string we start by converting that to an array:
+
+```ts
+const strArr = str.split("");
+```
+
+At the same time we will want to define an empty array to hold all the permutations of the string we generate.
+
+```ts
+const perms = [];
+```
+
+Now at this point our permAlone method needs to call a function called generate with two arguments
+
+```ts
+generate(strArr.length, [...strArr]);
+```
+
+The first argument is the length of the list we are finding permutations of. The second argument is simply a copy of the list (you can alternatively make a copy using strArr.slice()). We generally want functions to be pure in that they do not modify the variables that are passed in (think concepts of immutability). So we pass a copy of the list instead (and for reasons we will see below since this is a recursive function).
+
+Now that this is out of the way we need to define our generate method which implements Heap's algorithm. Now again we are implementing a recursive solution here. So the first thing that should come to mind is **what is our base case?**. In this case its when the first argument of generate is equal to 1.
+
+```ts
+  const generate = (k, heapArr) => {
+    //base case
+    if (k === 1) {
+      perms.push([...heapArr]);
+      return;
+    }
+```
+
+That probably doesn't make much sense. But in short what we are saying here is that once we have finished recursing for a single permutation of the string push it into our results array. Then we will return to the call stack and continue generating other permutations until we are out. **Note: that we are going to use heapArr inside generate to signify the array copy we made of the original string array to generate each unique permutation**
+
+Now if we arent at the end of generating a set of permutations we are going to recursively call generate() with the first argument of generate decremented by one.
+
+```ts
+generate(k - 1, heapArr);
+```
+
+This our recursion. So now you may ask what the purpose of this is? Well lets take a step back and ask ourselves how many permutations exist in a list of items? For example suppose we have 'ab'. How many permutations exist?
+
+> ab, ba
+
+or **two**.
+
+Now how about 'aba'?
+
+> aba, baa, aab, aab, baa, aba
+
+or **six**.
+
+Finally for fun how about 'abab'?
+
+> abab, baab, aabb, aabb, baab, abab, bbaa, bbaa, abba,
+> baba, baba, abba, aabb, aabb, baab, abab, abab, baab,
+> baba, abba, bbaa, bbaa, abba, baba
+
+(I will count for you don't worry) or **twenty-four**.
+
+So this is a pretty common series in mathematics but effectively the number of permutations is n!. Factorials are pretty important in mathematics and algorithms and we will continue to see them moving forward. But as a quick reminder a factorial means multiply the result of n less 1 each subsequent time (up until 0). So 4! is equivalent to (4-0) x (4-1) x (4-2) x (4-3) or twenty-four just like we calculated above.
+
+What did we notice here? There are 4 products above. Thus we have 4 recursions more or less to handle these total combinations to calculate.
+
+Now with that out of the way for each grouping we need to iterate through and calculate all possible sub permutations. That is done with a tried and true for loop with a single if/else block and yet another recursive generate call.
+
+```ts
+for (let i = 0; i < k - 1; i++) {
+  if (k % 2 === 0) {
+    swapIndices(heapArr, i, k - 1);
+  } else {
+    swapIndices(heapArr, 0, k - 1);
+  }
+  generate(k - 1, heapArr);
+}
+```
+
+Intuitive? Probably not haha. So the looping makes sense somewhat. We effectively need to make sure we generate every list combintation for the previously mentioned groupings (of size 4, 3, 2 and finally 1). The if/else block is what is interesting.
+
+Essentially if the grouping count k is even we are going to call a function swapIndices and rotate the values in our heap array for the ith and k-1 th element. Otherwise if it's odd we swap out the 0th index and k-1th index.
+
+Now I could double or even triple this blog post poorly explaining what exactly is going on here. I actually strongly recommend you find a good youtube or blog article explaining the math behind this (maybe my own in the future 😆). Instead what I will offer is that essentially what is happening here is that we are rotating numbers in the array in pairs (which makes sense if you notice we pass 2 indices to the helper function). So basically whether k is even or odd tells us which index we need to swap. However depending on where we are in the recursion stack we may need to swap additional pairs still to get the final base case permutation we are calculating for a given instance. That's why we make additional calls to generate and place them on the stack.
+
+Make any more sense? Probably not. But again what we are doing is adding more and more generate calls to the call stack that are performing many, many pair swaps that ultimately generate a unique list of combinations. That's the magic of Heap's algorithm.
+
+Now as previously mentioned we need an in place swap method. We can actually accomplish this simply using ES6
+
+```ts
+const swapIndices = (arr, idx1, idx2) =>
+  ([arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]);
+```
+
+Now you may not have seen this before but this is effectively the equivalent of this code block
+
+```ts
+const swapIndices = (arr, idx1, idx2) => {
+  const temp = arr[idx1];
+  arr[idx1] = arr[idx2];
+  arr[idx2] = arr[idx1];
+};
+```
+
+I enjoy using the first version but honestly either is fine. Now are we done? **Nope!** 🤯
+
+If you read the problem again you will see that not only do they ask us for the length of the combination of the resulting list but they also want us to eliminate any results with repeating characters. This can be accomplished a few ways. My solution will prefer array methods over regex.
+
+```
+  //return array with dupes filtered
+  return perms.reduce((accum, current) => {
+    const noRepeats = current.every((char, idx) => char !== current[idx - 1]);
+    if (noRepeats) accum.push(current);
+    return accum;
+  }, []).length;
+```
+
+Alright so what is happening here. Let's break it down one part at a time. First we start by applying a reducer function to the permutations array we just created using Heap's algorithm via generate(). The intention of this reduce is to return a brand new array with only results meeting the problem statements criteria. We then simply need to return the length of this new array.
+
+Now what happens inside the reduce? First we start out by inspecting each sub array inside our permutations we generated. We then use Array.every() to check that for each letter in the array that it does not match the value of the previous letter in the array. This works because Array.every() will return false if ANY character in the array fails to meet the condition if the method we apply to each array item.
+
+If there are no repeats in the list we are parsing through we push it to the new list. Otherwise we skip to the next list in the permutations array. By doing so we get a nicely filtered list back that passes the test cases that FCC gives us.
+
+## Complexity
+
+The complexity of this algorithm is again gated by whatever is going to take the most crunching of data. The reduce method we use to re-parse the data is O(n^2) because for every sub array in the permutations list we need to check every character to make sure we have no repeating characters. But Heap's algorithm as we previously mentioned generated n! combinations. So this translates to O(n!). If we look overall at big O for this it reduces to O(n!). This seems high but for calculating combinations it is still considered the best case worse case algorithms for calculating all possible combinations of a list.
+
+Thanks for reading this post and until next time best of luck working through your algorithms.
