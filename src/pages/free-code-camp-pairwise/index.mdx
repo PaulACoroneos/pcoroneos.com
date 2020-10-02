@@ -1,0 +1,126 @@
+import { paulcoroneos } from "../../authors.ts";
+
+export const meta = {
+  title: "Free Code Camp (FCC) - Pairwise",
+  description: `SolvingF Free Code Camp's pairwise algorithm.`,
+  date: "2020-10-02",
+  authors: [paulcoroneos],
+};
+
+Today's algorithm we will examine is Free Code Camp's (FCC) pairwise algorithm which deals with list traversal.
+
+<!--more-->
+
+## Problem statement and analysis
+
+As always let us examine the problem statement:
+
+> Given an array arr, find element pairs whose sum equal the second argument arg and return the sum of their indices.
+>
+> You may use multiple pairs that have the same numeric elements but different indices. Each pair should use the lowest possible available indices. Once an element has been used it cannot be reused to pair with another element. For instance, pairwise([1, 1, 2], 3) creates a pair [2, 1] using the 1 at index 0 rather than the 1 at index 1, because 0+2 < 1+2.
+>
+> For example pairwise([7, 9, 11, 13, 15], 20) returns 6. The pairs that sum to 20 are [7, 13] and [9, 11]. We can then write out the array with their indices and values.
+>
+> | Index |  0  |  1  |  2  |  3  |  4  |
+> | :---: | :-: | :-: | :-: | :-: | :-: |
+> | Value |  7  |  9  | 11  | 13  | 15  |
+>
+> Below we'll take their corresponding indices and add them.
+>
+> 7 + 13 = 20 → Indices 0 + 3 = 3
+> 9 + 11 = 20 → Indices 1 + 2 = 3
+> 3 + 3 = 6 → Return 6
+
+So off the top of of my head a few things we need to consider here
+
+1. We are trying to find pairs that some to a target argument.
+2. We can only use each number once so we should track what indices we are using.
+3. We need to prioritize the lowest index values first when calculating matched pairs (ie we should move left to right and use indices that match as soon as possible)
+
+So based on this we already know we are going to have to worst case check every pair to see if they sum to the target arg. That being said there are some "smart" shortcuts we can take to reduce the worst case in cases where we do indeed have early pairs in the list. So with this all in mind let's take a look at one possible implementation.
+
+## Implementation
+
+Generally with algorithms there are a few base cases we can consider which reduce the average runtime of the problem. Two easy ones we can implement before doing any iteration are as follows:
+
+```js
+//base case 1. array too small
+if (arr.length <= 1) return 0;
+//base case 2. Exactly 2 entries
+if (arr.length === 2) return arr[0] + arr[1] === arg ? 1 : 0;
+```
+
+Base case 1 occurs if the array is size one or less. Obviously this means there is no possible combination. Thus per the requirements of the problem we can return 0. Base case 2 occurs when we have exactly two entries. In this case we can simply inspect the sum of the two indices and check if they equal the target arg. If they do then the sum will always be 0 + 1 = 1. Otherwise we return 0 just like the first base case.
+
+After this point we will then need to proceed with looping through possibilities. First we will define an array:
+
+```js
+//otherwise lets loop for each element and check if another element sums to args
+const pairedIndices = [];
+```
+
+Arrays are really easy to work with so we will push "used" indexes here. This is necessary for compiling the sum of the indices at the end of the problem and for also making some small optimiziations within the loop. Now let's take a look at the main loop:
+
+```js
+for (let i = 0; i < arr.length; i++) {
+  //if we have already used this index, skip using continue
+  if (pairedIndices.includes(i)) continue;
+  for (let j = i + 1; j < arr.length; j++) {
+    if (pairedIndices.includes(j)) continue;
+    if (arr[i] + arr[j] === arg) {
+      pairedIndices.push(i, j);
+      break; //skip remainder of loop, we found a pair
+    }
+  }
+}
+```
+
+At the beginning any possible value in the array could sum with another value to meet the arg target. So we are going to iterate through the list with this for loop. We then use a second for loop starting at the first loops current iteration + 1 to test the remaining indices in the array versus the index we are checking sums.
+
+We have 2 optimizations that potentially reduce the runtime cost of this algorithm. First off, before starting the second loop we check to see whether we have already used the selected index i in one of the sum pairs. This may not make sense initially but let me explain. The outer most loop is going to run through every index in the array. But its very possible while iterating through subsequent indices in the second loop we may "consume" i indexes before we get to then. In this case if we have already used the instance of the i index there is no point in iterating through for it. Continue effectively acts to skips the iteration for that index i. The second optimization we make is to check within the inner loop whether the index j has already been used as well. This again is because we can only use 1 index at a time.
+
+Otherwise we simply sum array pairs and see if they match the target. If they do we then push them to our array. This continues until we have either looped or consumed every index in the array. Now we can't stop here. The problem asks us to sum the indices and return a single number. Fortunately arrays lend themselves well to being reduce through handy Array.reduce().
+
+```js
+return pairedIndices.reduce((accum, current) => {
+  accum += current;
+  return accum;
+}, 0);
+```
+
+What this snippet more or less does is starts with a sum of 0. We then iterate through each value in the indices array and add the number to that initial sum of 0. Once we have run through the entire array we return a single number!
+
+Here is the final solution:
+
+```js
+function pairwise(arr, arg) {
+  //base case 1. array too small
+  if (arr.length <= 1) return 0;
+  //base case 2. Exactly 2 entries
+  if (arr.length === 2) return arr[0] + arr[1] === arg ? 1 : 0;
+
+  //otherwise lets loop for each element and check if another element sums to args
+  const pairedIndices = [];
+  for (let i = 0; i < arr.length; i++) {
+    //if we have already used this index, skip using continue
+    if (pairedIndices.includes(i)) continue;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (pairedIndices.includes(j)) continue;
+      if (arr[i] + arr[j] === arg) {
+        pairedIndices.push(i, j);
+        break; //skip remainder of loop, we found a pair
+      }
+    }
+  }
+  return pairedIndices.reduce((accum, current) => {
+    accum += current;
+    return accum;
+  }, 0);
+}
+```
+
+## Complexity
+
+From a runtime complexity we have 2 for loops. Now we do have a lot of optimizations that certainly can help the average case. But at the end of the day the worst case is that no pair of indices sum to the target arg. In which case we must iterate through everything to find this out. Two nested for loops leads to O(N^2).
+
+Thanks as always and best of luck solving algorithms!
