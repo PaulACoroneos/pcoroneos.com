@@ -26,7 +26,7 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/free-code-camp-pairwise": [
+    "/free-code-camp-symmetric-difference": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
