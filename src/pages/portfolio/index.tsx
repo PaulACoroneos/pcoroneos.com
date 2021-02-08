@@ -17,7 +17,7 @@ const data = [
     deployedLink: 'https://where-has-paul-visited.netlify.app',
   },
   {
-    title: 'What do I wear on my run?',
+    title: 'What do I wear on my run? 🏃‍♀️ 🏃',
     githubLink: 'https://github.com/PaulACoroneos/What-Do-I-Wear-On-My-Run',
     imageSrc: './runner.jpg',
     deployedLink: 'https://whatdoiwearonmyrun.com',
