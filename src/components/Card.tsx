@@ -29,14 +29,14 @@ const Card: React.FC<CardProps> = ({
             <a title={githubTitle} href={githubLink}>
               <div className='px-2 py-1 grid grid-cols-2 items-center bg-primary rounded'>
                 <img src='./github.png' alt='' />
-                <span className='text-white text-md'>Github</span>
+                <span className='text-white text-sm'>Github</span>
               </div>
             </a>
             {deployedLink && 
               <a title={deployedTitle} href={deployedLink}>
                 <div className='px-2 py-1 grid grid-cols-2 items-center bg-primary rounded'>
                   <img width='40' height='40' src='./deploy.png' alt='' />
-                  <span className='text-white text-md'>Deploy</span>
+                  <span className='text-white text-sm'>Deploy</span>
                 </div>
               </a>
             }
