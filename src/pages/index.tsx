@@ -1,9 +1,9 @@
 import * as React from 'react'
-import dayjs from 'dayjs'
 import Link from 'next/link'
 import Head from 'next/head'
 import getAllPostPreviews from '../getAllPostPreviews'
 import twitterCard from '../img/paulcoroneos.jpg'
+import { format, parse } from 'date-fns'
 
 const posts = getAllPostPreviews()
 
@@ -28,7 +28,7 @@ const Home:React.FC = () =>
           Latest Blog Posts
         </h1>
         <p className='text-lg leading-7 text-gray-500' data-testid='mostRecentPostDate'>
-          Most recent post: {dayjs(posts[0].module.meta.date).format('MMMM DD, YYYY')}
+          Most recent post: {format(parse(posts[0].module.meta.date),'MMMM DD, YYYY')}
         </p>
       </div>
       <ul className='divide-y divide-gray-200'>
@@ -39,7 +39,7 @@ const Home:React.FC = () =>
                   <dt className='sr-only'>Published on</dt>
                   <dd className='text-base leading-6 font-medium text-gray-500'>
                     <time dateTime={meta.date}>
-                      {dayjs(meta.date).format('MMMM DD, YYYY')}
+                      {format(parse(meta.date),'MMMM DD, YYYY')}
                     </time>
                   </dd>
                 </dl>

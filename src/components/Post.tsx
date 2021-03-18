@@ -1,20 +1,20 @@
 import * as React from 'react';
 import Head from 'next/head';
 import PageTitle from './PageTitle';
-import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
+import { format, parse } from 'date-fns';
 
 //TODO Paul. Figure out why I cant override code terminal bg color
 const mdxComponents = {
-  pre: ({ className, ...props }) => 
+  pre: ({ className, ...props }) =>
     <pre
       className={`${className} rounded-md py-3 px-4 overflow-x-auto`}
       {...props}
     />
   ,
-  'pre.code': ({ className, ...props }) => 
+  'pre.code': ({ className, ...props }) =>
     <code className={`${className} text-gray-200`} {...props} />
   ,
 };
@@ -57,13 +57,13 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
       </Head>
       <header className='pt-6 xl:pb-10'>
         <div className='space-y-1 text-center'>
-          {meta.date && 
+          {meta.date &&
             <dl className='space-y-10'>
               <div>
                 <dt className='sr-only'>Published on</dt>
                 <dd className='text-base leading-6 font-medium text-gray-500'>
                   <time dateTime={meta.date}>
-                    {dayjs(meta.date).format('MMMM DD, YYYY')}
+                    {format(parse(meta.date), 'MMMM DD, YYYY')}
                   </time>
                 </dd>
               </div>
@@ -82,7 +82,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
           <dt className='sr-only'>Authors</dt>
           <dd>
             <ul className='flex justify-center xl:block space-x-8 sm:space-x-12 xl:space-x-0 xl:space-y-8'>
-              {meta.authors.map(author => 
+              {meta.authors.map(author =>
                 <li
                   key={author.twitter}
                   className='flex w-100 space-x-2'
@@ -96,9 +96,9 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
                     <dt className='sr-only'>Name</dt>
                     <dd className='text-gray-900 text-lg'>{author.name}</dd>
                     <dd className='inline-block'>
-                    <dt className='inline-block text-md'>Twitter:</dt>
-                    {' '}
-                    <a
+                      <dt className='inline-block text-md'>Twitter:</dt>
+                      {' '}
+                      <a
                         href={`https://twitter.com/${author.twitter}`}
                         className='text-secondary hover:text-primary text-md'
                       >
@@ -125,7 +125,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
           <div className='prose pt-10 pb-8'>
             <MDXProvider components={mdxComponents}>{children}</MDXProvider>
           </div>
-          {meta.discussion && 
+          {meta.discussion &&
             <div className='pt-6 pb-16'>
               <p>
                 Want to talk about this post?{' '}
@@ -140,9 +140,9 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
           }
         </div>
         <footer className='text-sm font-medium leading-5 divide-y divide-gray-200 xl:col-start-1 xl:row-start-2'>
-          {(next || previous) && 
+          {(next || previous) &&
             <div className='space-y-8 py-8'>
-              {next && 
+              {next &&
                 <div>
                   <h2 className='text-xs tracking-wide uppercase text-gray-500'>
                     Next Article
@@ -154,7 +154,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
                   </div>
                 </div>
               }
-              {previous && 
+              {previous &&
                 <div>
                   <h2 className='text-xs tracking-wide uppercase text-gray-500'>
                     Previous Article
