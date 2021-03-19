@@ -1,8 +1,13 @@
 {
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
   "devFiles": [
-    "static/runtime/react-refresh.js",
-    "static/development/dll/dll_7451980667d5e0261b1f.js",
-    "static/development/dll/dll_7451980667d5e0261b1f.js.map"
+    "static/chunks/react-refresh.js"
+  ],
+  "ampDevFiles": [
+    "static/chunks/webpack.js",
+    "static/chunks/amp.js"
   ],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
@@ -12,27 +17,15 @@
   ],
   "pages": {
     "/_app": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/_polyfills": [
-      "static/runtime/polyfills.js"
-    ],
-    "/about": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/free-code-camp-symmetric-difference": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/portfolio": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/_error.js"
     ]
-  }
+  },
+  "ampFirstPages": []
 }
