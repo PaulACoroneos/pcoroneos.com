@@ -1,6 +1,27 @@
 {
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
+  "/about": "pages/about.js",
+  "/atoi": "pages/atoi.js",
+  "/climbing-stairs": "pages/climbing-stairs.js",
+  "/cracking-the-code-interview-1-2": "pages/cracking-the-code-interview-1-2.js",
+  "/cracking-the-code-interview-1-3-urlify": "pages/cracking-the-code-interview-1-3-urlify.js",
+  "/cracking-the-code-interview-1-8-zero-matrix": "pages/cracking-the-code-interview-1-8-zero-matrix.js",
+  "/cracking-the-code-interview-1-9-string-rotation": "pages/cracking-the-code-interview-1-9-string-rotation.js",
+  "/ctci-is-unique": "pages/ctci-is-unique.js",
+  "/free-code-camp-no-repeats-please": "pages/free-code-camp-no-repeats-please.js",
+  "/free-code-camp-pairwise": "pages/free-code-camp-pairwise.js",
+  "/free-code-camp-symmetric-difference": "pages/free-code-camp-symmetric-difference.js",
+  "/hello world": "pages/hello world.js",
+  "/": "pages/index.html",
+  "/leetcode-24-swap-nodes-inpairs": "pages/leetcode-24-swap-nodes-inpairs.js",
+  "/leetcode-two-sum": "pages/leetcode-two-sum.js",
+  "/next-best-time": "pages/next-best-time.js",
+  "/parse-int": "pages/parse-int.js",
+  "/portfolio": "pages/portfolio.html",
+  "/role-tab": "pages/role-tab.js",
+  "/stack": "pages/stack.js",
+  "/updating-bootcamp": "pages/updating-bootcamp.js",
   "/_error": "pages/_error.js",
-  "/free-code-camp-symmetric-difference": "pages/free-code-camp-symmetric-difference.js"
+  "/404": "pages/404.html"
 }
