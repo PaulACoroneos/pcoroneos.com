@@ -6,35 +6,7 @@
   --color-quinary: #3e5c76;
   --color-white: #fff;
 }
-/* purgecss start ignore */
+
 @tailwind base;
-
-div > div > blockquote {
-  @apply ml-8 border-secondary border-l-4 pl-4 bg-indigo-100 rounded text-gray-800;
-}
-
-table {
-  @apply mb-6 text-sm mx-auto;
-  table-layout: fixed;
-}
-
-@screen md {
-  table {
-    @apply text-base;
-  }
-}
-
-/* Tables */
-td,
-th {
-  @apply px-2 py-1 border-2 rounded-sm border-gray-800 text-gray-800;
-}
-
-tr:nth-child(odd) {
-  @apply bg-indigo-200;
-}
-
-/* purgecss end ignore */
-
 @tailwind utilities;
 @tailwind components;

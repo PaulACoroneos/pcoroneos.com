@@ -1,34 +1,39 @@
 {
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
   "devFiles": [
-    "static/runtime/react-refresh.js",
-    "static/development/dll/dll_7451980667d5e0261b1f.js",
-    "static/development/dll/dll_7451980667d5e0261b1f.js.map"
+    "static/chunks/react-refresh.js"
+  ],
+  "ampDevFiles": [
+    "static/chunks/webpack.js",
+    "static/chunks/amp.js"
   ],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
-    "static/development/_buildManifest.module.js",
-    "static/development/_ssgManifest.js",
-    "static/development/_ssgManifest.module.js"
+    "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/_error.js"
     ],
-    "/_polyfills": [
-      "static/runtime/polyfills.js"
+    "/cracking-the-code-interview-1-9-string-rotation": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/cracking-the-code-interview-1-9-string-rotation.js"
     ],
-    "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
+    "/free-code-camp-no-repeats-please": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/free-code-camp-no-repeats-please.js"
     ]
-  }
+  },
+  "ampFirstPages": []
 }

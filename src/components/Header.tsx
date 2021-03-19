@@ -11,7 +11,7 @@ const Header:React.FC = () =>
               alt='Paul Coroneos Profile image'
               className='rounded-full h-8 wd-8 md:h-12 md:w-14'
             />
-            <span className='text-sm md:text-2xl lg:text-3xl pl-2 text-white'>Paul Coroneos</span>
+            <span className='text-sm md:text-2xl lg:text-3xl pl-2 text-white whitespace-nowrap'>Paul Coroneos</span>
           </a>
       </Link>
       <nav className='items-center ml-6'>
