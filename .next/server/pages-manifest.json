@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/free-code-camp-no-repeats-please": "pages/free-code-camp-no-repeats-please.js",
-  "/cracking-the-code-interview-1-9-string-rotation": "pages/cracking-the-code-interview-1-9-string-rotation.js"
+  "/free-code-camp-symmetric-difference": "pages/free-code-camp-symmetric-difference.js"
 }

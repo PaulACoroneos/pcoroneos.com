@@ -24,15 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/cracking-the-code-interview-1-9-string-rotation": [
+    "/free-code-camp-symmetric-difference": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/cracking-the-code-interview-1-9-string-rotation.js"
-    ],
-    "/free-code-camp-no-repeats-please": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/free-code-camp-no-repeats-please.js"
+      "static/chunks/pages/free-code-camp-symmetric-difference.js"
     ]
   },
   "ampFirstPages": []
