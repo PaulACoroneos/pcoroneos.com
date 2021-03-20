@@ -122,7 +122,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
           </dd>
         </dl>
         <div className='divide-y divide-gray-200 xl:pb-0 xl:col-span-3 xl:row-span-2'>
-          <div className='prose pt-10 pb-8'>
+          <div className='prose pt-10 pb-8 xl:pl-8'>
             <MDXProvider components={mdxComponents}>{children}</MDXProvider>
           </div>
           {meta.discussion &&

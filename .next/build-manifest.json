@@ -29,10 +29,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/leetcode-485-max-consecutive-ones": [
+    "/leetcode-1295-find-numbers-with-even-number-of-digits": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/leetcode-485-max-consecutive-ones.js"
+      "static/chunks/pages/leetcode-1295-find-numbers-with-even-number-of-digits.js"
+    ],
+    "/portfolio": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/portfolio.js"
     ]
   },
   "ampFirstPages": []
