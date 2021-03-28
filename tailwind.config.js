@@ -56,6 +56,11 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%'
+          }
+        },
         bullets: 'line',
         linkColor: [
           'var(--color-secondary)',

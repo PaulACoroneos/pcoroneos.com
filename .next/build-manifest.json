@@ -14,11 +14,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -29,15 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/leetcode-1295-find-numbers-with-even-number-of-digits": [
+    "/leetcode-141-linked-list-cycle": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/leetcode-1295-find-numbers-with-even-number-of-digits.js"
-    ],
-    "/portfolio": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/portfolio.js"
+      "static/chunks/pages/leetcode-141-linked-list-cycle.js"
     ]
   },
   "ampFirstPages": []
