@@ -141,7 +141,7 @@ I bet you're still confused. That's okay! Let's now dive into diagram land once 
 
 <img src='./basic-linked-list.jpg' alt='A basic singly linked list of 1, 2 and 3.' />
 
-Now what happens during first call of our reverseList(0) method? Well nothing exciting to be honest. We initialize our pointer to reverseList(head.next) which is added to our call stack:
+Now what happens during first call of our reverseList() method? Well nothing exciting to be honest. We initialize our pointer to reverseList(head.next) which is added to our call stack:
 
 <img src='./linked-list-recursive-one.jpg' alt='Linked list unaffected with one reverseList() call placed on call stack' />
 
@@ -149,7 +149,7 @@ Now let's fast forward two more steps and glance at the call stack:
 
 <img src='./linked-list-recursive-two.jpg' alt='Linked list unaffected with three reverseList() calls on call stack.' />
 
-Now at this point we can probably guess head.next is easily pointing to null (3 points to null in our original linked list). At this point our first condition triggers in which head or head.next argument is __null__. So node 3 is returned and **reverseList(3) is popped off the call stack**. Now we follow the rest of the psuedocode algorithm. 
+Now at this point we can probably guess head.next is easily pointing to null (3 points to null in our original linked list). At this point our first condition triggers in which head or head.next argument is __null__. So node 3 is returned and **reverseList(node 3) is popped off the call stack**. Now we follow the rest of the psuedocode algorithm. 
 
 This first step is actually the trickiest of all in my mind. We want the head arg node's next next pointer to point back to itself. But what does that actually mean? Now be **very** careful here you do not mix up ptr and head here. **they are not the same thing**. 
 
@@ -161,19 +161,15 @@ At this point you may think to yourself "uh oh". I must have made a mistake! But
 
 <img src='./linked-list-recursive-five.jpg' alt='Linked list with nodes 3 pointing to node 2 alone.' />
 
-With this we pop **reverseList(2)** off the stack because we then return ptr (or node 1). Now we simply just have to complete the reverseList(1) call remaining on the stack. Let's now step through the algorithm line by line:
+With this we pop **reverseList(node 2)** off the stack because we then return ptr (or node 1). Now we simply just have to complete the reverseList(node 1) call remaining on the stack. Let's now step through the algorithm line by line:
 
-Step 1: Ptr variable is assigned to null since we now are out of recursions on stack
+Step 1: Nodes 1 and 2 now point to each other since we set node 1's next.next to itself
 
-<img src='./linked-list-recursive-six.jpg' alt='step one of reverseList(1). Ptr variable points to null' />
+<img src='./linked-list-recursive-seven.jpg' alt='step one of reverseList(node 1). nodes 1 and 2 now point to each other' />
 
-Step 2: Nodes 1 and 2 now point to each other since we set node 1's next.next to itself
+Step 2: We delete the pointer from node 1 to node 2 by setting it to null. This makes node 1 the new tail node
 
-<img src='./linked-list-recursive-seven.jpg' alt='step two of reverseList(1). nodes 1 and 2 now point to each other' />
-
-Step 3: We delete the pointer from node 1 to node 2 by setting it to null. This makes node 1 the new tale node
-
-<img src='./linked-list-recursive-eight.jpg' alt='step three of reverseList(1). node 1 next is set to null so that only node 2 pointing to node 1 only exists' />
+<img src='./linked-list-recursive-eight.jpg' alt='step two of reverseList(node 1). node 1 next is set to null so that only node 2 pointing to node 1 only exists' />
 
 And at this point we are done because at the very top of our stack we returned 3 which now points to nodes 2 and 1 respectfully before terminating with null. Congratulations! 🥳 Now let's see the javascript implementation:
 

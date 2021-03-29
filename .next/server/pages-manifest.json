@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
   "/leetcode-206-reverse-link-list": "pages/leetcode-206-reverse-link-list.js"
 }
