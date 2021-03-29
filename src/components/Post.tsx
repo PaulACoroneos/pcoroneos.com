@@ -31,7 +31,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
   const next = posts[postIndex - 1];
 
   return (
-    <article className='xl:divide-y xl:divide-gray-200'>
+    <article className='divide-y divide-gray-200'>
       <Head>
         <title>{meta.title} - Paul Coroneos</title>
         <meta name='twitter:card' content='summary_large_image' />
@@ -55,7 +55,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
           content={`https://pcoroneos.com${meta.image}`}
         />
       </Head>
-      <header className='pt-6 xl:pb-10'>
+      <header className='py-4'>
         <div className='space-y-1 text-center'>
           {meta.date &&
             <dl className='space-y-10'>
@@ -75,13 +75,30 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
         </div>
       </header>
       <div
-        className='divide-y xl:divide-y-0 divide-gray-200 xl:grid xl:grid-cols-4 xl:col-gap-6 pb-16 xl:pb-20'
         style={{ gridTemplateRows: 'auto 1fr' }}
       >
-        <dl className='pt-6 pb-10 xl:pt-11 xl:border-b xl:border-gray-200'>
+        <div className='divide-y divide-gray-200 xl:pb-0 xl:col-span-3 xl:row-span-2'>
+          <div className='prose pt-10 pb-8 xl:pl-8'>
+            <MDXProvider components={mdxComponents}>{children}</MDXProvider>
+          </div>
+          {meta.discussion &&
+            <div className='pt-6 pb-16'>
+              <p>
+                Want to talk about this post?{' '}
+                <a
+                  href={meta.discussion}
+                  className='font-medium text-secondary hover:text-primary'
+                >
+                  Discuss this on GitHub &rarr;
+                </a>
+              </p>
+            </div>
+          }
+        </div>
+        <dl className='pt-6 pb-6 xl:pt-11 border-b border-gray-200'>
           <dt className='sr-only'>Authors</dt>
           <dd>
-            <ul className='flex justify-center xl:block space-x-8 sm:space-x-12 xl:space-x-0 xl:space-y-8'>
+            <ul className='flex justify-center space-x-8 sm:space-x-12'>
               {meta.authors.map(author =>
                 <li
                   key={author.twitter}
@@ -121,24 +138,6 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
             </ul>
           </dd>
         </dl>
-        <div className='divide-y divide-gray-200 xl:pb-0 xl:col-span-3 xl:row-span-2'>
-          <div className='prose pt-10 pb-8 xl:pl-8'>
-            <MDXProvider components={mdxComponents}>{children}</MDXProvider>
-          </div>
-          {meta.discussion &&
-            <div className='pt-6 pb-16'>
-              <p>
-                Want to talk about this post?{' '}
-                <a
-                  href={meta.discussion}
-                  className='font-medium text-secondary hover:text-primary'
-                >
-                  Discuss this on GitHub &rarr;
-                </a>
-              </p>
-            </div>
-          }
-        </div>
         <footer className='text-sm font-medium leading-5 divide-y divide-gray-200 xl:col-start-1 xl:row-start-2'>
           {(next || previous) &&
             <div className='space-y-8 py-8'>
