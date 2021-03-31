@@ -78,7 +78,7 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
         style={{ gridTemplateRows: 'auto 1fr' }}
       >
         <div className='divide-y divide-gray-200 xl:pb-0 xl:col-span-3 xl:row-span-2'>
-          <div className='prose pt-10 pb-8 xl:pl-8'>
+          <div className='prose py-8 px-2'>
             <MDXProvider components={mdxComponents}>{children}</MDXProvider>
           </div>
           {meta.discussion &&
