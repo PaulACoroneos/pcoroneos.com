@@ -102,12 +102,12 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
               {meta.authors.map(author =>
                 <li
                   key={author.twitter}
-                  className='flex w-100 space-x-2'
+                  className='flex w-100 space-x-2 items-center'
                 >
                   <img
                     src={author.avatar}
                     alt=''
-                    className='w-10 h-10 rounded-full flex-grow-0 mt-1'
+                    className='w-14 h-14 rounded-full flex-grow-0'
                   />
                   <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
                     <dt className='sr-only'>Name</dt>
