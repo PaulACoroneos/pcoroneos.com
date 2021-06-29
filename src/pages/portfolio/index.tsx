@@ -10,19 +10,6 @@ const data = [
     deployedLink:
       'https://repl.it/repls/folder/Scientific-Computing-with-Python-Projects',
   },
-  {
-    title: 'Where has Paul visited Around the world? 🗺️',
-    githubLink: 'https://github.com/PaulACoroneos/Where-Has-Paul-Been',
-    imageSrc: './world.png',
-    deployedLink: 'https://where-has-paul-visited.netlify.app',
-  },
-  {
-    title: 'What do I wear on my run? 🏃‍♀️ 🏃',
-    githubLink: 'https://github.com/PaulACoroneos/What-Do-I-Wear-On-My-Run',
-    imageSrc: './runner.jpg',
-    deployedLink: 'https://whatdoiwearonmyrun.com',
-  },
-
 ];
 
 const Portfolio = () => 

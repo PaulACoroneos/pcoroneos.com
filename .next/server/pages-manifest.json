@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/leetcode-1295-find-numbers-with-even-number-of-digits": "pages/leetcode-1295-find-numbers-with-even-number-of-digits.js",
-  "/portfolio": "pages/portfolio.js"
+  "/portfolio": "pages/portfolio.js",
+  "/": "pages/index.js"
 }
