@@ -86,10 +86,10 @@ module.exports = withBundleAnalyzer({
               const content = [
                 'import Post from "src/components/Post"',
                 'export { getStaticProps } from "src/getStaticProps"',
-                src,
+                `${src} \n`,
                 'export default (props) => <Post meta={meta} {...props} />',
               ].join('\n')
-
+              
               if (content.includes('<!--more-->')) {
                 return this.callback(null, content.split('<!--more-->').join('\n'))
               }
