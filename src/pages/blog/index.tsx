@@ -1,13 +1,13 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import getAllPostPreviews from '../getAllPostPreviews'
-import twitterCard from '../img/paulcoroneos.jpg'
+import getAllPostPreviews from '../../getAllPostPreviews'
+import twitterCard from '../../img/paulcoroneos.jpg'
 import { format, parse } from 'date-fns'
 
 const posts = getAllPostPreviews()
 
-const Home:React.FC = () => 
+const Blog:React.FC = () => 
     <div className='divide-y divide-gray-200'>
       <Head>
         <meta name='twitter:card' content='summary_large_image' />
@@ -72,4 +72,4 @@ const Home:React.FC = () =>
     </div>
   
 
-export default Home;
+export default Blog;
