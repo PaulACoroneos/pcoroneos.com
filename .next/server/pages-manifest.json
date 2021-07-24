@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/about": "pages/about.js",
-  "/leetcode-203-remove-linked-list-element": "pages/leetcode-203-remove-linked-list-element.js"
+  "/leetcode": "pages/leetcode.js",
+  "/": "pages/index.js"
 }

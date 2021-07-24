@@ -18,6 +18,9 @@ const Header:React.FC = () =>
         <Link href='/'>
           <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Blog</a>
         </Link>
+        <Link href='/leetcode'>
+        <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Leetcode</a>
+        </Link>
         <Link href='/portfolio'>
         <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Portfolio</a>
         </Link>

@@ -16,7 +16,7 @@ function dateSortDesc(a, b) {
 //filter out mdx files w/out date. these arent blogposts (other pages)
 // eslint-disable-next-line no-extra-parens
 const getAllPostPreviews = () => importAll((require as any).context('./pages/?preview', true, /\.mdx$/)).sort((a, b) =>
-    dateSortDesc(a.module.meta.date, b.module.meta.date)
-  )
+  dateSortDesc(a.module.meta.date, b.module.meta.date)
+);
 
 export default getAllPostPreviews
