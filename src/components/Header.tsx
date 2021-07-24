@@ -15,7 +15,7 @@ const Header:React.FC = () =>
           </a>
       </Link>
       <nav className='items-center ml-6'>
-        <Link href='/'>
+        <Link href='/blog'>
           <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Blog</a>
         </Link>
         <Link href='/leetcode'>
