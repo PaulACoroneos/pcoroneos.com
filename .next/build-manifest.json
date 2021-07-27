@@ -29,15 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/blog": [
+    "/leetcode-121-best-time-to-buy-and-sell-stock": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/blog.js"
-    ],
-    "/leetcode": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/leetcode.js"
+      "static/chunks/pages/leetcode-121-best-time-to-buy-and-sell-stock.js"
     ]
   },
   "ampFirstPages": []
