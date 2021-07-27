@@ -11,21 +11,21 @@ const Header:React.FC = () =>
               alt='Paul Coroneos Profile image'
               className='rounded-full h-8 wd-8 md:h-12 md:w-14'
             />
-            <span className='text-sm md:text-2xl lg:text-3xl pl-2 text-white whitespace-nowrap'>Paul Coroneos</span>
+            <span className='text-sm md:text-2xl lg:text-2xl xl:text-3xl pl-2 text-white whitespace-nowrap'>Paul Coroneos</span>
           </a>
       </Link>
       <nav className='items-center ml-6'>
         <Link href='/blog'>
-          <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Blog</a>
+          <a className='text-md md:text-2xl lg:text-2xl  xl:text-3xl text-white hover:text-primary transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Blog</a>
         </Link>
         <Link href='/leetcode'>
-        <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Leetcode</a>
+        <a className='text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Leetcode</a>
         </Link>
         <Link href='/portfolio'>
-        <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Portfolio</a>
+        <a className='text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>Portfolio</a>
         </Link>
         <Link href='/about'>
-        <a className='text-md md:text-2xl lg:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>About</a>
+        <a className='text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer'>About</a>
         </Link>
       </nav>
     </header>
