@@ -97,7 +97,7 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
 };
 ```
 
-#Complexity analysis
+## Complexity analysis
 
 So as discussed earlier when we review complexity we tend to thing about worst case. The worst case scenario is that nums1 is an empty array and nums2 has all the values. Or it's possible for example nums1 has 1 value that is greater than any other value in nums2 array. In either case this results in us having to iterate through every value. Therefore the computational complexity of this solution is **O(m+n)**. Space complexity wise we are basically O(1) because we are not allocating any additional temporary variables (nor do they inherently scale with the size of the dataset).
 
