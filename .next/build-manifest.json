@@ -24,10 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/leetcode-88-merge-sorted-array": [
+    "/about": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/leetcode-88-merge-sorted-array.js"
+      "static/chunks/pages/about.js"
     ]
   },
   "ampFirstPages": []
