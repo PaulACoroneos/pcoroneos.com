@@ -14,11 +14,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
@@ -29,10 +24,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/leetcode-27-remove-element": [
+    "/leetcode-88-merge-sorted-array": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/leetcode-27-remove-element.js"
+      "static/chunks/pages/leetcode-88-merge-sorted-array.js"
     ]
   },
   "ampFirstPages": []

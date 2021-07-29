@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/leetcode-27-remove-element": "pages/leetcode-27-remove-element.js"
+  "/leetcode-88-merge-sorted-array": "pages/leetcode-88-merge-sorted-array.js"
 }

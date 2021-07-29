@@ -1,0 +1,104 @@
+import { paulcoroneos } from "../../authors";
+
+export const meta = {
+  title: "Leetcode 88. Merge Sorted Array (JavaScript)",
+  description: `Solution to Leetcode 88 - Merge Sorted Array  (JavaScript)`,
+  date: "2021-07-28",
+  authors: [paulcoroneos],
+  tag:['leetcode','array','two-pointer','easy']
+};
+
+Let's take a look at yet another classic in-place array problem with  [LeetCode 88 - Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+<!--more-->
+
+## Problem statement and analysis
+
+> You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two > integers m and n, representing the number of elements in nums1 and nums2 respectively.
+>
+> Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+>
+> The final sorted array should not be returned by the function, but instead be stored > inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+Examples:
+
+```js
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+```
+
+```js
+Input: nums1 = [1], m = 1, nums2 = [], n = 0
+Output: [1]
+Explanation: The arrays we are merging are [1] and [].
+The result of the merge is [1].
+```
+
+As per a lot of in-place array problems nums1 is sized to be the "combined" size of the non zero values in both datasets (extra array values in nums1 are 0 filled). So we should intuitively think of two-pointer approach. Essentially we will initialize these pointers to some index of each array and then continue iterating through the array until some condition is met.
+
+So the question now becomes where do these pointers need to begin? Do we start both pointers at the start of each array? Do we start the pointers at the end of each array? Let's think through both approaches.
+
+## Approach 1. From the start of each array
+
+If we were to start with both pointers at the beginning of each array that is perfectly okay. We would loop at maximum for the length of m+n (total amount of numbers to merge, but more on why this isn't necessarily always the case later). Then we need to compare the number in nums1 at the ptr val with the number in nums2 at its ptr value. Whichever is less is the number than needs to be placed at that index.
+
+But we run into a complication of what to do with the "other value" that is greater. If the value is the one from nums1 it is no big deal it can stay where it is and we simply increment the nums1 ptr. But if the value needs to be from nums2 we need to store that number temporarily somewhere. We can't just store the number in a temporary variable. This is because it's actually entirely possible that every number in nums2 is less than every number in nums1. So that temporary value starts to scale with the length of our data which is against the spirit of inplace array traversal.
+
+So instead of thinking through the logistics of trying to get around this we think through approach 2.
+
+## Approach 2. Start from the end of each array
+
+We can invert our thinking here and ask now what about starting from the end of each array. Or in other words we initialize the nums1 ptr to m-1 and nums2 to n-1. We then are going to iterate backwards through nums1 checking whether the value at nums1 for the nums1 ptr is greater than the values at the ptr for nums2. If it is then we copy the nums1 value for the index of nums1 at m+n-1. Converserely if the value of nums1 less than the value pointed out in nums2 we copy the nums2 value. Depending on which value is picked we then decrement the value of that pointer afterwards. We will then keep running the loop until all the numbers in nums1 are the sorted combination of values in nums1 and nums2. 
+
+Let's look at a simplified psuedocode Solution
+
+```js
+
+// While all the numbers in nums1 arent sorted yet with the values of both arrays
+// Check if the value at the pointer of nums1 is greater than the value of the ptr at nums2
+// if yes, assign the value of nums1 at the index of the iteration we are on for nums1 to the value of nums1 at its pointer. 
+// decrement the nums1 ptr
+// if no, assign the value of nums2 at the index of the iteration we are on for nums1 to the value of nums2 at its pointer
+// decrement the nums2 ptr
+```
+
+Now you'll notice above I was a bit vague about what the definition of these pointers should be. In most two pointer problems we would define the values based on either the length of the datasets or initialize them to 0. But if you look closely at the problem you will see it actually already provides us the pointers we need. To review:
+
+> You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two > integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+M and N represent the the number of elements in nums1 and nums2 respectively. That sure sounds like an initialized index pointer we need! Therefore we can directly use these arguments as our pointers in the problem (simply use and reference minus 1 because the index of the final value in any array is its length minus 1); 
+
+Now there's one other "cute" optimization we can do in this problem. Whenever you are sorting/merging values your computational complexity is always **O(number of values)**. This makes sense because you at least need to visit each number in the array(s) once in order to figure out where they are supposed to go. But one thing to consider is how we can improve the average case of the solution. That is because in real life we do not always get the worst case. So let's again review the problem statement:
+
+> Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+Our arrays are already sorted. As we discussed previously we are pushing values into nums1 until nums1 contains the consolidated sorted values of both arrays. So at worst we have to keep doing computations until all numbers are in sorted order. But that does not necessarily mean we have to visit every number! Confused 😃?  Nums1 and nums2 are sorted within themselves. Suppose we exhaust the values in nums2 such that only values in nums1 are left. What is the relative sort order of these remaining values? 
+
+They are already in non-ascending order! Therefore the key optimization takeaway is that **we only need to iterate through values until nums2 pointer is 0** (or in reality -1 because again m and n represent the length of each array so to use as an index value we simply reference the value with one subtracted). At this point we are finished and can exit the function. Let's now look at the solution:
+
+```ts
+/**
+ Do not return anything, modify nums1 in-place instead.
+ */
+function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+    while(n > 0) {
+        //if val in nums1 is greater than val in nums2, use nums1
+        if(nums1[m-1] >nums2[n-1]) {
+            nums1[m+n-1] = nums1[m-1];
+            m--;
+        }
+        //otherwise use nums2 val
+        else {
+            nums1[m+n-1] = nums2[n-1];
+            n--;
+        }
+    }
+};
+```
+
+#Complexity analysis
+
+So as discussed earlier when we review complexity we tend to thing about worst case. The worst case scenario is that nums1 is an empty array and nums2 has all the values. Or it's possible for example nums1 has 1 value that is greater than any other value in nums2 array. In either case this results in us having to iterate through every value. Therefore the computational complexity of this solution is **O(m+n)**. Space complexity wise we are basically O(1) because we are not allocating any additional temporary variables (nor do they inherently scale with the size of the dataset).
+
+Thank you and best of luck with your algorithmic journey!
