@@ -98,44 +98,40 @@ const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
         <dl className='pt-6 pb-6 xl:pt-11 border-b border-gray-200'>
           <dt className='sr-only'>Authors</dt>
           <dd>
-            <ul className='flex justify-center space-x-8 sm:space-x-12'>
-              {meta.authors.map(author =>
-                <li
-                  key={author.twitter}
-                  className='flex w-100 space-x-2 items-center'
-                >
-                  <img
-                    src={author.avatar}
-                    alt=''
-                    className='w-14 h-14 rounded-full flex-grow-0'
-                  />
-                  <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
-                    <dt className='sr-only'>Name</dt>
-                    <dd className='text-gray-900 text-lg'>{author.name}</dd>
-                    <dd className='inline-block'>
-                      <dt className='inline-block text-md'>Twitter:</dt>
-                      {' '}
-                      <a
-                        href={`https://twitter.com/${author.twitter}`}
-                        className='text-secondary hover:text-primary text-md'
-                      >
-                        {author.twitter}
-                      </a>
-                    </dd>
-                    <dd>
-                      <dt className='inline-block text-md'>Github:</dt>
-                      {' '}
-                      <a
-                        href={`https://github.com/${author.github}`}
-                        className='text-secondary hover:text-primary text-md'
-                      >
-                        {author.github}
-                      </a>
-                    </dd>
-                  </dl>
-                </li>
-              )}
-            </ul>
+            <div
+              key='pacman326'
+              className='flex w-100 space-x-2 items-center'
+            >
+              <img
+                src='/paulcoroneos.jpg'
+                alt=''
+                className='w-14 h-14 rounded-full flex-grow-0'
+              />
+              <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
+                <dt className='sr-only'>Name</dt>
+                <dd className='text-gray-900 text-lg'>Paul Coroneos</dd>
+                <dd className='inline-block'>
+                  <dt className='inline-block text-md'>Twitter:</dt>
+                  {' '}
+                  <a
+                    href='https://twitter.com/pacman326'
+                    className='text-secondary hover:text-primary text-md'
+                  >
+                    @pacman326
+                  </a>
+                </dd>
+                <dd>
+                  <dt className='inline-block text-md'>Github:</dt>
+                  {' '}
+                  <a
+                    href='https://github.com/${PaulACoroneos'
+                    className='text-secondary hover:text-primary text-md'
+                  >
+                    PaulACoroneos
+                  </a>
+                </dd>
+              </dl>
+            </div>
           </dd>
         </dl>
         <footer className='text-sm font-medium leading-5 divide-y divide-gray-200 xl:col-start-1 xl:row-start-2'>

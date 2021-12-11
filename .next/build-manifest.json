@@ -11,23 +11,24 @@
   ],
   "lowPriorityFiles": [
     "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/development/_ssgManifest.js",
+    "static/development/_middlewareManifest.js"
   ],
   "pages": {
     "/_app": [
-      "static/chunks/main.js",
       "static/chunks/webpack.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/chunks/main.js",
       "static/chunks/webpack.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/about": [
-      "static/chunks/main.js",
+    "/leetcode-88-merge-sorted-array": [
       "static/chunks/webpack.js",
-      "static/chunks/pages/about.js"
+      "static/chunks/main.js",
+      "static/chunks/pages/leetcode-88-merge-sorted-array.js"
     ]
   },
   "ampFirstPages": []
