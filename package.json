@@ -7,7 +7,7 @@
     "cypress:open:dev": "run-p dev cypress:open ",
     "cypress:run": "cypress run",
     "dev": "next dev",
-    "build": "next build && next export && npm run build:rss",
+    "build": "next build && next export",
     "lint": "eslint --ext ts,tsx,mdx .",
     "lint:fix": "eslint --fix --ext ts,tsx,mdx .",
     "start": "next start",
