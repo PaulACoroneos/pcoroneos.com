@@ -1,6 +1,7 @@
 function importAll(r) {
   return r
     .keys()
+    .filter(fileName => fileName.substr(1).startsWith('rc/'))
     .map(fileName => ({
       link: fileName.substr(1).replace(/\/index\.mdx$/, ''),
       module: r(fileName),
