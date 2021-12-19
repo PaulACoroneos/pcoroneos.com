@@ -46,7 +46,7 @@ const Blog = () =>
               <div className='space-y-6'>
                 <h2 className='text-2xl leading-8 font-bold tracking-tight'>
                   <Link href={link}>
-                    <a className='text-gray-900'>{meta.title}</a>
+                    <a data-testid='article-link' className='text-gray-900'>{meta.title}</a>
                   </Link>
                 </h2>
                 <div className='prose text-gray-500'>

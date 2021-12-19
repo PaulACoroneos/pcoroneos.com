@@ -32,7 +32,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
   const next = posts[postIndex - 1];
 
   return (
-    <article className='divide-y divide-gray-200'>
+    <article className='divide-y divide-gray-200' data-testid='blog-post'>
       <Head>
         <title>{meta.title} - Paul Coroneos</title>
         <meta name='twitter:card' content='summary_large_image' />
