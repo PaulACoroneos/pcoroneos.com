@@ -18,10 +18,10 @@ jobs:
           path: |
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm install
+      - run: npm ci
       - run: npm run lint:fix
       - name: Run Integration Tests
-        run: npm cypress run
+        run: npm run cypress:run
       - name: Run E2E Tests
         uses: cypress-io/github-action@v2
         with:
