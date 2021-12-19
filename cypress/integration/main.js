@@ -1,15 +1,4 @@
 describe('pcoroneos.com test', () => {
-  it('Check header nav and header 1', () => {
-    cy.visit('/');
-    cy.get('header').within(() => {
-      cy.findByRole('link', { name: /paul coroneos home/i }).should('exist');
-      cy.findByRole('img', { name: /paul coroneos profile image/i });
-      cy.findByRole('link', { name: /blog/i }).should('exist');
-      cy.findByRole('link', { name: /portfolio/i }).should('exist');
-      cy.findByRole('link', { name: /about/i }).should('exist');
-    });
-    cy.findByRole('heading', { name: /latest blog posts/i }).should('exist');
-  });
   it('Check about page ', () => {
     cy.visit('/about');
     cy.findByRole('heading', { name: /about me/i }).should('exist');

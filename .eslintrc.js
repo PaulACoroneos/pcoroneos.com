@@ -12,7 +12,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'plugin:prettier/recommended',
-    'plugin:mdx/recommended'
+    'plugin:mdx/recommended',
+    'plugin:react/jsx-runtime'
   ],
   globals: {
     Atomics: 'readonly',
