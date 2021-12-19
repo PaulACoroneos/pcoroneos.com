@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
 import { format, parse } from 'date-fns';
+import Image from 'next/image';
 
 //TODO Paul. Figure out why I cant override code terminal bg color
 const mdxComponents = {
@@ -103,10 +104,12 @@ const Post = ({ meta, children, posts }: PostProps) => {
               key='pacman326'
               className='flex w-100 space-x-2 items-center'
             >
-              <img
+              <Image
                 src='/paulcoroneos.jpg'
                 alt=''
                 className='w-14 h-14 rounded-full flex-grow-0'
+                width={14}
+                height={14}
               />
               <dl className='text-sm font-medium leading-5 whitespace-no-wrap'>
                 <dt className='sr-only'>Name</dt>

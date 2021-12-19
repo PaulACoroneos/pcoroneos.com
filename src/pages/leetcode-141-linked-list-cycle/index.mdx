@@ -1,4 +1,4 @@
-
+import Image from 'next/image';
 
 export const meta = {
   title: "Leetcode 141 - Linked List Cycle",
@@ -23,7 +23,7 @@ As always let's look at the problem being asked:
 
 Alright so some concepts are being throw out here. What exactly does a cycle mean in plain words? Well often a picture is 1000 words so lets take a look at one here:
 
-<img  src='./linked-list-cycle.jpg' alt='a linked list with a cycle from 3rd element pointing back to second element' />
+<Image  src='/linked-list-cycle.jpg' alt='a linked list with a cycle from 3rd element pointing back to second element' layout="responsive" width={600} height={400}/>
 
 
 What we see here is that a linked list of size 3 is initialized. Starting at the head we point to a node containing the number 3. This node then points to another node containing the number 4. Now normally we would expect the end of the linked list to point to null, or the absense of a node. However in this case we follow the diagram and note that the final node points back to node 3. So in this case what we see is that as we traverse the linked list we will continue to rotate between nodes containing the values and 3 and 4. And thus a **cycle** is found.
