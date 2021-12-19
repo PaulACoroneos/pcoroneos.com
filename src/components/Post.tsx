@@ -22,9 +22,10 @@ const mdxComponents = {
 type PostProps = {
   meta: any;
   posts: any;
+  children: React.ReactChild;
 };
 
-const Post: React.FC<PostProps> = ({ meta, children, posts }) => {
+const Post = ({ meta, children, posts }: PostProps) => {
   const router = useRouter();
   const postIndex = posts.findIndex(post => post.link === router.pathname);
   const previous = posts[postIndex + 1];

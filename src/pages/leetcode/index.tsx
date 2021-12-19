@@ -6,7 +6,7 @@ import getAllPostPreviews from 'src/getAllPostPreviews'
 
 const posts = getAllPostPreviews()
 
-const Leetcode: React.FC = () =>
+const Leetcode = () =>
   <div className='divide-y divide-gray-200'>
     <Head>
       <meta name='twitter:card' content='summary_large_image' />

@@ -6,7 +6,7 @@ import { format, parse } from 'date-fns'
 
 const posts = getAllPostPreviews()
 
-const Blog: React.FC = () =>
+const Blog = () =>
   <div className='divide-y divide-gray-200'>
     <Head>
       <meta name='twitter:card' content='summary_large_image' />

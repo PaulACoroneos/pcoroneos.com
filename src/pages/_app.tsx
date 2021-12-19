@@ -5,10 +5,10 @@ import SectionContainer from '../components/SectionContainer'
 import Header from '../components/Header'
 
 type AppProps = {
-  Component: React.FC
+  Component: React.ComponentType;
   pageProps:any
 }
-const App:React.FC<AppProps> = ({ Component, pageProps }) => 
+const App = ({ Component, pageProps }: AppProps) => 
     <div className='antialiased'>
       <Head>
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />

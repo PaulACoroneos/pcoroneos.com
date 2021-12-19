@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/about": "pages/about.js",
-  "/": "pages/index.js"
+  "/leetcode-27-remove-element": "pages/leetcode-27-remove-element.js",
+  "/leetcode-203-remove-linked-list-element": "pages/leetcode-203-remove-linked-list-element.js",
+  "/leetcode-121-best-time-to-buy-and-sell-stock": "pages/leetcode-121-best-time-to-buy-and-sell-stock.js",
+  "/leetcode-88-merge-sorted-array": "pages/leetcode-88-merge-sorted-array.js"
 }
