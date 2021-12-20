@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Card from 'src/components/Card';
+import Card from 'src/components/card';
 
 const data = [
   {
