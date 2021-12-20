@@ -1,8 +1,9 @@
 import * as React from 'react'
 import '../css/tailwind.css'
 import Head from 'next/head'
-import SectionContainer from '../components/SectionContainer'
-import Header from '../components/Header'
+import SectionContainer from '../components/section-container'
+import Header from '../components/header'
+import Footer from 'src/components/footer'
 
 type AppProps = {
   Component: React.ComponentType;
@@ -25,6 +26,7 @@ const App = ({ Component, pageProps }: AppProps) =>
         <main>
           <Component {...pageProps} />
         </main>
+        <Footer />
       </SectionContainer>
     </div>
   

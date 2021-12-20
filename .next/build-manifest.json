@@ -1,239 +1,44 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills-5cd94c89d3acac5f.js"
+    "static/chunks/polyfills.js"
   ],
-  "devFiles": [],
-  "ampDevFiles": [],
+  "devFiles": [
+    "static/chunks/react-refresh.js"
+  ],
+  "ampDevFiles": [
+    "static/chunks/webpack.js",
+    "static/chunks/amp.js"
+  ],
   "lowPriorityFiles": [
-    "static/dMeqPWGNuA8b14AjZqMGa/_buildManifest.js",
-    "static/dMeqPWGNuA8b14AjZqMGa/_ssgManifest.js",
-    "static/dMeqPWGNuA8b14AjZqMGa/_middlewareManifest.js"
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js",
+    "static/development/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/105-72adeb438c916c4c.js",
-      "static/chunks/pages/index-53d597e11f8beb46.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
     ],
     "/_app": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/css/09fbdaeeecdd4418.css",
-      "static/chunks/pages/_app-50b37af77f14938a.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/pages/_error-2280fa386d040b66.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_error.js"
     ],
     "/about": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/about-b95ef80ca68f1c6e.js"
-    ],
-    "/atoi": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/atoi-a2e757ddf470ab7d.js"
-    ],
-    "/blog": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/105-72adeb438c916c4c.js",
-      "static/chunks/pages/blog-6b7021a003fe4a77.js"
-    ],
-    "/climbing-stairs": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/climbing-stairs-dac6e1da76205e8b.js"
-    ],
-    "/cracking-the-code-interview-1-2": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/cracking-the-code-interview-1-2-470f78b8fd36f4ce.js"
-    ],
-    "/cracking-the-code-interview-1-3-urlify": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/cracking-the-code-interview-1-3-urlify-0f6f19cb1df2d74d.js"
-    ],
-    "/cracking-the-code-interview-1-8-zero-matrix": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/cracking-the-code-interview-1-8-zero-matrix-aea4ad7f846a454b.js"
-    ],
-    "/cracking-the-code-interview-1-9-string-rotation": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/cracking-the-code-interview-1-9-string-rotation-7acf81e41d8be17c.js"
-    ],
-    "/ctci-is-unique": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/ctci-is-unique-31a2fba485a8e367.js"
-    ],
-    "/free-code-camp-no-repeats-please": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/free-code-camp-no-repeats-please-1ac5bc6bf68c9665.js"
-    ],
-    "/free-code-camp-pairwise": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/free-code-camp-pairwise-65eab041b633eda1.js"
-    ],
-    "/free-code-camp-symmetric-difference": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/free-code-camp-symmetric-difference-f3ebdca9d8c5dd6f.js"
-    ],
-    "/hello world": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/hello world-fa606ffa7ac50d77.js"
-    ],
-    "/leetcode": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/105-72adeb438c916c4c.js",
-      "static/chunks/pages/leetcode-082a73a62ca82800.js"
-    ],
-    "/leetcode-121-best-time-to-buy-and-sell-stock": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-121-best-time-to-buy-and-sell-stock-8fcca613366a73b2.js"
-    ],
-    "/leetcode-1295-find-numbers-with-even-number-of-digits": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-1295-find-numbers-with-even-number-of-digits-b4401f4111858f8f.js"
-    ],
-    "/leetcode-141-linked-list-cycle": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-141-linked-list-cycle-d6324a3a84da4ceb.js"
-    ],
-    "/leetcode-203-remove-linked-list-element": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-203-remove-linked-list-element-754dd414cffe5d5d.js"
-    ],
-    "/leetcode-206-reverse-link-list": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-206-reverse-link-list-8cfc900ffe516957.js"
-    ],
-    "/leetcode-27-remove-element": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-27-remove-element-6e90515ab6933e34.js"
-    ],
-    "/leetcode-485-max-consecutive-ones": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-485-max-consecutive-ones-95f80f64f21b7d17.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/about.js"
     ],
     "/leetcode-88-merge-sorted-array": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-88-merge-sorted-array-f5f90aa955407a0f.js"
-    ],
-    "/leetcode-two-sum": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/leetcode-two-sum-c57fbdab0572b56e.js"
-    ],
-    "/next-best-time": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/next-best-time-59444935c75f31fd.js"
-    ],
-    "/parse-int": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/parse-int-ec76818f74edd6ba.js"
-    ],
-    "/portfolio": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/pages/portfolio-6032a5c7fc7514a2.js"
-    ],
-    "/role-tab": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/role-tab-dbb6577a4c995598.js"
-    ],
-    "/stack": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/stack-b178edb1e3349723.js"
-    ],
-    "/updating-bootcamp": [
-      "static/chunks/webpack-514908bffb652963.js",
-      "static/chunks/framework-6e4ba497ae0c8a3f.js",
-      "static/chunks/main-d98b4a7f39fdfc80.js",
-      "static/chunks/73-c200dce52aabd6fb.js",
-      "static/chunks/pages/updating-bootcamp-0f66f4d9c0fa6999.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/leetcode-88-merge-sorted-array.js"
     ]
   },
   "ampFirstPages": []
