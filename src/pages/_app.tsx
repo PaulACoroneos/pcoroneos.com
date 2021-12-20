@@ -2,7 +2,7 @@ import * as React from 'react'
 import '../css/tailwind.css'
 import Head from 'next/head'
 import SectionContainer from '../components/section-container'
-import Header from '../components/header'
+import Header from 'src/components/header'
 import Footer from 'src/components/footer'
 
 type AppProps = {
