@@ -1,28 +1,16 @@
 const { createLoader } = require('simple-functional-loader')
-const rehypePrism = require('@mapbox/rehype-prism')
 const visit = require('unist-util-visit')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [require('remark-images'), require('remark-emoji'), require('remark-prism')],
+    rehypePlugins: [],
+  },
 })
-const images = require('remark-images')
-const emoji = require('remark-emoji')
 
-const tokenClassNames = {
-  tag: 'text-code-red',
-  'attr-name': 'text-code-yellow',
-  'attr-value': 'text-code-green',
-  deleted: 'text-code-red',
-  inserted: 'text-code-green',
-  punctuation: 'text-code-white',
-  keyword: 'text-code-purple',
-  string: 'text-code-green',
-  function: 'text-code-blue',
-  boolean: 'text-code-red',
-  comment: 'text-gray-400 italic',
-}
-
-module.exports = withBundleAnalyzer({
-  pageExtensions: ['js', 'jsx', 'mdx','ts','tsx'],
+module.exports = withMDX({
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   experimental: {
     modern: true,
   },
@@ -40,34 +28,12 @@ module.exports = withBundleAnalyzer({
       ],
     })
 
-    const mdx = [
-      options.defaultLoaders.babel,
-      {
-        loader: '@mdx-js/loader',
-        options: {
-          rehypePlugins: [
-            rehypePrism,
-            () => tree => {
-                visit(tree, 'element', (node, index, parent) => {
-                  let [token, type] = node.properties.className || []
-                  if (token === 'token') {
-                    node.properties.className = [tokenClassNames[type]]
-                  }
-                })
-              },
-          ],
-          remarkPlugins: [images, emoji]
-        },
-      },
-    ]
-
     config.module.rules.push({
       test: /\.mdx$/,
       oneOf: [
         {
           resourceQuery: /preview/,
           use: [
-            ...mdx,
             createLoader(function (src) {
               if (src.includes('<!--more-->')) {
                 const [preview] = src.split('<!--more-->')
@@ -81,7 +47,6 @@ module.exports = withBundleAnalyzer({
         },
         {
           use: [
-            ...mdx,
             createLoader(function (src) {
               const content = [
                 'import Post from "src/components/post"',
@@ -89,7 +54,7 @@ module.exports = withBundleAnalyzer({
                 `${src} \n`,
                 'export default (props) => <Post meta={meta} {...props} />',
               ].join('\n')
-              
+
               if (content.includes('<!--more-->')) {
                 return this.callback(null, content.split('<!--more-->').join('\n'))
               }
@@ -101,15 +66,15 @@ module.exports = withBundleAnalyzer({
       ],
     })
 
-    if (!options.dev && options.isServer) {
-      const originalEntry = config.entry
+    // if (!options.dev && options.isServer) {
+    // const originalEntry = config.entry
 
-      // config.entry = async () => {
-      //   const entries = { ...await originalEntry() }
-      //   entries['./scripts/build-rss.js'] = './scripts/build-rss.js'
-      //   return entries
-      // }
-    }
+    // config.entry = async () => {
+    //   const entries = { ...await originalEntry() }
+    //   entries['./scripts/build-rss.js'] = './scripts/build-rss.js'
+    //   return entries
+    // }
+    // }
 
     return config
   },

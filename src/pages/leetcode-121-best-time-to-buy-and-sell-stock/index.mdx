@@ -64,7 +64,7 @@ Confused? That's okay! What we are doing above is the aforementioned "greedy" ap
 
 Okay with all those words out of the way let's look at some psuedocode
 
-```
+```js
 // for each price in the stock list
 // check to see if the number is the new lowest stock price
 // if it is, that our new absolute minima, move on
@@ -74,7 +74,7 @@ Okay with all those words out of the way let's look at some psuedocode
 
 Hopefully we are a little clearer than mud now on the algorithm. The completed code is as follows:
 
-```
+```js
 function maxProfit(prices: number[]): number {
     let maxProfit = 0;
     let minPrice = Number.MAX_SAFE_INTEGER;
