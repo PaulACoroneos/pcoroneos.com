@@ -30,15 +30,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/about": [
+    "/blog": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/about.js"
+      "static/chunks/pages/blog.js"
     ],
-    "/leetcode-88-merge-sorted-array": [
+    "/cracking-the-code-interview-1-8-zero-matrix": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/leetcode-88-merge-sorted-array.js"
+      "static/chunks/pages/cracking-the-code-interview-1-8-zero-matrix.js"
+    ],
+    "/leetcode": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/leetcode.js"
+    ],
+    "/leetcode-121-best-time-to-buy-and-sell-stock": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/leetcode-121-best-time-to-buy-and-sell-stock.js"
     ]
   },
   "ampFirstPages": []

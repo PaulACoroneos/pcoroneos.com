@@ -1,5 +1,6 @@
 import * as React from 'react'
 import '../css/tailwind.css'
+import '../css/night-owl.css'
 import Head from 'next/head'
 import SectionContainer from '../components/section-container'
 import Header from 'src/components/header'
