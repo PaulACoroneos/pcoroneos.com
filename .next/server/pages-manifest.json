@@ -1,7 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
-  "/_error": "pages/_error.js",
-  "/cracking-the-code-interview-1-8-zero-matrix": "pages/cracking-the-code-interview-1-8-zero-matrix.js",
-  "/leetcode-121-best-time-to-buy-and-sell-stock": "pages/leetcode-121-best-time-to-buy-and-sell-stock.js"
+  "/_error": "pages/_error.js"
 }
