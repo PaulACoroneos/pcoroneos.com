@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Head from 'next/head';
 import PageTitle from './page-title';
 import Link from 'next/link';

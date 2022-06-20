@@ -14,6 +14,9 @@ module.exports = withMDX({
   experimental: {
     modern: true,
   },
+  eslint: {
+    dirs: ['src/pages', 'src/components'],
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
