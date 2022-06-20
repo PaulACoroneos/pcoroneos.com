@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:@next/next/recommended',
     'plugin:import/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -30,6 +31,9 @@ module.exports = {
     extraFileExtensions: ['.mdx']
   },
   settings: {
+    next: {
+      rootDir: "src"
+    },
     react: {
       version: 'detect'
     }
@@ -140,7 +144,6 @@ module.exports = {
     'react/static-property-placement': 0,
     'react/state-in-constructor': 0,
     'react/no-array-index-key': 0,
-
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
