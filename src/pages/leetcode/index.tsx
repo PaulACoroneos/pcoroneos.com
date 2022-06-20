@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import { format, parse } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import getAllPostPreviews from 'src/getAllPostPreviews'
 
 const posts = getAllPostPreviews()
@@ -35,7 +35,7 @@ const Leetcode = () =>
               <dt className='sr-only'>Published on</dt>
               <dd className='text-base leading-6 font-medium text-gray-500'>
                 <time dateTime={meta.date}>
-                  {format(parse(meta.date), 'MMMM DD, YYYY')}
+                  {format(parseISO(meta.date), 'MMMM dd, yyyy')}
                 </time>
               </dd>
             </dl>
