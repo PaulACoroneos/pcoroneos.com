@@ -3,7 +3,7 @@ import PageTitle from './page-title';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MDXProvider } from '@mdx-js/react';
-import { format, parse } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 //TODO Paul. Figure out why I cant override code terminal bg color
 const mdxComponents = {
@@ -63,7 +63,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
                 <dt className='sr-only'>Published on</dt>
                 <dd className='text-base leading-6 font-medium text-gray-500'>
                   <time dateTime={meta.date}>
-                    {format(parse(meta.date), 'MMMM DD, YYYY')}
+                    {format(parseISO(meta.date), 'MMMM dd, yyyy')}
                   </time>
                 </dd>
               </div>

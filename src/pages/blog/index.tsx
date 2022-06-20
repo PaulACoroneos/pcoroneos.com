@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import getAllPostPreviews from '../../getAllPostPreviews'
-import { format, parse } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 
 const posts = getAllPostPreviews()
 
@@ -27,7 +27,7 @@ const Blog = () =>
         Latest Blog Posts
       </h1>
       <p className='text-lg leading-7 text-gray-500' data-testid='mostRecentPostDate'>
-        Most recent post: {format(parse(posts[0].module.meta.date), 'MMMM DD, YYYY')}
+        Most recent post: {format(parseISO(posts[0].module.meta.date), 'MMMM dd, yyyy')}
       </p>
     </div>
     <ul className='divide-y divide-gray-200'>
@@ -38,7 +38,7 @@ const Blog = () =>
               <dt className='sr-only'>Published on</dt>
               <dd className='text-base leading-6 font-medium text-gray-500'>
                 <time dateTime={meta.date}>
-                  {format(parse(meta.date), 'MMMM DD, YYYY')}
+                  {format(parseISO(meta.date), 'MMMM dd, yyyy')}
                 </time>
               </dd>
             </dl>
