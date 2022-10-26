@@ -4,5 +4,4 @@ jest.config.js
 fixtures
 shared-fixtures
 coverage
-src/pages/**/*.mdx
 next.config.js

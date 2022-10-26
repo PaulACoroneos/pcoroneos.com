@@ -32,7 +32,7 @@ module.exports = {
   },
   settings: {
     next: {
-      rootDir: "src"
+      rootDir: '.'
     },
     react: {
       version: 'detect'

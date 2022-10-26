@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { format, parseISO } from 'date-fns'
-import getAllPostPreviews from 'src/getAllPostPreviews'
+import getAllPostPreviews from 'getAllPostPreviews'
 
 const posts = getAllPostPreviews()
 

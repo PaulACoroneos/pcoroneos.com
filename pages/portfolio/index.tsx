@@ -1,4 +1,4 @@
-import Card from 'src/components/card';
+import Card from 'components/card';
 
 const data = [
   {
