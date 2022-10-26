@@ -1,9 +1,10 @@
 function importAll(r) {
   return r
     .keys()
-    .filter(fileName => !fileName.substr(1).startsWith('rc/'))
+    .filter(fileName => !fileName.substr(1).startsWith('rc/')).
+    filter(fileName => !fileName.includes('pages'))
     .map(fileName => ({
-      link: fileName.substr(1).replace(/\/index\.mdx$/, ''),
+      link: fileName.substr(0).replace(/\/index\.mdx$/, ''),
       module: r(fileName),
     }))
 }

@@ -31,8 +31,8 @@ const Blog = () =>
       </p>
     </div>
     <ul className='divide-y divide-gray-200'>
-      {posts.filter(post => post.module.meta.date).map(({ link, module: { default: Component, meta } }, idx) =>
-        <li key={link} className='py-4 md:py-12' data-testid={`article-${idx}`}>
+      {posts.filter(post => post.module.meta.date).map(({ link, module: { default: Component, meta } }) =>
+        <li key={link} className='py-4 md:py-12'>
           <article className='space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline'>
             <dl>
               <dt className='sr-only'>Published on</dt>
