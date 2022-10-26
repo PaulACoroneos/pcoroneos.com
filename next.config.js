@@ -15,7 +15,7 @@ module.exports = withMDX({
     modern: true,
   },
   eslint: {
-    dirs: ['src/pages', 'src/components'],
+    dirs: ['components'],
   },
   webpack: (config, options) => {
     config.module.rules.push({
@@ -52,8 +52,8 @@ module.exports = withMDX({
           use: [
             createLoader(function (src) {
               const content = [
-                'import Post from "src/components/post"',
-                'export { getStaticProps } from "src/getStaticProps"',
+                'import Post from "components/post"',
+                'export { getStaticProps } from "getStaticProps"',
                 `${src} \n`,
                 'export default (props) => <Post meta={meta} {...props} />',
               ].join('\n')

@@ -3,8 +3,8 @@ import '../css/tailwind.css'
 import '../css/night-owl.css'
 import Head from 'next/head'
 import SectionContainer from '../components/section-container'
-import Header from 'src/components/header'
-import Footer from 'src/components/footer'
+import Header from 'components/header'
+import Footer from 'components/footer'
 
 type AppProps = {
   Component: React.ComponentType;
