@@ -17,11 +17,11 @@ jobs:
         with:
           path: |
             **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - run: npm ci
-      - run: npm run lint:fix
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - run: pnpm ci
+      - run: pnpm run lint:fix
       - name: Cypress run
         uses: cypress-io/github-action@v4.1.0
         with:
-          build: npm run build
-          start: npm start
+          build: pnpm build
+          start: pnpm start
