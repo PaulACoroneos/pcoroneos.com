@@ -20,7 +20,8 @@
     "jsx": "preserve",
     "types": [
       "cypress",
-      "@testing-library/cypress"
+      "@testing-library/cypress",
+      "webpack-env"
     ],
     "incremental": true
   },
@@ -34,5 +35,5 @@
     "**/*.js",
     ".eslintrc.js",
     "**/*.mdx"
-  ]
+, "next.config.mjs"  ]
 }

@@ -1,15 +1,14 @@
-function importAll(r) {
+function importAll(r: __WebpackModuleApi.RequireContext) {
   return r
-    .keys()
-    .filter(fileName => !fileName.substr(1).startsWith('rc/')).
-    filter(fileName => !fileName.includes('pages'))
+    .keys().
+    filter(fileName => !fileName.includes('pages') && !fileName.includes('./about'))
     .map(fileName => ({
-      link: fileName.substr(0).replace(/\/index\.mdx$/, ''),
+      link: fileName.replace(/\/index\.mdx$/, ''),
       module: r(fileName),
-    }))
+    }));
 }
 
-function dateSortDesc(a, b) {
+export function dateSortDesc(a, b) {
   if (a > b) return -1
   if (a < b) return 1
   return 0
@@ -17,8 +16,6 @@ function dateSortDesc(a, b) {
 
 //filter out mdx files w/out date. these arent blogposts (other pages)
 // eslint-disable-next-line no-extra-parens
-const getAllPostPreviews = () => importAll((require as any).context('./pages/?preview', true, /\.mdx$/)).sort((a, b) =>
-  dateSortDesc(a.module.meta.date, b.module.meta.date)
-);
+const getAllPostPreviews = () => importAll(require.context('./pages/?preview', true, /\.mdx$/,'sync'))
 
 export default getAllPostPreviews

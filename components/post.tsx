@@ -105,7 +105,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
                   </h2>
                   <div className='text-secondary hover:text-primary'>
                     <Link href={next.link}>
-                      <a>{next.title}</a>
+                      {next.title}
                     </Link>
                   </div>
                 </div>
@@ -117,7 +117,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
                   </h2>
                   <div className='text-secondary hover:text-primary'>
                     <Link href={previous.link}>
-                      <a>{previous.title}</a>
+                      {previous.title}
                     </Link>
                   </div>
                 </div>
@@ -125,10 +125,10 @@ const Post = ({ meta, children, posts }: PostProps) => {
             </div>
           }
           <div className='pt-8'>
-            <Link href='/'>
-              <a className='text-secondary hover:text-primary'>
+            <Link href='/' className='text-secondary hover:text-primary'>
+              
                 &larr; Back to the blog
-              </a>
+              
             </Link>
           </div>
         </footer>
