@@ -4,4 +4,3 @@ jest.config.js
 fixtures
 shared-fixtures
 coverage
-next.config.js

@@ -2,8 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/portfolio": "pages/portfolio.js",
-  "/about": "pages/about.js",
-  "/blog": "pages/blog.js",
-  "/leetcode-88-merge-sorted-array": "pages/leetcode-88-merge-sorted-array.js"
+  "/leetcode-27-remove-element": "pages/leetcode-27-remove-element.js",
+  "/blog": "pages/blog.js"
 }
