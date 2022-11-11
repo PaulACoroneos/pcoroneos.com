@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Header from 'components/header'
 import Footer from 'components/footer'
 import SectionContainer from 'components/section-container'
+import { Analytics } from '@vercel/analytics/react'
 
 type AppProps = {
   Component: React.ComponentType;
@@ -12,6 +13,7 @@ type AppProps = {
 }
 const App = ({ Component, pageProps }: AppProps) => 
     <div className='antialiased'>
+      <Analytics />
       <Head>
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
