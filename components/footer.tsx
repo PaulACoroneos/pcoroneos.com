@@ -8,6 +8,8 @@ const Footer = () => <footer className='py-4 flex justify-between items-center'>
     <a className='text-secondary hover:text-primary' href='https://www.linkedin.com/in/paulacoroneos/'>LinkedIn</a>
     {' '}
     <a className='text-secondary hover:text-primary' rel='me' href='https://mstdn.social/@pacman326'>Mastodon</a>
+    {' '}
+    <a className='text-secondary hover:text-primary' rel='me' href='https://www.twitch.tv/pacman326'>Twitch</a>
   </div>
 </footer>
 
