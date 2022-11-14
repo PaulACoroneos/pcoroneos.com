@@ -15,7 +15,6 @@ const App = ({ Component, pageProps }: AppProps) =>
   <div className='antialiased'>
     <Analytics />
     <Head>
-      <a rel='me' className='hidden' href='https://mstdn.social/@pacman326' />
       <link
         rel='apple-touch-icon'
         sizes='180x180'
