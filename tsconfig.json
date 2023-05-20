@@ -23,7 +23,13 @@
       "@testing-library/cypress",
       "webpack-env"
     ],
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "exclude": [
     "node_modules"
@@ -34,6 +40,8 @@
     "**/*.tsx",
     "**/*.js",
     ".eslintrc.js",
-    "**/*.mdx"
-, "next.config.mjs"  ]
+    "**/*.mdx",
+    "next.config.mjs",
+    ".next/types/**/*.ts"
+  ]
 }

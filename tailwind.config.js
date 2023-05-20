@@ -3,7 +3,9 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 const mdx = require('@mdx-js/mdx')
 
 module.exports = {
-  content: ['./**/*.{js,ts,tsx,mdx}'],
+  content: [    './app/**/*.{js,ts,jsx,tsx,mdx}', 
+  './pages/**/*.{js,ts,jsx,tsx,mdx}',
+  './components/**/*.{js,ts,jsx,tsx,mdx}',],
   options: {
     extractors: [
       {
