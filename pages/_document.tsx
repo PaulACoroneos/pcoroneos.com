@@ -16,7 +16,6 @@ export default class Document extends NextDocument {
             href='/fonts/Inter-roman.var-latin.woff2?3.13'
             as='font'
             type='font/woff2'
-            crossOrigin='true'
           />
         </Head>
         <body>
