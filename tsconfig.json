@@ -35,5 +35,5 @@
     "**/*.js",
     ".eslintrc.js",
     "**/*.mdx"
-, "next.config.mjs"  ]
+, "next.config.js"  ]
 }

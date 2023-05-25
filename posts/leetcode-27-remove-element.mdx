@@ -1,0 +1,87 @@
+---
+  title: Leetcode 27. Remove Element (JavaScript)
+  description: Solution to Leetcode 27 - Remove Element  (JavaScript)
+  date: "2021-07-27"
+  tag: leetcode,array,two-pointer,easy
+---
+
+Let's take a look at a classic in-place array problem with  [LeetCode 27 - Remove Element](https://leetcode.com/problems/remove-element/)
+
+## Problem statement and analysis
+
+Let's start by taking a look at the problem statement:
+
+>Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The relative order of the elements may be changed.
+>
+>Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.
+>
+>Return k after placing the final result in the first k slots of nums.
+>
+>Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
+
+An example is given of:
+
+```
+Input: nums = [3,2,2,3], val = 3
+Output: 2, nums = [2,2,_,_]
+```
+
+where as the problem insinuates the values after the second element don't matter.
+
+## Algorithm analysis
+
+I am going to be brutally honest. This problem confused me quite a bit when i started. But let's key in on a few critical concepts here. The problem wants us to make updates to the array **in-place**. What this means is cannot allocate another data structure (like another array) to copy values into. But **inplace** does not mean we cant use some temporary variables to store things like pointers.
+
+As a general concept most inplace array problems we can use the concept of two pointer approach. That is to say we use two variables that store an array index and perform some operations on something like an array such that we end up passing through the array only once (our ideal scenario for almost every algorithm). But how does two pointer approach help us here? Let's think conceptually again for a moment.
+
+The problem only cares for the returned value of the index of the last "good" value we haven't used. Even more interesting the problem doesn't care the order of the unremoved values. These are concessions made to make 2 ptr possible given this is an unsorted array. It's critical to understand these when analyzing an algorithmic problem because while these are purely academic constraints real life datasets/requirements may have similar concessions.
+
+Anyways to sum it up what the problem is telling us is to make sure that the start of the array is filled with the non-removed values in any order and the returned integer should match the index of the final non-matched number. 
+
+The first pointer will start at the beginning of the array at index 0. The second pointer will start at the length of the array (not length of array -1 like you would expect probably initially). The reason is actually quite simple. Let's suppose you have:
+
+```
+[2,2,2,2]
+val =3
+```
+
+So no values match and actually the returned value should be 4, not the "index" of the final value at three.
+
+Then like most 2 pointer problems we are going to start looping until the start pointer crosses the end pointer. For this problem what this effectively means is that the start pointer has crossed the index in which "removed" elements would reside. There are no elements to swap at this point so we can stop iterating.
+
+Within each iteration we first check to see whether the value in the array at the start pointer index matches the match value. If it does we go ahead and swap the value at the start index in the array with the end index (minus 1 so we are actually in bounds of the array). The end pointer then should be decremented because that value is now a "removed" value. 
+
+Conversely if the value does not match the match value then theres no need to swap. We simply increment the start pointer by one.
+
+Once we are done iterating the question is not whether to return the end pointer or the start pointer. This actually kind of threw me off initially as well. Let's think about this a second. The end pointer will finish at the last know unmatched value. This is because every time we find a "match" with a value in the array we decrement one value less. As a result once the start pointer crosses the end pointer (or is equal to) end pointer logically will have the correct array index.
+
+## Code Solution
+
+The code is as follows:
+
+```ts
+function removeElement(nums: number[], val: number): number {
+    //base case
+    if (nums.length <0 ) return;
+    
+    let start = 0;
+    let end = nums.length;
+    while (start < end) {
+        if(nums[start] === val) {
+            nums.splice(start,1);
+            end--;
+        }
+        else {
+            start++;
+        }
+    }
+
+    return end;
+};
+```
+
+## Complexity analysis
+
+As with most two pointer array problems computational complexity is **O(N)**. This is because we check each element only once. Space complexity is a cool **O(1)** since we only use 2 extra pointers (doesnt scale with size of data).
+
+Thank you as always and best of luck on your algorithmic journey!

@@ -1,0 +1,129 @@
+---
+  title: Free Code Camp (FCC) - Symmetric Difference
+  description: Solving Free Code Camp's symmetric difference algorithm.
+  date: "2020-10-03"
+---
+
+Today we will review Free Code Camp's (FCC) Symmetric Difference algorithm.
+
+## Problem statement and analysis
+
+As always let us examine the problem statement:
+
+> The mathematical term symmetric difference (△ or ⊕) of two sets is the set of elements which are in > either of the two sets but not in both.
+>
+> For example, for sets A = {1, 2, 3} and B = {2, 3, 4}, A △ B = >>{1, 4}.
+>
+> Symmetric difference is a binary operation, which means it operates on only two elements. So to evaluate an expression involving symmetric differences among three elements (A △ B △ C), you must > complete one operation at a time.
+> Thus, for sets A and B above, and C = {2, 3}, A △ B △ C = (A △ B) △ C >= {1, 4} △ {2, 3} = {1, 2, 3, 4}.
+>
+> Create a function that takes two or more arrays and returns an array of their symmetric difference. The returned array must contain only unique values (no duplicates).
+
+So this problem doesn't seem too bad from the outset. If we distill it down a bit really all its saying is "find the only the numbers that dont exists into sets and return that." If there are more than two sets take them two at a time (reducing sets of 2 down to one) until we basically only have one resultant set left. This set should be numbers that only uniquely existed between **all** sets.
+
+With that in mind let's take a look at implementation.
+
+## Implementation
+
+First off let's start with our base cases
+
+```js
+function sym(...args) {
+  //base case. array of 1 or less returned? return args
+  if(args.length <= 1) return args;
+```
+
+So if there is an array of size one or less we obviously know that there are no sets to diff against. So we can safely return either the 1 set or nothing. With that out of the way we are reading to start doing the diffs. First off we create a while loop
+
+```js
+  while(args.length > 1) {
+```
+
+In other words we want to keep looping through the args until the length is down to one set. This is possible because we are going to make changes on the fly. If we want to make this more pure and not modify the input argument we can simply make a copy of the array at the top of the function by either:
+
+```js
+  const argsCopy = ...[...args]
+  // or
+  const argsCopy = args.slice();
+```
+
+Next we are going to compare the first and second set and call a diff function.
+
+```js
+const arrDiff = diff(args[0], args[1]);
+
+const diff = (arr1, arr2) => {
+  const diffedA = arr1.filter((val) => !arr2.includes(val));
+  const diffedB = arr2.filter((val) => !arr1.includes(val));
+  return [...diffedA, ...diffedB];
+};
+```
+
+The diff() method is going to take two different sets. We are then going to take each of these sets and return a new array that does not contain entries of the other. Do you see why we want to do this? No? Thats okay! Lets do a quick example
+
+Suppose arr1 is {2,0} and arr2 is {2,1}. **diffedA** becomes {1} and **diffedB** becomes {0}. The return merges the two sets into {1,0}. Now representationally we are using arrays here and not JavaScript sets (though that comes later). So please don't get confused by the array versus set notation. **Our data manipulation uses arrays up until the very end, but from a mathematics perspective these are numbers sets.** So you will immediately see that indeed {1,0} is inded the set of unique values we expect!
+
+Finally since we have combined the first two array we need to combine this new set along with the remaining values. We can use a handy combination of array spread and Array.slice() to accomplish this. Notice we start slice from index two which would have been the original "3rd" index in the list.
+
+```js
+args = [arrDiff, ...args.slice(2)];
+```
+
+As per the while loop we then keep repeating until args is a single element. Finally we have to do one last clever little trick.
+
+```js
+return [...new Set(args[0])];
+```
+
+This close may seem a little confusing at first. Lets explain it bit by bit. Since we are spreading args using the rest operator (...) our sets are stored in array of array syntax, ie
+
+```ts
+Array({ set1 }, { set2 }, ...rest);
+```
+
+Since we have reduced the args array down to size 1 we simply select the 0th index. Now we use Set to take the array and essentially dedupe the results we have done so far. Why you might ask? Well let's take another example:
+
+Suppose we have set {1,3,3} and {0,1}. What is the symmetric difference? Well regardless of whether a number exists multiple times it is still part of the set in our diff calculation. And since 3 doesnt ever exist in set two we return **{0,3,3}**. Now obviously this isn't what we want. We want only unique numbers as well. Well that's exactly what set returns us! Now we can't just stop at using Set because it does not return us an array. So we simply spread the Set return into an array and return it.
+
+The final code is as follows:
+
+```js
+const diff = (arr1, arr2) => {
+  const diffedA = arr1.filter((val) => !arr2.includes(val));
+  const diffedB = arr2.filter((val) => !arr1.includes(val));
+  return [...diffedA, ...diffedB];
+};
+
+function sym(...args) {
+  //base case. no array passed
+  if (args.length === 0) return args;
+  //base case. Only 1 array passed
+  if (args.length === 1) return args;
+  //otherwise loop through all arrays and reduce unique values to single array
+  while (args.length > 1) {
+    const arrDiff = diff(args[0], args[1]);
+    args = [arrDiff, ...args.slice(2)];
+  }
+  return [...args[0]];
+}
+```
+
+## Complexity
+
+Practically if we look at the result of this we will need to always go through each set in the list once. That gives us one O(N) for operating the while loop. But then we operate through each sub set in the diff function. So that mirrors a nested set of loops. So we end up looking at O((length of set)\*(length of 0th set being compared + length of 1th set being compared)). If we are a bit sloppy we are at least looking at O(N^2).
+
+Now can we do a little better? The answer is yes. I won't be implementing for this blogpost (I will leave to you the reader) but we can take advantage of a hash table (and its O(1) lookup, add and remove) to reduce some of the array parsing we are doing with the above solution. More specifically the Set we use above is PERFECT for reducing runtime. So much so that we can reduce to simply O(N) (minimum since we must at least traverse every set in the list).
+A quick somewhat complete solution looks like:
+
+```js
+const symDiff = new Set();
+
+//for the length of the list of sets
+// place first set being compared into a new set
+// now compared each value in second set to above set
+// IF the set contains this value DELETE this value from the inner set within the loop
+// ELSE add the value to the set
+// push the values to the symDiff set
+```
+
+Thank you for reading and as always best of luck in implementing your algorithms!

@@ -1,0 +1,150 @@
+---
+  title: Solving Leetcode 1 - Two Sum (JavaScript)
+  description: My solution and explanation of leetcode number 1 - Two Sum using JavaScript.
+  date: "2020-07-28",
+  tags: leetcode
+---
+
+As I mentioned in my [about me](/about) section I do not have a traditional CS degree. My background consists of being a former semiconductor test engineer with a MS in Electrical Engineering and a Bachelors in Applied Mathematics. I have learned so much in the past one and a half years as I have continued to build things.
+
+That being said I feel at this point there is a strong need for me to work on the data structure and algorithm fundamentals I never learned. So over the course of the remainder of the year I will be digging into many of these topics and as I write solutions (this example is Leetcode based) I hope to share with you my thought process and code.
+
+
+
+Leetcode Problem 1 is the classic [two sum](https://leetcode.com/problems/two-sum/) problem. In **summary**:
+
+_Given an array of integers, return indices of the two numbers such that they add up to a specific target._
+
+In the specific flavor of this problem we assume a set of inputs has exactly 1 solution and we may not use the same number twice. **(Important! Make sure to read the requirements of your problem carefully!)**
+
+Now there are several approaches to solving two sum. I will discuss two but only provide the final solution I used to submit the problem (I leave that exercise to you the reader).
+
+## Method 1. Brute Force
+
+Brute force is the general solution you should find first in solving these problems. Often it is the most intuitive and helps to set you up (and your base test cases) to come up with alternative (and perhaps also more performant) solutions.
+
+As a human I might simply solve the problem by looking at each value in the array. I then add this first value to each value in the remainder of the array and check to see if the sum matches my target. If I have I have found the solution and I can return the result. In psuedo code this may look like the following:
+
+```js
+// For each value in the array (loop 1 )
+
+// For each value in the array starting after the index we are on from loop 1 (loop 2)
+
+// Does the sum of the value we have from first loop and second loop match target?
+
+// If yes return index of both numbers as an array and return (we are done)
+
+// If no keep looping
+```
+
+This will always find you the answer given the problem guarantees there is always a solution given a certain array and target value. So it should be a correct solution in that it always returns a valid answer. But one common question that gets asked is what is the big O of this algorithm?
+
+### Big O cost
+
+For this problem we see two loops. For the most part when we see a loop that iterates through each member we should immediately think O(n) because it's very possible the needed values for the sum are unluckily the second to last (and last) members of the array. The cost of comparing the values is trivial in comparison to the amount of iteration we do so we can just focus on the loop cost. Two nested loops results in O(n\*n) or **O(n^2)**.
+
+## Method 2. Hash Table
+
+Method two (which my final submit solution utilizes) uses the concept of a hash table. I will likely make a dedicated blogpost about this soon but you can think of a hash table as sort of a phonebook or dictionary of information in the form of a JavaScript object. This property is quite helpful as we will see in a moment.
+
+In our previous solution we used two nested loops that ran through all of our data. In general we want to avoid doing so as O(n^2) is generally not the greatest choice. So what can we do instead with a hash table? Let's start with some simple psuedo code.
+
+```js
+// Define an empty hash table (object)
+
+// Iterate through the array (loop 1)
+
+// Calculate the delta for what value we are looking for by subtracting
+// the target value from the value of the index we are currently on
+
+// Does the hash table have a key value matching to this delta?
+
+// If the delta is actually also a value in the table already we need to find its "twin"
+// later in the table because it will show up twice
+
+// Else return the index of the values that meet the target
+
+// Delta is not at table. For the looped value add it to the hash table with a value
+// of its delta
+```
+
+Now your first reaction to this solution may be what the heck is this? It certainly was for me. This is a significant amount more work that the previous array traversal (brute force solution). But it turns out it's actually not that bad. And once you see the "trick" this same method can be applied to _many_ array like problems.
+
+What the hash table solution tries to solve is instead of adding together numbers over and over again to figure out the target we figure out how far away a given number in the array is versus the target. We then store this value. So if we look at the phone book example we gave earlier what we are saying is something like:
+
+** Hey for the number 4 it turns out it's 5 away from the target **
+
+If you are more of a code person visualize it like this
+
+```js
+const hashTable = {
+  "4": 5,
+};
+```
+
+What you will learn later is that lookups in a hash table like this are _VERY_ cheap (in fact they are O(1) cheap). So we then apply this thought process starting with the first item in the array. We then store it in the previously mentioned format in the hash table. So lets say we have an array with values 1, 3 and 5 with a target of 8. Our hash table might look like:
+
+```js
+const hashTable = {
+  "1": 7,
+  "3": 5,
+  "5": 3,
+};
+```
+
+You may have just noticed something. It looks like key 3 has a value of 5. And key 5 has a value of three. And now it should start clicking what the value of the hash table is. If I find for a given "delta" (lets say 3) there is an entry in the hash table this means we just found a pair of numbers that will meet the target. So in this case the returned answer becomes:
+
+```js
+[1, 2];
+```
+
+Where 1 and 2 are the corresponding index of the values in the array that match to the target. My resultant code is as follows:
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+  const hashTable = {};
+
+  for (num of nums) {
+    const delta = target - num;
+    if (hashTable.hasOwnProperty(delta)) {
+      //case when 2 copies of same value equal target
+      if (delta === hashTable[delta]) {
+        const firstIdx = nums.indexOf(num);
+        const secondIdx = nums.indexOf(num, firstIdx + 1);
+        return [firstIdx, secondIdx];
+      }
+      return [nums.indexOf(num), nums.indexOf(delta)];
+    }
+    hashTable[num] = delta;
+  }
+  return undefined;
+};
+```
+
+There are a few things left to explain. Even though the problem states there is always a solution I went ahead and returned undefined should the function not find a value. This will allow this code to be used in cases where a solution does not exist. There is also a possibility where the key in the hash table might match the target. Say for example we have the following case:
+
+```js
+const target = 8;
+const arr = [4, 4];
+
+//resultant hash table is
+const hashTable = {
+  "4": 4,
+  //next entry would be another "4":4
+};
+```
+
+The problem specifies we cant use the same index twice. But it's possible to have duplicate values inside the array. So the code insident the second if condition checks for this case and we find the corresponding indexes for both matching values.
+
+### Big O cost
+
+So we did a lot of work to use a hash table? So what did we gain. Well if you inspect the above code you will notice we now have a single loop where we iterate through the array. So we already sit at O(n). But as previously mentioned we now check immediately to see whether we have already found the "complimentary" delta from the target as we iterate through the array. Lookup in the hash table is O(1) since we directly reference the object key. So this results in **O(n)** complexity. A significant improvement over our brute force solution!!!!
+
+## Conclusion
+
+I hope you found this to be helpful in explaining how to solve two sum problem using JavaScript. Best of luck in your studies!

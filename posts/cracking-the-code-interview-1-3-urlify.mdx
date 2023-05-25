@@ -1,0 +1,105 @@
+---
+  title: Cracking the Code Interview 1-3 Urlify (JavaScript)
+  description: My solution and explanation of Cracking the Code Interview 1-3 - Urlify. (JavaScript)
+  date: "2020-08-06"
+---
+
+Hello everyone and welcome back! Today we will be discussing my solution to Cracking the Code Interview 1-3 - Urlify. Let's start out with the prompt (first thing we should do when given an algorithm!):
+
+> Write a method to replace all spaces in a string with '%20'. You may assume that the string has sufficient space at the end to
+> hold sufficient characters, and that you are given the length of the string.
+
+Now of course the description does not really work for a language like JavaScript because in JavaScript string are immutable. In order to roughly replicate their requirements we would need to represent the string as a string[] instead. For fun we are going to give 2 solution that do not update the string in place (using string methods) and 1 solution where it is done in place (using string[]).
+
+## String method solutions
+
+### Solution 1. string.replace()
+
+If we really want to be cheeky JavaScript like many languages has a very handy method on the string prototype called [replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace). What's particularly cool about replace is that it actually accepts regular expressions. To be honest I am not nearly as good at regex as I believe I should be so I appreciate any chance to practice and continue improving. So a cute 1 line solution to the problem (which of course will return a new string) is as follows:
+
+```ts
+const urlify = (str: string) => str.replace(/ /g, "%20");
+```
+
+The first argument to replace represents a matcher, in this case literally an empty space. The g basically means anywhere in the tring we find a space. The second argument represents what we want to replace the found match with. Which in the case is the encoding for an empty string. I want to give an honorable mention to [encodeURI()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) here as well. In fact it's a super useful method and implements the URI spec well for not just spaces. But since the problem is scoped to spaces I elected to use a smaller method.
+
+### Solution 2. String.replace() without the method
+
+I would obviously use string.replace in any production code for a small enough string to encode. But sometimes it's interesting to try to implement the method yourself. So if I was asked to implement string.replace() for a white space here is a crude way I would perform it
+
+```ts
+    let strCpy = str;
+    let len = strCpy.length;
+    for (let i = 0; i < len; i++) {
+        if (strCpy[i] === ' ') {
+            strCpy = `${strCpy.substr(0, i)}%20${strCpy.slice(i + 1)}`; //build new string. Strings are immutable in JS
+            len = strCpy.length;
+            i += 2; //skip 1 extra chars to reset for loop pointer AFTER %20
+        }
+    }
+    return strCpy;
+};
+```
+
+First thing I do is I initialize a copy of my string and capture it's length (probably copying the str is redundant here but since I am primary a React dev I generally do not override the value of a passed argument). I then iterate through the string. If I find a space I then do something that looks a little bit mind numbing. So let's break it down piece by piece first.
+
+```ts
+strCpy.substr(0, i);
+```
+
+String.substring() returns a section of string. The first argument represents the starting index of the string we want to copy from and the second argument represents the number of characters we want to copy.
+
+```ts
+strCpy.slice(i + 1);
+```
+
+String.slice() takes two optional arguments (start and end index). In fact you can pass no arguments to String.slice() and just get a copy of the entire string. This case we provide the starting index AFTER the whitespace occurs in the string up to the END of the string.
+
+We stick these two into a template literal with text '%20' sandwiched inbetween and as a result we get a new string where the space is replaced by %20. Let's look at this visually.
+
+```ts
+//example 'h ello'
+
+//strCpy.subStr() is called str.substr(0,1) because the space is at index "1" (remember indices start at 0 by default).
+
+//Output is 'h'
+
+// strCpy.slice() is called strCpy.slice(1+1). The output of this is
+
+//Output is 'ello'
+
+//So with template literal resultant is 'h'+'%20'+'ello' = 'h%20ello'
+```
+
+Now by doing this the length of the string has changed. So our previous length is no longer valid because it is associated with the previous copy of the string. Thus we recapture the new string length and then we actually skip 2 additional indexes because the space has now become '%20' which is 3 spaces. So we need to move ahead an extra bit to stay aligned.
+
+Once we finish iterating through the string we then return the newly encoded string.
+
+### Complexity
+
+Complexity analysis is pretty easy in the case. We have to check every character to see whether there is a space. In this case that means at minimum O(n).
+
+## In place solution
+
+Okay that felt like cheating a bit. It really wasn't in the spirit of the question which is really meant to be "in place". So let's flip over to character array and look at an in place solution.
+
+```ts
+const urlify = (str: string[]) => {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === " ") {
+      str.splice(i, 1, "%", "2", "0");
+    }
+  }
+  return str;
+};
+```
+
+Since we now use a string array we get access to splice which is an [in place](https://en.wikipedia.org/wiki/In-place_algorithm) method. This is closer to the intent of the original problem. Just like in the string method cases we iterate through the string one character at time looking for an empty string. But instead of using immutable methods that create a new copy of the string we will use splice.
+
+Array.splice() takes up to 3 arguments (there is an overload available). In this case we want to provide it 1) the index in which we want to start inside the array 2) how many things inside the array we want to remove (a single space so 1) and 3) what to insert into the array at this place ('%', '2' and '0'). Once we have finished iterating through the array we return the array.
+
+### Complexity analysis.
+
+Complexity is not different here because again at the end of the day even in an array form we still have to check every character. So we have O(n). But we do save some space because we are creating whole copies of the array. Granted though the data input type in this case (string[] versus string) makes this possible. We could similarly make the string and array with String.Prototype.split() and back to a string with String.Prototype.join() but then we are back to making additional copies of data. Whether the tradeoff is worth it of course depends on the data we are parsing.
+
+Thank you again and as always have fun with algorithms!
