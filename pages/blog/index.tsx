@@ -2,7 +2,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import Link from "next/link";
 import path from "path";
-import { postFilePaths, POSTS_PATH } from "../utils/mdxUtils";
+import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
 
@@ -37,7 +37,7 @@ export default function Index({ posts }) {
       </Head>
       <div className="pt-4 md:pt-6 pb-4 md:pb-8 space-y-2 md:space-y-5">
         <h1 className="text-3xl leading-9 font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          Latest Blog Posts
+          Blog Posts
         </h1>
         <p
           className="text-lg leading-7 text-gray-500"
@@ -57,20 +57,21 @@ export default function Index({ posts }) {
       <ul className="divide-y divide-gray-200">
         {posts
           .sort((a, b) => parseISO(b.data.date) - parseISO(a.data.date))
-          .slice(0, 4)
           .map((post, idx) => {
             console.log(post);
             return (
               <li key={posts[idx]} className="py-4 md:py-12">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
-                  <dl>
-                    <dt className="sr-only">Published on</dt>
-                    <dd className="text-base leading-6 font-medium text-gray-500">
-                      <time dateTime={post.data.date}>
-                        {format(parseISO(post.data.date), "MMMM dd, yyyy")}
-                      </time>
-                    </dd>
-                  </dl>
+                  {post.data?.date ? (
+                    <dl>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="text-base leading-6 font-medium text-gray-500">
+                        <time dateTime={post.data.date}>
+                          {format(parseISO(post.data.date), "MMMM dd, yyyy")}
+                        </time>
+                      </dd>
+                    </dl>
+                  ) : null}
                   <div className="space-y-5 xl:col-span-3">
                     <div className="space-y-6">
                       <h2 className="text-2xl leading-8 font-bold tracking-tight">

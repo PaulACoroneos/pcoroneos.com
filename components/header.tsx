@@ -25,12 +25,6 @@ const Header = () => (
         Blog
       </Link>
       <Link
-        href="/leetcode"
-        className="text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
-      >
-        Leetcode
-      </Link>
-      <Link
         href="/portfolio"
         className="text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
       >
