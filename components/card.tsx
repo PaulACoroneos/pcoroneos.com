@@ -11,25 +11,25 @@ const Card = ({ title, githubLink, deployedLink, imageSrc }: CardProps) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="bg-white rounded-lg mt-5">
+      <div className="mt-5 rounded-lg bg-white">
         <img src={imageSrc} className="h-40 rounded-md" alt="" />
       </div>
-      <div className="bg-secondary shadow-lg rounded-lg -mt-4 w-64 h-56 flex flex-col justify-between">
-        <div className="py-5 px-5">
-          <span className="font-bold text-lg text-white">{title}</span>
+      <div className="-mt-4 flex h-56 w-64 flex-col justify-between rounded-lg bg-secondary shadow-lg">
+        <div className="p-5">
+          <span className="text-lg font-bold text-white">{title}</span>
         </div>
-        <div className="p-4 grid grid-cols-2 gap-1">
+        <div className="grid grid-cols-2 gap-1 p-4">
           <a title={githubTitle} href={githubLink}>
-            <div className="px-2 py-1 grid grid-cols-2 items-center bg-primary rounded">
+            <div className="grid grid-cols-2 items-center rounded bg-primary px-2 py-1">
               <img src="./github.png" alt="" />
-              <span className="text-white text-sm">Github</span>
+              <span className="text-sm text-white">Github</span>
             </div>
           </a>
           {deployedLink && (
             <a title={deployedTitle} href={deployedLink}>
-              <div className="px-2 py-1 grid grid-cols-2 items-center bg-primary rounded">
+              <div className="grid grid-cols-2 items-center rounded bg-primary px-2 py-1">
                 <img width="39" height="39" src="./deploy.png" alt="" />
-                <span className="text-white text-sm">Deploy</span>
+                <span className="text-sm text-white">Deploy</span>
               </div>
             </a>
           )}

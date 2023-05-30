@@ -9,7 +9,7 @@ import { format, parseISO } from "date-fns";
 const mdxComponents = {
   pre: ({ className, ...props }) => (
     <pre
-      className={`${className} rounded-md py-3 px-4 overflow-x-auto`}
+      className={`${className} overflow-x-auto rounded-md px-4 py-3`}
       {...props}
     />
   ),
@@ -31,7 +31,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
   const next = posts[postIndex - 1];
 
   return (
-    <article className="divide-y divide-gray-200" data-testid="blog-post">
+    <article className="divide-gray-200 divide-y" data-testid="blog-post">
       <Head>
         <title>{meta.title} - Paul Coroneos</title>
         <meta name="twitter:card" content="summary_large_image" />
@@ -61,7 +61,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
             <dl className="space-y-10">
               <div>
                 <dt className="sr-only">Published on</dt>
-                <dd className="text-base leading-6 font-medium text-gray-500">
+                <dd className="text-gray-500 text-base font-medium leading-6">
                   <time dateTime={meta.date}>
                     {format(parseISO(meta.date), "MMMM dd, yyyy")}
                   </time>
@@ -75,12 +75,12 @@ const Post = ({ meta, children, posts }: PostProps) => {
         </div>
       </header>
       <div style={{ gridTemplateRows: "auto 1fr" }}>
-        <div className="divide-y divide-gray-200 xl:pb-0 xl:col-span-3 xl:row-span-2">
-          <div className="prose py-8 px-2">
+        <div className="divide-gray-200 divide-y xl:col-span-3 xl:row-span-2 xl:pb-0">
+          <div className="prose px-2 py-8">
             <MDXProvider components={mdxComponents}>{children}</MDXProvider>
           </div>
           {meta.discussion && (
-            <div className="pt-6 pb-16">
+            <div className="pb-16 pt-6">
               <p>
                 Want to talk about this post?{" "}
                 <a
@@ -93,12 +93,12 @@ const Post = ({ meta, children, posts }: PostProps) => {
             </div>
           )}
         </div>
-        <footer className="text-sm font-medium leading-5 divide-y divide-gray-200 xl:col-start-1 xl:row-start-2">
+        <footer className="divide-gray-200 divide-y text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2">
           {(next || previous) && (
             <div className="space-y-8 py-8">
               {next && (
                 <div>
-                  <h2 className="text-xs tracking-wide uppercase text-gray-500">
+                  <h2 className="text-gray-500 text-xs uppercase tracking-wide">
                     Next Article
                   </h2>
                   <div className="text-secondary hover:text-primary">
@@ -108,7 +108,7 @@ const Post = ({ meta, children, posts }: PostProps) => {
               )}
               {previous && (
                 <div>
-                  <h2 className="text-xs tracking-wide uppercase text-gray-500">
+                  <h2 className="text-gray-500 text-xs uppercase tracking-wide">
                     Previous Article
                   </h2>
                   <div className="text-secondary hover:text-primary">

@@ -7,9 +7,9 @@ const FOOTER_LINKS = [
 ];
 
 const Footer = () => (
-  <footer className="py-4 flex justify-between items-center">
+  <footer className="flex items-center justify-between py-4">
     <span className="italic">Copyright © Paul Coroneos 2023</span>
-    <div className="grid gap-2 grid-cols-3 md:grid-cols-5">
+    <div className="grid grid-cols-3 gap-2 md:grid-cols-5">
       {FOOTER_LINKS.map((link) => (
         <a
           className="text-secondary hover:text-primary"

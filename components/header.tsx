@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 
 const Header = () => (
-  <header className="flex items-center md:rounded-lg py-2 md:py-8 justify-between bg-secondary max-w-3xl mx-auto px-1 md:px-4 sm:px-6 xl:max-w-5xl xl:px-0 md:mt-2">
+  <header className="bg-secondary mx-auto flex max-w-3xl items-center justify-between px-1 py-2 sm:px-6 md:mt-2 md:rounded-lg md:px-4 md:py-8 xl:max-w-5xl xl:px-0">
     <Link
       href="/"
       aria-label="Paul Coroneos Home"
@@ -11,34 +11,34 @@ const Header = () => (
       <img
         src="/paulcoroneos.jpg"
         alt="Paul Coroneos Profile image"
-        className="rounded-full h-8 wd-8 md:h-24 md:w-24"
+        className="h-8 w-8 rounded-full md:h-24 md:w-24"
       />
-      <span className="text-sm md:text-2xl lg:text-2xl xl:text-3xl pl-2 text-white whitespace-nowrap">
+      <span className="whitespace-nowrap pl-2 text-sm text-white md:text-2xl lg:text-2xl xl:text-3xl">
         Paul Coroneos
       </span>
     </Link>
-    <nav className="items-center ml-6">
+    <nav className="ml-6 items-center">
       <Link
         href="/blog"
-        className="text-md md:text-2xl lg:text-2xl  xl:text-3xl text-white hover:text-primary transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
+        className="hover:text-primary cursor-pointer  px-1 text-white transition duration-150 ease-in-out md:px-4 md:text-2xl lg:text-2xl xl:text-3xl"
       >
         Blog
       </Link>
       <Link
         href="/leetcode"
-        className="text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
+        className="hover:text-primary cursor-pointer px-1 text-white transition  duration-150 ease-in-out md:px-4 md:text-2xl lg:text-2xl xl:text-3xl"
       >
         Leetcode
       </Link>
       <Link
         href="/portfolio"
-        className="text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
+        className="hover:text-primary cursor-pointer px-1 text-white transition  duration-150 ease-in-out md:px-4 md:text-2xl lg:text-2xl xl:text-3xl"
       >
         Portfolio
       </Link>
       <Link
         href="/about"
-        className="text-md md:text-2xl lg:text-2xl xl:text-3xl text-white hover:text-primary  transition duration-150 ease-in-out px-1 md:px-4 cursor-pointer"
+        className="hover:text-primary cursor-pointer px-1 text-white transition  duration-150 ease-in-out md:px-4 md:text-2xl lg:text-2xl xl:text-3xl"
       >
         About
       </Link>
