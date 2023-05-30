@@ -4,7 +4,8 @@
     "eslint-config-next",
       "plugin:@typescript-eslint/recommended",
       "prettier",
-      "plugin:prettier/recommended"
+      "plugin:prettier/recommended",
+      "plugin:tailwindcss/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "overrides": [{
