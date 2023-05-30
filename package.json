@@ -66,7 +66,7 @@
     "typescript": "^5.0.4"
   },
   "lint-staged": {
-    "*.{js,css,mdx,ts,tsx,jsx}": "eslint --fix"
+    "*.{js,css,mdx,ts,tsx,jsx,json}": "eslint --fix"
   },
   "packageManager": "pnpm@8.6.0"
 }
