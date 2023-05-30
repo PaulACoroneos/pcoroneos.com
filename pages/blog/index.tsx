@@ -5,8 +5,9 @@ import path from "path";
 import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
+import { Post } from "../../types/types";
 
-export default function Index({ posts }) {
+export default function Index({ posts }: { posts: Post[] }) {
   return (
     <div className="divide-y divide-gray-200">
       <Head>
@@ -47,7 +48,9 @@ export default function Index({ posts }) {
           {format(
             parseISO(
               posts.sort(
-                (a, b) => parseISO(b.data.date) - parseISO(a.data.date)
+                (a, b) =>
+                  parseISO(b.data.date).getTime() -
+                  parseISO(a.data.date).getTime()
               )[0].data.date
             ),
             "MMMM dd, yyyy"
@@ -56,11 +59,14 @@ export default function Index({ posts }) {
       </div>
       <ul className="divide-y divide-gray-200">
         {posts
-          .sort((a, b) => parseISO(b.data.date) - parseISO(a.data.date))
+          .sort(
+            (a, b) =>
+              parseISO(b.data.date).getTime() - parseISO(a.data.date).getTime()
+          )
           .map((post, idx) => {
             console.log(post);
             return (
-              <li key={posts[idx]} className="py-4 md:py-12">
+              <li key={posts[idx].filePath} className="py-4 md:py-12">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                   {post.data?.date ? (
                     <dl>
@@ -101,7 +107,7 @@ export default function Index({ posts }) {
   );
 }
 
-export function getStaticProps() {
+export const getStaticProps = () => {
   const posts = postFilePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
     const { content, data } = matter(source);
@@ -114,4 +120,4 @@ export function getStaticProps() {
   });
 
   return { props: { posts } };
-}
+};

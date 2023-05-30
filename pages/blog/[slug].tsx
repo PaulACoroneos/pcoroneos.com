@@ -12,6 +12,7 @@ import Link from "next/link";
 import PageTitle from "../../components/page-title";
 import { format, parseISO } from "date-fns";
 import { useRouter } from "next/router";
+import { FrontMatterData } from "../../types/types";
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -30,7 +31,13 @@ const components = {
   ),
 };
 
-export default function PostPage({ source, frontMatter }) {
+export default function PostPage({
+  source,
+  frontMatter,
+}: {
+  source: any;
+  frontMatter: FrontMatterData;
+}) {
   const router = useRouter();
 
   // const postIndex = posts.findIndex((post) => post.link === router.pathname);

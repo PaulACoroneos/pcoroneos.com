@@ -30,7 +30,7 @@ const components = {
   ),
 };
 
-export default function AboutPage({ source, frontMatter }) {
+export default function AboutPage({ source, frontMatter }: any) {
   const router = useRouter();
 
   return (

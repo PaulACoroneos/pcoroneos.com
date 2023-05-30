@@ -5,8 +5,9 @@ import path from "path";
 import { postFilePaths, POSTS_PATH } from "../utils/mdxUtils";
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
+import { Post } from "../types/types";
 
-export default function Index({ posts }) {
+export default function Index({ posts }: { posts: Post[] }) {
   return (
     <div className="divide-y divide-gray-200">
       <Head>
