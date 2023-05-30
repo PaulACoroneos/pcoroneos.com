@@ -63,5 +63,8 @@
     "lint-staged": "^13.2.2",
     "rss": "^1.2.2",
     "typescript": "^5.0.4"
+  },
+  "lint-staged": {
+    "*.{js,css,mdx,ts,tsx,jsx}": "lint --cache --fix"
   }
 }

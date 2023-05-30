@@ -1,3 +1,3 @@
-import Blog from '../pages/blog/index';
+import Blog from "../pages/blog/index";
 
 export default Blog;
