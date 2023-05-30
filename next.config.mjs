@@ -1,8 +1,8 @@
-import remarkImages from 'remark-images';
-import remarkEmoji from 'remark-emoji';
-import remarkPrism from 'remark-prism';
-import nextMdx from '@next/mdx';
-import path from 'path';
+import remarkImages from "remark-images";
+import remarkEmoji from "remark-emoji";
+import remarkPrism from "remark-prism";
+import nextMdx from "@next/mdx";
+import path from "path";
 
 const __dirname = path.resolve();
 
@@ -15,19 +15,16 @@ const withMDX = nextMdx({
 });
 
 export default withMDX({
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  eslint: {
-    dirs: ['components'],
-  },
-  webpack: config => {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
       use: [
         {
-          loader: 'file-loader',
+          loader: "file-loader",
           options: {
-            publicPath: '/_next',
-            name: 'static/media/[name].[hash].[ext]',
+            publicPath: "/_next",
+            name: "static/media/[name].[hash].[ext]",
           },
         },
       ],
@@ -38,11 +35,11 @@ export default withMDX({
       oneOf: [
         {
           resourceQuery: /preview/,
-          use: [{ loader: path.resolve(__dirname, 'scripts') + '/preview.js' }],
+          use: [{ loader: path.resolve(__dirname, "scripts") + "/preview.js" }],
         },
         {
           use: [
-            { loader: path.resolve(__dirname, 'scripts') + '/add-imports.js' },
+            { loader: path.resolve(__dirname, "scripts") + "/add-imports.js" },
           ],
         },
       ],
