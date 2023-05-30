@@ -59,12 +59,15 @@ export default function Index({ posts }: { posts: Post[] }) {
       </div>
       <ul className="divide-y divide-gray-200">
         {posts
-          .sort((a, b) => parseISO(b.data.date) - parseISO(a.data.date))
+          .sort(
+            (a, b) =>
+              parseISO(b.data.date).getTime() - parseISO(a.data.date).getTime()
+          )
           .slice(0, 4)
           .map((post, idx) => {
             console.log(post);
             return (
-              <li key={posts[idx]} className="py-4 md:py-12">
+              <li key={posts[idx].filePath} className="py-4 md:py-12">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                   <dl>
                     <dt className="sr-only">Published on</dt>
