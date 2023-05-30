@@ -12,7 +12,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "prebuild": "node prebuild.js"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.8.0",
