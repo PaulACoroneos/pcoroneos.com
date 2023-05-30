@@ -48,7 +48,9 @@ export default function Index({ posts }: { posts: Post[] }) {
           {format(
             parseISO(
               posts.sort(
-                (a, b) => parseISO(b.data.date) - parseISO(a.data.date)
+                (a, b) =>
+                  parseISO(b.data.date).getTime() -
+                  parseISO(a.data.date).getTime()
               )[0].data.date
             ),
             "MMMM dd, yyyy"
