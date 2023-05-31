@@ -15,7 +15,7 @@ const Blog = () => {
   }, []);
 
   return posts?.length ? (
-    <div className="divide-y divide-gray-200">
+    <div className="divide-gray-200 divide-y">
       <Head>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pacman326" />
@@ -42,27 +42,27 @@ const Blog = () => {
         />
         <title>Blog – Paul Coroneos</title>
       </Head>
-      <div className="pt-4 md:pt-6 pb-4 md:pb-8 space-y-2 md:space-y-5">
-        <h1 className="text-3xl leading-9 font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+      <div className="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
+        <h1 className="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
           Latest Blog Posts
         </h1>
         <p
-          className="text-lg leading-7 text-gray-500"
+          className="text-gray-500 text-lg leading-7"
           data-testid="mostRecentPostDate"
         >
           Most recent post:{" "}
           {format(parseISO(posts[0].module.meta.date), "MMMM dd, yyyy")}
         </p>
       </div>
-      <ul className="divide-y divide-gray-200">
+      <ul className="divide-gray-200 divide-y">
         {posts
           .filter((post) => post.module.meta.date)
           .map(({ link, module: { default: Component, meta } }) => (
             <li key={link} className="py-4 md:py-12">
-              <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
+              <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
                   <dt className="sr-only">Published on</dt>
-                  <dd className="text-base leading-6 font-medium text-gray-500">
+                  <dd className="text-gray-500 text-base font-medium leading-6">
                     <time dateTime={meta.date}>
                       {format(parseISO(meta.date), "MMMM dd, yyyy")}
                     </time>
@@ -70,7 +70,7 @@ const Blog = () => {
                 </dl>
                 <div className="space-y-5 xl:col-span-3">
                   <div className="space-y-6">
-                    <h2 className="text-2xl leading-8 font-bold tracking-tight">
+                    <h2 className="text-2xl font-bold leading-8 tracking-tight">
                       <Link
                         data-testid="article-link"
                         className="text-gray-900"
@@ -79,11 +79,11 @@ const Blog = () => {
                         {meta.title}
                       </Link>
                     </h2>
-                    <div className="prose text-gray-500">
+                    <div className="text-gray-500 prose">
                       <Component />
                     </div>
                   </div>
-                  <div className="text-base leading-6 font-medium">
+                  <div className="text-base font-medium leading-6">
                     <Link
                       href={link}
                       className="text-secondary hover:text-primary"
