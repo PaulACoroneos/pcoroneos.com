@@ -14,10 +14,6 @@
       "rules": {
         "react/react-in-jsx-scope": "off"
       }
-    },
-    {
-      "files": ["*.mdx"],
-      "extends": ["plugin:mdx/recommended"]
     }
   ]
 }
