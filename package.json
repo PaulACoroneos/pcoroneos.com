@@ -8,7 +8,7 @@
     "cypress:open:dev": "run-p dev cypress:open ",
     "cypress:run": "cypress run",
     "dev": "next dev",
-    "build": "next build && next export && npx build:rss",
+    "build": "next build",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "start": "next start",

@@ -15,6 +15,7 @@ const withMDX = nextMdx({
 });
 
 export default withMDX({
+  output: "export",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
