@@ -4,6 +4,7 @@ const FOOTER_LINKS = [
   { href: "https://www.linkedin.com/in/paulacoroneos/", label: "LinkedIn" },
   { href: "https://mstdn.social/@pacman326", label: "Mastodon" },
   { href: "https://www.twitch.tv/pacman326", label: "Twitch" },
+  { href: "https://www.pcoroneos.com/rss.xml", label: "RSS" },
 ];
 
 const Footer = () => (
