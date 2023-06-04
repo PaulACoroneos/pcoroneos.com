@@ -16,7 +16,7 @@ const withMDX = nextMdx({
 
 export default withMDX({
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  webpack: (config, options) => {
+  webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
       use: [
@@ -45,11 +45,11 @@ export default withMDX({
       ],
     });
 
-    if (!options.dev && options.isServer) {
+    if (!dev && isServer) {
       const originalEntry = config.entry;
-
       config.entry = async () => {
         const entries = { ...(await originalEntry()) };
+        // These scripts can import components from the app and use ES modules
         entries["scripts/build-rss.js"] = "./scripts/build-rss.js";
         return entries;
       };
