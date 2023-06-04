@@ -16,7 +16,7 @@ const withMDX = nextMdx({
 
 export default withMDX({
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  webpack: (config) => {
+  webpack: (config, options) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
       use: [
@@ -45,15 +45,15 @@ export default withMDX({
       ],
     });
 
-    // if (!options.dev && options.isServer) {
-    // const originalEntry = config.entry
+    if (!options.dev && options.isServer) {
+      const originalEntry = config.entry;
 
-    // config.entry = async () => {
-    //   const entries = { ...await originalEntry() }
-    //   entries['./scripts/build-rss.js'] = './scripts/build-rss.js'
-    //   return entries
-    // }
-    // }
+      config.entry = async () => {
+        const entries = { ...(await originalEntry()) };
+        entries["./scripts/build-rss.js"] = "./scripts/build-rss.js";
+        return entries;
+      };
+    }
 
     return config;
   },
