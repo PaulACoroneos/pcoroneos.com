@@ -7,7 +7,7 @@ const feed = new RSS({
   feed_url: "https://pcoroneos.com/feed.xml",
 });
 
-export const buildRss = (posts: any) => {
+export const buildRss = async (posts: any) => {
   posts.forEach(({ link, module: { meta } }) => {
     feed.item({
       author: "Paul Coroneos",
