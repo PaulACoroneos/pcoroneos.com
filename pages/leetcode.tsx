@@ -5,14 +5,12 @@ import { format, parseISO } from "date-fns";
 import getAllPostPreviews from "getAllPostPreviews";
 
 const Leetcode = () => {
-  const [posts, setPosts] = React.useState([]);
-
-  React.useEffect(() => {
-    const sortedPostsInDesc = getAllPostPreviews().sort((a, b) =>
+  const sortedPostsInDesc = getAllPostPreviews()
+    .sort((a, b) =>
       new Date(b.module.meta.date) > new Date(a.module.meta.date) ? 1 : -1
-    );
-    setPosts(sortedPostsInDesc);
-  }, []);
+    )
+    .filter((post) => post?.module?.meta?.date)
+    .filter((post) => post.module?.meta?.tags?.includes("leetcode"));
 
   return (
     <div className="divide-gray-200 divide-y">
@@ -48,10 +46,8 @@ const Leetcode = () => {
         </h1>
       </div>
       <ul className="divide-gray-200 divide-y">
-        {(posts ?? [])
-          .filter((post) => post?.module?.meta?.date)
-          .filter((post) => post.module?.meta?.tag?.includes("leetcode"))
-          .map(({ link, module: { default: Component, meta } }) => (
+        {sortedPostsInDesc.map(
+          ({ link, module: { default: Component, meta } }) => (
             <li key={link} className="py-4 md:py-12">
               <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
@@ -85,7 +81,8 @@ const Leetcode = () => {
                 </div>
               </article>
             </li>
-          ))}
+          )
+        )}
       </ul>
     </div>
   );
