@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       author: "Paul Coroneos",
       title: meta.title,
       guid: link,
-      url: `https://pcoroneos.com${link}`,
+      url: `https://pcoroneos.com${link.slice(1)}`,
       date: meta.date,
       categories: meta.tags?.map((tag) => tag) ?? [],
       description: meta.description,
