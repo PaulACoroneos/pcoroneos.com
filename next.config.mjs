@@ -30,6 +30,15 @@ export default withMDX({
       ],
     });
 
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        fs: false,
+        path: false,
+        os: false,
+      },
+    };
+
     config.module.rules.push({
       test: /\.mdx$/,
       oneOf: [

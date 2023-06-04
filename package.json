@@ -70,10 +70,5 @@
   "lint-staged": {
     "*.{js,css,mdx,ts,tsx,jsx,json}": "eslint --fix"
   },
-  "packageManager": "pnpm@8.6.0",
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false
-  }
+  "packageManager": "pnpm@8.6.0"
 }
