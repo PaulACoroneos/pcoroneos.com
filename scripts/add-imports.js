@@ -6,8 +6,8 @@ module.exports = function (src) {
     "export default (props) => <Post meta={meta} {...props} />",
   ].join("\n");
 
-  if (content.includes("`{/* more */}`")) {
-    return this.callback(null, content.split("`{/* more */}`").join("\n"));
+  if (content.includes("{/* more */}")) {
+    return this.callback(null, content.split("{/* more */}").join("\n"));
   }
 
   return this.callback(
