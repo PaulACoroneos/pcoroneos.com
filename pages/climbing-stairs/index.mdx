@@ -1,12 +1,9 @@
-
-
 export const meta = {
   title:
     "Solving Leetcode 70 - Climbing Stairs (JavaScript) (Fibonacci sequence)",
   description: `My solution and explanation of leetcode number 70 - Climbing stairs using JavaScript and Fibonacci sequence.`,
   date: "2020-07-30",
-  
-  tag:['leetcode']
+  tags: ["leetcode"],
 };
 
 It's been a lot of fun completing one algorithm problem a day! I feel there is plenty time to go but I firmly believe given enough variety (and time) I will better master critical concepts. We previous have worked on two sum and atoi() which involve some clever tricks and helper methods that JavaScript provides. Today we are going to talk about something a little different and start dipping our toes into the concept of recursion and iterative solutions with [leetcode 70 climbing stairs](https://leetcode.com/problems/climbing-stairs/).
@@ -77,7 +74,7 @@ Looks deceptively simple no? But it's actually simple in this case once you unde
 
 The real magic occurs in the second line. We return from the function by returning the sum of two calls of the fibonacci sequence, one at one less than the number of steps we are checking for and another two less than the steps we are checking for. **HUH?** Well it's still not too bad. We can start to talk about the call stack here but I think that is a little too imperative. Rather I want to describe in english what is going on.
 
-Every time climbStairs() is called we going to now have two copies of that function in memory. Those two copies of the function are then going to spawn up to another two copies of the function. This "doubling" will keep happening until these copies hit ```n <= 1```. Makes sense? No? Lets look at a table for n = 3:
+Every time climbStairs() is called we going to now have two copies of that function in memory. Those two copies of the function are then going to spawn up to another two copies of the function. This "doubling" will keep happening until these copies hit `n <= 1`. Makes sense? No? Lets look at a table for n = 3:
 
 | Count |                    calls                     |
 | :---: | :------------------------------------------: |
@@ -126,8 +123,8 @@ In english what we are going to do is replace the recursive call with an iterati
 
 ```js
 const cache = {
-  "0": 1,
-  "1": 1,
+  0: 1,
+  1: 1,
 };
 
 const climbStairs = function (n) {

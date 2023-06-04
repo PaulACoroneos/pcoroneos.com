@@ -1,14 +1,11 @@
-
-
 export const meta = {
   title: "Leetcode 88. Merge Sorted Array (JavaScript)",
   description: `Solution to Leetcode 88 - Merge Sorted Array  (JavaScript)`,
   date: "2021-07-28",
-  
-  tag:['leetcode','array','two-pointer','easy']
+  tags: ["leetcode", "array", "two-pointer", "easy"],
 };
 
-Let's take a look at yet another classic in-place array problem with  [LeetCode 88 - Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+Let's take a look at yet another classic in-place array problem with [LeetCode 88 - Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 `{/* more */}`
 
 ## Problem statement and analysis
@@ -49,15 +46,14 @@ So instead of thinking through the logistics of trying to get around this we thi
 
 ## Approach 2. Start from the end of each array
 
-We can invert our thinking here and ask now what about starting from the end of each array. Or in other words we initialize the nums1 ptr to m-1 and nums2 to n-1. We then are going to iterate backwards through nums1 checking whether the value at nums1 for the nums1 ptr is greater than the values at the ptr for nums2. If it is then we copy the nums1 value for the index of nums1 at m+n-1. Converserely if the value of nums1 less than the value pointed out in nums2 we copy the nums2 value. Depending on which value is picked we then decrement the value of that pointer afterwards. We will then keep running the loop until all the numbers in nums1 are the sorted combination of values in nums1 and nums2. 
+We can invert our thinking here and ask now what about starting from the end of each array. Or in other words we initialize the nums1 ptr to m-1 and nums2 to n-1. We then are going to iterate backwards through nums1 checking whether the value at nums1 for the nums1 ptr is greater than the values at the ptr for nums2. If it is then we copy the nums1 value for the index of nums1 at m+n-1. Converserely if the value of nums1 less than the value pointed out in nums2 we copy the nums2 value. Depending on which value is picked we then decrement the value of that pointer afterwards. We will then keep running the loop until all the numbers in nums1 are the sorted combination of values in nums1 and nums2.
 
 Let's look at a simplified psuedocode Solution
 
 ```js
-
 // While all the numbers in nums1 arent sorted yet with the values of both arrays
 // Check if the value at the pointer of nums1 is greater than the value of the ptr at nums2
-// if yes, assign the value of nums1 at the index of the iteration we are on for nums1 to the value of nums1 at its pointer. 
+// if yes, assign the value of nums1 at the index of the iteration we are on for nums1 to the value of nums1 at its pointer.
 // decrement the nums1 ptr
 // if no, assign the value of nums2 at the index of the iteration we are on for nums1 to the value of nums2 at its pointer
 // decrement the nums2 ptr
@@ -67,13 +63,13 @@ Now you'll notice above I was a bit vague about what the definition of these poi
 
 > You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two > integers m and n, representing the number of elements in nums1 and nums2 respectively.
 
-M and N represent the the number of elements in nums1 and nums2 respectively. That sure sounds like an initialized index pointer we need! Therefore we can directly use these arguments as our pointers in the problem (simply use and reference minus 1 because the index of the final value in any array is its length minus 1); 
+M and N represent the the number of elements in nums1 and nums2 respectively. That sure sounds like an initialized index pointer we need! Therefore we can directly use these arguments as our pointers in the problem (simply use and reference minus 1 because the index of the final value in any array is its length minus 1);
 
 Now there's one other "cute" optimization we can do in this problem. Whenever you are sorting/merging values your computational complexity is always **O(number of values)**. This makes sense because you at least need to visit each number in the array(s) once in order to figure out where they are supposed to go. But one thing to consider is how we can improve the average case of the solution. That is because in real life we do not always get the worst case. So let's again review the problem statement:
 
 > Merge nums1 and nums2 into a single array sorted in non-decreasing order.
 
-Our arrays are already sorted. As we discussed previously we are pushing values into nums1 until nums1 contains the consolidated sorted values of both arrays. So at worst we have to keep doing computations until all numbers are in sorted order. But that does not necessarily mean we have to visit every number! Confused 😃?  Nums1 and nums2 are sorted within themselves. Suppose we exhaust the values in nums2 such that only values in nums1 are left. What is the relative sort order of these remaining values? 
+Our arrays are already sorted. As we discussed previously we are pushing values into nums1 until nums1 contains the consolidated sorted values of both arrays. So at worst we have to keep doing computations until all numbers are in sorted order. But that does not necessarily mean we have to visit every number! Confused 😃? Nums1 and nums2 are sorted within themselves. Suppose we exhaust the values in nums2 such that only values in nums1 are left. What is the relative sort order of these remaining values?
 
 They are already in non-ascending order! Therefore the key optimization takeaway is that **we only need to iterate through values until nums2 pointer is 0** (or in reality -1 because again m and n represent the length of each array so to use as an index value we simply reference the value with one subtracted). At this point we are finished and can exit the function. Let's now look at the solution:
 
@@ -82,19 +78,19 @@ They are already in non-ascending order! Therefore the key optimization takeaway
  Do not return anything, modify nums1 in-place instead.
  */
 function merge(nums1: number[], m: number, nums2: number[], n: number): void {
-    while(n > 0) {
-        //if val in nums1 is greater than val in nums2, use nums1
-        if(nums1[m-1] >nums2[n-1]) {
-            nums1[m+n-1] = nums1[m-1];
-            m--;
-        }
-        //otherwise use nums2 val
-        else {
-            nums1[m+n-1] = nums2[n-1];
-            n--;
-        }
+  while (n > 0) {
+    //if val in nums1 is greater than val in nums2, use nums1
+    if (nums1[m - 1] > nums2[n - 1]) {
+      nums1[m + n - 1] = nums1[m - 1];
+      m--;
     }
-};
+    //otherwise use nums2 val
+    else {
+      nums1[m + n - 1] = nums2[n - 1];
+      n--;
+    }
+  }
+}
 ```
 
 ## Complexity analysis

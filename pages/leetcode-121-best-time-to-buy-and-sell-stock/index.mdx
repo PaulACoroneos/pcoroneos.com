@@ -1,14 +1,11 @@
-
-
 export const meta = {
   title: "Leetcode 121. Best Time to Buy and Sell Stock (JavaScript)",
   description: `Solution to Leetcode 121 - Best Time to Buy and Sell Stock  (JavaScript)`,
   date: "2021-07-26",
-  
-  tag:['leetcode','array','dynamic-programming']
+  tags: ["leetcode", "array", "dynamic-programming"],
 };
 
-It's time to mix an array problem with some light dynamic programming in  [LeetCode 121 - Find Numbers with Even Number of Digits](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+It's time to mix an array problem with some light dynamic programming in [LeetCode 121 - Find Numbers with Even Number of Digits](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 `{/* more */}`
 
 ## Problem statement and analysis
@@ -28,7 +25,7 @@ Input: prices = [7,1,5,3,6,4]
 Output: 5
 ```
 
-and 
+and
 
 ```
 Input: prices = [7,6,4,3,1]
@@ -54,9 +51,12 @@ Complexity is pretty straightfoward for this one. We have 2 nested for loops. Th
 
 For the second approach we are going to do a little light dynamic programming. It turns out there is actually a single loop approach to this problem. We are going to slowly start delving into the concept of dynamic programming as we begin to solve more leetcode problems. But essentially today what we want to use is a technique called "the greedy approach". Let's look at a quick plot of the first example that was provided.
 
-<img src='./best-time-buy-and-sell-stock.jpg' alt='peak and valley diagram example 1' />
+<img
+  src="./best-time-buy-and-sell-stock.jpg"
+  alt="peak and valley diagram example 1"
+/>
 
-Did this help to understand what the one approach solution is? So as we scan across this peak and valley chart we observe local minima and maxima and an absolute minima and maxima (highlighted via text and also a line). 
+Did this help to understand what the one approach solution is? So as we scan across this peak and valley chart we observe local minima and maxima and an absolute minima and maxima (highlighted via text and also a line).
 
 The largest maxmia after the smallest minima is the largest delta (or profit) we can derive for a given list of stock prices. And this is exactly what we will do. We will go through numbers one by calculating the largest delta (profit) so far by examining the deltas between stock prices. But unlike approach number 1 we are not going to rotate all permutations for every number in the stock list. Instead we are going to compare the maximum profit calculated so far to maximum profit for each number in the list (using the minimum value we have found so far from previous iteration).
 
@@ -76,23 +76,22 @@ Hopefully we are a little clearer than mud now on the algorithm. The completed c
 
 ```js
 function maxProfit(prices: number[]): number {
-    let maxProfit = 0;
-    let minPrice = Number.MAX_SAFE_INTEGER;
-    
-    //base case
-    if(prices.length < 2 ) return maxProfit;
-    
-    for(let i = 0; i< prices.length;i++) {
-        if(prices[i] < minPrice) {
-            minPrice = prices[i];
-        }
-        else if (prices[i] - minPrice > maxProfit) {
-            maxProfit = prices[i] - minPrice;
-        }
+  let maxProfit = 0;
+  let minPrice = Number.MAX_SAFE_INTEGER;
+
+  //base case
+  if (prices.length < 2) return maxProfit;
+
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] < minPrice) {
+      minPrice = prices[i];
+    } else if (prices[i] - minPrice > maxProfit) {
+      maxProfit = prices[i] - minPrice;
     }
-    
-    return maxProfit
-};
+  }
+
+  return maxProfit;
+}
 ```
 
 Complexity analysis is thankfully pretty straightforward here. We have one single loop which gives us a nice computational complexity of **O(N)**. Space once again is **O(1)** as we use a few temporary variables that does not scale with stock price list size.

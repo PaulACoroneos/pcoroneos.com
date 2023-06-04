@@ -30,6 +30,16 @@ export default withMDX({
       ],
     });
 
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        fs: false,
+        path: false,
+        os: false,
+        stream: false,
+      },
+    };
+
     config.module.rules.push({
       test: /\.mdx$/,
       oneOf: [
@@ -44,16 +54,6 @@ export default withMDX({
         },
       ],
     });
-
-    // if (!options.dev && options.isServer) {
-    // const originalEntry = config.entry
-
-    // config.entry = async () => {
-    //   const entries = { ...await originalEntry() }
-    //   entries['./scripts/build-rss.js'] = './scripts/build-rss.js'
-    //   return entries
-    // }
-    // }
 
     return config;
   },

@@ -36,7 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#094074" />
       <meta name="msapplication-TileColor" content="#094074" />
       <meta name="theme-color" content="#ffffff" />
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+      <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
     </Head>
     <Header />
     <SectionContainer>
