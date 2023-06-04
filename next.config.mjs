@@ -50,7 +50,7 @@ export default withMDX({
 
       config.entry = async () => {
         const entries = { ...(await originalEntry()) };
-        entries["./scripts/build-rss.js"] = "./scripts/build-rss";
+        entries["./scripts/build-rss"] = "./scripts/build-rss";
         return entries;
       };
     }
