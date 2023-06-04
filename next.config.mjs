@@ -36,6 +36,7 @@ export default withMDX({
         fs: false,
         path: false,
         os: false,
+        stream: false,
       },
     };
 
