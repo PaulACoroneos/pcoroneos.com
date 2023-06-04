@@ -1,6 +1,7 @@
-import fs from "fs";
-import RSS from "rss";
-import getAllPostPreviews from "../getAllPostPreviews";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require("fs");
+const RSS = require("rss");
+const getAllPostPreviews = require("../getAllPostPreviews");
 
 const feed = new RSS({
   title: "Blog – Paul Coroneos",
