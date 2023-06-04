@@ -4,7 +4,7 @@ import { buildRss } from "./utils/generate-rss";
 export async function getStaticProps() {
   const posts = getAllPostPreviews();
 
-  await buildRss(posts);
+  buildRss(posts);
 
   return {
     props: {

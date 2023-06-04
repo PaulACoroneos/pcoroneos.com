@@ -7,17 +7,15 @@ const feed = new RSS({
   feed_url: "https://pcoroneos.com/feed.xml",
 });
 
-export const buildRss = async (posts: any) => {
+export const buildRss = (posts: any) => {
   posts.forEach(({ link, module: { meta } }) => {
     feed.item({
+      author: "Paul Coroneos",
       title: meta.title,
       guid: link,
       url: `https://pcoroneos.com${link}`,
       date: meta.date,
       description: meta.description,
-      custom_elements: [].concat(
-        meta.authors.map((author) => ({ author: [{ name: author.name }] }))
-      ),
     });
   });
 
