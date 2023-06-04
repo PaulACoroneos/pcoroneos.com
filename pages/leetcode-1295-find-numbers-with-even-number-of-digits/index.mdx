@@ -1,14 +1,12 @@
-
-
 export const meta = {
   title: "Leetcode 1295. Find Numbers with Even Number of Digits (JavaScript)",
   description: `Solution to Leetcode 1295 - Find Numbers with Even Number of Digits  (JavaScript)`,
   date: "2021-03-20",
-  
-  tag:['leetcode']
+
+tags: ["leetcode"],
 };
 
-We continue looking into array problems with  [LeetCode 1295 - Find Numbers with Even Number of Digits](https://leetcode.com/problems/max-consecutive-ones/)
+We continue looking into array problems with [LeetCode 1295 - Find Numbers with Even Number of Digits](https://leetcode.com/problems/max-consecutive-ones/)
 `{/* more */}`
 
 ## Problem statement and analysis
@@ -20,7 +18,7 @@ Let's start by taking a look at the problem statement:
 Sounds simple enough at first glance. So for example given:
 
 ```js
-[1,123,22,44]
+[1, 123, 22, 44];
 ```
 
 By inspect we see numbers at indices 0 and 1 have an odd number of digits. So we would say **two** numbers are odd.
@@ -34,13 +32,13 @@ Recall from when you first started learning about numbers (in base 10, though no
 We can represent a base 10 number as the sum of its digits where each digit is multiplied by its base number (10) to the power of the place it resides (starting at index 0). Confused? That's okay lets look at it in table format:
 
 | Number | 10^(2) | 10^(1) | 10^(0) |
-| :-- | :-: | :-: | :-: |
-| 345|3|4|5|
-| 21 | 0 | 2 |1|
+| :----- | :----: | :----: | :----: |
+| 345    |   3    |   4    |   5    |
+| 21     |   0    |   2    |   1    |
 
-So let's take for example the number 345. 345 can be broken up to be 3 * 10^2 + 4 * 10^1 + 5 * 10^0. Similarly 21 can be broken up to read (let's just keep 10^2 for illustrative purposes) 0 * 10^2 + 2 * 10^1 + 1 * 10^0. 
+So let's take for example the number 345. 345 can be broken up to be 3 _ 10^2 + 4 _ 10^1 + 5 _ 10^0. Similarly 21 can be broken up to read (let's just keep 10^2 for illustrative purposes) 0 _ 10^2 + 2 _ 10^1 + 1 _ 10^0.
 
-So why go through all this trouble to explain base 10 concepts? Well it turns out many algorithms build off this division concept. What we now have learned is that digits are simply varying levels of multiples of 10 from one another summed together. Armed this with knowledge this mean **we can extract digits by simply dividing the number over and over again by its base (10) until the floor of the number is 0**. 
+So why go through all this trouble to explain base 10 concepts? Well it turns out many algorithms build off this division concept. What we now have learned is that digits are simply varying levels of multiples of 10 from one another summed together. Armed this with knowledge this mean **we can extract digits by simply dividing the number over and over again by its base (10) until the floor of the number is 0**.
 
 Now why does the floor matter? Suppose the last place of a number is 1. The number 1 divided by ten will become a fractional number (in this case 0.1). But becase we are dealing with integers in the problem if we get to decimals that means we have exhausted the digits to count. At this point we should correctly stop counting digits.
 
@@ -59,17 +57,18 @@ Take yourself back down memory lane to elementary school when you first learned 
 > Even numbers are divisible by 2 with no remainder
 > An odd number leaves a remainder of 1
 
-So what properties stand out to you that we might be able to take advantage of using the modulus operator? The last two! So simply put if we compute the modulus of the integer by 2 an answer of one or zero correspond to an odd or even number respectively. 
+So what properties stand out to you that we might be able to take advantage of using the modulus operator? The last two! So simply put if we compute the modulus of the integer by 2 an answer of one or zero correspond to an odd or even number respectively.
 
 Now we should have the tools we need to solve this algorithm. But for now let's quickly write out the psuedocode based off what we have learned.
 
 ### Even Check Psuedocode
+
 ```js
 // Inialize a counter to 0
 
 // Loop while the floor of the number from the array is greater than zero
-  // increment digit count
-  // set the number to itself divided by 10
+// increment digit count
+// set the number to itself divided by 10
 
 // Check to see if the number of digits is even, and if so increment even counter
 ```
@@ -77,36 +76,38 @@ Now we should have the tools we need to solve this algorithm. But for now let's 
 Now with that out of the way let's examine the main problem psuedocode which becomes quite trivial:
 
 ## Main Problem Psuedocode
+
 ```js
 // Check base case that if array is empty return 0
 // Inialize a counter to 0
 
 // Loop through all the array elements
-  // If the element is even, increment the counter
+// If the element is even, increment the counter
 
 //return counter value
 ```
 
 ## Solution
+
 ```js
 /**
  * @param {number[]} nums
  * @return {number}
  */
-var findNumbers = function(nums) {
-    //base cases
-    if (nums.length === 0) return 0;
-    
-    let evenCnt = 0;
-    for(let num of nums) {
-        let digitCnt = 0;
-        while(Math.floor(num) > 0) {
-            digitCnt++;
-            num /= 10;
-        }
-        if(digitCnt % 2 === 0) evenCnt++;
+var findNumbers = function (nums) {
+  //base cases
+  if (nums.length === 0) return 0;
+
+  let evenCnt = 0;
+  for (let num of nums) {
+    let digitCnt = 0;
+    while (Math.floor(num) > 0) {
+      digitCnt++;
+      num /= 10;
     }
-    return evenCnt;
+    if (digitCnt % 2 === 0) evenCnt++;
+  }
+  return evenCnt;
 };
 ```
 

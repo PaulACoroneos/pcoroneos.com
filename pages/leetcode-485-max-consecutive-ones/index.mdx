@@ -1,11 +1,9 @@
-
-
 export const meta = {
   title: "Leetcode 485. Max Consecutive Ones (JavaScript)",
   description: `Solution to Leetcode 485 - Max Consecutive Ones (JavaScript)`,
   date: "2021-03-19",
-  
-  tag:['leetcode']
+
+tags: ["leetcode"],
 };
 
 I am back after a brief hiatus! Over the next several posts we are going to cover some very common array problems. Let's start with [LeetCode 485 - Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/)
@@ -22,7 +20,7 @@ Let's start by taking a look at the problem statement:
 So for example let's say we are given an array
 
 ```js
-const arr = [0,1,1,0,0,0];
+const arr = [0, 1, 1, 0, 0, 0];
 
 console.log(maxConsecutiveOnes(arr));
 
@@ -52,26 +50,24 @@ Seems pretty trivial at first inspection, no? We glance at the array and see by 
  * @param {number[]} nums
  * @return {number}
  */
-var findMaxConsecutiveOnes = function(nums) {
-    let maxCount = 0;
-    let rollingCount = 0;
-    
-    //base cases
-    if (nums.length === 0) return maxCount;
-    if (nums.length === 1) return nums[0];
-    
-    for(const num of nums) {
-        if(num === 1) {
-            rollingCount++;
-            if( rollingCount > maxCount) {
-                maxCount++;
-            }
-        }
-        else
-            rollingCount = 0;
-    }
-    
-    return maxCount;
+var findMaxConsecutiveOnes = function (nums) {
+  let maxCount = 0;
+  let rollingCount = 0;
+
+  //base cases
+  if (nums.length === 0) return maxCount;
+  if (nums.length === 1) return nums[0];
+
+  for (const num of nums) {
+    if (num === 1) {
+      rollingCount++;
+      if (rollingCount > maxCount) {
+        maxCount++;
+      }
+    } else rollingCount = 0;
+  }
+
+  return maxCount;
 };
 ```
 
@@ -80,4 +76,3 @@ var findMaxConsecutiveOnes = function(nums) {
 Thankfully complexity is pretty straightforward for this problem. If we examine the code we have 1 single loop that iterates through the length of the array. It should be intuitively obvious that in order to find the max 1 count we have to loop through every value once. The constants to store the counts are inconsequential given a large dataset so complexity resolves to **O(N)**. Space is **O(1)** since we are storing singular values.
 
 Thanks and best of luck on your algorithmic journey!
-
