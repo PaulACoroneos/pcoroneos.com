@@ -1,0 +1,49 @@
+export const meta = {
+  title: "Using Jest toHaveBeenCalledWith() with expect.anything() to test a subset of parameters",
+  description: `Using Jest toHaveBeenCalledWith() with expect.anything() to test a subset of parameters`,
+  date: "2023-06-15",
+  tags: ["jest","testing","javascript","testing-library","react"],
+};
+
+Last week I had an interesting problem come across my desk. I was tasked with ensuring that when an `onClick` handler was fired that a certain object was returned in the callback. Now this object would depend on the form state so I wanted to test several permutations. What was making things difficult was that the onClick callback returned a second object with many utility functions that were inherent to an underlying library and I wasn't interested in checking them as part of this testing.
+
+{/* more */}
+
+## The problem
+
+Let's take a look at [Jest's `toHaveBeenCalledWith` method](https://jestjs.io/docs/expect#tohavebeencalledwitharg1-arg2-). This method is used to check that a function has been called with a specific set of parameters. For example, we might use something along the lines of:
+
+```js
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
+
+it('checks whether onclick is invoked with form state onClick', async () => {
+  const mockHandleOnClick = jest.fn();
+  const user = userEvent.setup();
+
+  render(<SomeComponent onClick={mockHandleOnClick} initialState={{foo:'bar'}} />);
+  await userEvent.click(screen.getByRole('button'));
+
+  await waitFor(mockHandleOnClick).toHaveBeenCalledWith({foo:'bar'});
+})
+```
+
+Unfortunately, this doesn't work for me as per the previous description because Jest will then complain about the second object that is returned from the onClick handler. So how do we get around this? in comes `expect.anything()` to the rescue.
+
+### Using expect.anything()
+
+Per [jest documentation](https://jestjs.io/docs/expect#expectanything) `expect.anything()` tells Jest to expect anything but `null` or `undefined`. This is perfect because I am not interested in testing the implementation detail of the underlying OSS library im using. So what does this look like in practice?
+
+```js
+it('checks whether onclick is invoked with form state onClick', async () => {
+  const mockHandleOnClick = jest.fn();
+  const user = userEvent.setup();
+
+  render(<SomeComponent onClick={mockHandleOnClick} initialState={{foo:'bar'}} />);
+  await userEvent.click(screen.getByRole('button'));
+
+  await waitFor(mockHandleOnClick).toHaveBeenCalledWith({foo:'bar'}, expect.anything());
+})
+```
+
+Thank you for visiting and best of luck writing unit tests!
