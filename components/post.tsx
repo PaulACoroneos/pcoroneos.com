@@ -21,7 +21,7 @@ const mdxComponents = {
 type PostProps = {
   meta: any;
   posts: any;
-  children: React.ReactChild;
+  children: React.ReactNode;
 };
 
 const Post = ({ meta, children, posts }: PostProps) => {

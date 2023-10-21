@@ -1,4 +1,4 @@
-const FOOTER_LINKS = [
+export const FOOTER_LINKS = [
   { href: "https://github.com/PaulACoroneos", label: "Github" },
   { href: "https://twitter.com/pacman326", label: "Twitter" },
   { href: "https://www.linkedin.com/in/paulacoroneos/", label: "LinkedIn" },
