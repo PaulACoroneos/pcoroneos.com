@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,22 +14,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "types": [
-      "cypress",
-      "@testing-library/cypress",
-      "webpack-env"
-    ],
+    "types": ["cypress", "@testing-library/cypress", "webpack-env", "jest"],
     "incremental": true
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     ".eslintrc.js",
-    "**/*.mdx"
-, "next.config.mjs"  ]
+    "**/*.mdx",
+    "next.config.mjs"
+  ]
 }

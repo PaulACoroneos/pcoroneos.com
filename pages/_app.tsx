@@ -9,7 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 type AppProps = {
   Component: React.ComponentType;
-  pageProps: any;
+  pageProps: Record<string, unknown>;
 };
 const App = ({ Component, pageProps }: AppProps) => (
   <div className="antialiased">

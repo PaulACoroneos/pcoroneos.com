@@ -18,10 +18,25 @@ const mdxComponents = {
   ),
 };
 
+// write type for postprops
+type Meta = {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  discussion: string;
+};
+
 type PostProps = {
-  meta: any;
-  posts: any;
+  meta: Meta;
   children: React.ReactNode;
+  posts: {
+    link: string;
+    title: string;
+    module: {
+      meta: Meta;
+    };
+  }[];
 };
 
 const Post = ({ meta, children, posts }: PostProps) => {
