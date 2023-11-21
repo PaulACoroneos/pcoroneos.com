@@ -1,12 +1,14 @@
 export const FOOTER_LINKS = [
   { href: "https://github.com/PaulACoroneos", label: "Github" },
   { href: "https://twitter.com/pacman326", label: "Twitter" },
-  { href: "https://www.linkedin.com/in/paulacoroneos/", label: "LinkedIn" },
-  { href: "https://mstdn.social/@pacman326", label: "Mastodon" },
+  {
+    href: "https://www.linkedin.com/in/paulacoroneos/",
+    label: "LinkedIn",
+  },
+  { href: "https://meta.masto.host/@pacman326", label: "Mastodon", rel: "me" },
   { href: "https://www.twitch.tv/pacman326", label: "Twitch" },
   { href: "https://www.pcoroneos.com/rss.xml", label: "RSS" },
 ];
-
 const Footer = () => (
   <footer className="md:text-md flex items-center justify-between space-x-2 py-4 text-sm lg:text-lg">
     <span className="italic">© Paul Coroneos 2023</span>
