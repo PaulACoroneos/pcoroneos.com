@@ -18,6 +18,7 @@ const Footer = () => (
           className="text-secondary hover:text-primary"
           key={link.href}
           href={link.href}
+          rel={link?.rel}
         >
           {link.label}
         </a>
