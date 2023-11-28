@@ -2,18 +2,14 @@ export type CardProps = {
   title: string;
   githubLink: string;
   deployedLink?: string;
-  imageSrc: string;
 };
 
-const Card = ({ title, githubLink, deployedLink, imageSrc }: CardProps) => {
+const Card = ({ title, githubLink, deployedLink }: CardProps) => {
   const githubTitle = `Github link for ${title}`;
   const deployedTitle = `Deployed link for ${title}`;
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="mt-5 rounded-lg bg-white">
-        <img src={imageSrc} className="h-40 rounded-md" alt="" />
-      </div>
+    <div className="flex flex-col items-center p-2">
       <div className="-mt-4 flex h-56 w-64 flex-col justify-between rounded-lg bg-secondary shadow-lg">
         <div className="p-5">
           <span className="text-lg font-bold text-white">{title}</span>
