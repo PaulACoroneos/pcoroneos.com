@@ -2,9 +2,16 @@ import Card from "components/card";
 
 const data = [
   {
-    title: "Vanilla HTML and CSS Survey Form",
+    title: "Barbeque Survey Form",
     githubLink: "https://github.com/PaulACoroneos/survey-form",
     deployedLink: "https://paulacoroneos.github.io/survey-form/",
+    tags: ["HTML", "CSS"],
+  },
+  {
+    title: "Albert Einstein tribute",
+    deployedLink: "https://paulacoroneos.github.io/tribute-page/",
+    githubLink: "https://github.com/PaulACoroneos/tribute-page",
+    tags: ["HTML", "CSS"],
   },
 ];
 

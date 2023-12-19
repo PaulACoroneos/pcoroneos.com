@@ -2,17 +2,26 @@ export type CardProps = {
   title: string;
   githubLink: string;
   deployedLink?: string;
+  tags: string[];
 };
 
-const Card = ({ title, githubLink, deployedLink }: CardProps) => {
+const Card = ({ title, githubLink, deployedLink, tags }: CardProps) => {
   const githubTitle = `Github link for ${title}`;
   const deployedTitle = `Deployed link for ${title}`;
 
   return (
     <div className="flex flex-col items-center p-2">
-      <div className="-mt-4 flex h-56 w-64 flex-col justify-between rounded-lg bg-secondary shadow-lg">
-        <div className="p-5">
+      <div className="-mt-4 flex h-64 w-64 flex-col justify-between rounded-lg bg-secondary shadow-lg">
+        <div className="p-5 text-white">
           <span className="text-lg font-bold text-white">{title}</span>
+          <span className="block pt-2">Technologies used:</span>
+          <ul className="ml-4 list-disc">
+            {tags.map((tag) => (
+              <li className="text-xs" key={tag}>
+                {tag}
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="grid grid-cols-2 gap-1 p-4">
           <a title={githubTitle} href={githubLink}>
