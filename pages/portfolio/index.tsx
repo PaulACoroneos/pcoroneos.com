@@ -23,7 +23,7 @@ const data = [
 ];
 
 const Portfolio = () => (
-  <ul className="grid min-h-[800px] gap-8 pt-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+  <ul className="min-h-[800px] space-y-2 pt-6">
     {data.map((cardData) => (
       <li key={cardData.title}>
         <Card {...cardData} />
