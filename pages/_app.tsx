@@ -6,6 +6,7 @@ import Header from "components/header";
 import Footer from "components/footer";
 import SectionContainer from "components/section-container";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 type AppProps = {
   Component: React.ComponentType;
@@ -14,6 +15,7 @@ type AppProps = {
 const App = ({ Component, pageProps }: AppProps) => (
   <div className="antialiased">
     <Analytics />
+    <SpeedInsights />
     <Head>
       <link
         rel="apple-touch-icon"
