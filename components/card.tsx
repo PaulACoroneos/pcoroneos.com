@@ -10,8 +10,8 @@ const Card = ({ title, githubLink, deployedLink, tags }: CardProps) => {
   const deployedTitle = `Deployed link for ${title}`;
 
   return (
-    <div className="grid w-full grid-cols-3 items-center rounded-lg bg-secondary p-3">
-      <h2 className="text-xl font-bold text-white">{title}</h2>
+    <div className="grid w-full grid-cols-1 items-center gap-1 rounded-lg bg-secondary p-3 md:grid-cols-3">
+      <h2 className="text-md font-bold text-white md:text-xl">{title}</h2>
       <ul className="space-x-2">
         {tags.map((tag) => (
           <li
