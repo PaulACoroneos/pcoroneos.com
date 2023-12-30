@@ -20,6 +20,12 @@ const data = [
     githubLink: "https://github.com/PaulACoroneos/Technical-Documentation-Page",
     tags: ["HTML", "CSS"],
   },
+  {
+    title: "Product Landing Page",
+    deployedLink: "https://paulacoroneos.github.io/product-landing-page/",
+    githubLink: "https://github.com/PaulACoroneos/product-landing-page",
+    tags: ["HTML", "CSS"],
+  },
 ];
 
 const Portfolio = () => (
