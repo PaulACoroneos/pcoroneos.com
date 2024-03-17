@@ -143,8 +143,8 @@ devDependencies:
     specifier: ^6.0.0
     version: 6.0.0(webpack@5.76.0)
   husky:
-    specifier: ^5.2.0
-    version: 5.2.0
+    specifier: ^9.0.11
+    version: 9.0.11
   jest:
     specifier: ^29.5.0
     version: 29.5.0(@types/node@20.11.28)(ts-node@10.9.1)
@@ -5017,9 +5017,9 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: true
 
-  /husky@5.2.0:
-    resolution: {integrity: sha512-AM8T/auHXRBxlrfPVLKP6jt49GCM2Zz47m8G3FOMsLmTv8Dj/fKVWE0Rh2d4Qrvmy131xEsdQnb3OXRib67PGg==}
-    engines: {node: '>= 10'}
+  /husky@9.0.11:
+    resolution: {integrity: sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: true
 
