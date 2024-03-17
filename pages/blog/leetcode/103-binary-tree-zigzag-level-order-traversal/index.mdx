@@ -23,7 +23,7 @@ A bit confused? Let's consider a simple tree with some values and arrows superim
 </div>
 
 The arrows will represent the "zigzag" in which we form the answer. In other words, we want to write each level of the tree to a separate answer array in the opposite direction of the previous level the tree.
-Now it's important to note here that we still will traverse the tree with standard BFS methodology (using 2 queues implemented with JavaScript arrays). 
+Now it's important to note here that we still will traverse the tree with standard BFS methodology (using 2 queues implemented with JavaScript arrays).
 
 So how can we represent which direction we should write the node values per level? The simplest solution I could come up with was simply using a boolean value `ltr` (left to right) which we will toggle after each level. For each level, we will collect the corresponding nodes into a subArray where once we have finished iterating through the entire level will push the entire result to the `ans` array.
 
@@ -42,34 +42,33 @@ So how can we represent which direction we should write the node values per leve
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var zigzagLevelOrder = function(root) {
-    if(!root) return [];
-    
-    let queue = [root]
-    const ans = [];
-    let ltr = true;
+var zigzagLevelOrder = function (root) {
+  if (!root) return [];
 
-    while(queue.length) {
-        const secondQueue = [];
-        const length = queue.length;
-        const subAns = [];
-        for(let i = 0 ; i < length; i++) {
-            const node = queue[i]
-            subAns.push(node.val)
-            if(node?.left) {
-                secondQueue.push(node.left)
-            }
-            if(node?.right) {
-                secondQueue.push(node.right);
-            }
-        }
-        ans.push(ltr ? subAns : subAns.reverse());
-        queue = secondQueue;
-        ltr = !ltr;
+  let queue = [root];
+  const ans = [];
+  let ltr = true;
+
+  while (queue.length) {
+    const secondQueue = [];
+    const length = queue.length;
+    const subAns = [];
+    for (let i = 0; i < length; i++) {
+      const node = queue[i];
+      subAns.push(node.val);
+      if (node?.left) {
+        secondQueue.push(node.left);
+      }
+      if (node?.right) {
+        secondQueue.push(node.right);
+      }
     }
-    
-    return ans;
-    
+    ans.push(ltr ? subAns : subAns.reverse());
+    queue = secondQueue;
+    ltr = !ltr;
+  }
+
+  return ans;
 };
 ```
 
