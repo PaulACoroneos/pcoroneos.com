@@ -13,7 +13,7 @@
     "lint:fix": "next lint --fix",
     "start": "next start",
     "test": "jest",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.8.0",
