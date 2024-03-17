@@ -11,7 +11,7 @@ export const FOOTER_LINKS = [
 ];
 const Footer = () => (
   <footer className="md:text-md flex items-center justify-between space-x-2 py-4 text-sm lg:text-lg">
-    <span className="italic">© Paul Coroneos 2023</span>
+    <span className="italic">© Paul Coroneos 2024</span>
     <div className="flex flex-wrap space-x-4">
       {FOOTER_LINKS.map((link) => (
         <a
