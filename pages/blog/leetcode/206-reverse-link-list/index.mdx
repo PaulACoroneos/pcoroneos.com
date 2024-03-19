@@ -46,21 +46,21 @@ The first line should be somewhat straightforward. If the linked list is empty o
 Now using a third pointer in the loop may not make sense initially. If we already have a pointer pointing to previous and current, can't we derive the next pointer value? The answer is **no** due to the nature of linked lists. Let's review a diagram:
 
 <img
-  src="./basic-linked-list.jpg"
+  src="/basic-linked-list.jpg"
   alt="A basic singly linked list of 1, 2 and 3."
 />
 
 Here is a simple linked list consisting of 3 nodes 1, 2 and 3. We want to reverse this list such that when read from head to tail the nodes read back are 3, 2 and 1. Now let's apply our 2 pointer approach to the nodes for the first iteration:
 
 <img
-  src="./linked-list-prev-curr-step-one.jpg"
+  src="/linked-list-prev-curr-step-one.jpg"
   alt="Linked list at first iteration of reverse algorithm"
 />
 
 So as per our psuedocode our prev pointer will be set to null (it's outside the linked list initially) and curr will be set to the head node (node 1 in this case). We know we want node 1 to point to prev (null because this is the new tail of the linked list since we are reversing it). So as per the algorithm we set node 1's next pointer to prev (null):
 
 <img
-  src="./linked-list-prev-curr-step-two.jpg"
+  src="/linked-list-prev-curr-step-two.jpg"
   alt="Linked list at second iteration of reverse algorithm"
 />
 
@@ -69,38 +69,38 @@ So far so good right? Now node 1 is pointing to null. We then proceed to set the
 Now that of course is not what we want. And thus the next pointer comes into play. Now let's add in that next pointer (on node 2):
 
 <img
-  src="./linked-list-prev-curr-step-three.jpg"
+  src="/linked-list-prev-curr-step-three.jpg"
   alt="Linked list at second iteration of reverse algorithm with next pointer shown"
 />
 
 Ah that's much better! Even though we disconnected the first part of the linked list from the second part we now have a reference to the disconnected portion of the list. The break in the list is fine because we are going to reconnect this next node back to the other part of linked list in next iteration. So we finish by shifting our prev and current pointers by one:
 
 <img
-  src="./linked-list-prev-curr-step-four.jpg"
+  src="/linked-list-prev-curr-step-four.jpg"
   alt="Linked list with curr and prev pointer shifted at end of first loop."
 />
 
 The pattern will continue for the second loop. I will quickly visually step through the second iteration of the linked list reverse:
 
 <img
-  src="./linked-list-prev-curr-step-five.jpg"
+  src="/linked-list-prev-curr-step-five.jpg"
   alt="start of second loop where next pointer is defined as current pointers next pointer."
 />
 
 <img
-  src="./linked-list-prev-curr-step-six.jpg"
+  src="/linked-list-prev-curr-step-six.jpg"
   alt="node 2 next pointer now points to node 1 disconnecting list from node 3"
 />
 
 <img
-  src="./linked-list-prev-curr-step-seven.jpg"
+  src="/linked-list-prev-curr-step-seven.jpg"
   alt="previous and current pointers are moved to nodes 2 and 3 respectively"
 />
 
 Now I invite the reader to do the final iteration on your own by drawing. I find personally start with pen and paper (or a tablet and pen) before coding is a great start to algorithms because it allows you to intuitively understand what is trying to be done before even writing a line of code. Then once you have a diagram that you can understand develop a psuedocode solution. Finally once armed with psuedocode should you start your language specific solution. Anyways the final list should look at follows:
 
 <img
-  src="./linked-list-prev-curr-step-eight.jpg"
+  src="/linked-list-prev-curr-step-eight.jpg"
   alt="final reversed linked list with prev pointing to new linked list head."
 />
 
@@ -166,21 +166,21 @@ So for our recursive method we essentially want to move to the end of our linked
 I bet you're still confused. That's okay! Let's now dive into diagram land once more. Starting out let's look at our original linked list:
 
 <img
-  src="./basic-linked-list.jpg"
+  src="/basic-linked-list.jpg"
   alt="A basic singly linked list of 1, 2 and 3."
 />
 
 Now what happens during first call of our reverseList() method? Well nothing exciting to be honest. We initialize our pointer to reverseList(head.next) which is added to our call stack:
 
 <img
-  src="./linked-list-recursive-one.jpg"
+  src="/linked-list-recursive-one.jpg"
   alt="Linked list unaffected with one reverseList() call placed on call stack"
 />
 
 Now let's fast forward two more steps and glance at the call stack:
 
 <img
-  src="./linked-list-recursive-two.jpg"
+  src="/linked-list-recursive-two.jpg"
   alt="Linked list unaffected with three reverseList() calls on call stack."
 />
 
@@ -191,14 +191,14 @@ This first step is actually the trickiest of all in my mind. We want the head ar
 At this point ptr and head correspond to nodes 1 and 2 respectively. As a reminder at point the order of the pointers in the list have also not changed. So lets break up the double call here. Head.next is actually node 3. This is again because node 2 points to node 3. Then we want node 3's next to point back to node 2, which is what our head argument holds. So it then looks something like this:
 
 <img
-  src="./linked-list-recursive-four.jpg"
+  src="/linked-list-recursive-four.jpg"
   alt="Linked list with nodes 3 and 2 pointing to each other."
 />
 
 At this point you may think to yourself "uh oh". I must have made a mistake! But in actuality you are doing things exactly right. The last step of method asks us to set head.next to null. Or in this case we eliminate the arrow pointing between nodes 2 and 3:
 
 <img
-  src="./linked-list-recursive-five.jpg"
+  src="/linked-list-recursive-five.jpg"
   alt="Linked list with nodes 3 pointing to node 2 alone."
 />
 
@@ -207,14 +207,14 @@ With this we pop **reverseList(node 2)** off the stack because we then return pt
 Step 1: Nodes 1 and 2 now point to each other since we set node 1's next.next to itself
 
 <img
-  src="./linked-list-recursive-seven.jpg"
+  src="/linked-list-recursive-seven.jpg"
   alt="step one of reverseList(node 1). nodes 1 and 2 now point to each other"
 />
 
 Step 2: We delete the pointer from node 1 to node 2 by setting it to null. This makes node 1 the new tail node
 
 <img
-  src="./linked-list-recursive-eight.jpg"
+  src="/linked-list-recursive-eight.jpg"
   alt="step two of reverseList(node 1). node 1 next is set to null so that only node 2 pointing to node 1 only exists"
 />
 
