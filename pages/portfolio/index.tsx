@@ -26,6 +26,12 @@ const data = [
     githubLink: "https://github.com/PaulACoroneos/product-landing-page",
     tags: ["HTML", "CSS"],
   },
+  {
+    title: "Palindrome Checker",
+    deployedLink: "https://paulacoroneos.github.io/palindrome-checker/",
+    githubLink: "https://github.com/PaulACoroneos/palindrome-checker",
+    tags: ["HTML", "CSS", "JavaScript"],
+  },
 ];
 
 const Portfolio = () => (
