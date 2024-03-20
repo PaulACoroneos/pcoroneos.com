@@ -41,7 +41,7 @@
     "webpack": "^5.76.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.1.6",
+    "@next/bundle-analyzer": "^14.1.4",
     "@testing-library/cypress": "^10.0.1",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "14.2.1",
