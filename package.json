@@ -46,7 +46,7 @@
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "14.2.2",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "@types/react": "^18.2.67",
     "@types/rss": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
