@@ -1,9 +1,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
+import getAllPostPreviews from "../../utilities/mdx";
 
 const Blog = () => {
-  const sortedPostsInDesc = [].sort((a, b) =>
+  const sortedPostsInDesc = getAllPostPreviews().sort((a, b) =>
     new Date(b.module.meta.date) > new Date(a.module.meta.date) ? 1 : -1
   );
 
@@ -44,11 +45,14 @@ const Blog = () => {
           data-testid="mostRecentPostDate"
         >
           Most recent post:{" "}
-          {format(parseISO(posts[0].module.meta.date), "MMMM dd, yyyy")}
+          {format(
+            parseISO(sortedPostsInDesc[0].module.meta.date),
+            "MMMM dd, yyyy"
+          )}
         </p>
       </div>
       <ul className="divide-gray-200 divide-y">
-        {posts
+        {sortedPostsInDesc
           .filter((post) => post.module.meta.date)
           .map(({ link, module: { default: Component, meta } }) => (
             <li key={link} className="py-4 md:py-12">
