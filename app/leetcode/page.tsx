@@ -24,7 +24,7 @@ const Leetcode = () => {
     : sortedPostsInDesc;
 
   return (
-    <div className="divide-y divide-gray-200">
+    <div className="divide-gray-200 divide-y">
       <head>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pacman326" />
@@ -52,7 +52,7 @@ const Leetcode = () => {
         <title>Leetcode – Paul Coroneos</title>
       </head>
       <div className="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
-        <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl">
+        <h1 className="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
           Latest Leetcode Solutions
         </h1>
       </div>
@@ -66,13 +66,13 @@ const Leetcode = () => {
           />
         </label>
       </div>
-      <ul className="divide-y divide-gray-200">
+      <ul className="divide-gray-200 divide-y">
         {posts.map(({ link, module: { default: Component, meta } }) => (
           <li key={link} className="py-4 md:py-12">
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <dl>
                 <dt className="sr-only">Published on</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500">
+                <dd className="text-gray-500 text-base font-medium leading-6">
                   <time dateTime={meta.date}>
                     {format(parseISO(meta.date), "MMMM dd, yyyy")}
                   </time>
@@ -85,7 +85,7 @@ const Leetcode = () => {
                       {meta.title}
                     </Link>
                   </h2>
-                  <div className="prose text-gray-500">
+                  <div className="text-gray-500 prose">
                     <Component />
                   </div>
                 </div>

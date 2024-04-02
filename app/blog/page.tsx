@@ -3,12 +3,12 @@ import Link from "next/link";
 import { format, parseISO } from "date-fns";
 
 const Blog = () => {
-  const sortedPostsInDesc = getAllPostPreviews().sort((a, b) =>
+  const sortedPostsInDesc = [].sort((a, b) =>
     new Date(b.module.meta.date) > new Date(a.module.meta.date) ? 1 : -1
   );
 
   return sortedPostsInDesc?.length ? (
-    <div className="divide-y divide-gray-200">
+    <div className="divide-gray-200 divide-y">
       <head>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pacman326" />
@@ -36,18 +36,18 @@ const Blog = () => {
         <title>Blog – Paul Coroneos</title>
       </head>
       <div className="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
-        <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl">
+        <h1 className="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
           Latest Blog Posts
         </h1>
         <p
-          className="text-lg leading-7 text-gray-500"
+          className="text-gray-500 text-lg leading-7"
           data-testid="mostRecentPostDate"
         >
           Most recent post:{" "}
           {format(parseISO(posts[0].module.meta.date), "MMMM dd, yyyy")}
         </p>
       </div>
-      <ul className="divide-y divide-gray-200">
+      <ul className="divide-gray-200 divide-y">
         {posts
           .filter((post) => post.module.meta.date)
           .map(({ link, module: { default: Component, meta } }) => (
@@ -55,7 +55,7 @@ const Blog = () => {
               <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
                   <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500">
+                  <dd className="text-gray-500 text-base font-medium leading-6">
                     <time dateTime={meta.date}>
                       {format(parseISO(meta.date), "MMMM dd, yyyy")}
                     </time>
@@ -72,7 +72,7 @@ const Blog = () => {
                         {meta.title}
                       </Link>
                     </h2>
-                    <div className="prose text-gray-500">
+                    <div className="text-gray-500 prose">
                       <Component />
                     </div>
                   </div>

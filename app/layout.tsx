@@ -4,6 +4,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "../components/header";
 import SectionContainer from "../components/section-container";
 import Footer from "../components/footer";
+import "../css/tailwind.css";
+import "../css/night-owl.css";
+import React from "react";
 
 export default function RootLayout({
   children,
