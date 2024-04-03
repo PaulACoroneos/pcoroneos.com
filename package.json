@@ -47,7 +47,7 @@
     "@testing-library/react": "14.2.2",
     "@types/jest": "^29.5.12",
     "@types/mdx": "^2.0.12",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.12.3",
     "@types/react": "^18.2.73",
     "@types/rss": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
