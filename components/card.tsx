@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export type CardProps = {
   title: string;
   githubLink: string;
@@ -28,7 +30,7 @@ const Card = ({ title, githubLink, deployedLink, tags }: CardProps) => {
           title={githubTitle}
           href={githubLink}
         >
-          <img width="24" height="24" src="/github.png" alt="" />
+          <Image width="24" height="24" src="/github.png" alt="" />
           <span className="text-sm font-medium text-white">Github</span>
         </a>
         <a
@@ -36,7 +38,7 @@ const Card = ({ title, githubLink, deployedLink, tags }: CardProps) => {
           title={deployedTitle}
           href={deployedLink}
         >
-          <img width="24" height="32" src="/deploy.png" alt="" />
+          <Image width="24" height="32" src="/deploy.png" alt="" />
           <span className="pl-1 text-sm font-medium text-white">Deploy</span>
         </a>
       </div>

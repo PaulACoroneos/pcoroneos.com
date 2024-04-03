@@ -1,7 +1,8 @@
+"use client";
 import * as React from "react";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import getAllPostPreviews from "getAllPostPreviews";
+import getAllPostPreviews from "../../utilities/mdx";
 
 const Leetcode = () => {
   const [typedFilter, setTypedFilter] = React.useState<string | null>(null);
