@@ -10,32 +10,6 @@ const Blog = () => {
 
   return sortedPostsInDesc?.length ? (
     <div className="divide-gray-200 divide-y">
-      <head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@pacman326" />
-        <meta name="twitter:creator" content="@pacman326" />
-        <meta name="twitter:title" content="Paul Coroneos" />
-        <meta
-          name="twitter:description"
-          content="Personal blog and portfolio for Paul Coroneos."
-        />
-        <meta
-          name="twitter:image"
-          content="https://pcoroneos.com/paulcoroneos.jpg}"
-        />
-        <meta property="og:url" content="https://pcoroneos.com" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="Paul Coroneos" />
-        <meta
-          property="og:description"
-          content="Paul Coroneos developer personal web site."
-        />
-        <meta
-          property="og:image"
-          content="https://pcoroneos.com/paulcoroneos.jpg"
-        />
-        <title>Blog – Paul Coroneos</title>
-      </head>
       <div className="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
         <h1 className="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
           Latest Blog Posts
