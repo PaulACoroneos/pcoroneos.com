@@ -6,7 +6,7 @@
 
 import { GetServerSideProps } from "next";
 import RSS from "rss";
-import getAllPostPreviews from "../getAllPostPreviews";
+import getAllPostPreviews from "../utilities/mdx";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const feed = new RSS({

@@ -1,7 +1,6 @@
 module.exports = function (src) {
   const content = [
     'import Post from "components/post"',
-    'export { getStaticProps } from "getStaticProps"',
     `${src} \n`,
     "export default (props) => <Post meta={meta} {...props} />",
   ].join("\n");
