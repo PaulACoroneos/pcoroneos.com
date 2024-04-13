@@ -50,7 +50,7 @@
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.77",
     "@types/rss": "^0.0.32",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.5.0",
     "cypress": "^13.7.3",
     "eslint": "^8.57.0",
