@@ -46,7 +46,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "14.2.2",
     "@types/jest": "^29.5.12",
-    "@types/mdx": "^2.0.12",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^20.12.4",
     "@types/react": "^18.2.77",
     "@types/rss": "^0.0.32",
