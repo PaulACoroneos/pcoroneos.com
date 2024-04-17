@@ -32,6 +32,19 @@ const data = [
     githubLink: "https://github.com/PaulACoroneos/palindrome-checker",
     tags: ["HTML", "CSS", "JavaScript"],
   },
+  {
+    title: "Calorie Counter",
+    deployedLink: "https://paulacoroneos.github.io/calorie-counter/",
+    githubLink: "https://github.com/PaulACoroneos/calorie-counter",
+    tags: ["HTML", "CSS", "JavaScript"],
+  },
+  {
+    title: "Music Player",
+    deployedLink:
+      "https://paulacoroneos.github.io/free-code-camp-music-player/",
+    githubLink: "https://github.com/PaulACoroneos/free-code-camp-music-player",
+    tags: ["HTML", "CSS", "JavaScript"],
+  },
 ];
 
 const Portfolio = () => (
