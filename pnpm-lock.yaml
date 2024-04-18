@@ -77,8 +77,8 @@ dependencies:
 
 devDependencies:
   '@next/bundle-analyzer':
-    specifier: ^14.2.1
-    version: 14.2.1
+    specifier: ^14.2.2
+    version: 14.2.2
   '@testing-library/cypress':
     specifier: ^10.0.1
     version: 10.0.1(cypress@13.7.3)
@@ -1106,8 +1106,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@next/bundle-analyzer@14.2.1:
-    resolution: {integrity: sha512-Qwy3Mu/dfnu4rs2xzCy7gKZlwzZzYtiq/rjPcK/7xq3BHSyLthkHf1NAF8NNfjVTouDwo2KchisHrmAamUNWWw==}
+  /@next/bundle-analyzer@14.2.2:
+    resolution: {integrity: sha512-Zp2xG3VTPHUquOcBaRtrr0/n7mqnjKUmprGcJXPEKGgP5rAsLymIfWKm3jIVWIw5Eb4fNOfX4v+L+qiSvs+OJw==}
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
