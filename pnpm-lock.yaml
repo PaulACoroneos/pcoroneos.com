@@ -140,8 +140,8 @@ devDependencies:
     specifier: ^4.6.2
     version: 4.6.2(eslint@8.57.0)
   eslint-plugin-tailwindcss:
-    specifier: ^3.16.0
-    version: 3.16.0(tailwindcss@3.4.3)
+    specifier: ^3.17.3
+    version: 3.17.3(tailwindcss@3.4.3)
   file-loader:
     specifier: ^6.2.0
     version: 6.2.0(webpack@5.91.0)
@@ -3718,9 +3718,9 @@ packages:
       string.prototype.matchall: 4.0.11
     dev: true
 
-  /eslint-plugin-tailwindcss@3.16.0(tailwindcss@3.4.3):
-    resolution: {integrity: sha512-OVMNBDvSc7eqZTfLVoEo900bxZUu74W5Cp/VPa2hYqKIGbfTq/UfKIX6df+xkPmD3jVW21n4VblLBLd8dHTjeQ==}
-    engines: {node: '>=12.13.0'}
+  /eslint-plugin-tailwindcss@3.17.3(tailwindcss@3.4.3):
+    resolution: {integrity: sha512-DVMVVUFQ+lPraRSuUk2I41XMnusXT6b3WaQZYlUHduULnERaqe9sNfmpRY1IyxlzmKoQxSbZ8IHRhl9ePo8PeA==}
+    engines: {node: '>=18.12.0'}
     peerDependencies:
       tailwindcss: ^3.4.0
     dependencies:
