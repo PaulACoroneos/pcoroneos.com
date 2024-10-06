@@ -21,8 +21,7 @@
     "types": [
       "cypress",
       "@testing-library/cypress",
-      "webpack-env",
-      "jest"
+      "webpack-env"
     ],
     "incremental": true,
     "plugins": [
