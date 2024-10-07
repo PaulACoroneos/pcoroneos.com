@@ -63,7 +63,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "file-loader": "^6.2.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.6",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.9",
     "prettier": "^2.7.1",
