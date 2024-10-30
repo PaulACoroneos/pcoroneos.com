@@ -1,0 +1,102 @@
+export const meta = {
+  title: "Leetcode 20. Valid Parentheses (JavaScript)",
+  description: `Solution to Leetcode 27 - Remove Element  (JavaScript)`,
+  date: "2024-10-29",
+  tags: ["leetcode", "array", "stack", "easy"],
+};
+
+Today let's take a look at [Leetcode problem 20 - Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+
+## Problem statement and analysis
+
+Let's start off by reading the description of the problem:
+
+> Given a string s containing just the characters ```'(', ')', '{', '}', '[' and ']'```, determine if the input string is valid.
+> An input string is valid if:
+> 1. Open brackets must be closed by the same type of brackets.
+> 2. Open brackets must be closed in the correct order.
+> 3. Every close bracket has a corresponding open bracket of the same type.
+
+So from this description we can infer a few things. First of all we aren't allowed to have any "leftover" brackets after matching everything. So for example single ```'(', ')', '{', '}', '[' or ']'``` should return false. Second, brackets dont necessarily need to be in "pairs" within the list to have a valid matching partner. For example:
+
+```typescript
+['{','[',']','}']
+````
+
+Is a valid sequence (returns true) because the inner two brackets match and this allows the outer two brackets to then match together. Finally bracket matching must be opposites. Or in other worlds:
+
+```typescript
+['{','}']
+```
+
+is okay but:
+
+```typescript
+['}','}']
+```
+
+is not okay (returns false).
+
+Given all this what are some ways we can determine whether all brackets in the list have a matching parter (with the right orientation)? At first you might reach for something like a brute force approach starting with the first bracket in the list and then iterating through the list until you find an opposite partner. If you do you might then move that first pointer to the next index in the list and keep going. If you reach the end of the list then its a valid parentheses string, otherwise its not.
+
+But this quickly falls apart for the following example:
+
+```typescript
+['{', '[', '(', ']', ')', '}']
+```
+
+As you can see while the outer brackets are correctly matched the second bracket in the list will incorrectly find a partner. But the order is sadly wrong. Instead what we can (and should do in this case) is use a handy ```stack``` data structure (an array works here). What we can do is simply push values into the stack as we iterate through the list. Then on each iteration we pop the array to get the last value pushed. We then do a comparison of the last popped value to the current value in the iteration to see if they are a matched pair. If they are, we move onto the next iteration. If they do not match, we push both values back into the stack and iterate to the next value. Here is a psuedo-code example (with the corner case of an empty stack covered):
+
+```typescript
+// define dictionary of matching bracket values
+
+// initialize stack to first value in list
+
+// iterate from first index value in list to end
+// check if the stack is empty. If it is push the current value
+// otherwise pop the last value from the stack and compare it to current value you are iterating over. If they match move to the next iteration.
+// If they do not match, push the previously popped value and the current value back onto the stack
+
+// After the loop is complete, return whether the stack is empty or not. An empty stack means all brackets matched and its a "valid parentheses". Otherwise if the stack contains any value at least 1 bracket has not matched.
+```
+
+We must check for the stack being empty because its possible we have cleared all matching brackets so far (but arent done iterating yet). A good example would be:
+
+```typescript
+['[',']','{','}']
+````
+
+After an iteration ( `[` and `]` brackets match) the stack is empty, and thus we need to push `{` to the stack first to then check for its partner. Here is my final implementation:
+
+```typescript
+function isValid(s: string): boolean {
+    const matchingHash = {
+        '}': '{',
+        ']': '[',
+        ')': '('
+    };
+
+    const stack = [s[0]];
+
+    for(let i = 1; i < s.length; i++) {
+        if(!stack.length) {
+            stack.push(s[i]);
+        }
+        else {
+        const valToCompare = stack.pop();
+        if(matchingHash[s[i]] !== valToCompare) {
+            stack.push(valToCompare,s[i])
+        }
+        }
+
+    }
+
+    return !stack.length;
+};
+````
+
+## Time and Space Complexity Analysis
+
+In order to validate that all brackets match in the array we must iterate through each value at least once. The stack grows worst case to be the length of the list (let's say all brackets dont match for example). Therefore time and space complexity of this solution are **O(N)**.
+
+Thank you so much as always and it's great to be back after a greater than 1 year hiatus!
