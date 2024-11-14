@@ -1,12 +1,12 @@
 export const FOOTER_LINKS = [
   { href: "https://github.com/PaulACoroneos", label: "Github" },
-  { href: "https://twitter.com/pacman326", label: "Twitter" },
   {
     href: "https://www.linkedin.com/in/paulacoroneos/",
     label: "LinkedIn",
   },
   { href: "https://meta.masto.host/@pacman326", label: "Mastodon", rel: "me" },
   { href: "https://www.twitch.tv/pacman326", label: "Twitch" },
+  { href: "https://bsky.app/profile/pacman326.bsky.social", label: "Bluesky" },
   { href: "https://www.pcoroneos.com/rss.xml", label: "RSS" },
 ];
 const Footer = () => (
