@@ -30,9 +30,12 @@ So given this criteria let's consider the following psuedocode:
 ```ts
 // define an object to hold our dictionary
 
-//Loop through each character in the first string. If it exists in our dictionary, increment the count for that key by one. If it does not, create a new key in the dictionary, and set it to 1
+// Loop through each character in the first string. If it exists in our dictionary, increment the count for that key by one.
+// If it does not, create a new key in the dictionary, and set it to 1
 
-//Now loop through each character in the second string. If the key exists and its value is greater than 0, decrement the value associated with the key. Otherwise if it doesnt exist or the entry for that key in the dictionary is zero, return false.
+// Now loop through each character in the second string. If the key exists and its value is greater than 0, 
+// decrement the value associated with the key. Otherwise if it doesnt exist or the entry for that key in the dictionary is zero, 
+// return false.
 
 // If we complete looping through the dictionary then we have an anagram. Return true.
 ```
