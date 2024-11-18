@@ -1,0 +1,87 @@
+export const meta = {
+  title: "Leetcode 242 - Valid Anagram (JavaScript)",
+  description: `My solution and explanation of Leetcode number 242 - Valid Anagram.`,
+  date: "2024-11-17",
+  tags: ["leetcode", "anagram", "hashmap"],
+};
+
+In my previous blogpost I discussed how palindromes are a great way to dip one's toes into algorithms. But an even simpler start is to work with an anagram. An anagram is a word that is formed from another using the original letters exactly once. So how would we go about determining whether one word is an anagram of another? Let's talk through how to solve [Leetcode problem 242 - Valid Anagram](https://leetcode.com/problems/valid-anagram/description/).
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+As always lets begin with a description of the problem:
+
+> Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+Let's consider a few things based on the problem description and the definition of what an anagram is:
+
+1. The strings must be the exact same length for one string to be an anagram of the other
+2. In the case of multiple copies of the same letter, each and every letter must be used.
+3. Each letter must exist in both strings.
+
+For this kind of problem I will use the concept of a hashtable or dictionary. The idea here is that we will iterate through one of the strings and create a list of each letter including the quantity of that letter thats contained in one of the strings. We will then use it as a lookup as we check character by character through the other string. __Since both strings must be the same length it does not matter which string generates the dictionary and which string is used to perform comparison__.
+
+After the dictionary is formed we then loop through each character in the second string and check whether it exists in the dictionary. If it does we decrement the count for that letter in the dictionary. Otherwise if it doesnt exist at all as a key in the dictionary, or the count is zero then we know we dont have an anagram and can early return.
+
+So given this criteria let's consider the following psuedocode:
+
+```ts
+// define an object to hold our dictionary
+
+// Loop through each character in the first string. If it exists in our dictionary, increment the count for that key by one.
+// If it does not, create a new key in the dictionary, and set it to 1
+
+// Now loop through each character in the second string. If the key exists and its value is greater than 0, 
+// decrement the value associated with the key. Otherwise if it doesnt exist or the entry for that key in the dictionary is zero, 
+// return false.
+
+// If we complete looping through the dictionary then we have an anagram. Return true.
+```
+
+## solution
+
+My Javascript solution is as follows:
+
+```ts
+function isAnagram(s: string, t: string): boolean {
+    if(s.length !== t.length) return false;
+    if(s.length === 1) return s === t;
+
+    const hashMap = {};
+
+    // create a lookup table with first string
+    for(let i =0; i < s.length; i++) {
+        if(s[i] in hashMap) {
+            hashMap[s[i]]++;
+        }
+        else {
+            hashMap[s[i]] = 1;
+        }
+    }
+
+    // now validate the lookup table against second string
+    for(let i = 0; i < t.length; i++) {
+        if(hashMap[t[i]]) {
+            hashMap[t[i]]--;
+        }
+        else {
+            return false;
+        }
+    }
+
+    return true;
+
+};
+```
+
+**Note**: I went ahead and added 2 small optimizations where we check in the case the lengths of the string differ, or if they dont differ if the length is 1. In these cases we can skip looping and directly evaluate whether they are anagrams
+
+## Complexity and Space Analysis
+
+The time complexity of this algorithm is pretty straightforward. We have two loops and in each loop worst case we must iterate through every character (in case we have a valid anagram). So assuming s.length === t.length, Our time complexity is O(N).
+
+Space wise we create a hashmap which scales to the length of the string. This is clasically O(N).
+
+Thanks as always and take care.
