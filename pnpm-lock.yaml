@@ -80,7 +80,7 @@ importers:
         version: 15.0.3
       '@testing-library/cypress':
         specifier: ^10.0.2
-        version: 10.0.2(cypress@13.16.0)
+        version: 10.0.2(cypress@13.16.1)
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
@@ -109,8 +109,8 @@ importers:
         specifier: ^4.3.4
         version: 4.3.4(vite@5.4.11(@types/node@22.10.1)(terser@5.29.2))
       cypress:
-        specifier: ^13.16.0
-        version: 13.16.0
+        specifier: ^13.16.1
+        version: 13.16.1
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -1722,8 +1722,8 @@ packages:
   csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
-  cypress@13.16.0:
-    resolution: {integrity: sha512-g6XcwqnvzXrqiBQR/5gN+QsyRmKRhls1y5E42fyOvsmU7JuY+wM6uHJWj4ZPttjabzbnRvxcik2WemR8+xT6FA==}
+  cypress@13.16.1:
+    resolution: {integrity: sha512-17FtCaz0cx7ssWYKXzGB0Vub8xHwpVPr+iPt2fHhLMDhVAPVrplD+rTQsZUsfb19LVBn5iwkEUFjQ1yVVJXsLA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -5269,11 +5269,11 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.15(ts-node@10.9.2(@types/node@22.10.1)(typescript@5.7.2))
 
-  '@testing-library/cypress@10.0.2(cypress@13.16.0)':
+  '@testing-library/cypress@10.0.2(cypress@13.16.1)':
     dependencies:
       '@babel/runtime': 7.24.0
       '@testing-library/dom': 10.1.0
-      cypress: 13.16.0
+      cypress: 13.16.1
 
   '@testing-library/dom@10.1.0':
     dependencies:
@@ -6140,7 +6140,7 @@ snapshots:
 
   csstype@3.1.2: {}
 
-  cypress@13.16.0:
+  cypress@13.16.1:
     dependencies:
       '@cypress/request': 3.0.6
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
