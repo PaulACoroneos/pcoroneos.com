@@ -60,7 +60,7 @@
     "eslint-plugin-mdx": "^3.1.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-tailwindcss": "^3.17.5",
     "file-loader": "^6.2.0",
     "husky": "^9.1.7",
