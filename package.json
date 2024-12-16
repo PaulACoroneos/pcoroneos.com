@@ -43,7 +43,7 @@
     "@next/bundle-analyzer": "^15.0.3",
     "@testing-library/cypress": "^10.0.2",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "16.0.1",
+    "@testing-library/react": "16.1.0",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
