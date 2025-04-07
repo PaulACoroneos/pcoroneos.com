@@ -30,8 +30,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       '@types/webpack-env':
-        specifier: ^1.18.5
-        version: 1.18.5
+        specifier: ^1.18.8
+        version: 1.18.8
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@15.2.4(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
@@ -1078,8 +1078,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@types/webpack-env@1.18.5':
-    resolution: {integrity: sha512-wz7kjjRRj8/Lty4B+Kr0LN6Ypc/3SymeCCGSbaXp2leH0ZVg/PriNiOwNj4bD4uphI7A8NXS4b6Gl373sfO5mA==}
+  '@types/webpack-env@1.18.8':
+    resolution: {integrity: sha512-G9eAoJRMLjcvN4I08wB5I7YofOb/kaJNd5uoCMX+LbKXTPCF+ZIHuqTnFaK9Jz1rgs035f9JUPUhNFtqgucy/A==}
 
   '@types/yauzl@2.10.0':
     resolution: {integrity: sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==}
@@ -5922,7 +5922,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@types/webpack-env@1.18.5': {}
+  '@types/webpack-env@1.18.8': {}
 
   '@types/yauzl@2.10.0':
     dependencies:
