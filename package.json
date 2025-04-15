@@ -64,7 +64,7 @@
     "eslint-plugin-tailwindcss": "^3.18.0",
     "file-loader": "^6.2.0",
     "husky": "^9.1.7",
-    "jsdom": "^26.0.0",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15.5.1",
     "prettier": "^2.7.1",
     "rss": "^1.2.2",
