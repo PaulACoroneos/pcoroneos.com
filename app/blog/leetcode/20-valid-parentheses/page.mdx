@@ -13,28 +13,29 @@ Today let's take a look at [Leetcode problem 20 - Valid Parentheses](https://lee
 
 Let's start off by reading the description of the problem:
 
-> Given a string s containing just the characters ```'(', ')', '{', '}', '[' and ']'```, determine if the input string is valid.
+> Given a string s containing just the characters `'(', ')', '{', '}', '[' and ']'`, determine if the input string is valid.
 > An input string is valid if:
+>
 > 1. Open brackets must be closed by the same type of brackets.
 > 2. Open brackets must be closed in the correct order.
 > 3. Every close bracket has a corresponding open bracket of the same type.
 
-So from this description we can infer a few things. First of all we aren't allowed to have any "leftover" brackets after matching everything. So for example single ```'(', ')', '{', '}', '[' or ']'``` should return false. Second, brackets dont necessarily need to be in "pairs" within the list to have a valid matching partner. For example:
+So from this description we can infer a few things. First of all we aren't allowed to have any "leftover" brackets after matching everything. So for example single `'(', ')', '{', '}', '[' or ']'` should return false. Second, brackets dont necessarily need to be in "pairs" within the list to have a valid matching partner. For example:
 
 ```typescript
-['{','[',']','}']
-````
+["{", "[", "]", "}"];
+```
 
 Is a valid sequence (returns true) because the inner two brackets match and this allows the outer two brackets to then match together. Finally bracket matching must be opposites. Or in other worlds:
 
 ```typescript
-['{','}']
+["{", "}"];
 ```
 
 is okay but:
 
 ```typescript
-['}','}']
+["}", "}"];
 ```
 
 is not okay (returns false).
@@ -44,10 +45,10 @@ Given all this what are some ways we can determine whether all brackets in the l
 But this quickly falls apart for the following example:
 
 ```typescript
-['{', '[', '(', ']', ')', '}']
+["{", "[", "(", "]", ")", "}"];
 ```
 
-As you can see while the outer brackets are correctly matched the second bracket in the list will incorrectly find a partner. But the order is sadly wrong. Instead what we can (and should do in this case) is use a handy ```stack``` data structure (an array works here). What we can do is simply push values into the stack as we iterate through the list. Then on each iteration we pop the array to get the last value pushed. We then do a comparison of the last popped value to the current value in the iteration to see if they are a matched pair. If they are, we move onto the next iteration. If they do not match, we push both values back into the stack and iterate to the next value. Here is a psuedo-code example (with the corner case of an empty stack covered):
+As you can see while the outer brackets are correctly matched the second bracket in the list will incorrectly find a partner. But the order is sadly wrong. Instead what we can (and should do in this case) is use a handy `stack` data structure (an array works here). What we can do is simply push values into the stack as we iterate through the list. Then on each iteration we pop the array to get the last value pushed. We then do a comparison of the last popped value to the current value in the iteration to see if they are a matched pair. If they are, we move onto the next iteration. If they do not match, we push both values back into the stack and iterate to the next value. Here is a psuedo-code example (with the corner case of an empty stack covered):
 
 ```typescript
 // define dictionary of matching bracket values
@@ -65,37 +66,35 @@ As you can see while the outer brackets are correctly matched the second bracket
 We must check for the stack being empty because its possible we have cleared all matching brackets so far (but arent done iterating yet). A good example would be:
 
 ```typescript
-['[',']','{','}']
-````
+["[", "]", "{", "}"];
+```
 
 After an iteration ( `[` and `]` brackets match) the stack is empty, and thus we need to push `{` to the stack first to then check for its partner. Here is my final implementation:
 
 ```typescript
 function isValid(s: string): boolean {
-    const matchingHash = {
-        '}': '{',
-        ']': '[',
-        ')': '('
-    };
+  const matchingHash = {
+    "}": "{",
+    "]": "[",
+    ")": "(",
+  };
 
-    const stack = [s[0]];
+  const stack = [s[0]];
 
-    for(let i = 1; i < s.length; i++) {
-        if(!stack.length) {
-            stack.push(s[i]);
-        }
-        else {
-        const valToCompare = stack.pop();
-        if(matchingHash[s[i]] !== valToCompare) {
-            stack.push(valToCompare,s[i])
-        }
-        }
-
+  for (let i = 1; i < s.length; i++) {
+    if (!stack.length) {
+      stack.push(s[i]);
+    } else {
+      const valToCompare = stack.pop();
+      if (matchingHash[s[i]] !== valToCompare) {
+        stack.push(valToCompare, s[i]);
+      }
     }
+  }
 
-    return !stack.length;
-};
-````
+  return !stack.length;
+}
+```
 
 ## Time and Space Complexity Analysis
 

@@ -13,18 +13,17 @@ Palindromes are among some the most common "entry level" algorithm problems. Spe
 
 As always lets begin with a description of the problem:
 
->A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and >removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric ?>characters include letters and numbers.
+> A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and >removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric ?>characters include letters and numbers.
 
->Given a string s, return true if it is a palindrome, or false otherwise.
+> Given a string s, return true if it is a palindrome, or false otherwise.
 
-Let's break down a few things before considering a psuedo code solution. First off, the prompt says we should only consider alpha numeric characters when making comparisons to determine whether the given string is in fact a palindrome. This significantly reduces the scope of which we have to consider matching characters which is great! We also just need to return a true or false as to whether the string meets the criteria. This is also great because this means we can take advantage of some optimizations such as breaking our computation as soon as we detech that a string can in fact never be a palindrome. 
+Let's break down a few things before considering a psuedo code solution. First off, the prompt says we should only consider alpha numeric characters when making comparisons to determine whether the given string is in fact a palindrome. This significantly reduces the scope of which we have to consider matching characters which is great! We also just need to return a true or false as to whether the string meets the criteria. This is also great because this means we can take advantage of some optimizations such as breaking our computation as soon as we detech that a string can in fact never be a palindrome.
 
 If we were inspecting a string to determine whether it was a palindrome we would follow some simple steps. First at minimum we would start by looking at the first and last character of the word and checking if they match. If the letter was not alphanumeric we would simply skip it and move to the adjacent letter (right in the case of the start of string, and left in the case of the end of the string). If the letters match we would logically move inward to the next pair of characters. If the letters do not match we would know immediately the string is in fact not a palindrome. If we run out of pairs to match then we can be confident the word is in fact a palindrome.
 
 A rough psuedocode implementation of this can be represented as follows
 
 ```ts
-
 // define two variables. One starts at the index of the first char in the string. The other at the last char in the string minus 1 (its going to be the s.length-1 because Javascript indexes at 0)
 
 // Now loop until we no longer have pairs to compare (the first pointer becomes larger that the value of the second variable representing the end comparison in the string)
@@ -44,7 +43,7 @@ A rough psuedocode implementation of this can be represented as follows
 // if we exit the loop all char pairs match. This is a palindrome so we can return true.
 ```
 
-One thing youll notice is that I havent filtered or removed anything such as spaces or non alphanumeric characters. If you carefully read the prompt again youll see that its not actually a requirement because all the algorithm wants us to return is **whether the string is a palindrome or not**. So we can actually be clever here and simply __move the pointer__ to skip comparison of invalid values. This reduces runtime and potentially memory usage of our algorithm because we have to do less work and also we dont need to store a modified copy of the string since strings are immutable in Javscript.
+One thing youll notice is that I havent filtered or removed anything such as spaces or non alphanumeric characters. If you carefully read the prompt again youll see that its not actually a requirement because all the algorithm wants us to return is **whether the string is a palindrome or not**. So we can actually be clever here and simply **move the pointer** to skip comparison of invalid values. This reduces runtime and potentially memory usage of our algorithm because we have to do less work and also we dont need to store a modified copy of the string since strings are immutable in Javscript.
 
 ## Implementation
 
@@ -52,34 +51,31 @@ My implementation is as follows:
 
 ```ts
 function isPalindrome(s: string): boolean {
-    if (s.length === 1) return true;
-    const alphanumericRegex = /^[A-Z0-9]$/i;
-    let ptra = 0;
-    let ptrb = s.length-1;
+  if (s.length === 1) return true;
+  const alphanumericRegex = /^[A-Z0-9]$/i;
+  let ptra = 0;
+  let ptrb = s.length - 1;
 
-    while(ptra < ptrb) {
-        if(!alphanumericRegex.test(s[ptra])) {
-            ptra++;
-        }
-        else if (!alphanumericRegex.test(s[ptrb])) {
-            ptrb--;
-        }
-        else {
-            if(s[ptra].toLowerCase() === s[ptrb].toLowerCase()) {
-                ptra++;
-                ptrb--;
-            }
-            else {
-                return false;
-            }
-        }
+  while (ptra < ptrb) {
+    if (!alphanumericRegex.test(s[ptra])) {
+      ptra++;
+    } else if (!alphanumericRegex.test(s[ptrb])) {
+      ptrb--;
+    } else {
+      if (s[ptra].toLowerCase() === s[ptrb].toLowerCase()) {
+        ptra++;
+        ptrb--;
+      } else {
+        return false;
+      }
     }
+  }
 
-    return true;
+  return true;
 }
 ```
 
-I start by making a small optimization case since a string of length 1 is valid. All strings of length 1 per the criteria are palindromes. So we can safely return true in this case. I then need a method to determine whether a character is alphanumeric. What I have done here is defined a regex that matches against unicode letters a-z and number 0-9 __case insensitive__. I could have also simply added "az" to the regex but this is a bit more concise.
+I start by making a small optimization case since a string of length 1 is valid. All strings of length 1 per the criteria are palindromes. So we can safely return true in this case. I then need a method to determine whether a character is alphanumeric. What I have done here is defined a regex that matches against unicode letters a-z and number 0-9 **case insensitive**. I could have also simply added "az" to the regex but this is a bit more concise.
 
 I then define two pointer variables, one at the starting index of any string (0 in Javscript), then a second pointer at the final index of the string (again s.length-1 in Javscript). I now loop until i ensure my first pointer has not "crossed" my second pointer signifying i have looped through all character pairs.
 

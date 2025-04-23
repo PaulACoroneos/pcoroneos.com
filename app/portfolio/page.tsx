@@ -45,6 +45,11 @@ const data = [
     githubLink: "https://github.com/PaulACoroneos/free-code-camp-music-player",
     tags: ["HTML", "CSS", "JavaScript"],
   },
+  {
+    title: "Bookbot",
+    githubLink: "https://github.com/PaulACoroneos/Bookbot",
+    tags: ["python"],
+  },
 ];
 
 const Portfolio = () => (
