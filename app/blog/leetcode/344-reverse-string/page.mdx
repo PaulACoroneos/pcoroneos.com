@@ -1,0 +1,71 @@
+export const meta = {
+  title: "Leetcode 344 - Reverse String",
+  description: `Leetcode 344 - Reverse string using Typescript.`,
+  date: "2025-05-03",
+  tags: ["leetcode", "two pointer", "string", "typescript"],
+};
+
+Hello and welcome to another algorithm problem review! Today we will talk about [a simple algorithm on how to reverse a string in Leetcode 206 - Reverse Linked List](https://leetcode.com/problems/reverse-string/description/)
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+As always let's start with the problem statement:
+
+> Write a function that reverses a string. The input string is given as an array of characters s.
+> You must do this by modifying the input array in-place with O(1) extra memory.
+
+So I think let's set a few ground rules as we analyze this problem:
+
+1. Yes we could use the built-in `reverse()` method to reverse the string. But that would make for quite the boring blog post. 😊. So let's do it ourselves
+2. We are asked to do this in place. This means we cannot create a new array to store the reversed string. Temporary variables are allowed. But the spirit of these types of problems is to generally not create new variables that scale with the input size.
+
+When we generally see an ask to reverse strings or arrays, we can thinking of a few approaches:
+
+1. **Use a standard sorting algorithm**. The naive approach to this problem would be to use a sorting algorithm like quicksort or mergesort to sort the array in reverse order. As you may have found in your algorithm journey, the best case time complexity of these algorithms is O(n log n). While this works it is not the most efficient solution.
+
+2. **Use a two pointer approach**. This is the one of the most common (and accepted) appraoches for problems where you perform "in place" operations on arrays that involve "swapping" elements. The idea is to use two pointers, one at the start of the array and one at the end of the array. We then swap the elements at these two pointers and move the pointers towards each other until they meet in the middle. Once we have done so, we have completed work on the array.
+
+For the sake of this problem, let's use the two pointer approach.
+
+### Solution
+
+We were able to give a rough "psuedocode" of the solution above. Let's now write the code to implement this.
+
+```typescript
+/**
+ Do not return anything, modify s in-place instead.
+ */
+function reverseString(s: string[]): void {
+  if (s.length == 1) return;
+
+  let ptra = 0;
+  let ptrb = s.length - 1;
+
+  while (ptra < ptrb) {
+    [s[ptra], s[ptrb]] = [s[ptrb], s[ptra]];
+    ptra++;
+    ptrb--;
+  }
+}
+```
+
+Let's break this down a bit:
+
+1. We first check if the length of the string is 1. If it is, we return immediately. This is a bit of a micro optimization and may be premature. But if for example we expect a lot of strings of length 1, this will save us a few iterations. It's always good to clarify what types of inputs we expect to receive to tailor the solution to the problem.
+2. Otherwise we define the two pointers. One at the start of the array and one at the end of the array.
+3. We then enter a while loop that continues until the two pointers meet in the middle. Inside the loop we swap the elements at the two pointers and move the pointers towards each other. This is done using the destructuring assignment syntax in JavaScript. This is a nice syntactic sugar that allows us to swap the elements without needing a temporary variable. The same could be done using a temporary variable if you prefer that syntax.
+
+```ts
+const temp = s[ptra];
+const temp2 = s[ptrb];
+s[ptra] = temp2;
+s[ptrb] = temp;
+```
+
+### Complexity analysis
+
+So what is our time and space complexity? The problem asks that we do the work in place. We defined 2 variables to store the pointer indices. We also used two temporary variables to swap the elements. But since these dont "scale" with the input size, we can say that **our space complexity is O(1)**. For time complexity, we are iterating through the array once. So our **time complexity is O(n)**. This is much better than the O(n log n) time complexity of the sorting algorithm! Is this the best time complexity we can achieve? As always with any types of sorting problems, we must visit each element at least once. So O(n) is the best time complexity we can achieve.
+
+Thank you and best of luck with your coding journey!
