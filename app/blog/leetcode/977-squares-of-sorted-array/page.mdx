@@ -1,0 +1,63 @@
+export const meta = {
+  title: "Leetcode 977 - Squared of a Sorted Array",
+  description: `Leetcode 977 - Squares of a sorted array using Typescript.`,
+  date: "2025-05-03",
+  tags: ["leetcode", "two pointer", "array", "typescript"],
+};
+
+Hello! Let's continue our trend of working on two-pointer algorithms. Today we will talk about [how to return an array of sorted squares in Leetcode 977 - Squares of a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/description/)
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+Let's start with the problem statement:
+
+> Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+So we have quite a bit going on here. Let's break this down a bit:
+
+1. The array is sorted in non-decreasing order. This is important for later so let's keep that in mind
+2. We don't need to worry about doing operating "in place". We can return a new array.
+
+So what can we do here? As we've discussed in previous problems with arrays of values and re-ordering, a **two pointer** approach is a good candidate for this problem. But how exactly can we use two pointers here effectively? Let's take a quick step back and think about how the data inputs are structured. Let's take for example the following array:
+
+```ts
+[-4, -1, 0, 3, 10];
+```
+
+What do we see about this array that may help us in this problem (besides the fact it's in non-decreasing order)? What we see is that if we square each value, the resultant squared values start large on the ends and get smaller towards the middle. So if we were trying to find the largest number in the array using two pointers, what values would we start with? The first and last values of the array! So in this example (-4^2 = 16) is less than (10^2 = 100). So we want to put 100 in our result array **at the end**. In other words, we are going to build the result array **backwards** by working from the outside in on the original array.
+
+The final piece of our solution is what to do once we have "consumed" a value in the array? The answer is simply to move the pointer 1 value up (in case of left pointer) or 1 value down (in case of right pointer). But this still isnt quite enough. How exactly do we calculate where we should place the value in the result array? We could certainly do some math each iteration based on the original length of the starting input and the left and right pointers. But thats a lot of calculation.
+
+What do we already know? Well, we are going to return an array thats the same length as the original array. This implies no matter what, **we need to visit every value in the original array exactly once**. Therefore we can just wrap our logic in a simple for loop where the index represents the place in the new array we should add the value. This is in contrast to other two pointer problems where we may simply loop while the pointers either are not equal or cross each other.
+
+Finally when we are done, we can simply return the result array.
+
+### Solution
+
+```ts
+function sortedSquares(nums: number[]): number[] {
+  let ptra = 0;
+  let ptrb = nums.length - 1;
+  const squaredNums = new Array(nums.length);
+
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (Math.abs(nums[ptrb]) > Math.abs(nums[ptra])) {
+      squaredNums[i] = nums[ptrb] ** 2;
+      ptrb--;
+    } else {
+      squaredNums[i] = nums[ptra] ** 2;
+      ptra++;
+    }
+  }
+
+  return squaredNums;
+}
+```
+
+### Complexity analysis
+
+If we look at the algorithm above there is a single for loop that iterates through the array once. Therefore the time complexity is O(n). But that seems counterintuitive because after all we are returning a sorted array. As we know, the best case time complexity of sorting algorithms is O(n log n). So how can we say this is O(n)? The answer is that we arent having to actually do a formal sort as per the problem: **the array is sorted in non-decreasing order**. Even though we square the values in the array, we are placing them from largest to smallest in the result array because the order is already guaranteed for us. Or in other words, we know there won't be a large value that whats we've seen on the edges of the input array as we iterate inwards. From a space complexity perspective, we are using O(n) space to store the result array.
+
+Thanks and best of luck on your coding journey!
