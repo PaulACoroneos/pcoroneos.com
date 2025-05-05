@@ -1,0 +1,66 @@
+export const meta = {
+  title: "Leetcode 643. Maximum Average Subarray I (Typescript)",
+  description: `Solution to Leetcode 643 - Maximum Average Subarray I (Typescript)`,
+  date: "2025-05-05",
+  tags: ["leetcode", "algorithms", "typescript", "sliding window"],
+};
+
+Today we will be going over [Leetcode 643 - Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/description/). This will be one of many sliding window problems we will be going over the next few weeks (and further on because, hey, there are a lot of them).
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+But let's not get too far ahead of ourselves. Let's start with the problem statement:
+
+> You are given an integer array nums consisting of n elements, and an integer k.
+> Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+
+So let's break this down a bit. We are given an array `nums` , and some length `k`. We are then asked to figure out what the maximum average of a continuous subbarray of length `k` is. Whenever we see words in a problem such as "maximum", "minimum", "longest", "shortest" and paired with a word like "subarray" or "substring" we should consider sliding window as a potential solution. The basic concept of a sliding window windows to calculate values for a constrained subset of data defined by some lower and upper bound. As we work through the data set this "window", defined by the lower and upper bounds "slides" through the data set. Now why would we want to do this?
+
+### Why Sliding Window?
+
+Let's take the naive approach to this problem. We could simply iterate through the array and calculate every single possible average of every subarray of length `k`. If your time complexity alarm is going off, you are absolutely correct! The time complexity of such an approach would be O(nums.length \* k) which is the dreaded O(n^2) time complexity. In general we prefer to do O(n log n) or better. So going back to our sliding window approach how does this help time complexity?
+
+The advantage of the sliding windopw approach is that we can calculate the average of the first `k` elements in O(k) time (worst case the length of nums). After this point we are going to "slide" through the remainder of the values of the array once. So this will be some amount of work that is less than the total length of the array. Since we are now doing 2 partial loops through the array, but no longer nested loops, we can now do this in O(n) time. That's a pretty massive improvement over O(n^2) time complexity. The key here of course is that we are **looking at continous data**. And thus we are able to constrain our search. Confused? That's okay let's now focus on this problem (and don't worry, we will be doing a lot more sliding window problems in the future).
+
+### Calculating the max average
+
+Okay with a high level explanation of the sliding window approach out of the way, how can we use sliding window within the constraints of this problem? First we need to calculate the sum of the first `k` elements. This is going to be our initial sum. The reason we need to do this is to create our initial window in which to compare to all future windows. We will store this as our initial maximum sum. Now we need to iterate through the remaining windows left in our array. In this case we want to start at index `k` and go to the end of the array. For each iteration we will do the following:
+
+1. Update our working sum to subtract the first element of the previous window and add the next element in the array. When we slide our window "1" index to the right, we are removing the first element of the previous window and adding the next element in the array.
+
+2. Take the maximum of the current working sum and the previous maximum sum. If the current working sum is greater than the maximum sum _so far_ we will update the maximum sum to be the current working sum.
+
+Now you might be a bit confused. The replacement of the maximum sum with the current working sum probably makes sense. After all, if the new window has a larger sum we should keep that. But how do we know that there won't be an even larger sum later on from a future window? The answer is that we wont know whether theres a larger sum until we iterate through **ALL** possible windows. And once we have found a larger window, all previous windows no longer matter because we are only interested **in the largest maximum window of length k**.
+
+3. Finally we need to return the maximum sum divided by `k` to get the average. You may of course be wondering why I didn't compare averages previously. There is no reason to directly compare averages because the averaging factor `k` is constant. Therefore it will play no role in the comparison of the maximum sum. Or said more plainly, the larger the sum the larger the average.
+
+### Solution
+
+```typescript
+function findMaxAverage(nums: number[], k: number): number {
+  let sum = 0;
+
+  //lets build initial sum
+  for (let i = 0; i < k; i++) {
+    sum += nums[i];
+  }
+
+  let maxSum = sum;
+
+  //now lets do sliding windows to see whether theres a larger average
+  for (let i = k; i < nums.length; i++) {
+    sum = sum + nums[i] - nums[i - k];
+    maxSum = Math.max(maxSum, sum);
+  }
+
+  return maxSum / k;
+}
+```
+
+## Time and Space Complexity Analysis
+
+We kind of already have given this information away. The time complexity of this algorithm is O(n) because we are iterating through the array once in the worst case (no nested loops). The space complexity is O(1) because we are just directly storing values in variables that do not scale with the input size.
+
+Thanks as always and best of luck on your coding journey!
