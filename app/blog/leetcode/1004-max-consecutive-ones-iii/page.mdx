@@ -1,0 +1,74 @@
+export const meta = {
+  title: "Leetcode 1004. Max Consecutive Ones III (Typescript)",
+  description: `Solution to Leetcode 1004 - Maximum Consecutive Ones III (Typescript)`,
+  date: "2025-05-06",
+  tags: ["leetcode", "algorithms", "typescript", "sliding window"],
+};
+
+Today we will be going over [Leetcode 643 - Maximum Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/description/). Yet again we will be leveraging the sliding window approach for this problem.
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+Let's take a look at the problem statement:
+
+> Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+
+So basically what we are looking to do is return provide the maximum length (as a number) of a subarray thats a combination of 1's and some maximum number of 0's k. When we see the phrase "maximum length of a subarray" we should strong consider using the sliding window approach. How can we accomplish sliding window on this problem given the constraint we are allowed up to `k` 0's? At first you may think we need to take an approach similar to other sliding window problems where we must calculate local versus maximum value so far. We might do something like start from some point `left` and keep moving `right`. We could then count 1's and 0's until we exceed our allotted 0's count. Then we might increment `left`, reset our "allowed zeroes" counter, set right to the position of left and start over. But this is actually not a very efficient approach.
+
+Instead, lets think from what is called a greedy approach (this is actually an incredibly common approach in both algorithms and competitive programming). That is to say we instead will operate on the following prinicples:
+
+1. We will always move the "right" pointer (which represents how far along the array we have traversed) right by one. This is because we want to maximize the length of the longest subarray (or at least get additional information) every iteration for maximal time efficiency.
+2. We will then take a look whether we have exceeded our zero limit. If we have, the **most efficient move to make is now to move the left pointer to the right until we are back within our zero limit**. Or in other words, we assume up until this point we've already found the largest possible subarray. So now we should keep shifting the starting point of the largest possible subarray to the right until we are able to claw back at least one zero for our overall counter.
+3. When right exceeds our array length the maximum subarray is simple the difference between the right and left pointers.
+
+Now you may be quite confused (and honestly even I was when I started to work on sliding window problems). But let me give another idea that helped me understand this problem. Let's say we have already iterated through 7 elements in a 10 element array. Maybe something like:
+
+```typescript
+[1, 0, 0, 1, 1, 1, 0, 1, 1, 0];
+```
+
+Where `k` is 2. The maximum subarray up to this point is now 6 (`[1,0,0,1,1,1]). Let's now say we move our left pointer twice and throw away the previous left values. We now have:
+
+```typescript
+[0, 1, 1, 1, 0, 1, 1, 0];
+```
+
+For arguments sake lets say since we threw away 1 zero, `k` is now 1. Let's also carry over our maximum subarray length of 6. What have we done? We've now created a new sub problem from the subarray! We have an array and some maximum number of 0's we can flip (in this case we will always have 1 zero left to flip). And in reality what we are now doing is trying to see from this point "does what is left allow me to increase the number that i've found so far for the maximum subarray length"? Or in other words, by moving the left pointer to the right, can the right pointer go further to create that longer subarray? If that didn't help I apologize haha. But in a lot of algorithm problems the goal is to create subproblems that are easier to solve. We will see this in concepts such as recursion and dynamic programming in the future.
+
+With all that being said, let's take a look at one possible solution to this problem.
+
+## Solution
+
+```typescript
+function longestOnes(nums: number[], k: number): number {
+  let left = 0;
+  let right = 0;
+
+  while (right < nums.length) {
+    if (nums[right] === 0) {
+      k--;
+    }
+    //did we violate our allowed zeroes?
+    if (k < 0) {
+      //if left was pointing to a zero get one back
+      if (nums[left] === 0) {
+        k++;
+      }
+      left++;
+    }
+    right++;
+  }
+
+  return right - left;
+}
+```
+
+Our outer while loop will run until we reach the end of the array (this can just be a for loop as well). We first check whether we are pointing to a zero in the nums array with the right pointer. If we are, we decrement our "allowed zeroes" counter. Now we need to check whether we have violated our allowed zeroes. If we have, we need to move our left pointer to the right and check to see whether we have clawed back a zero yet. If we have, great we can increment our allowed zeroes counter. If we haven't, the next loop iteration will check again (and move the left pointer again). Finally we increment our right pointer. Once we reach the end of the array we return the difference between the right and left pointers as this is our maximum subarray length.
+
+## Time and Space Complexity Analysis
+
+As with most sliding window problems, the time complexity of this solution is O(n). This is because the right pointer will iterate once for every element in the array. The left pointer will also iterate once for every element in the array. So we can say that the time complexity is O(n + n) = O(n) (remember we drop constants!). The space complexity is O(1) as we are not using any additional data structures to store information. We are only using a few variables to keep track of our pointers and allowed zeroes.
+
+Thanks and best of luck with your coding journey!
