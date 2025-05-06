@@ -50,7 +50,7 @@
     "@types/rss": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "cypress": "^14.3.2",
     "eslint": "^8.57.0",
     "eslint-config-next": "^15.3.1",
