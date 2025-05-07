@@ -1,0 +1,57 @@
+export const meta = {
+  title:
+    "Leetcode 1413. Minimum Value to Get Positive Step by Step Sum (Typescript)",
+  description: `Solution to Leetcode 1413 - Minimum Value to Get Positive Step by Step Sum (Typescript)`,
+  date: "2025-05-07",
+  tags: ["leetcode", "algorithms", "typescript", "prefix sum"],
+};
+
+Today we will be going over [Leetcode 1413 - Minimum Value to Get Positive Step by Step Sum](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/description/). In a previous blogpost [we discussed the concept of prefix sums.](https://www.pcoroneos.com/blog/leetcode/1480-running-sum-of-1d-array) Today we are going to have a chance to implement this concept in a real problem!
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+But before we get too far ahead of ourselves let's take a look at the problem statement:
+
+> Given an array of integers nums, you start with an initial positive value startValue.
+> In each iteration, you calculate the step by step sum of startValue plus elements in nums (from left to right).
+> Return the minimum positive value of startValue such that the step by step sum is never less than 1.
+
+So initially this might be quite confusing. What do they mean "whats the minimum positive startValue such that the step by step sum is never less than 1"? Well let's break this down and look at an example.
+
+Let's say we have an array like:
+
+```typescript
+[-3, 2, -3, 4, 2];
+```
+
+For the first index we have **_-3_**. So what value added to -3 gets us a _minimum positive value of -1_?. Well that would be **_4_**. So this means at minimum our start value must be no less than 4. Now we move to index 1. Our sum so far (4-3) is 1. So at index 1 in the array we add 1 +2 = 3. We are above 1 great!. Now we move to index 2. We take 3 -3 = 0. This is a problem because now we are below 1. Therefore we need to add 1 to our start value ( 4 -> 5). So now after adding 1 to 3-3+1 we are back to 1 and we can move on to index 3. Since the remaining values in the list are all positive we know our final answer is 5.
+
+The technique we used here is called prefix sums. We are iterating through the array 1 index at a time and keeping track of the sum. If at any point the sum is less than 1 we need to add 1 to our start value. By taking this approach we at most only need to iterate through the data once which is a big improvement over the naive approach of iterating through the data multiple times.
+
+## Solution
+
+```typescript
+function minStartValue(nums: number[]): number {
+  let minVal = nums[0] < 1 ? 1 - nums[0] : 1;
+
+  for (let i = 1; i < nums.length; i++) {
+    nums[i] += nums[i - 1];
+    if (nums[i] + minVal < 1) {
+      minVal = 1 - nums[i];
+    }
+  }
+  return minVal;
+}
+```
+
+The first step in our solution is to find the initial minimum value. If the initial value at index 0 is less than one we need to calculate the minimum number such that the difference of our calculated minimum value and the first value is 1. Or in other words we need to use a minimum value when added to the first index results in 1. Otherwise if the value is positive (and at least 1) we can just set our minimum value to 1.
+
+Then we iterate through the array starting at index 1 since we have already handled index 0. We calculate the latested prefix sum by adding the current index value to the previous index value. We then check if the prefix sum plus our minimum value is less than 1. If we have dipped below 1 then we know our current minimum value is not sufficient. So we need to recalculate our minimum value by taking the difference between 1 and the current prefix sum similar to line of one out solution. Finally we return our minimum value after looping through the array.
+
+## Time and Space Complexity Analysis
+
+As with most prefix sum problems we have a time complexity of **_O(n)_**. This is because we are iterating through the array once and doing constant time operations. The space complexity is **_O(1)_** since we are not using any additional data structures to store our results that scale with the size of our input data (the list of nums). We are only using one additional variable to track the minimum value.
+
+Thank you as always and best of luck on your coding journey!
