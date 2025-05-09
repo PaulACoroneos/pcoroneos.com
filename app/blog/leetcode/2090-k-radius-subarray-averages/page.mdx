@@ -1,0 +1,77 @@
+export const meta = {
+  title: "Leetcode 2090. K Radius Subarray Averages (Typescript)",
+  description: `Solution to Leetcode 2090 - K Radius Subarray Averages (Typescript)`,
+  date: "2025-05-09",
+  tags: ["leetcode", "algorithms", "typescript", "prefix sum"],
+};
+
+Today we will be going over [Leetcode 2090 - K Radius Subarray Averages](https://leetcode.com/problems/k-radius-subarray-averages/description/). This is a slightly more advanced problem that requires the usage of the prefix sum technique.
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+As always, let's take a look at the problem statement:
+
+> You are given a 0-indexed array nums of n integers, and an integer k. The k-radius average for a subarray of nums centered at some index i with the radius k is the average of all elements in nums between the indices i - k and i + k (inclusive). If there are less than k elements before or after the index i, then the k-radius average is -1. Build and return an array avgs of length n where avgs[i] is the k-radius average for the subarray centered at index i. The average of x elements is the sum of the x elements divided by x, using integer division. The integer division truncates toward zero, which means losing its fractional part.
+
+Let's break this down a bit. We are given an array of integers and an integer k. We then are asked per indice to calculate the average of a radius **k** around the indice (inclusive). If there are not enough elements in the array to calculate the average we should return -1. The main difference here between previous prefix sum problems we have solved is that we have introduced boundaries. The boundary condition in this case is that for an average to be calculated it must have minimum of **k** elements on either side of the current index. So we will have to modify how we consume our prefix sum.
+
+There are a few ways to approach this. I decided to start by defining 2 base cases.
+
+1. If **k** is 0, then we can just return the array as is. This is because the average of a single number is itself.
+2. If the length of the array is less than **2k + 1** then we cannot calculate any averages. In other words if the array size cannot have at least **k** elements on either side of the current index then we should return an array of -1's.
+
+With this out of the way I followed the standard approach for calculating a prefix sum. The prefix sum array is initialized to the first element of the original array. Then we loop through the rest of the array and add each element to the previous prefix sum. This gives us an array that contains the cumulative sum of all elements up to that index.
+
+Now the unique part of this problem comes into play. Which elements do we need to loop through the calculate our resultant average array? A hint is that we don't necessarily need to loop through the entire array. Let's start by initializing a new array **averages** that will have every value set to -1. As you may recall this is effectively the default value for our resultant array values. Now what are the conditions to calculate an average? We must have at least **k** elements on either side of the current index. So this means **any** value before index k in the array cannot calculate an average. This means we can start our loop at index **k**. The same holds true for the end of the array. We cannot calculate an average for any index greater than **nums.length - k - 1**. Why this equation? Well we know the final index in an array is **nums.length - 1** because arrays are 0 indexed in Typescript. The after this we know we need to offset by **k** elements as we wont have enough values to the "right" to calculate the average for the final few indices. So we can loop from **k** to **nums.length - k - 1**. (This is probably the trickiest part of this problem in my opinion).
+
+Now how about calculating the sum of all elements **2k+1**? Well, we start by setting our local sum for the index to the prefix sum at index **i + k**. This is because we need the cumulative sum of all elements up to index **i + k**. Now as you recall from other prefix sum problems, [say this one we recently did on leetcode 1413 minimum value to get positive step by step sum](https://www.pcoroneos.com/blog/leetcode/1413-minimum-value-to-get-positive-step-by-step-sum/), we then should subtract the prefix sum of the elements summed up for the index **k** less than the current index minus 1 (because we want to be inclusive of the k values to the left of the current index).
+
+Now you may immediately have a question. For the first iteration if we take this approach would we fall out of bounds? Say we have
+
+```typescript
+[1, 2, 3, 4, 5];
+
+k = 2;
+```
+
+The sum of all elements up to the upper radius k around index 2 is 2+2 = 4. Or in other words we take the value of **prefixSum[4]** which is no problem. However the offset array becomes 2-2-1 = -1. Obviously this is not a valid array index! Now one approach we could take here is to instead calculate a 1-index prefix sum. This would mean offsetting our prefix sum by an "added" 0 at the start of the array. By doing so on the first calculation we no longer fall out of bounds. But I find this to be a bit confusing personally so instead what I pragmatically thought
+
+> The first index i will always have elements k to the left of it. So there is no need to subtract an offset because inherently the offset is 0 because there are no remaining elements to the left.
+
+So to guard against the initial condition we simply can add an if statement to only subtract the offset if we are past the "first" calculated average. Once the average is complete we do integer division by **2k + 1** to get the average. In Typscript we can simply use **Math.floor()** to do this since division returns a float. Finally we store this value in the array. Once we have completed the loop we return the averages array.
+
+## Solution
+
+```typescript
+function getAverages(nums: number[], k: number): number[] {
+  //base case. if k is 0, then return as is
+  if (k === 0) return nums;
+  const averages = Array(nums.length).fill(-1);
+  //base case, we dont have enough nums for even 1 radius
+  if (nums.length < 2 * k + 1) return averages;
+
+  const prefixSum = [nums[0]];
+  // calculate prefix sum
+  for (let i = 1; i < nums.length; i++) {
+    prefixSum[i] = nums[i] + prefixSum[i - 1];
+  }
+
+  for (let i = k; i <= nums.length - k - 1; i++) {
+    let sum = prefixSum[i + k];
+    if (i > k) {
+      sum -= prefixSum[i - k - 1];
+    }
+    averages[i] = Math.floor(sum / (2 * k + 1));
+  }
+
+  return averages;
+}
+```
+
+## Time and Space Complexity Analysis
+
+The time and space complexity for this solution with be **_O(n)_**. This is because we are iterating through the array at least once and we store the values in a new array that always scales with the size of the data.
+
+Thank you and best of luck on your coding journey!
