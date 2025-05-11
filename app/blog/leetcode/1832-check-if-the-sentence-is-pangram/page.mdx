@@ -15,11 +15,11 @@ With that light introduction done let's take a look at the [problem statement fo
 
 > A pangram is a sentence where every letter of the English alphabet appears at least once. Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
 
-So this is a fairly straightforward problem. We are given a string of characters. We want to know whether the string contains __at least__ one copy of all 26 letters of the English alphabet. Even nicer the input is guaranteed to only contain lowercase letters. So we don't have to worry about any other characters or upper case letters meaning we can simplify of solution significantly. When we see this as we mentioned in the introduction we should think about using a hash table. The reason for this is that we can iterate through the string and create a dictionary of all the letters we have seen. Then we can check if the length of the dictionary is 26. If it is then we know we have seen all letters in the alphabet. If not, then we know we are missing at least one letter. 
+So this is a fairly straightforward problem. We are given a string of characters. We want to know whether the string contains **at least** one copy of all 26 letters of the English alphabet. Even nicer the input is guaranteed to only contain lowercase letters. So we don't have to worry about any other characters or upper case letters meaning we can simplify of solution significantly. When we see this as we mentioned in the introduction we should think about using a hash table. The reason for this is that we can iterate through the string and create a dictionary of all the letters we have seen. Then we can check if the length of the dictionary is 26. If it is then we know we have seen all letters in the alphabet. If not, then we know we are missing at least one letter.
 
-Therefore our solution should be to 
+Therefore our solution should be to
 
-1. Create a hash table to store all the letters we have seen in the string *at least once*.
+1. Create a hash table to store all the letters we have seen in the string _at least once_.
 2. Iterate through the string and add each letter to the hash table.
 3. Check if the length of the hash table is 26. If it is, return true. If not, return false.
 
@@ -29,27 +29,28 @@ A somewhat simple solution would be to use a Javascript object. Such as solution
 
 ```typescript
 function checkIfPangram(sentence: string): boolean {
-    const seen: Record<string, boolean> = {};
+  const seen: Record<string, boolean> = {};
 
-    for (const char of sentence) {
-        seen[char] = true;
-    }
+  for (const char of sentence) {
+    seen[char] = true;
+  }
 
-    return Object.keys(seen).length === 26;
+  return Object.keys(seen).length === 26;
 }
 ```
-But given we only care whether each letter appears once is there a better data structure we can use? Yes! A Javscript __Set__ would be perfect here. Recall that a set is a data structure that only allows unique values. So if we add a letter to the set and it already exists, it will not be added again. This means we can simply check the size of the set at the end to see if we have seen all 26 letters. A very simple solution would be:
+
+But given we only care whether each letter appears once is there a better data structure we can use? Yes! A Javscript **Set** would be perfect here. Recall that a set is a data structure that only allows unique values. So if we add a letter to the set and it already exists, it will not be added again. This means we can simply check the size of the set at the end to see if we have seen all 26 letters. A very simple solution would be:
 
 ```typescript
 function checkIfPangram(sentence: string): boolean {
-    return new Set(sentence).size === 26
-};
+  return new Set(sentence).size === 26;
+}
 ```
 
-Why can we just pass the sentence directly to the set? Well, the __Set__ constructor accepts an iterable. So we can pass in a string and it will iterate through each character in the string and add it to the set. This is a very clean solution.
+Why can we just pass the sentence directly to the set? Well, the **Set** constructor accepts an iterable. So we can pass in a string and it will iterate through each character in the string and add it to the set. This is a very clean solution.
 
 ## Time and Space Complexity Analysis
 
-The time complexity of this solution is **_O(n)_** where n is the length of the string. This is because we have to iterate through each character in the string once to add it to the set even if there are duplicates. After all, we wont know if theres a duplicate letter unless we iterate on it! The space complexity is **_O(1)_** because the size of the set will never exceed 26 characters (the number of letters in the English alphabet). 
+The time complexity of this solution is **_O(n)_** where n is the length of the string. This is because we have to iterate through each character in the string once to add it to the set even if there are duplicates. After all, we wont know if theres a duplicate letter unless we iterate on it! The space complexity is **_O(1)_** because the size of the set will never exceed 26 characters (the number of letters in the English alphabet).
 
 Thank you and best of luck on your coding journey!

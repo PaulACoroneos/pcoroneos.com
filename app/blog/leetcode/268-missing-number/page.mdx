@@ -1,0 +1,106 @@
+export const meta = {
+  title: "Leetcode 268 - Missing Number (Typescript)",
+  description: `Solving Leetcode 268 - Missing Number (Typescript)`,
+  date: "2025-05-11",
+  tags: ["leetcode", "algorithms", "typescript", "hash table"],
+};
+
+Let's continue our trend of working hash table problems by solving [Leetcode 268 - Missing Number](https://leetcode.com/problems/missing-number/).
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+As always let's start by looking at the problem statement:
+
+> Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+Alright let's break down our requirements here:
+
+1. We are always going to get a list of integers from **0 to n**
+2. The list will be **distinct** and will be missing exactly **one** number from the length of the range. Thus we will always return a single number.
+
+Requirement 2 might be tricky to understand at first. Let's take a look at a simple example. Say let's have a array:
+
+```ts
+const nums = [0, 1];
+```
+
+The length of this array is 2. Therefore the problem expects that the list of numbers should contain values from **0 to 2** (inclusive). Looking at this array by inspection we can see that the number **2** is missing. Thus the output of this function should be **2**.
+
+Now that we better understand the requirements how might we go about solving this problem? This is a classic solve where using a Typescript **Set** is great because we can create a hash table of the numbers (now we dont have to care about the fact the list isnt sorted).
+
+With this table what could we then do? Well, we could create a loop starting at **0** and going up to the length of the nums array. For each number we could check if it exists in the hash table. If it does not exist then we can return that number as the missing number.
+
+## Solution
+
+```ts
+function missingNumber(nums: number[]): number {
+  const numsSet = new Set(nums);
+
+  for (let i = 0; i <= nums.length; i++) {
+    if (!numsSet.has(i)) return i;
+  }
+}
+```
+
+## Alternative Solution
+
+That being said for most hash table problems there are usually a few more clever solutions. These are not always necessarily better but they are fun to touch on.
+
+### Arithmetic Sum
+
+Another possible way to solve this problem is to use the fact that the sum of the numbers in the **nums** array is going to be exactly short the missing number. This is because the inclusive sum of the numbers from **0 to n** is going to be "just" larger!
+
+```ts
+function missingNumber(nums: number[]): number {
+  const n = nums.length;
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = nums.reduce((acc, num) => acc + num, 0);
+  return expectedSum - actualSum;
+}
+```
+
+So what we do is [calculate the arthmetic series of the numbers](https://www.chilimath.com/lessons/advanced-algebra/arithmetic-series-formula/) from **0 to n** using a fancy math formula. We then go ahead and sum the nums array because we dont know what the actual sum is without iterating through it. Finally we just subtract the two sums and return the result.
+
+### Bit Manipulation (XOR)
+
+Another interesting solution is to utilize the property of the XOR operator. This is probably a blogpost of its own but the key property of XOR is that when you XOR a number with itself the result is **0**. Any number XORed with **0** is the number itself. And finally XOR is commutative and associative (meaning order of the numbers does not matter!).
+
+So what we can do with this approach is essentially XOR all the numbers in the range **0 to nums.length** with the numbers in the array. The result will be the missing number because all the other numbers will cancel out.
+
+```ts
+function missingNumber(nums: number[]): number {
+  let missing = nums.length;
+  for (let i = 0; i < nums.length; i++) {
+    missing ^= i ^ nums[i];
+  }
+  return missing;
+}
+```
+
+This one is a bit harder to visualize for me initially so let's use an example:
+
+```ts
+const nums = [0, 1, 3];
+
+let missing = 3; // nums.length
+
+// iteration i = 0, missing = 3
+3 XOR 0 XOR 0 = 3 (11 XOR 00 XOR 00 = 11)
+
+// iteration i = 1, missing = 3
+3 XOR 1 XOR 1 = 3 (11 XOR 01 XOR 01 = 11)
+
+// iteration i = 2, missing = 3
+3 XOR 2 XOR 3 = 1 (11 XOR 10 XOR 11 = 10)
+
+// missing = 2!
+
+```
+
+## Time and Space Complexity Analysis
+
+In all these solutions we manipulate through the nums array once. Therefore the time complexity of all these solutions is **O(n)**. Space wise we only a few variables that do not scale with the length of the input side. Therefore the space complexity of all these solutions is **O(1)**.
+
+Thanks for reading and best of luck with your coding journey!
