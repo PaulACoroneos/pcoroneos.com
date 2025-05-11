@@ -1,9 +1,12 @@
+'use client';
 import * as React from "react";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import getAllPostPreviews from "../../utilities/mdx";
 
 const Blog = () => {
+  const [page,setPage] = React.useState(0);
+
   const sortedPostsInDesc = getAllPostPreviews().sort((a, b) =>
     new Date(b.module.meta.date) > new Date(a.module.meta.date) ? 1 : -1
   );
@@ -28,6 +31,7 @@ const Blog = () => {
       <ul className="divide-gray-200 divide-y">
         {sortedPostsInDesc
           .filter((post) => post.module.meta.date)
+          .slice(page,page+9)
           .map(({ link, module: { default: Component, meta } }) => (
             <li key={link} className="py-4 md:py-12">
               <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
@@ -68,6 +72,25 @@ const Blog = () => {
             </li>
           ))}
       </ul>
+      <div className="flex items-center justify-between pt-4">
+        <button
+          onClick={() => setPage(page => page - 1)}
+          disabled={page === 0}
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Previous posts
+        </button>
+        <span className="text-sm text-gray-700">
+          Page {page + 1} of {Math.ceil(sortedPostsInDesc.length / 10)}
+        </span>
+        <button
+          onClick={() => setPage(page => page + 1)}
+          disabled={page >= Math.ceil(sortedPostsInDesc.length / 10) - 1}
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Next posts
+        </button>
+      </div>
     </div>
   ) : null;
 };
