@@ -1,0 +1,69 @@
+export const meta = {
+  title: "Leetcode 2225. Find Players With Zero or One Losses(Typescript)",
+  description: `Solution to Leetcode 2225 - Find Players With Zero or One Losses(Typescript)`,
+  date: "2025-05-13",
+  tags: ["leetcode", "algorithms", "typescript", "hash table"],
+};
+
+Today we will be going over [Leetcode 2225 - Find Players With Zero or One Losses](https://leetcode.com/problems/find-players-with-zero-or-one-losses/). This is a hash table problem that requires us to keep track of the number of wins and losses for each player.
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+Let's take a look at the problem statement:
+
+> You are given an integer array matches where matches[i] = [winneri, loseri] indicates that the player winneri defeated player loseri in a match. Return a list answer of size 2 where:
+
+- answer[0] is a list of all players that have not lost any matches.
+- answer[1] is a list of all players that have lost exactly one match.
+- The values in the two lists should be returned in increasing order.
+
+> Note: You should only consider the players that have played at least one match. The testcases will be generated such that no two matches will have the same outcome.
+
+So the goal of this problem is effectively to return a tuple of two arrays. The first array should contain a list of all players that have not lost any matches. The second array should contain a list of all players that have lost exactly one match. Since we need to iterate through the entire matches list and sum results this is **a classic case to use a hash table**. So our strategy here will be to map over all matches. Each iterations we should
+
+1. Check where the winner is in the hash table. If they are not in the hash table we should add them with a value of 0 (indicating they have not lost any matches). If they are in the hash table we should do nothing because they have already won a match.
+
+2. Check whether the loser is in the hash table. If they are not in the hash table we should add them with a value of 1 (indicating they have lost one match).
+
+3. If the loser is already in the hash table we should increment their value by 1 (indicating they have lost another match).
+
+After this we should iterate across the hash table and check whether each player has lost either 0 or 1 matches. If they have lost 0 matches we should add them to the first array (winners). If they have lost 1 match we should add them to the second array (lostOnlyOnce). Finally we should return the two arrays after sorting them in increasing order.
+
+## Solution
+
+```typescript
+function findWinners(matches: number[][]): number[][] {
+  const hashTable = new Map();
+  for (const [winner, loser] of matches) {
+    if (!hashTable.has(winner)) {
+      hashTable.set(winner, 0);
+    }
+    if (!hashTable.has(loser)) {
+      hashTable.set(loser, 1);
+    } else {
+      hashTable.set(loser, hashTable.get(loser) + 1);
+    }
+  }
+  const winners = [];
+  const lostOnlyOnce = [];
+
+  for (const [player, losses] of hashTable) {
+    if (losses === 0) {
+      winners.push(player);
+    }
+    if (losses === 1) {
+      lostOnlyOnce.push(player);
+    }
+  }
+
+  return [winners.sort((a, b) => a - b), lostOnlyOnce.sort((a, b) => a - b)];
+}
+```
+
+## Time and Space Complexity Analysis
+
+Since we are required to sort the array at the end, our best case time complexity is **O(n log n)**. This is because when we sort a list of values we must visit each value at least once. And every iteration we sort we can half the number of values we need to sort. For space complexity we are using a our worst case is **O(n)** because we are storing the values in a hash table which will scale with the quantity of players.
+
+Thank you and best of luck on your coding journey!
