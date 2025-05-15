@@ -1,0 +1,48 @@
+export const meta = {
+  title: "Leetcode 1133 - Largest Unique Number (Typescript)",
+  description: `Leetcode 1133 - Solution to Largest Unique Number using Typescript.`,
+  date: "2025-05-15",
+  tags: ["leetcode", "hash table", "typescript"],
+};
+
+Today we will be using hash tables to find the largest unique number in an array in [Leetcode 1133 - Largest Unique Number](https://leetcode.com/problems/largest-unique-number/).
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+As always let's start by looking at the problem statement:
+
+> Given an integer array nums, return the largest integer that only occurs once. If no integer occurs once, return -1.
+
+So reading between the problem statement. We have a list of numbers that are not guaranteed to be unique. We may not even have a unique number. Given these constraints we need to find all unique numberrs in the array. Once we have we should return the largest of these numbers. If we do not have any unique numbers we should return -1.
+
+Since we need to check every number in the list an efficient way to do this is the use of a hash table. We can start by iterating through the entire array and building a table where each key is the number, and the corresponding value is the number of times that number appears in the array. Once we have this table we can iterate through it and find the largest number that has a value of 1. If we do not find any numbers with a value of 1 we should return -1.
+
+### Solution
+
+```typescript
+function largestUniqueNumber(nums: number[]): number {
+  const hashMap = new Map<number, number>();
+
+  for (const num of nums) {
+    const count = hashMap.get(num) ?? 0;
+    hashMap.set(num, count + 1);
+  }
+
+  let largestUniqueNumber = -1;
+  for (const [num, count] of hashMap) {
+    if (count === 1) {
+      largestUniqueNumber = Math.max(largestUniqueNumber, num);
+    }
+  }
+
+  return largestUniqueNumber;
+}
+```
+
+### Complexity analysis
+
+For this problem the time and space complexity is O(n). This is because we need to iterate through the entire array to create the hash table and then we need to iterate through said hash table to find the largest unique number.
+
+Thank you and best of luck with your coding journey!
