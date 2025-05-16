@@ -1,0 +1,58 @@
+export const meta = {
+  title: "Leetcode 1189 - Maximum Number of Balloons (Typescript)",
+  description: `Leetcode 1189 - Solution to Maximum Number of Balloons using Typescript.`,
+  date: "2025-05-15",
+  tags: ["leetcode", "hash table", "typescript"],
+};
+
+Let's work on a slightly more advanced hash table problem today with [Leetcode 1189 - Maximum Number of Balloons](https://leetcode.com/problems/maximum-number-of-balloons/description/).
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+As always let's start by looking at the problem statement:
+
+> 
+
+### Solution
+
+```typescript
+function maxNumberOfBalloons(text: string): number {
+  if(text.length < 5) return 0
+
+  const BALLOON_TABLE: Record<string,number> = {
+    'b': 1,
+    'a': 1,
+    'l': 2,
+    'o': 2,
+    'n': 1
+  };
+
+  const letterHash = new Map();
+
+  for(const letter of text) {
+    if(letter in BALLOON_TABLE) {
+        const cnt = letterHash.get(letter) ?? 0;
+        letterHash.set(letter,cnt+ 1);
+    }
+  }
+
+  if(letterHash.size !== 5) return 0;
+
+  let maximumNumberBalloons = Number.MAX_SAFE_INTEGER;
+
+  for(const letter in BALLOON_TABLE) {
+    maximumNumberBalloons = Math.min(maximumNumberBalloons,Math.floor(letterHash.get(letter)/ BALLOON_TABLE[letter]))
+  }
+
+  return maximumNumberBalloons;
+};
+}
+```
+
+### Complexity analysis
+
+For this problem the time and space complexity is O(n). This is because we need to iterate through the entire array to create the hash table. Space complexity wise the letterHash map will store at most 5 key-value pairs (one for each letter in "balloon"), so the space complexity is O(1).  
+
+Thank you for reading and best of luck on your coding journey!
