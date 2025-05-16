@@ -13,46 +13,60 @@ Let's work on a slightly more advanced hash table problem today with [Leetcode 1
 
 As always let's start by looking at the problem statement:
 
-> 
+> Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible. You can use each character in text at most once. Return the maximum number of instances that can be formed.
+
+So let's extract a few tidbits from the problem statement.
+
+1. We need to count how many times we can form the word "balloon" from the letters in the string text.
+2. We aren't guaranteed to have enough letters to form the word "balloon" either from lack of letters or from missing some letters to form the world.
+
+Given these two points we should immediately think of using a hash table since we will need to count the number of times each letter appears in the string text. Based off this we can then iterate through the hash table to determine how many times we can form the word "balloon". Now you might ask... how can we determine how many times we can form the word "balloon" from the hash table in a unique way? One method is to first assume we have a large number of instances of the word "balloon". Then we can check each letter and determine how many theoretical "balloons" we could form from the count of that letter. Say for example we have 4 b's in the string. Since the word "balloon" only has 1 b, we can form 4 theoretical "balloons" from the b's. Our **maximum balloons count** now is **4**. Now let's say we have 3 a's in the string. Since the word "balloon" only has 1 a, we can form 3 theoretical "balloons" from the a's. Our **maximum balloons count** now is **3**. This is because even though we have 4 b's, we are constrained by having only 3 a's.
+
+We can continue this process for the rest of the letters in the word "balloon". When we finish the remaining "best" count is the maximum number of times we can form the word "balloon". Now that being said you will see my solution contains some optimizations.
+
+1. If the initial string doesnt even have at least one of each letter of "balloon" (5 letters) we can immediately return 0.
+2. When creating the hash table we can go ahead and skip any letters that are not in the word balloon. We use a lookup object to do this. This lookup object will double as a way to determine how many times we can form the word "balloon" from the letters in the string text. If the hashtable isn't exactly 5 letters long we can also return 0, since we are missing at least one letter to form the word "balloon".
 
 ### Solution
 
 ```typescript
 function maxNumberOfBalloons(text: string): number {
-  if(text.length < 5) return 0
+  if (text.length < 5) return 0;
 
-  const BALLOON_TABLE: Record<string,number> = {
-    'b': 1,
-    'a': 1,
-    'l': 2,
-    'o': 2,
-    'n': 1
+  const BALLOON_TABLE: Record<string, number> = {
+    b: 1,
+    a: 1,
+    l: 2,
+    o: 2,
+    n: 1,
   };
 
   const letterHash = new Map();
 
-  for(const letter of text) {
-    if(letter in BALLOON_TABLE) {
-        const cnt = letterHash.get(letter) ?? 0;
-        letterHash.set(letter,cnt+ 1);
+  for (const letter of text) {
+    if (letter in BALLOON_TABLE) {
+      const cnt = letterHash.get(letter) ?? 0;
+      letterHash.set(letter, cnt + 1);
     }
   }
 
-  if(letterHash.size !== 5) return 0;
+  if (letterHash.size !== 5) return 0;
 
   let maximumNumberBalloons = Number.MAX_SAFE_INTEGER;
 
-  for(const letter in BALLOON_TABLE) {
-    maximumNumberBalloons = Math.min(maximumNumberBalloons,Math.floor(letterHash.get(letter)/ BALLOON_TABLE[letter]))
+  for (const letter in BALLOON_TABLE) {
+    maximumNumberBalloons = Math.min(
+      maximumNumberBalloons,
+      Math.floor(letterHash.get(letter) / BALLOON_TABLE[letter])
+    );
   }
 
   return maximumNumberBalloons;
-};
 }
 ```
 
 ### Complexity analysis
 
-For this problem the time and space complexity is O(n). This is because we need to iterate through the entire array to create the hash table. Space complexity wise the letterHash map will store at most 5 key-value pairs (one for each letter in "balloon"), so the space complexity is O(1).  
+For this problem the time and space complexity is O(n). This is because we need to iterate through the entire array to create the hash table. Space complexity wise the letterHash map will store at most 5 key-value pairs (one for each letter in "balloon"), so the space complexity is O(1).
 
 Thank you for reading and best of luck on your coding journey!
