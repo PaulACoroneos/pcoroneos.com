@@ -1,6 +1,7 @@
 import remarkImages from "remark-images";
 import remarkEmoji from "remark-emoji";
 import remarkPrism from "remark-prism";
+import remarkGfm from "remark-gfm";
 import nextMdx from "@next/mdx";
 import path from "path";
 
@@ -9,7 +10,7 @@ const __dirname = path.resolve();
 const withMDX = nextMdx({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkImages, remarkEmoji, remarkPrism],
+    remarkPlugins: [remarkImages, remarkEmoji, remarkPrism,remarkGfm],
     rehypePlugins: [],
   },
 });
