@@ -1,0 +1,52 @@
+export const meta = {
+  title: "Leetcode 383 - Ransom Note (Typescript)",
+  description: `Solution to Leetcode 383 - RansomNote (Typescript)`,
+  date: "2025-05-18",
+  tags: ["leetcode", "algorithms", "typescript", "hash table"],
+};
+
+Today we will be going over [Leetcode 383 - Ransom Note](https://leetcode.com/problems/ransom-note/description/). This is another example of using hash tables.
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+Let's start with the problem statement:
+
+> Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise. Each letter in magazine can only be used once in ransomNote.
+
+We have two strings in this problem, `ransomNote` and `magazine`. We essentially need to check that all letters in ransomNote are present in magazine. It doesn't matter is the magazine has more letters than the ransomNote, but it does matter that the magazine has at least as many letters as the ransomNote and that it includes **at least** the letters in the ransomNote.
+
+This is a pretty classic case to use a hash table. We can simply hash the contents of the magazine into a hash table where each letter it represented with a corresponding letter count for how many times it shows up in the magazine. We pick the magazine because it should be at least as large as the ransomNote string if not larger. Once we create the ransomNote hash table, we can then iterate through the letters of the ransomNote and check if there are enough letters in the magazine hash table to satisfy the ransomNote. If we find a letter that is not present or not present enough times, we can return false. If we get through all the letters in the ransomNote, we can return true.
+
+## Solution
+
+```typescript
+function canConstruct(ransomNote: string, magazine: string): boolean {
+    const magazineMap = new Map<string,number>();
+
+    for(const letter of magazine) {
+        const cnt = magazineMap.get(letter) ?? 0;
+        magazineMap.set(letter,cnt+1)
+    };
+
+    for(const letter of ransomNote) {
+        const cnt = magazineMap.get(letter) ?? 0;
+        if(cnt > 0) {
+            magazineMap.set(letter, cnt-1);
+        }
+        else {
+            return false;
+        }
+    }
+
+    return true;
+
+};
+```
+
+## Time and Space Complexity Analysis
+
+The time conplexity of this problem is O(m+n), where m and n are the lengths of the magazine and ransomNote strings respectively. But if we say assume the lengths are equal, we can say the time complexity is **O(n)** because constants are dropped in Big O notation. It might be easy to also say that space complexity is O(n) as well because worst case we store all possible lowercase letters in the magazine hash table. But the english alphabet is only 26 letters which is constant and independent of the input size. So we can say the space complexity actually **O(1)**.
+
+Thank you for reading and best of luck in your coding journey!
