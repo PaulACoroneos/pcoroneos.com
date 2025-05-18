@@ -10,7 +10,7 @@ const __dirname = path.resolve();
 const withMDX = nextMdx({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkImages, remarkEmoji, remarkPrism,remarkGfm],
+    remarkPlugins: [remarkImages, remarkEmoji, remarkPrism, remarkGfm],
     rehypePlugins: [],
   },
 });

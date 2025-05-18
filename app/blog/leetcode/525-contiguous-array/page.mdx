@@ -28,7 +28,7 @@ Then I thought about some of our recent work with prefix sums. And then I though
 Now, one key this we haven't covered above. If our continuous subarray starts at the beginning of the nums array we will never find a match in our hash table. So we need to add a key of 0 and a value of -1 to our hash table. This of this as a "dummy" key that tells our algorithm "hey before index 0, the sum of the array is 0". If this is confusing thats okay it took me quite a bit to understand it as well. Let me see if a simple example will help. Say we have:
 
 ```ts
-const nums = [0,1]
+const nums = [0, 1];
 ```
 
 1. At index 0, we have a running sum of -1 (0-1). We add this to our hash table with a value of 0. So our hash table looks like this:
@@ -38,6 +38,7 @@ const nums = [0,1]
     -1: 0
 }
 ```
+
 2. At index 1, we have a running sum of 0 (-1+1). We check our hash table and find that we do not have a match! So we add the key of 0 and value of 1 to our hash table. So our hash table looks like this:
 
 ```ts
@@ -61,21 +62,20 @@ Hey now we have pair 0,-1 ahead of time. So if we calculate the delta we have (1
 With all of that explanation out of the way, let's look at one more example to help solidify the concept.
 
 ```ts
-const nums = [0,1,0,1,0,1]
+const nums = [0, 1, 0, 1, 0, 1];
 ```
 
 Here's a table showing the step-by-step execution for the example:
 
-| Index        | Value | Running Sum | Hash Table                          | Max Contiguous Length | Explanation                                       |
-|--------------|-------|-------------|-------------------------------|------------------------|---------------------------------------------------|
-| Before start | -     | 0           | `{0: -1}`                     | 0                      | Initialize with dummy entry                       |
-| 0            | 0     | -1          | `{0: -1, -1: 0}`              | 0                      | Add new entry for -1                              |
-| 1            | 1     | 0           | `{0: -1, -1: 0}`              | 2                      | Found 0 in map at index -1, length = 1 - (-1) = 2 |
-| 2            | 0     | -1          | `{0: -1, -1: 0}`              | 2                      | Found -1 in map at index 0, length = 2 - 0 = 2    |
-| 3            | 1     | 0           | `{0: -1, -1: 0}`              | 4                      | Found 0 in map at index -1, length = 3 - (-1) = 4 |
-| 4            | 0     | -1          | `{0: -1, -1: 0}`              | 4                      | Found -1 in map at index 0, length = 4 - 0 = 4    |
-| 5            | 1     | 0           | `{0: -1, -1: 0}`              | 6                      | Found 0 in map at index -1, length = 5 - (-1) = 6 |
-
+| Index        | Value | Running Sum | Hash Table       | Max Contiguous Length | Explanation                                       |
+| ------------ | ----- | ----------- | ---------------- | --------------------- | ------------------------------------------------- |
+| Before start | -     | 0           | `{0: -1}`        | 0                     | Initialize with dummy entry                       |
+| 0            | 0     | -1          | `{0: -1, -1: 0}` | 0                     | Add new entry for -1                              |
+| 1            | 1     | 0           | `{0: -1, -1: 0}` | 2                     | Found 0 in map at index -1, length = 1 - (-1) = 2 |
+| 2            | 0     | -1          | `{0: -1, -1: 0}` | 2                     | Found -1 in map at index 0, length = 2 - 0 = 2    |
+| 3            | 1     | 0           | `{0: -1, -1: 0}` | 4                     | Found 0 in map at index -1, length = 3 - (-1) = 4 |
+| 4            | 0     | -1          | `{0: -1, -1: 0}` | 4                     | Found -1 in map at index 0, length = 4 - 0 = 4    |
+| 5            | 1     | 0           | `{0: -1, -1: 0}` | 6                     | Found 0 in map at index -1, length = 5 - (-1) = 6 |
 
 **Result:** The maximum length of a contiguous subarray with equal 0s and 1s is 6.
 
@@ -85,27 +85,28 @@ With two example out of the way, lets finally take a look at my solution:
 
 ```ts
 function findMaxLength(nums: number[]): number {
-    const numMap = new Map<number,number>([[0,-1]]);
-    let runningSum = 0;
-    let maxContiguousLen =0;
+  const numMap = new Map<number, number>([[0, -1]]);
+  let runningSum = 0;
+  let maxContiguousLen = 0;
 
-    for(const [idx,num] of nums.entries()) {
-        runningSum += num === 0 ? -1 : 1;
-        if(numMap.has(runningSum)) {
-            maxContiguousLen = Math.max(maxContiguousLen,idx-numMap.get(runningSum))
-        }
-        else {
-            numMap.set(runningSum,idx);
-        }
-    } 
+  for (const [idx, num] of nums.entries()) {
+    runningSum += num === 0 ? -1 : 1;
+    if (numMap.has(runningSum)) {
+      maxContiguousLen = Math.max(
+        maxContiguousLen,
+        idx - numMap.get(runningSum)
+      );
+    } else {
+      numMap.set(runningSum, idx);
+    }
+  }
 
-    return maxContiguousLen;
-
-};
+  return maxContiguousLen;
+}
 ```
 
 ## Time and Space Complexity
 
-The time complexity of this problem is **O(N)** because we must iterate through the entire array once. The space complexity is also **O(N)** because we are storing the running sum and its corresponding index in a hash table. If you think about it our worst case could be that the array contains all 0's or all 1's. In this case we would have to store __nums.length__ entries in our hash table.
+The time complexity of this problem is **O(N)** because we must iterate through the entire array once. The space complexity is also **O(N)** because we are storing the running sum and its corresponding index in a hash table. If you think about it our worst case could be that the array contains all 0's or all 1's. In this case we would have to store **nums.length** entries in our hash table.
 
 Thanks and best of luck on your algorithmic journey!
