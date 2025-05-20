@@ -1,0 +1,70 @@
+export const meta = {
+  title:
+    "Leetcode 3 - Longest Substring Without Repeating Characters (Typescript)",
+  description: `Solution to Leetcode 3 - Longest Substring Without Repeating Characters (Typescript)`,
+  date: "2025-05-19",
+  tags: ["leetcode", "algorithms", "typescript", "hash table", "two pointer"],
+};
+
+Today we will be going over [Leetcode 3 - Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/). This problem combines two techniques (no spoilers, let's talk about it in the analysis section!)
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+Let's start with the problem statement:
+
+> Given a string s, find the length of the longest substring without duplicate characters.
+
+Wow this may be our shortest problem statement yet! But let's break it down a bit.
+
+1. We want to find the longest substring of a string without any duplicate characters. The key part of this statement is the word "substring". This means we are looking for a contiguous sequence of characters in the string and not a **subsequence**. A subsequence is a sequence that can be derived from another sequence by deleting some elements without changing the order of the remaining elements. For example, "ace" is a subsequence of "abcde" but "abc" is not a substring of "abcde". This means we can't just use a **Set** for example to store characters we have found so far because in the case we have say **"pwwkew"** the correct substring is "wke" and not "pwke". We can't just ignore that second duplicate "w"!
+
+Okay so we def have intuition that we need to use a hash table to store the characters we have seen so far. Hopefully if you have joined me so far working these problems you'll see that tool at least. As I worked through this problem I realized this kind of reminded me of array problems I had done where I needed to leverage _two pointer technique_ to find subarrays through something called a **sliding window**. And actually thats exactly what we are going to do here. We are going to use a hash table (**Map**) to store characters we have seen so far and their corresponding index in the string. The reason we need that index is so we can calculate a "working" length of a subarray by subtracting the current index from the index of the last duplicate character we saw (and 1 to get past that duplicate character to define our new window). We will define a "second" pointer (outside our loop pointer) that will hold onto the first instance of as duplicated letter to accomplish this.
+
+A little confused? Don't worry, I was too! Let's take a look at an example to clarify:
+
+Let's take our previous example of **"pwwkew"**. We start with an empty hash table and a max length of 0. We will also define a second pointer called `start` that will be initialized to 0. Then let's walk through as we loop through the string character by character:
+
+| loop index | character | hash table          | max length | start |
+| ---------- | --------- | ------------------- | ---------- | ----- |
+| 0          | p         | `{p:0}`             | 1          | 0     |
+| 1          | w         | `{p:0,w:1}`         | 2          | 0     |
+| 2          | w         | `{p:0,w:2}`         | 2          | 1     |
+| 3          | k         | `{p:0,w:2,k:3}`     | 3          | 1     |
+| 4          | e         | `{p:0,w:2,k:3,e:4}` | 4          | 1     |
+| 5          | w         | `{p:0,w:5,k:3,e:4}` | 4          | 2     |
+
+Everything works smoothly until we hit the duplicate `"w"` at index 2. At this point, we notice that `"w"` was already seen at index 1. Since we cannot have repeating characters in our substring, we update the `start` pointer to be one position after the previous occurrence of `"w"`, which is `1 + 1 = 2`. This ensures that our current substring window no longer includes the earlier duplicate. You can think of our working substring as a sliding window over the input string. This window adjusts as we loop, always representing a substring with all unique characters. For example, after encountering the second `"w"`, our window becomes `"kew"`, which starts at index 2.
+
+We use a hash map (`Map<string, number>`) to store the most recent index at which each character was seen. Before processing a character, we check whether it has already been seen and whether its last recorded index is within our current window. If both conditions are true, we shift the `start` pointer just after the last occurrence of that character to maintain uniqueness.
+
+After evaluating whether the window needs to shift, we update the map to store the current index for that character. Then we calculate the length of the current substring using `i - start + 1`, since the substring is contiguous. If this length is larger than the current `maxLen`, we update `maxLen`.
+
+At the end, we return the longest substring length we found. One final note is that we handle the case of an empty string right at the beginning of the function. If the string is empty, it has no substrings, so the correct answer is 0. Otherwise, we initialize `maxLen` to 0, since the substring length is calculated dynamically as we iterate.
+
+## Solution
+
+```typescript
+function lengthOfLongestSubstring(s: string): number {
+  if (!s.length) return 0;
+  let maxLen = 1;
+  let start = 0;
+  const subStrMap = new Map<string, number>();
+  for (let i = 0; i < s.length; i++) {
+    const str = s[i];
+    if (subStrMap.has(str) && subStrMap.get(str) >= start) {
+      start = subStrMap.get(str) + 1;
+    }
+    subStrMap.set(str, i);
+    maxLen = Math.max(maxLen, i - start + 1);
+  }
+  return maxLen;
+}
+```
+
+## Time and Space Complexity Analysis
+
+The time complexity of this solution is **O(n)**, where n is the length of the input string. This is because we are iterating through the string once. The space complexity similarly is 0(n) if we consider there is not a classic constraint (such as 26 lowercase letters in english alphabet). This is because worst case every letter in the string is unique.
+
+Thank you and best of luck with your coding!
