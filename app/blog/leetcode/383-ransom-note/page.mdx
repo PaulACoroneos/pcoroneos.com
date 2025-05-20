@@ -23,26 +23,24 @@ This is a pretty classic case to use a hash table. We can simply hash the conten
 
 ```typescript
 function canConstruct(ransomNote: string, magazine: string): boolean {
-    const magazineMap = new Map<string,number>();
+  const magazineMap = new Map<string, number>();
 
-    for(const letter of magazine) {
-        const cnt = magazineMap.get(letter) ?? 0;
-        magazineMap.set(letter,cnt+1)
-    };
+  for (const letter of magazine) {
+    const cnt = magazineMap.get(letter) ?? 0;
+    magazineMap.set(letter, cnt + 1);
+  }
 
-    for(const letter of ransomNote) {
-        const cnt = magazineMap.get(letter) ?? 0;
-        if(cnt > 0) {
-            magazineMap.set(letter, cnt-1);
-        }
-        else {
-            return false;
-        }
+  for (const letter of ransomNote) {
+    const cnt = magazineMap.get(letter) ?? 0;
+    if (cnt > 0) {
+      magazineMap.set(letter, cnt - 1);
+    } else {
+      return false;
     }
+  }
 
-    return true;
-
-};
+  return true;
+}
 ```
 
 ## Time and Space Complexity Analysis

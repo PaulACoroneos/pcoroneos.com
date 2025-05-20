@@ -1,0 +1,45 @@
+export const meta = {
+  title: "Leetcode 771. Jewels and Stones (Typescript)",
+  description: `Solution to Leetcode 771 - Jewels and Stones (Typescript)`,
+  date: "2025-05-19",
+  tags: ["leetcode", "array", "hashtable", "easy"],
+};
+
+Let's look at an easy hash table problem in [LeetCode 771 - Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/description/)
+{/* more */}
+
+## Problem statement and analysis
+
+Let's start by taking a look at the problem statement:
+
+> You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels. Letters are case sensitive, so "a" is considered a different type of stone from "A".
+
+## Algorithm analysis
+
+This is a pretty simple problem. We basically need to create a hash table from either stones or jewels. Then we can iterate through the other string and check if the value exists in the hash table. If it does we can increment a counter. The final value of the counter is our answer. There is no need to hash the other string since we have to iterate through it anyways to check whether each stone or jewel is in the other hash table.
+
+## Code Solution
+
+The code is as follows:
+
+```ts
+function numJewelsInStones(jewels: string, stones: string): number {
+  const stoneMap = new Map<string, number>();
+  for (const stone of stones) {
+    const cnt = stoneMap.get(stone) ?? 0;
+    stoneMap.set(stone, cnt + 1);
+  }
+  let jewelCnt = 0;
+  for (const jewel of jewels) {
+    jewelCnt += stoneMap.get(jewel) ?? 0;
+  }
+
+  return jewelCnt;
+}
+```
+
+## Complexity analysis
+
+Similar to a previous problem we have a time complexity of **O(n)** and a space complexity of **O(n)**. The space complexity is due to the fact we are using a hash table to store the stones. Even though theoretically the sizes of stones and jewels can in fact be different, if we consider the worst case than they are at least equal we can consider that we have to iterate an equal amount of times irregardless if we used jewels to make the hash table or stones instead. Space complexity similarly is O(n) following the same logic.
+
+Thanks and best best of luck with your coding!
