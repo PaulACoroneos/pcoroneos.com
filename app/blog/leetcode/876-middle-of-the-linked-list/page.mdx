@@ -1,0 +1,62 @@
+export const meta = {
+  title: "Leetcode 876 - Middle of the Linked List (Typescript)",
+  description: `Solution to Leetcode 876 - Middle of the Linked List (Typescript)`,
+  date: "2025-05-20",
+  tags: ["leetcode", "algorithms", "typescript", "linked list", "two pointers"],
+};
+
+After a long stint in hash table land it's time to move onto another class of data structures and algorithms. We are going to start out with linked lists by solving a classic problem in [Leetcode 876 - Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/description/).
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+Let's start with the problem statement:
+
+> Given the head of a singly linked list, return the middle node of the linked list. If there are two middle nodes, return the second middle node.
+
+FYI, I am going to assume the reader understands what a singly linked list is. If you don't, [you can read about them here](https://en.wikipedia.org/wiki/Singly_linked_list). I think one day I will write a post about them (and replace the link from wikipedia with my own). But for now, let's just assume you know what a singly linked list is.
+
+So how might we go about solving this problem? Well, we could convert the single linked list into an array, then return the (second) middle element of the array. This is because once we are in array land we have simple **O(1)** access to any element in the array. But this is not a very efficient solution because we are using **O(n)** space to store the array. We can do better.
+
+Another approach we could take would be to do something such as loop through the linked list and count the number of elements in the linked list. Then we could loop through the linked list again and return the middle element. This would be **O(n)** time complexity but also **O(1)** space complexity. But this is not a very efficient solution either because we are looping through the linked list twice. Can we do even better?
+
+So in working algorithms we have become familiar with the **two pointers** technique. It's pretty cool how we are starting to merge some ideas together huh? Usually when we tackle array problems we can leverage two poiners to create things such as a sliding window. But linked lists operate a bit differently. We can't just use the index of the array to access the elements in the linked list. But we can still use two pointers to solve this problem.
+
+We are going to introduce the concept of a slow and fast pointer. The slow pointer is going to move one node at a time. The fast pointer is going to move two nodes at a time. Then we are going to loop over and over again until the fast pointer reaches the end of the linked list. Now you may be asking yourself "what was the point of this"? When our fast pointer reaches the end of the linked list, where does our "slow" pointer end up? Well if our slow pointer by definition moves **half as fast** as the fast pointer, then it will end up in the middle of the linked list. So we can just return the slow pointer!
+
+The only caveat we need to consider is the problem asks us to return the **second** middle node if there are two middle nodes. So if the length of the linked list is even, we need to return the second middle node. We can solve this by just setting the fast pointer to the header initially rather than the next node. This way when the fast pointer reaches the end of the linked list, the slow pointer will be at the second middle node.
+
+## Solution
+
+```typescript
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function middleNode(head: ListNode | null): ListNode | null {
+  //base condition. If LL is of length 1, return head
+  if (!head.next) return head;
+  let slow = head;
+  let fast = head;
+  while (fast?.next) {
+    slow = slow?.next;
+    fast = fast?.next?.next;
+  }
+  return slow;
+}
+```
+
+## Time and Space Complexity Analysis
+
+The time complexity of this solution is **O(n)** because we are looping through the linked list once. The space complexity is **O(1)** because we are not using any extra space to store the linked list. We are just using two pointers to traverse the linked list.
+
+Thanks for reading and best of luck in your coding journey! If you have any questions or comments, please feel free to reach out to me on [Bluesky](https://bsky.app/profile/pacman326.bsky.social) or [LinkedIn](https://www.linkedin.com/in/paulacoroneos/). I would love to hear from you!
