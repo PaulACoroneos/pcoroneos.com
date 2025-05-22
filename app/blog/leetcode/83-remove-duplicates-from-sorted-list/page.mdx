@@ -1,0 +1,64 @@
+export const meta = {
+  title: "Leetcode 83. Remove Duplicates From Sorted List (Typescript)",
+  description: `Solution to Leetcode 83 - Remove Duplicates From Sorted List (Typescript)`,
+  date: "2025-05-21",
+  tags: ["leetcode", "algorithms", "typescript", "linked list"],
+};
+
+Today we will be going over [Leetcode 83 - Remove Duplicates From Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/). This will be a pretty straightforward linked list problem with a small catch.
+
+{/* more */}
+
+## Problem Statement and Analysis
+
+As always, let's take a look at the problem statement:
+
+> Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+This appears to be a pretty straighforward problem. We have a linked list that is sorted (this is technically not in the problem description, but inspecting the examples shows each linked list is pre-sorted). If the linked lists weren't sorted, this would be a slightly hardware problem to solve. So given what we have learned about linked lists how would we solve this problem?
+
+We know at minimum we need to navigate through all enties in the list at least once. This is because there can be a duplicate at the very end of te list. But what should we do at each iteration? Well we know we can access the **value** of a node by checking **node.val**. What else do we have for every node? A **next** pointer. Therefore we can get the value of the next node by simply checking **node.next.val**. If the value of the current node is equal to the value of the next node, the we can effectively remove it from our list. How would we do this? We can set the **next** pointer of the current node to the **next** pointer of the next node. This will effectively remove the next node from our list.
+
+Now the question becomes, how do we advance the list? If the next node is not a duplicate, we can iterate to **node.next**. If we found a duplicate, we dont iterate yet. Now why would we not iterate every loop? Well, because the node after the next node might be a duplicate as well!. But if we advance every time, we may leave a duplicate behind. So we need to check if the next node is a duplicate before we advance. If it is, we can set the **next** pointer of the current node to the **next** pointer of the next node. If it is not, we can simply advance to the next node.
+
+Now one part I left out is we are required to return the head of the list at the end (it's not an in-place problem). So we need to keep track of the head of the list. We can do this by creating a **sentinel** node at the start of the list. This will allow us to return the head of the list at the end. Sentinel nodes are a common pattern in linked list problems we will continue to see in the future.
+
+## Solution
+
+```typescript
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function deleteDuplicates(head: ListNode | null): ListNode | null {
+  if (!head || !head?.next) {
+    return head;
+  }
+
+  let sentinel = head;
+
+  while (head?.next) {
+    if (head.val === head?.next.val) {
+      head.next = head.next?.next;
+    } else {
+      head = head?.next;
+    }
+  }
+
+  return sentinel;
+}
+```
+
+## Time and Space Complexity Analysis
+
+The time complexity of this solution is O(n) where n is the number of nodes in the linked list. This is because we are iterating through the list once and performing a constant amount of work at each node. Space complexity is O(1) because we are not using any extra space that grows with the input size.
+
+Thanks for reading and best of luck in your coding journey! If you have any questions or comments, please feel free to reach out to me on [Bluesky](https://bsky.app/profile/pacman326.bsky.social) or [LinkedIn](https://www.linkedin.com/in/paulacoroneos/). I would love to hear from you!
