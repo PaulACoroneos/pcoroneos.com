@@ -1,0 +1,31 @@
+export const meta = {
+  title:
+    "Migrating to AstroJS from NextJS",
+  description: `Migrating my personal blog from AstroJS from NextJS`,
+  date: "2025-05-25",
+  tags: ["astrojs","nextjs","copilot","llm","ai"],
+};
+
+I've been using the new Copilot agent mode to try to migrate my blog from NextJS App Router to Astro. I write all my blogposts in MDX with styling predefined via TailwindCSS. I then have a little legacy Webpack code that inserts getStaticProps calls where needed to fetch the blog data and then I decorate the post with a wrapper so that it looks consistent (probably should have moved a lot of this to a layout.tsx file, but you know how tech debt works).
+
+{/* more */}
+
+After two 1.5 hours sessions I am pleasantly surprised to see actually most of the blog is moved over! Styling is not correct though and I will probably need another session to get this fixed. Here is my feelings so far:
+
+**Pros:**
+
+- Claude 3.7 did an excellent job of translating my next.config.js to the astro.config.js. That being said I had to explain certain things such as my redirects object for it to move it to the appropriate place.
+- Being able to pause the agent "mid flight" was INCREDIBLY useful to course correct. I don't think the models are at a point yet where you can just let them iterate freely for hours, even if you give it a structured prompt
+- I was able to continue working in the background on learning system design while the code worked. I will read every line it changed before cutting traffic over, but effectively I was able to somewhat parallelize working on two things which I find quite challenging on a day to day basis.
+- After 3 hours of work I actually had an almost complete working clone of my blog in Astro with significantly less tech debt!
+- Even though copilot in agent mode went off the rails a bit on the styling... I actually like some of the spacing changes it suggested. I may accept some of these before releasing.
+
+**Cons:**
+- Sometimes it's really, really wrong. For example I asked it to use my css files and tailwind directly and re-apply it to the new blog. It kind of went off the rails and started re-implementing what tailwind was already doing. I even fed it my existing production blog but it continued to just add more CSS rather than try to refine. This is a common complaint i've seen with current AI models.
+- The tools really need specific prompting and aren't nearly as context aware as expected. For example I use pnpm as my package manager but the tools assumed I wanted to use npm.
+- You eventually will run out of credits. After about 1.5 hours I hit a rate limit and had to start the next day. I am hopeful this reduces over time.
+- You really have to be specific in your prompting or it will take a lot of liberties. Those liberties will often not match what you expect
+
+Overall I am __SUPER__ impressed with how far along these tools have come. But it has reinforced my conclusion that in the current incarnation these tools are best served as a multiplying layer rather than a full developer replacement. I think for devs who are familiar with system design and general coding practices there is truly something here.
+
+More to come!
