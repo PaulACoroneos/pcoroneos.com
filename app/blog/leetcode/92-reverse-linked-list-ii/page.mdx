@@ -1,0 +1,83 @@
+export const meta = {
+  title: "Leetcode 92 - Reverse Linked List II (Typescript)",
+  description: `Leetcode 92 - Reverse Linked List II using Typescript.`,
+  date: "2025-05-26",
+  tags: ["leetcode", "linked list", "typescript"],
+};
+
+Today let's have some fun reversing linked lists with [Leetcode 92 - Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/description/).
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+As always let's start by looking at the problem statement:
+
+> Given the head of a singly linked list and two integers left and right where `left <= right`, reverse the nodes of the list from position left to position right, and return the reversed list.
+
+Alright so this is quite the doozy. We are given a singly linked list and two integers, **left** and **right**, which represent the positions of the nodes we need to reverse. The are the 1-indexed positions of the start and end of a sublist that we want to reverse. If there are any other nodes not included in this sublist, they should remain in their original order.
+
+When we need to work to reverse (or even track) nodes in a linked list, we should immediately consider reaching for pointers. Pointers are great in this scenario because they take up **O(1)** space and they can give us a reference to a node that may not be directly accessible as we perform operations on the linked list (such as move next pointers around).
+
+First of we should consider our base cases. If the head is null, or if the **left** and **right** are the same, we can return the head as is since there is nothing to reverse. This is because there is no work to be done. Otherwise, we will once again use the concept of a dummy node to help us track the head of the list. This is required because if the sublist we are reversing starts at the head of the list, we need to be able to return the new head of the list after the reversal. Since this takes up O(1) space, it's not terribly expensive to do so.
+
+Next we will define our first pointer **prev**. This pointer will be used to track the node just before the sublist we are reversing. This is important because it will anchor the new sublist to any nodes (if there are any) before the nodes within the sublist. However as we recall unlike arrays, linked lists do not have direct access to the previous node. So we will need to iterate through the list until we reach the node just before the sublist starts. After performing this operation, we will have our **prev** pointer set to the node just before the sublist we are reversing.
+
+Next, we will define our second and third pointers **next** and **curr**. The **curr** pointer will be used as a "pivot" to reverse the nodes in the sublist. Or in other words we will keep the curr pointer constant as we move nodes. This will make a bit more sense shortly. This pointer initializes to prev.next or the node right after our previous node. Finally we will define the **next** pointer. This pointer will be the node we are moving around the pivot pointer **curr**. This pointer will do the most work of all as we loop.
+
+With our pointers defined, we now need to loop the number of nodes we need to reverse. We can simply calculate this as the difference between **right** and **left**. For each iteration, we will do the following:
+
+1. Set the **next** pointer to the node after the **curr** pointer. This is the node we are about to move.
+2. Set the **curr** pointer's next to the node after the **next** pointer. This effectively "removes" the **next** node from the list, but we still have a reference to it because the **next** pointer is still pointing to it. This is what the "right" side of the sublist will look like after we are done moving the **next** node.
+3. Set the **next** pointer's next to the node after the **prev** pointer. This effectively "inserts" the **next** node at the beginning of the sublist we are reversing.
+4. Finally, we set the **prev** pointer's next to the **next** pointer. This effectively "anchors" the new sublist to the previous nodes in the list.
+
+We continue until we have exhausted the number of nodes we need to reverse. At this point, we have successfully reversed the sublist and reattached and nodes before and after the sublist (if applicable). Finally, we can return the head of the list by returning the dummy node's next pointer.
+
+### Solution
+
+```typescript
+function reverseBetween(
+  head: ListNode | null,
+  left: number,
+  right: number
+): ListNode | null {
+  //if the head node doesnt exist, or there nothing to reverse return head
+  if (!head || left === right) return head;
+
+  //create a dummy node to point to beginning on the list so we can return it at the end
+  const dummy = new ListNode(0, head);
+  //initialize the prev pointer to this dummy node to start
+  let prev = dummy;
+
+  // Move prev to the node just before the sublist
+  for (let i = 1; i < left; i++) {
+    prev = prev.next;
+  }
+
+  // initialize the current pointer to the first node after the prev node
+  let curr = prev.next;
+  // create the next helper node
+  let next = null;
+  // loop the number of nodes we need to reverse
+  for (let i = 0; i < right - left; i++) {
+    //the next node is the node after the current node we are pivoting around
+    next = curr.next;
+    // point the current node past the node we are about to move
+    curr.next = next.next;
+    // the node we are moving should point to the tail of the previous sublist
+    next.next = prev.next;
+    // the last node before the sublist starts now should point to the node we have moved
+    prev.next = next;
+  }
+
+  // effectively return the head by referencing what the dummy node points to
+  return dummy.next;
+}
+```
+
+### Time and Space Complexity analysis
+
+For this problem, the time complexity is O(n) where n is the number of nodes in the linked list. This is because we are iterating through the list at least once since the worst case scenario is that the entire linked list is reversed. The space complexity is O(1) because we are not using any extra space that grows with the input size. We are only using a few pointers to keep track of the nodes we are reversing.
+
+Thanks for reading along! If you have any questions or comments, feel free to each out to me on [Bluesky](https://bsky.app/profile/pacman326.bsky.social) or [LinkedIn](https://www.linkedin.com/in/paulacoroneos/). I would love to hear from you!
