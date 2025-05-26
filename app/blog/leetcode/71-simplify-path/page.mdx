@@ -1,0 +1,82 @@
+export const meta = {
+  title: "Leetcode 71 - Simplify Path (Typescript)",
+  description: `Leetcode 71 - Simplify Path using Typescript.`,
+  date: "2025-05-26",
+  tags: ["leetcode", "linked list", "typescript"],
+};
+
+Today let's work on processing unix paths with [Leetcode 92 - Simplify Path](https://leetcode.com/problems/simplify-path/description/).
+
+{/* more */}
+
+## Problem statement and anaylsis
+
+As always let's start by looking at the problem statement:
+
+> You are given an absolute path for a Unix-style file system, which always begins with a slash '/'. Your task is to transform this absolute path into its simplified canonical path.
+
+> The rules of a Unix-style file system are as follows:
+>
+> - A single period '.' represents the current directory.
+> - A double period '..' represents the previous/parent directory.
+> - Multiple consecutive slashes such as '//' and '///' are treated as a single slash '/'.
+> - Any sequence of periods that does not match the rules above should be treated as a valid directory or file name. For example, '...' and '....' are valid directory or file names.
+
+> The simplified canonical path should follow these rules:
+>
+> - The path must start with a single slash '/'.
+> - Directories within the path must be separated by exactly one slash '/'.
+> - The path must not end with a slash '/', unless it is the root directory.
+> - The path must not have any single or double periods ('.' and '..') used to denote current or parent directories.
+
+> Return the simplified canonical path.
+
+This has to be a record for a problem description for us. But its deceivingly complex. Even I overcomplicated the situation starting out. So let's break down what the problem is asking us.
+
+We are trying to create a unix safe file path given the above rules. As we may know as devs:
+
+- '../' typically means to go up one directory
+- '.' means the current directory
+- multiple slashes are ignored and treated as a single slash
+- any other sequence of characters is a valid directory or file name
+
+We know that paths typically have a well known structure. But what is that structure? Well we know that the path is made with segments that are separated by slashes. So even as a string we can actually consider the path as an array of segments. If we say for example "split" the path by slashes we can get an array of segments.
+
+So now we have a decent way to process the parts of the path. We can iterate through each segment and do something. But what exactly can we do? After discussing things such as linked lists, hash tables, and pointers it's finally time to introduce the concept of a stack. A stack is a data structure that allows us to push and pop elements in a last in first out (LIFO) manner.
+
+Now how does a stack help us here? Well recall that we are trying to create a unix safe file path. As we iterate and get back segments we can store them somewhere. If while iterating the next segment has for example a '..' we know that the previous segment is not useful. This is because by navigating up a direcrory we negate the previous segment. Since in a stack data structure the last element is the first one to be removed, we can simply perform a **pop** operation and not store the _'..'_ segment. If the next segment is a '.' for example we can simply ignore it (and not push to the stack). If the next segment is a valid directory or file name we can simply push it to the stack. Finally similar to a **'.'** if the segment is an empty string (can occur if we have a lot of excess shashes) we can also ignore it.
+
+If we implement the stack as a Javascript array, then we can use the built in **push** and **pop** methods to add and remove elements from the stack. At the end of the iteration we can simply use **Array.join()** to join the elements of the stack to restore it to being a string with the **/** delimiter. Finally we concatenate a forward slash to the beginning of the string to ensure that the path starts with a single slash to comply with the rules of a Unix-style file system.
+
+One side optimization is to check whether the length is a single character. If it is, we can simply return a single slash as the path. This is because a single slash is the root directory and is a valid path. But feel free to skip this optimization if you want to.
+
+### Solution
+
+```typescript
+function simplifyPath(path: string): string {
+  //base case
+  if (path.length === 1) return "/";
+
+  const stack = [];
+
+  const pathArr = path.split("/");
+
+  for (const part of pathArr) {
+    if (part === "..") {
+      stack.pop();
+    } else if (["", "."].includes(part)) {
+      continue;
+    } else {
+      stack.push(part);
+    }
+  }
+
+  return `/${stack.join("/")}`;
+}
+```
+
+### Time and Space Complexity analysis
+
+The time complexity of this solution is **O(n)**, where n is the length of the input path string. This is because we iterate through each segment of the path exactly once. The space complexity is also **O(n)** in the worst case, as we may need to store all segments in the stack if there are no '..' or '.' segments.
+
+Thanks for reading along! If you have any questions or comments, feel free to each out to me on [Bluesky](https://bsky.app/profile/pacman326.bsky.social) or [LinkedIn](https://www.linkedin.com/in/paulacoroneos/). I would love to hear from you!
