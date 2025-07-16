@@ -21,8 +21,8 @@ importers:
         specifier: ^15.3.2
         version: 15.3.2
       '@next/mdx':
-        specifier: ^15.3.2
-        version: 15.3.2(@mdx-js/loader@3.1.0(webpack@5.100.2))(@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0))
+        specifier: ^15.4.1
+        version: 15.4.1(@mdx-js/loader@3.1.0(webpack@5.100.2))(@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0))
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.15.17)(typescript@5.8.3)))
@@ -700,8 +700,8 @@ packages:
   '@next/eslint-plugin-next@15.3.2':
     resolution: {integrity: sha512-ijVRTXBgnHT33aWnDtmlG+LJD+5vhc9AKTJPquGG5NKXjpKNjc62woIhFtrAcWdBobt8kqjCoaJ0q6sDQoX7aQ==}
 
-  '@next/mdx@15.3.2':
-    resolution: {integrity: sha512-D6lSSbVzn1EiPwrBKG5QzXClcgdqiNCL8a3/6oROinzgZnYSxbVmnfs0UrqygtGSOmgW7sdJJSEOy555DoAwvw==}
+  '@next/mdx@15.4.1':
+    resolution: {integrity: sha512-IFONSoKQJEZ2IU97on9bthyIyhp+VT5VAhizlZs0Iped9mrM1NShuabUjeoYhVE6l7oUscoWiuWDBru13PFRCA==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -5671,7 +5671,7 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.3.2(@mdx-js/loader@3.1.0(webpack@5.100.2))(@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0))':
+  '@next/mdx@15.4.1(@mdx-js/loader@3.1.0(webpack@5.100.2))(@mdx-js/react@3.1.0(@types/react@19.0.12)(react@19.1.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
