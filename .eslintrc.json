@@ -1,14 +1,24 @@
 {
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "ignorePatterns": ["dist", ".astro", "tsconfig.tsbuildinfo"],
   "extends": [
     "eslint:recommended",
-    "eslint-config-next",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:tailwindcss/recommended",
-    "plugin:prettier/recommended"
+    "plugin:tailwindcss/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "overrides": [
+    {
+      "files": ["*.js", "*.cjs", "*.mjs"],
+      "env": {
+        "node": true
+      }
+    },
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {

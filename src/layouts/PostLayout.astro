@@ -1,0 +1,57 @@
+---
+import { format, parseISO } from "date-fns";
+import PageTitle from "../components/PageTitle.astro";
+
+type PostMeta = {
+  title: string;
+  description?: string;
+  date?: string;
+  discussion?: string;
+};
+
+interface Props {
+  meta: PostMeta;
+}
+
+const { meta } = Astro.props;
+---
+
+<article class="divide-gray-200 divide-y" data-testid="blog-post">
+  <header class="py-4">
+    <div class="space-y-1 text-center">
+      {meta.date && (
+        <dl class="space-y-10">
+          <div>
+            <dt class="sr-only">Published on</dt>
+            <dd class="text-gray-500 text-base font-medium leading-6">
+              <time dateTime={meta.date}>{format(parseISO(meta.date), "MMMM dd, yyyy")}</time>
+            </dd>
+          </div>
+        </dl>
+      )}
+      <div>
+        <PageTitle>{meta.title}</PageTitle>
+      </div>
+    </div>
+  </header>
+  <div style="grid-template-rows: auto 1fr;">
+    <div class="divide-gray-200 divide-y xl:col-span-3 xl:row-span-2 xl:pb-0">
+      <div class="prose px-2 py-8">
+        <slot />
+      </div>
+      {meta.discussion && (
+        <div class="pb-16 pt-6">
+          <p>
+            Want to talk about this post?
+            <a href={meta.discussion} class="font-medium text-secondary hover:text-primary">Discuss this on GitHub →</a>
+          </p>
+        </div>
+      )}
+    </div>
+    <footer class="divide-gray-200 divide-y text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2">
+      <div class="pt-8">
+        <a href="/" class="text-secondary hover:text-primary">← Back to the blog</a>
+      </div>
+    </footer>
+  </div>
+</article>

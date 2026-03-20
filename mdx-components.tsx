@@ -9,7 +9,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
     "pre.code": ({ className, ...props }) => (
-      <code className={`${className} text-gray-200`} {...props} />
+      <code className={`${className} text-white`} {...props} />
     ),
     ...components,
   };
