@@ -7,12 +7,10 @@ import remarkPrism from "remark-prism";
 import remarkGfm from "remark-gfm";
 import rehypePrefixBaseUrl from "./src/lib/rehype-prefix-base-url.mjs";
 
-const site = "https://paulacoroneos.github.io";
-const base = "/pcoroneos.com";
+const site = "https://www.pcoroneos.com";
 
 export default defineConfig({
   site,
-  base,
   redirects: {
     "//atoi": "/blog/atoi",
     "/climbing-stairs": "/blog/climbing-stairs",
@@ -45,7 +43,7 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkImages, remarkEmoji, remarkPrism, remarkGfm],
-      rehypePlugins: [[rehypePrefixBaseUrl, { base }]],
+      rehypePlugins: [rehypePrefixBaseUrl],
     }),
     react(),
   ],
