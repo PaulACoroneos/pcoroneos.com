@@ -6,14 +6,11 @@ import remarkEmoji from "remark-emoji";
 import remarkPrism from "remark-prism";
 import remarkGfm from "remark-gfm";
 
-const repo = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
-const owner = process.env.GITHUB_REPOSITORY_OWNER ?? "";
-const isUserPage = Boolean(owner) && repo.toLowerCase() === `${owner.toLowerCase()}.github.io`;
-const githubSite = owner ? `https://${owner}.github.io` : "https://pcoroneos.com";
-const base = isUserPage ? "/" : repo ? `/${repo}` : "/";
+const site = "https://paulacoroneos.github.io";
+const base = "/pcoroneos.com";
 
 export default defineConfig({
-  site: githubSite,
+  site,
   base,
   redirects: {
     "//atoi": "/blog/atoi",
