@@ -1,0 +1,21 @@
+---
+const footerLinks = [
+  { href: "https://github.com/PaulACoroneos", label: "Github" },
+  { href: "https://www.linkedin.com/in/paulacoroneos/", label: "LinkedIn" },
+  { href: "https://meta.masto.host/@pacman326", label: "Mastodon", rel: "me" },
+  { href: "https://www.twitch.tv/pacman326", label: "Twitch" },
+  { href: "https://bsky.app/profile/pacman326.bsky.social", label: "Bluesky" },
+  { href: "https://www.pcoroneos.com/rss.xml", label: "RSS" },
+];
+---
+
+<footer class="md:text-md flex items-center justify-between space-x-2 py-4 text-sm lg:text-lg">
+  <span class="italic">© Paul Coroneos 2026</span>
+  <div class="flex flex-wrap space-x-4">
+    {footerLinks.map((link) => (
+      <a class="text-secondary hover:text-primary" href={link.href} rel={link.rel}>
+        {link.label}
+      </a>
+    ))}
+  </div>
+</footer>

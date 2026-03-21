@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import mdxComponents from "../lib/mdx-components";
+import AboutContent, { meta } from "../../app/about/page.mdx";
+---
+
+<BaseLayout title={`${meta.title} - Paul Coroneos`} description={meta.description}>
+  <article class="divide-gray-200 divide-y" data-testid="blog-post">
+    <header class="py-4">
+      <div class="space-y-1 text-center">
+        <h1 class="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+          {meta.title}
+        </h1>
+      </div>
+    </header>
+    <div class="prose px-2 py-8">
+      <AboutContent components={mdxComponents} />
+    </div>
+  </article>
+</BaseLayout>

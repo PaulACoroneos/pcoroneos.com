@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostLayout from "../../layouts/PostLayout.astro";
+import mdxComponents from "../../lib/mdx-components";
+import { getAllPosts } from "../../lib/posts";
+
+export const getStaticPaths = () => {
+  return getAllPosts().map((post) => ({
+    params: {
+      slug: post.link.replace(/^\/blog\//, ""),
+    },
+    props: {
+      post,
+    },
+  }));
+};
+
+const { post } = Astro.props;
+const Content = post.module.default;
+const title = `${post.module.meta.title} - Paul Coroneos`;
+---
+
+<BaseLayout title={title} description={post.module.meta.description}>
+  <PostLayout meta={post.module.meta}>
+    <Content components={mdxComponents} />
+  </PostLayout>
+</BaseLayout>

@@ -2,7 +2,7 @@ This is the personal blog/portfolio for Paul Coroneos
 
 ## Technologies used
 
+- Astro
 - React
-- Next
 - Tailwind
-- Cypress
+- Vitest
