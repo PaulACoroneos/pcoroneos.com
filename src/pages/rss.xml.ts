@@ -8,8 +8,8 @@ export const GET: APIRoute = async () => {
     description: "Personal blog and portfolio for Paul Coroneos.",
     language: "en",
     copyright: `©${new Date().getFullYear()} Paul Coroneos`,
-    site_url: "https://pcoroneos.com",
-    feed_url: "https://pcoroneos.com/rss.xml",
+    site_url: "https://www.pcoroneos.com",
+    feed_url: "https://www.pcoroneos.com/rss.xml",
   });
 
   const posts = getAllPosts();
@@ -18,7 +18,7 @@ export const GET: APIRoute = async () => {
       author: "Paul Coroneos",
       title: meta.title,
       guid: link,
-      url: `https://pcoroneos.com${link}`,
+      url: `https://www.pcoroneos.com${link}`,
       date: meta.date,
       categories: meta.tags?.map((tag) => tag) ?? [],
       description: meta.description,
