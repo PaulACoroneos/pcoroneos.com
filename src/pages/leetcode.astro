@@ -2,8 +2,10 @@
 import { format, parseISO } from "date-fns";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAllPosts } from "../lib/posts";
+import { withBase } from "../lib/with-base";
 
 const posts = getAllPosts().filter((post) => post.module.meta.tags?.includes("leetcode"));
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Leetcode - Paul Coroneos" description="Leetcode solutions by Paul Coroneos">
@@ -37,14 +39,14 @@ const posts = getAllPosts().filter((post) => post.module.meta.tags?.includes("le
             <div class="space-y-5 xl:col-span-3">
               <div class="space-y-6">
                 <h2 class="text-2xl font-bold leading-8 tracking-tight">
-                  <a href={link} class="text-gray-900">{meta.title}</a>
+                  <a href={withBase(base, link)} class="text-gray-900">{meta.title}</a>
                 </h2>
                 <div class="text-gray-500 prose">
                   <p>{excerpt}</p>
                 </div>
               </div>
               <div class="text-base font-medium leading-6">
-                <a href={link} class="text-secondary hover:text-primary" aria-label={`Read ${meta.title}`}>
+                <a href={withBase(base, link)} class="text-secondary hover:text-primary" aria-label={`Read ${meta.title}`}>
                   Read more →
                 </a>
               </div>
