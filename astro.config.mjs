@@ -5,6 +5,7 @@ import remarkImages from "remark-images";
 import remarkEmoji from "remark-emoji";
 import remarkPrism from "remark-prism";
 import remarkGfm from "remark-gfm";
+import rehypePrefixBaseUrl from "./src/lib/rehype-prefix-base-url.mjs";
 
 const site = "https://paulacoroneos.github.io";
 const base = "/pcoroneos.com";
@@ -44,6 +45,7 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkImages, remarkEmoji, remarkPrism, remarkGfm],
+      rehypePlugins: [[rehypePrefixBaseUrl, { base }]],
     }),
     react(),
   ],
