@@ -6,12 +6,10 @@ import remarkEmoji from "remark-emoji";
 import remarkPrism from "remark-prism";
 import remarkGfm from "remark-gfm";
 
-const site = "https://paulacoroneos.github.io";
-const base = "/pcoroneos.com";
+const site = "https://paulacoroneos.github.io/pcoroneos.com";
 
 export default defineConfig({
   site,
-  base,
   redirects: {
     "//atoi": "/blog/atoi",
     "/climbing-stairs": "/blog/climbing-stairs",
