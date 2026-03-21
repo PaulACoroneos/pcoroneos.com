@@ -9,6 +9,7 @@ interface Props {
 const { title, githubLink, deployedLink, tags } = Astro.props;
 const githubTitle = `Github link for ${title}`;
 const deployedTitle = `Deployed link for ${title}`;
+const base = import.meta.env.BASE_URL;
 ---
 
 <div class="grid w-full grid-cols-1 items-center gap-1 rounded-lg bg-secondary p-3 md:grid-cols-3">
@@ -20,12 +21,12 @@ const deployedTitle = `Deployed link for ${title}`;
   </ul>
   <div class="flex justify-end space-x-2">
     <a class="flex items-center rounded bg-primary px-2 py-1" title={githubTitle} href={githubLink}>
-      <img width="24" height="24" src="/github.png" alt="" />
+      <img width="24" height="24" src={`${base}github.png`} alt="" />
       <span class="text-sm font-medium text-white">Github</span>
     </a>
     {deployedLink ? (
       <a class="flex items-center rounded bg-primary px-2 py-1" title={deployedTitle} href={deployedLink}>
-        <img width="24" height="32" src="/deploy.png" alt="" />
+        <img width="24" height="32" src={`${base}deploy.png`} alt="" />
         <span class="pl-1 text-sm font-medium text-white">Deploy</span>
       </a>
     ) : null}
