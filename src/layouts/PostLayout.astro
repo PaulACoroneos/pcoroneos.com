@@ -1,13 +1,16 @@
 ---
 import { format, parseISO } from "date-fns";
 import PageTitle from "../components/PageTitle.astro";
+import TagBadge from "../components/TagBadge.astro";
 import { withBase } from "../lib/with-base";
+import { cleanTitle } from "../lib/clean-title";
 
 type PostMeta = {
   title: string;
   description?: string;
   date?: string;
   discussion?: string;
+  tags?: string[];
 };
 
 interface Props {
@@ -16,44 +19,52 @@ interface Props {
 
 const { meta } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const displayTitle = cleanTitle(meta.title);
 ---
 
-<article class="divide-gray-200 divide-y" data-testid="blog-post">
-  <header class="py-4">
-    <div class="space-y-1 text-center">
+<article class="border-t-4 border-primary" data-testid="blog-post">
+  <header class="space-y-4 py-8">
+    <div class="space-y-3 text-center">
       {meta.date && (
-        <dl class="space-y-10">
-          <div>
-            <dt class="sr-only">Published on</dt>
-            <dd class="text-gray-500 text-base font-medium leading-6">
-              <time dateTime={meta.date}>{format(parseISO(meta.date), "MMMM dd, yyyy")}</time>
-            </dd>
-          </div>
+        <dl>
+          <dt class="sr-only">Published on</dt>
+          <dd class="text-base font-medium text-text-muted">
+            <time dateTime={meta.date}>{format(parseISO(meta.date), "MMMM dd, yyyy")}</time>
+          </dd>
         </dl>
       )}
-      <div>
-        <PageTitle>{meta.title}</PageTitle>
+      <div transition:name={`post-title-${meta.title}`}>
+        <PageTitle>{displayTitle}</PageTitle>
       </div>
-    </div>
-  </header>
-  <div style="grid-template-rows: auto 1fr;">
-    <div class="divide-gray-200 divide-y xl:col-span-3 xl:row-span-2 xl:pb-0">
-      <div class="prose px-2 py-8">
-        <slot />
-      </div>
-      {meta.discussion && (
-        <div class="pb-16 pt-6">
-          <p>
-            Want to talk about this post?
-            <a href={meta.discussion} class="font-medium text-secondary hover:text-primary">Discuss this on GitHub →</a>
-          </p>
-        </div>
+      {meta.tags?.length && (
+        <ul class="flex flex-wrap justify-center gap-2 pt-1">
+          {meta.tags.map((tag) => (
+            <li><TagBadge tag={tag} /></li>
+          ))}
+        </ul>
       )}
     </div>
-    <footer class="divide-gray-200 divide-y text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2">
-      <div class="pt-8">
-        <a href={withBase(base, "/blog")} class="text-secondary hover:text-primary">← Back to the blog</a>
+  </header>
+  <div class="space-y-8">
+    <div class="prose px-2 py-8">
+      <slot />
+    </div>
+    {meta.discussion && (
+      <div class="pb-16 pt-6">
+        <p class="text-text-primary">
+          Want to talk about this post?
+          <a href={meta.discussion} class="font-medium text-primary hover:text-primary-hover transition-colors">Discuss this on GitHub &rarr;</a>
+        </p>
       </div>
-    </footer>
+    )}
   </div>
+  <footer class="border-t border-border pt-8 text-sm font-medium">
+    <a
+      href={withBase(base, "/blog")}
+      class="group inline-flex min-h-[44px] items-center text-primary transition-colors hover:text-primary-hover"
+    >
+      <span class="mr-1 transition-transform group-hover:-translate-x-0.5">&larr;</span>
+      Back to the blog
+    </a>
+  </footer>
 </article>

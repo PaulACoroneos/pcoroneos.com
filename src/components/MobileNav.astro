@@ -1,0 +1,89 @@
+---
+import { withBase } from "../lib/with-base";
+
+const base = import.meta.env.BASE_URL;
+
+const navLinks = [
+  { href: withBase(base, "/blog"), label: "Blog" },
+  { href: withBase(base, "/leetcode"), label: "Leetcode" },
+  { href: withBase(base, "/portfolio"), label: "Portfolio" },
+  { href: withBase(base, "/about"), label: "About" },
+];
+---
+
+<!-- Hamburger button -->
+<button
+  id="mobile-menu-btn"
+  type="button"
+  class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-white transition-colors hover:opacity-80 md:hidden"
+  aria-label="Open menu"
+  aria-expanded="false"
+  aria-controls="mobile-menu"
+>
+  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+  </svg>
+</button>
+
+<!-- Mobile menu panel -->
+<div
+  id="mobile-menu"
+  class="fixed inset-x-0 top-0 z-50 hidden h-screen bg-header backdrop-blur-md"
+>
+  <div class="flex items-center justify-end px-4 py-4">
+    <button
+      id="mobile-menu-close"
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-white transition-colors hover:opacity-80"
+      aria-label="Close menu"
+    >
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <nav class="flex flex-col items-center space-y-2 px-4 pt-8" aria-label="Mobile navigation">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="w-full rounded-lg px-4 py-4 text-center text-xl font-display text-white transition-colors hover:opacity-80"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const closeBtn = document.getElementById("mobile-menu-close");
+    if (!btn || !menu || !closeBtn) return;
+
+    function open() {
+      menu!.classList.remove("hidden");
+      btn!.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      closeBtn!.focus();
+    }
+
+    function close() {
+      menu!.classList.add("hidden");
+      btn!.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      btn!.focus();
+    }
+
+    btn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+
+    menu.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", close);
+    });
+  });
+</script>

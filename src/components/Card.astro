@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/with-base";
+import TagBadge from "./TagBadge.astro";
 
 interface Props {
   title: string;
@@ -14,23 +15,33 @@ const deployedTitle = `Deployed link for ${title}`;
 const base = import.meta.env.BASE_URL;
 ---
 
-<div class="grid w-full grid-cols-1 items-center gap-1 rounded-lg bg-secondary p-3 md:grid-cols-3">
-  <h2 class="text-md font-bold text-white md:text-xl">{title}</h2>
-  <ul class="space-x-2">
-    {tags.map((tag) => (
-      <li class="inline-block rounded bg-quaternary p-2 text-xs text-white">{tag}</li>
-    ))}
-  </ul>
-  <div class="flex justify-end space-x-2">
-    <a class="flex items-center rounded bg-primary px-2 py-1" title={githubTitle} href={githubLink}>
-      <img width="24" height="24" src={withBase(base, "/github.png")} alt="" />
-      <span class="text-sm font-medium text-white">Github</span>
-    </a>
-    {deployedLink ? (
-      <a class="flex items-center rounded bg-primary px-2 py-1" title={deployedTitle} href={deployedLink}>
-        <img width="24" height="32" src={withBase(base, "/deploy.png")} alt="" />
-        <span class="pl-1 text-sm font-medium text-white">Deploy</span>
+<div class="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <h2 class="font-display text-lg font-bold text-text-primary md:text-xl">{title}</h2>
+    <ul class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <li><TagBadge tag={tag} /></li>
+      ))}
+    </ul>
+    <div class="flex shrink-0 gap-2">
+      <a
+        class="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+        title={githubTitle}
+        href={githubLink}
+      >
+        <img class="h-5 w-5 shrink-0" src={withBase(base, "/github.png")} alt="" />
+        <span>Github</span>
       </a>
-    ) : null}
+      {deployedLink ? (
+        <a
+          class="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+          title={deployedTitle}
+          href={deployedLink}
+        >
+          <img class="h-5 w-5 shrink-0" src={withBase(base, "/deploy.png")} alt="" />
+          <span>Deploy</span>
+        </a>
+      ) : null}
+    </div>
   </div>
 </div>

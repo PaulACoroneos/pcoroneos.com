@@ -2,6 +2,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,13 +11,21 @@ module.exports = {
   ],
   theme: {
     colors: {
+      transparent: "transparent",
+      current: "currentColor",
       primary: "var(--color-primary)",
+      "primary-hover": "var(--color-primary-hover)",
       secondary: "var(--color-secondary)",
       tertiary: "var(--color-tertiary)",
       quaternary: "var(--color-quaternary)",
       quinary: "var(--color-quinary)",
+      bg: "var(--color-bg)",
+      surface: "var(--color-surface)",
+      header: "var(--color-header)",
+      "text-primary": "var(--color-text)",
+      "text-muted": "var(--color-text-muted)",
+      border: "var(--color-border)",
       white: "var(--color-white)",
-      terminal: "var(--color-terminal)",
       code: {
         green: "#b5f4a5",
         yellow: "#ffe484",
@@ -34,21 +43,62 @@ module.exports = {
         14: "3.5rem",
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["DM Sans", ...defaultTheme.fontFamily.sans],
+        mono: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
+        display: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
       },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: "100%",
+            fontSize: "1.125rem",
+            lineHeight: "1.65",
+            color: "var(--color-text)",
+            a: {
+              color: "var(--color-primary)",
+              "&:hover": {
+                color: "var(--color-primary-hover)",
+              },
+            },
+            strong: {
+              color: "var(--color-text)",
+            },
+            h1: {
+              color: "var(--color-text)",
+            },
+            h2: {
+              color: "var(--color-text)",
+            },
+            h3: {
+              color: "var(--color-text)",
+            },
+            h4: {
+              color: "var(--color-text)",
+            },
+            blockquote: {
+              color: "var(--color-text-muted)",
+              borderLeftColor: "var(--color-primary)",
+            },
+            code: {
+              color: "var(--color-text)",
+            },
+            "ol > li::marker": {
+              color: "var(--color-text-muted)",
+            },
+            "ul > li::marker": {
+              color: "var(--color-text-muted)",
+            },
+            hr: {
+              borderColor: "var(--color-border)",
+            },
+            thead: {
+              borderBottomColor: "var(--color-border)",
+            },
+            "tbody tr": {
+              borderBottomColor: "var(--color-border)",
+            },
           },
         },
-        bullets: "line",
-        linkColor: [
-          "var(--color-secondary)",
-          {
-            hover: "var(--color-primary)",
-          },
-        ],
       },
     },
   },

@@ -20,7 +20,7 @@ const Content = post.module.default;
 const title = `${post.module.meta.title} - Paul Coroneos`;
 ---
 
-<BaseLayout title={title} description={post.module.meta.description}>
+<BaseLayout title={title} description={post.module.meta.description} ogType="article">
   <PostLayout meta={post.module.meta}>
     <Content components={mdxComponents} />
   </PostLayout>

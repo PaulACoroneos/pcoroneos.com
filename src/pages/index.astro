@@ -1,53 +1,130 @@
 ---
 import { format, parseISO } from "date-fns";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TagBadge from "../components/TagBadge.astro";
 import { getAllPosts } from "../lib/posts";
 import { withBase } from "../lib/with-base";
+import { cleanTitle } from "../lib/clean-title";
 
 const posts = getAllPosts();
 const base = import.meta.env.BASE_URL;
+
+const featuredPost = posts[0];
+const restPosts = posts.slice(1, 7);
+const remainingPosts = posts.slice(7);
 ---
 
 <BaseLayout title="Paul Coroneos" description="A blog and portfolio by Paul Coroneos">
   {posts.length ? (
-    <div class="divide-gray-200 divide-y">
-      <div class="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
-        <h1 class="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+    <div class="space-y-8 py-6 md:py-10">
+      <div class="space-y-2">
+        <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
           Latest Blog Posts
         </h1>
-        <p class="text-gray-500 text-lg leading-7">
+        <p class="text-lg text-text-muted">
           Most recent post: {format(parseISO(posts[0].module.meta.date), "MMMM dd, yyyy")}
         </p>
       </div>
-      <ul class="divide-gray-200 divide-y">
-        {posts.map(({ link, module: { meta }, excerpt }) => (
-          <li class="py-4 md:py-12">
-            <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+
+      {/* Bento grid */}
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {/* Featured post — large hero card */}
+        <article class="scroll-reveal group rounded-2xl border-l-4 border-primary bg-surface p-8 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md md:col-span-2 xl:row-span-2">
+          <div class="flex h-full flex-col justify-between gap-6">
+            <div class="space-y-4">
               <dl>
                 <dt class="sr-only">Published on</dt>
-                <dd class="text-gray-500 text-base font-medium leading-6">
-                  <time dateTime={meta.date}>{format(parseISO(meta.date), "MMMM dd, yyyy")}</time>
+                <dd class="text-sm font-medium text-text-muted">
+                  <time dateTime={featuredPost.module.meta.date}>
+                    {format(parseISO(featuredPost.module.meta.date), "MMMM dd, yyyy")}
+                  </time>
                 </dd>
               </dl>
-              <div class="space-y-5 xl:col-span-3">
-                <div class="space-y-6">
-                  <h2 class="text-2xl font-bold leading-8 tracking-tight">
-                    <a class="text-gray-900" href={withBase(base, link)}>{meta.title}</a>
-                  </h2>
-                  <div class="text-gray-500 prose">
-                    <p>{excerpt}</p>
-                  </div>
-                </div>
-                <div class="text-base font-medium leading-6">
-                  <a href={withBase(base, link)} class="text-secondary hover:text-primary" aria-label={`Read ${meta.title}`}>
-                    Read more →
+              <h2 class="font-display text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
+                <a href={withBase(base, featuredPost.link)} transition:name={`post-title-${featuredPost.module.meta.title}`}>
+                  {cleanTitle(featuredPost.module.meta.title)}
+                </a>
+              </h2>
+              <p class="text-text-muted leading-relaxed">{featuredPost.excerpt}</p>
+              {featuredPost.module.meta.tags?.length && (
+                <ul class="flex flex-wrap gap-2">
+                  {featuredPost.module.meta.tags.map((tag) => (
+                    <li><TagBadge tag={tag} /></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <a
+              href={withBase(base, featuredPost.link)}
+              class="group/link inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+              aria-label={`Read ${featuredPost.module.meta.title}`}
+            >
+              Read more
+              <span class="ml-1 transition-transform group-hover/link:translate-x-0.5">&rarr;</span>
+            </a>
+          </div>
+        </article>
+
+        {/* Rest of the bento grid posts */}
+        {restPosts.map((post) => (
+          <article class="scroll-reveal group rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+            <div class="flex h-full flex-col justify-between gap-4">
+              <div class="space-y-3">
+                <dl>
+                  <dt class="sr-only">Published on</dt>
+                  <dd class="text-sm font-medium text-text-muted">
+                    <time dateTime={post.module.meta.date}>
+                      {format(parseISO(post.module.meta.date), "MMMM dd, yyyy")}
+                    </time>
+                  </dd>
+                </dl>
+                <h2 class="font-display text-lg font-bold tracking-tight text-text-primary">
+                  <a href={withBase(base, post.link)} transition:name={`post-title-${post.module.meta.title}`}>
+                    {cleanTitle(post.module.meta.title)}
                   </a>
-                </div>
+                </h2>
+                <p class="line-clamp-3 text-sm text-text-muted">{post.excerpt}</p>
+                {post.module.meta.tags?.length && (
+                  <ul class="flex flex-wrap gap-2">
+                    {post.module.meta.tags.map((tag) => (
+                      <li><TagBadge tag={tag} /></li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            </article>
-          </li>
+              <a
+                href={withBase(base, post.link)}
+                class="group/link inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+                aria-label={`Read ${post.module.meta.title}`}
+              >
+                Read more
+                <span class="ml-1 transition-transform group-hover/link:translate-x-0.5">&rarr;</span>
+              </a>
+            </div>
+          </article>
         ))}
-      </ul>
+      </div>
+
+      {/* Remaining posts in a simpler list */}
+      {remainingPosts.length > 0 && (
+        <div class="space-y-4">
+          <h2 class="font-display text-xl font-bold text-text-primary">Older Posts</h2>
+          <div class="space-y-3">
+            {remainingPosts.map((post) => (
+              <article class="scroll-reveal flex items-baseline gap-4 rounded-xl border border-border bg-surface px-5 py-4 transition-all duration-200 hover:shadow-sm">
+                <time class="shrink-0 text-sm text-text-muted" dateTime={post.module.meta.date}>
+                  {format(parseISO(post.module.meta.date), "MMM dd, yyyy")}
+                </time>
+                <h3 class="font-medium text-text-primary">
+                  <a href={withBase(base, post.link)} class="hover:text-primary transition-colors">
+                    {cleanTitle(post.module.meta.title)}
+                  </a>
+                </h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   ) : null}
 </BaseLayout>
