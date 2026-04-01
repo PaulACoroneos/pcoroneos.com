@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, githubLink, deployedLink, tags } = Astro.props;
-const githubTitle = `Github link for ${title}`;
+const githubTitle = `GitHub link for ${title}`;
 const deployedTitle = `Deployed link for ${title}`;
 const base = import.meta.env.BASE_URL;
 ---
@@ -30,7 +30,7 @@ const base = import.meta.env.BASE_URL;
         href={githubLink}
       >
         <img class="h-5 w-5 shrink-0" src={withBase(base, "/github.png")} alt="" />
-        <span>Github</span>
+        <span>GitHub</span>
       </a>
       {deployedLink ? (
         <a
