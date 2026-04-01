@@ -1,0 +1,88 @@
+export const meta = {
+  title: "Redesigning (and migrating) my blog with Claude Code",
+  description:
+    "How I used Claude Code's plan mode (Opus 4.6 for planning, Sonnet 4.6 for implementation) to migrate my blog from Next.JS to Astro, redesign it with a terracotta/teal palette, add dark mode and accessibility improvements, and move hosting from Vercel to GitHub Pages.",
+  date: "2026-03-31",
+  tags: [
+    "astrojs",
+    "tailwindcss",
+    "claude-code",
+    "llm",
+    "ai",
+    "design",
+    "nextjs",
+  ],
+};
+
+A while back I wrote about [migrating my blog from NextJS to Astro using GitHub Copilot](/blog/migrating-to-astro). Well unfortunately that attempt stalled after 2 hours when the agent cornered itself in errors it couldn't resolve. I shelved it and moved on. Now in 2026, the ecosystem has matured greatly. Developers and non-developers alike are using models like Sonnet/Opus 4.5+ to migrate codebases and rapidly iterate on design in ways that simply weren't possible before.
+
+{/* more */}
+
+So I decided to try again, this time more ambitiously. Not just the migration, but a full redesign of a color palette I had grown stale on, plus a handful of features the old site was missing. For the harness I've been increasingly drawn to [Claude Code](https://claude.ai/code), Anthropic's CLI tool, and this felt like the right project to put it through its paces.
+
+## The approach: plan first, implement second
+
+I elected to use the emerging industry pattern: using Opus 4.6 for planning and Sonnet 4.6 for implementation.The biggest difference from my Copilot experience back in May of last year (and Copilot has since added this capability) was using Claude Code's **plan mode**. Before a single line of code was touched, I spent time with Opus 4.6 working through:
+
+- What 2026 design patterns actually look like (bento grids, scroll-driven animations, glassmorphism touches)
+- A new color palette - I specifically said "no purple and blue, it looks like every other site in 2026!" (I am a huge fan of shades of green and earthy tones)
+- Typography choices (swapped Inter for JetBrains Mono + DM Sans) to give a more dev focus to blog while also encouraging a sense of having some fun.
+- Accessibility requirements (WCAG 2.1 AA)
+- The order of implementation:
+  - Start with Astro.JS migration
+  - Create new design components
+  - Tweak styles for page and code blocks
+  - Cleanup various pages and update metadata block
+  - Perform a11y (accessibility) audit
+
+We landed on a **terracotta/copper accent** with deep teal-slate backgrounds. Completely different from the blue/indigo palette I had before. The planning agent even flagged that Tailwind 3's opacity modifier syntax doesn't work with raw hex CSS variables, a subtle bug we avoided before writing a line of code. I have since added several additional Eslint plugins (including TailwindCSS community plugin) and an associated skill so agent can rely on lint to help it make deterministic decisions around these things.
+
+Once I approved the plan, Sonnet took over and executed it phase by phase.
+
+## What actually got built
+
+**Dark mode** with system preference detection and a manual toggle. An inline script in `<head>` reads `localStorage` before first paint to avoid the flash-of-wrong-theme. Pressing the toggle persists your preference across sessions. There are several react hooks in npm that handle this, but it was simple enough to code this on my own with Claude's assistance.
+
+**Bento grid home page.** The most recent post gets a large hero card spanning two columns, followed by smaller cards for the next six posts, then a compact list for older ones. It's a significant visual upgrade from the old divide-y list. It's most likely a bit trendy, however I am opening myself up to be a bit more flexible with making style changes on my blog.
+
+**Tag badges on posts.** A shared `TagBadge` component now appears on the home page cards, blog listing, leetcode solutions, and individual post headers. Tags are sourced from the existing `meta.tags` array - no content changes required. So anytime I now add tags to my metadata block for my markdown files they cleanly show up. Eventually I will likely create some sort of filtering or aggregation around these similar to how tools such as Notion handle this.
+
+**Accessibility improvements** I'm actually proud of: skip navigation link, visible focus indicators, 44px minimum touch targets, ARIA labels on navigation and search, `aria-live` on the leetcode filter results, and `prefers-reduced-motion` support that disables all animations. These honestly should have been implemented day one (and some were). But I wanted to make sure my site was as accessibile as possible to a wider variety of readers.
+
+**A custom Shiki syntax theme.** The old PrismJS CSS approach was being silently overridden by Astro 6's built-in Shiki highlighter. Once I realized this (the giveaway was seeing purple in the source HTML as inline styles), I built a custom theme JSON that matches the terracotta/teal palette - keywords in terracotta, functions in light teal, strings in warm amber.
+
+**SEO basics** that were completely missing after the initial migration (honestly I think the model did mess this up): Open Graph tags, Twitter card, and canonical URLs. Now links shared on LinkedIn or Discord actually show a proper preview.
+
+**Moved from Vercel to GitHub Pages.** This was another thing I had been meaning to do. Vercel is a fantastic platform, but for a simple static site with no serverless functions it was overkill. The Astro migration was a natural forcing function - I set up a GitHub Actions workflow that builds and deploys to Pages on every push to `main`. Zero cost, one less platform dependency, and the deploy pipeline lives right alongside the code. Plus it gave me some practice with Github actions since I do a lot of Gitlab professionally.
+
+## Where Claude Code shined
+
+I actually migrated the app which is a MDX based SSG app to Astro.JS in basically 3 prompts! **This is completely a change from 9 months ago when I last tried!** I am speechless at the improvement not just in the quality of the developer experience but the accuracy and capability of these new tools.
+
+The multi-phase plan structure was genuinely useful. When I asked it to fix the header visibility bug (CSS variable hex values don't support Tailwind's `/90` opacity modifier - so `bg-secondary/90` silently rendered the header transparent), it correctly identified the root cause rather than just tweaking values until something worked.
+
+The `astro:page-load` and `astro:after-swap` event handling for dark mode persistence across client-side navigation was another case where it reasoned correctly about the problem. The initial scripts used `is:inline` which only runs on full page load - Sonnet caught this and rewrote them to use Astro's transition lifecycle events.
+
+I was also able to course-correct mid-session. When it started implementing a render-time title-cleaning utility (`cleanTitle`) to strip language suffixes from post titles, I interrupted and just manually cleaned the titles after I realized it was spinning for 2 mins trying to make the change.
+
+## Where it still needed guidance
+
+Some things required me to catch the issue first:
+
+- It initially proposed a `bg-secondary/90` frosted glass header - which silently failed because CSS variable hex values don't support Tailwind opacity modifiers. I had to notice the header was invisible before it diagnosed and fixed it.
+- The Shiki theme bug (purple function names) - I had to paste the actual HTML source to prove the old CSS was being ignored entirely.
+- Using `is:inline` scripts that broke after client-side navigation - noticed after testing, not caught proactively.
+- It left behind my old night-owl.css theme which was redundant after the Shiki migration. I ended up manually copying the remaining CSS to my tailwind.css file and deleting it. Which was no big deal
+- It really struggled with colors in dark theme. The initial header background color choice was so dark it was unreasonable. I had to iterate with it to get a more reasonable color
+- Styling is still personal and you should expect to need to guide it directly. For example it lacked hover colors for my foot links (I ended up having to manually define).
+- The "clean title" issue I listed above.
+
+None of these were catastrophic. But they reinforce the same conclusion from my Copilot post: **these tools are a multiplier, not a replacement**. You still need to know enough to recognize when something looks wrong. I don't think that's going away anytime soon
+
+## Overall and what's next
+
+The session probably saved me 10-15 hours of manual CSS and component work. The plan mode specifically was a game changer - having a structured document to review before implementation meant I caught design decisions I would have disagreed with (such as the initial font suggestion was Space Grotesk, which I vetoed) before they were baked into the code.
+
+I think this has now given me a foundation to begin actively posting again without being bogged down by often boring boilerplate work. I am hoping this year to spend time not just making Leetcode solution posts, but making more personal posts (such as [yesterday's post about playing trombone in the era of agentic AI](/blog/diffuse-thinking)) or talking about my journey into becoming a better fullstack agentic engineer.
+
+Thanks as always for visiting,

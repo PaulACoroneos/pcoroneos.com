@@ -1,22 +1,29 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 import Footer from "../components/Footer.astro";
 import { withBase } from "../lib/with-base";
 import "../../css/tailwind.css";
-import "../../css/night-owl.css";
 
 interface Props {
   title?: string;
   description?: string;
+  canonicalUrl?: string;
+  ogType?: "website" | "article";
 }
 
 const {
   title = "Paul Coroneos",
   description = "A blog and portfolio by Paul Coroneos",
+  canonicalUrl,
+  ogType = "website",
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
+const siteUrl = "https://www.pcoroneos.com";
+const canonical = canonicalUrl ?? `${siteUrl}${Astro.url.pathname}`;
+const ogImage = `${siteUrl}${withBase(base, "/paulcoroneos.jpg")}`;
 ---
 
 <!doctype html>
@@ -26,20 +33,63 @@ const base = import.meta.env.BASE_URL;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Paul Coroneos" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Dark mode (before paint) -->
+    <script is:inline>
+      function applyTheme() {
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+      applyTheme();
+      document.addEventListener("astro:after-swap", applyTheme);
+    </script>
 
     <link rel="apple-touch-icon" sizes="180x180" href={withBase(base, "/apple-touch-icon.png")} />
     <link rel="icon" type="image/png" sizes="32x32" href={withBase(base, "/favicon-32x32.png")} />
     <link rel="icon" type="image/png" sizes="16x16" href={withBase(base, "/favicon-16x16.png")} />
     <link rel="manifest" href={withBase(base, "/site.webmanifest")} />
-    <link rel="mask-icon" href={withBase(base, "/safari-pinned-tab.svg")} color="#094074" />
-    <meta name="msapplication-TileColor" content="#094074" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="mask-icon" href={withBase(base, "/safari-pinned-tab.svg")} color="#c45d3e" />
+    <meta name="msapplication-TileColor" content="#c45d3e" />
+    <meta name="theme-color" content="#faf8f5" />
     <link rel="alternate" type="application/rss+xml" href={withBase(base, "/rss.xml")} />
+
+    <ClientRouter />
   </head>
-  <body>
+  <body class="bg-bg text-text-primary transition-colors duration-200">
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
     <Header />
     <SectionContainer>
-      <main>
+      <main id="main-content">
         <slot />
       </main>
       <Footer />

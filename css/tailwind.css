@@ -1,12 +1,200 @@
 :root {
-  --color-primary: #5c6ac4;
-  --color-secondary: #094074;
-  --color-tertiary: #0d1321;
-  --color-quaternary: #1d2d44;
-  --color-quinary: #3e5c76;
+  color-scheme: light dark;
+
+  /* Core palette */
+  --color-primary: #c45d3e;
+  --color-primary-hover: #a84830;
+  --color-secondary: #1a3a3a;
+  --color-tertiary: #121a1a;
+  --color-quaternary: #243838;
+  --color-quinary: #4a6363;
+
+  /* Semantic tokens */
+  --color-bg: #faf8f5;
+  --color-surface: #f2eeea;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-border: #e0dbd5;
   --color-white: #fff;
+  --color-header: #1a3a3a;
+}
+
+.dark {
+  --color-primary: #d4734f;
+  --color-primary-hover: #e8886a;
+  --color-secondary: #5a9e9e;
+  --color-tertiary: #0f1414;
+  --color-quaternary: #1e2e2e;
+  --color-quinary: #6b8a8a;
+
+  --color-bg: #0f1414;
+  --color-surface: #182424;
+  --color-text: #e8e4e0;
+  --color-text-muted: #9a9590;
+  --color-border: #2a3a3a;
+  --color-white: #e8e4e0;
+  --color-header: #0a1a1a;
 }
 
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+@layer base {
+  body {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+}
+
+/* Shiki code block wrapper styles */
+pre.astro-code {
+  padding: 1.25em;
+  margin: 0.5em 0;
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: #152020 !important;
+}
+
+/* Inline code (not inside a pre) */
+:not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 0.3em;
+  background: #daf0ea;
+  color: #1a3a3a;
+  font-family: "JetBrains Mono", Monaco, Consolas, monospace;
+  font-size: 0.875em;
+}
+
+.dark :not(pre) > code {
+  background: #1e2e2e;
+  color: #e8c99a;
+}
+
+/* Heading anchor links */
+.prose :is(h1, h2, h3, h4) {
+  scroll-margin-top: 4rem;
+}
+
+@media (min-width: 768px) {
+  .prose :is(h1, h2, h3, h4) {
+    scroll-margin-top: 7rem;
+  }
+}
+
+.prose :is(h1, h2, h3, h4) a[aria-hidden="true"] {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  color: var(--color-primary);
+  font-weight: 400;
+  text-decoration: none;
+  margin-left: 0.35em;
+  font-size: 0.85em;
+}
+
+.prose :is(h1, h2, h3, h4) a[aria-hidden="true"]::before {
+  content: "#";
+  font-family: "JetBrains Mono", monospace;
+}
+
+.prose :is(h1, h2, h3, h4):hover a[aria-hidden="true"] {
+  opacity: 1;
+}
+
+.dark .prose :is(h1, h2, h3, h4) a[aria-hidden="true"] {
+  color: var(--color-secondary);
+}
+
+/* Skip navigation */
+.skip-nav {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-nav:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+/* Focus indicators */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Nav link animated underline */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Scroll-driven fade-in for cards */
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: fadeSlideUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

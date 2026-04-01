@@ -37,8 +37,8 @@ export const meta = {
   title: "Post Title",
   description: "Short description",
   date: "2019-08-19",
-  tags?: ["tag1"],
-  discussion?: "https://..."
+  tags: ["tag1"],
+  discussion: "https://...",
 };
 ```
 
