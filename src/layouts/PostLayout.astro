@@ -36,7 +36,7 @@ const displayTitle = cleanTitle(meta.title);
       <div transition:name={`post-title-${meta.title}`}>
         <PageTitle>{displayTitle}</PageTitle>
       </div>
-      {meta.tags?.length && (
+      {meta.tags?.length > 0 && (
         <ul class="flex flex-wrap justify-center gap-2 pt-1">
           {meta.tags.map((tag) => (
             <li><TagBadge tag={tag} /></li>

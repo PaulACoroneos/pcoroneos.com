@@ -46,7 +46,7 @@ const remainingPosts = posts.slice(7);
                 </a>
               </h2>
               <p class="text-text-muted leading-relaxed">{featuredPost.excerpt}</p>
-              {featuredPost.module.meta.tags?.length && (
+              {featuredPost.module.meta.tags?.length > 0 && (
                 <ul class="flex flex-wrap gap-2">
                   {featuredPost.module.meta.tags.map((tag) => (
                     <li><TagBadge tag={tag} /></li>
@@ -84,7 +84,7 @@ const remainingPosts = posts.slice(7);
                   </a>
                 </h2>
                 <p class="line-clamp-3 text-sm text-text-muted">{post.excerpt}</p>
-                {post.module.meta.tags?.length && (
+                {post.module.meta.tags?.length > 0 && (
                   <ul class="flex flex-wrap gap-2">
                     {post.module.meta.tags.map((tag) => (
                       <li><TagBadge tag={tag} /></li>

@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL;
                   <a href={withBase(base, link)} transition:name={`post-title-${meta.title}`}>{cleanTitle(meta.title)}</a>
                 </h2>
                 <p class="text-sm text-text-muted leading-relaxed">{excerpt}</p>
-                {meta.tags?.length && (
+                {meta.tags?.length > 0 && (
                   <ul class="flex flex-wrap gap-2">
                     {meta.tags.map((tag) => (
                       <li><TagBadge tag={tag} /></li>
