@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TagBadge from "../components/TagBadge.astro";
 import { getAllPosts } from "../lib/posts";
 import { withBase } from "../lib/with-base";
-import { cleanTitle } from "../lib/clean-title";
 
 const posts = getAllPosts();
 const base = import.meta.env.BASE_URL;
@@ -42,7 +41,7 @@ const remainingPosts = posts.slice(7);
               </dl>
               <h2 class="font-display text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
                 <a href={withBase(base, featuredPost.link)} transition:name={`post-title-${featuredPost.module.meta.title}`}>
-                  {cleanTitle(featuredPost.module.meta.title)}
+                  {featuredPost.module.meta.title}
                 </a>
               </h2>
               <p class="text-text-muted leading-relaxed">{featuredPost.excerpt}</p>
@@ -80,7 +79,7 @@ const remainingPosts = posts.slice(7);
                 </dl>
                 <h2 class="font-display text-lg font-bold tracking-tight text-text-primary">
                   <a href={withBase(base, post.link)} transition:name={`post-title-${post.module.meta.title}`}>
-                    {cleanTitle(post.module.meta.title)}
+                    {post.module.meta.title}
                   </a>
                 </h2>
                 <p class="line-clamp-3 text-sm text-text-muted">{post.excerpt}</p>
@@ -117,7 +116,7 @@ const remainingPosts = posts.slice(7);
                 </time>
                 <h3 class="font-medium text-text-primary">
                   <a href={withBase(base, post.link)} class="hover:text-primary transition-colors">
-                    {cleanTitle(post.module.meta.title)}
+                    {post.module.meta.title}
                   </a>
                 </h3>
               </article>

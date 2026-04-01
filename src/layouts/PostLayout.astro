@@ -3,8 +3,6 @@ import { format, parseISO } from "date-fns";
 import PageTitle from "../components/PageTitle.astro";
 import TagBadge from "../components/TagBadge.astro";
 import { withBase } from "../lib/with-base";
-import { cleanTitle } from "../lib/clean-title";
-
 type PostMeta = {
   title: string;
   description?: string;
@@ -19,7 +17,7 @@ interface Props {
 
 const { meta } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const displayTitle = cleanTitle(meta.title);
+const displayTitle = meta.title;
 ---
 
 <article class="border-t-4 border-primary" data-testid="blog-post">

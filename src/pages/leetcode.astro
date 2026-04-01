@@ -4,7 +4,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAllPosts } from "../lib/posts";
 import { withBase } from "../lib/with-base";
 import TagBadge from "../components/TagBadge.astro";
-import { cleanTitle } from "../lib/clean-title";
 
 const posts = getAllPosts().filter((post) => post.module.meta.tags?.includes("leetcode"));
 const base = import.meta.env.BASE_URL;
@@ -44,7 +43,7 @@ const base = import.meta.env.BASE_URL;
             </dl>
             <div class="space-y-3">
               <h2 class="font-display text-xl font-bold tracking-tight text-text-primary">
-                <a href={withBase(base, link)}>{cleanTitle(meta.title)}</a>
+                <a href={withBase(base, link)}>{meta.title}</a>
               </h2>
               <p class="text-sm text-text-muted leading-relaxed">{excerpt}</p>
               {meta.tags?.length > 0 && (
