@@ -62,17 +62,17 @@ const navLinks = [
     if (!btn || !menu || !closeBtn) return;
 
     function open() {
-      menu!.classList.remove("hidden");
-      btn!.setAttribute("aria-expanded", "true");
+      menu.classList.remove("hidden");
+      btn.setAttribute("aria-expanded", "true");
       document.body.style.overflow = "hidden";
-      closeBtn!.focus();
+      closeBtn.focus();
     }
 
     function close() {
-      menu!.classList.add("hidden");
-      btn!.setAttribute("aria-expanded", "false");
+      menu.classList.add("hidden");
+      btn.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-      btn!.focus();
+      btn.focus();
     }
 
     btn.addEventListener("click", open);
