@@ -3,71 +3,84 @@ import { format, parseISO } from "date-fns";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAllPosts } from "../lib/posts";
 import { withBase } from "../lib/with-base";
+import TagBadge from "../components/TagBadge.astro";
 
 const posts = getAllPosts().filter((post) => post.module.meta.tags?.includes("leetcode"));
 const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Leetcode - Paul Coroneos" description="Leetcode solutions by Paul Coroneos">
-  <div class="divide-gray-200 divide-y">
-    <div class="space-y-2 py-4 md:space-y-5 md:pb-8 md:pt-6">
-      <h1 class="text-gray-900 text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-        Latest Leetcode Solutions
-      </h1>
-    </div>
-    <div class="flex justify-end py-4">
-      <label>
-        <span class="pr-2 text-lg font-medium">Search Solutions</span>
+  <div class="space-y-8 py-6 md:py-10">
+    <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+      Latest Leetcode Solutions
+    </h1>
+
+    <div role="search" class="flex justify-end">
+      <label class="flex items-center gap-2">
+        <span class="text-base font-medium text-text-primary">Search Solutions</span>
         <input
           id="leetcode-filter"
-          class="appearance-none rounded border pl-2 shadow"
+          class="rounded-xl border border-border bg-surface px-4 py-3 text-text-primary shadow-sm transition-colors focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
           type="text"
           placeholder="Type to filter titles"
         />
       </label>
     </div>
-    <ul class="divide-gray-200 divide-y">
+
+    <div aria-live="polite" class="space-y-3">
       {posts.map(({ link, module: { meta }, excerpt }) => (
-        <li class="py-4 md:py-12" data-leetcode-item data-title={meta.title.toLowerCase()}>
-          <article class="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-            <dl>
+        <article
+          class="scroll-reveal rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          data-leetcode-item
+          data-title={meta.title.toLowerCase()}
+        >
+          <div class="flex flex-col gap-3 xl:flex-row xl:items-baseline xl:gap-6">
+            <dl class="shrink-0">
               <dt class="sr-only">Published on</dt>
-              <dd class="text-gray-500 text-base font-medium leading-6">
+              <dd class="text-sm font-medium text-text-muted">
                 <time dateTime={meta.date}>{format(parseISO(meta.date), "MMMM dd, yyyy")}</time>
               </dd>
             </dl>
-            <div class="space-y-5 xl:col-span-3">
-              <div class="space-y-6">
-                <h2 class="text-2xl font-bold leading-8 tracking-tight">
-                  <a href={withBase(base, link)} class="text-gray-900">{meta.title}</a>
-                </h2>
-                <div class="text-gray-500 prose">
-                  <p>{excerpt}</p>
-                </div>
-              </div>
-              <div class="text-base font-medium leading-6">
-                <a href={withBase(base, link)} class="text-secondary hover:text-primary" aria-label={`Read ${meta.title}`}>
-                  Read more →
-                </a>
-              </div>
+            <div class="space-y-3">
+              <h2 class="font-display text-xl font-bold tracking-tight text-text-primary">
+                <a href={withBase(base, link)}>{meta.title}</a>
+              </h2>
+              <p class="text-sm text-text-muted leading-relaxed">{excerpt}</p>
+              {meta.tags?.length > 0 && (
+                <ul class="flex flex-wrap gap-2">
+                  {meta.tags.map((tag) => (
+                    <li><TagBadge tag={tag} /></li>
+                  ))}
+                </ul>
+              )}
+              <a
+                href={withBase(base, link)}
+                class="group inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+                aria-label={`Read ${meta.title}`}
+              >
+                Read more
+                <span class="ml-1 transition-transform group-hover:translate-x-0.5">&rarr;</span>
+              </a>
             </div>
-          </article>
-        </li>
+          </div>
+        </article>
       ))}
-    </ul>
+    </div>
   </div>
   <script>
-    const searchInput = document.querySelector("#leetcode-filter");
-    const items = Array.from(document.querySelectorAll("[data-leetcode-item]"));
+    document.addEventListener("astro:page-load", () => {
+      const searchInput = document.querySelector("#leetcode-filter");
+      const items = Array.from(document.querySelectorAll("[data-leetcode-item]"));
 
-    if (searchInput instanceof HTMLInputElement) {
-      searchInput.addEventListener("input", () => {
-        const value = searchInput.value.toLowerCase();
-        items.forEach((item) => {
-          const title = item.getAttribute("data-title") ?? "";
-          item.classList.toggle("hidden", !title.includes(value));
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.addEventListener("input", () => {
+          const value = searchInput.value.toLowerCase();
+          items.forEach((item) => {
+            const title = item.getAttribute("data-title") ?? "";
+            item.classList.toggle("hidden", !title.includes(value));
+          });
         });
-      });
-    }
+      }
+    });
   </script>
 </BaseLayout>

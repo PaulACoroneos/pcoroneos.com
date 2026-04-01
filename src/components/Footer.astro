@@ -9,13 +9,19 @@ const footerLinks = [
 ];
 ---
 
-<footer class="md:text-md flex items-center justify-between space-x-2 py-4 text-sm lg:text-lg">
-  <span class="italic">© Paul Coroneos 2026</span>
-  <div class="flex flex-wrap space-x-4">
-    {footerLinks.map((link) => (
-      <a class="text-secondary hover:text-primary" href={link.href} rel={link.rel}>
-        {link.label}
-      </a>
-    ))}
+<footer class="border-t border-border py-6" aria-label="Footer">
+  <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+    <span class="text-sm italic text-text-muted">&copy; Paul Coroneos {new Date().getFullYear()}</span>
+    <div class="flex flex-wrap justify-center gap-1">
+      {footerLinks.map((link) => (
+        <a
+          class="inline-flex min-h-[44px] items-center rounded-lg px-3 text-sm text-text-muted transition-colors hover:text-primary"
+          href={link.href}
+          rel={link.rel}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
   </div>
 </footer>
