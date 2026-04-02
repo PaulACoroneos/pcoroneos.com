@@ -83,6 +83,19 @@ test.describe("Site smoke tests", () => {
         errors.push(msg.text());
       }
     });
+    page.on("pageerror", (error) => {
+      // Capture uncaught runtime exceptions on the page
+      const message =
+        (error && typeof (error as any).message === "string"
+          ? (error as any).message
+          : String(error));
+      errors.push(`pageerror: ${message}`);
+    });
+    page.on("requestfailed", (request) => {
+      const failure = request.failure();
+      const reason = failure?.errorText ?? "unknown error";
+      errors.push(`requestfailed: ${request.url()} - ${reason}`);
+    });
 
     await page.goto("/");
     await page.goto("/blog");
