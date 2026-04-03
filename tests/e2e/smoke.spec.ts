@@ -84,12 +84,7 @@ test.describe("Site smoke tests", () => {
       }
     });
     page.on("pageerror", (error) => {
-      // Capture uncaught runtime exceptions on the page
-      const message =
-        (error && typeof (error as any).message === "string"
-          ? (error as any).message
-          : String(error));
-      errors.push(`pageerror: ${message}`);
+      errors.push(`pageerror: ${error.message}`);
     });
     page.on("requestfailed", (request) => {
       const failure = request.failure();
