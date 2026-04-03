@@ -1,15 +1,18 @@
 import type { MDXComponents } from "mdx/types";
 import { withBase } from "./with-base";
 
-const base = import.meta.env.BASE_URL;
-
-const resolveMdxImageSrc = (src: string | undefined) => {
+export const resolveMdxImageSrc = (
+  base: string,
+  src: string | undefined
+): string | undefined => {
   if (!src || !src.startsWith("/")) {
     return src;
   }
 
   return withBase(base, src);
 };
+
+const base = import.meta.env.BASE_URL;
 
 const mdxComponents: MDXComponents = {
   pre: ({ className, ...props }) => (
@@ -23,7 +26,7 @@ const mdxComponents: MDXComponents = {
   ),
   img: ({ src, ...props }) => (
     <img
-      src={resolveMdxImageSrc(typeof src === "string" ? src : undefined)}
+      src={resolveMdxImageSrc(base, typeof src === "string" ? src : undefined)}
       {...props}
     />
   ),
