@@ -24,6 +24,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     img: ({ src, ...props }) => (
       <img
+        alt=""
         src={resolveMdxImageSrc(typeof src === "string" ? src : undefined)}
         {...props}
       />

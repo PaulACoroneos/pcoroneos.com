@@ -8,7 +8,7 @@ import {
 describe("normalizePostLink", () => {
   it("converts legacy mdx source paths into route paths", () => {
     expect(
-      normalizePostLink("../../app/blog/leetcode/1-two-sum/page.mdx")
+      normalizePostLink("../../app/blog/leetcode/1-two-sum/page.mdx"),
     ).toBe("/blog/leetcode/1-two-sum");
   });
 });
@@ -49,7 +49,7 @@ describe("extractExcerpt", () => {
     ].join("\n");
 
     expect(extractExcerpt(input, "fallback")).toBe(
-      "This post has great details."
+      "This post has great details.",
     );
   });
 

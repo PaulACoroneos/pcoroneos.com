@@ -57,7 +57,7 @@ function maxNumberOfBalloons(text: string): number {
   for (const letter in BALLOON_TABLE) {
     maximumNumberBalloons = Math.min(
       maximumNumberBalloons,
-      Math.floor(letterHash.get(letter) / BALLOON_TABLE[letter])
+      Math.floor(letterHash.get(letter) / BALLOON_TABLE[letter]),
     );
   }
 

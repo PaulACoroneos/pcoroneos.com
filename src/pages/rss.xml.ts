@@ -2,7 +2,7 @@ import RSS from "rss";
 import type { APIRoute } from "astro";
 import { getAllPosts } from "../lib/posts";
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = () => {
   const feed = new RSS({
     title: "Blog – Paul Coroneos",
     description: "Personal blog and portfolio for Paul Coroneos.",

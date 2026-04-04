@@ -23,7 +23,7 @@ it("checks whether onclick is invoked with form state onClick", async () => {
   const user = userEvent.setup();
 
   render(
-    <SomeComponent onClick={mockHandleOnClick} initialState={{ foo: "bar" }} />
+    <SomeComponent onClick={mockHandleOnClick} initialState={{ foo: "bar" }} />,
   );
   await userEvent.click(screen.getByRole("button"));
 
@@ -43,13 +43,13 @@ it("checks whether onclick is invoked with form state onClick", async () => {
   const user = userEvent.setup();
 
   render(
-    <SomeComponent onClick={mockHandleOnClick} initialState={{ foo: "bar" }} />
+    <SomeComponent onClick={mockHandleOnClick} initialState={{ foo: "bar" }} />,
   );
   await userEvent.click(screen.getByRole("button"));
 
   await waitFor(mockHandleOnClick).toHaveBeenCalledWith(
     { foo: "bar" },
-    expect.anything()
+    expect.anything(),
   );
 });
 ```
