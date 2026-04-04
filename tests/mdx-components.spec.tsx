@@ -13,19 +13,19 @@ const Img = mdxComponents.img as React.ComponentType<
 describe("resolveMdxImageSrc", () => {
   it("returns src unchanged when base is /", () => {
     expect(resolveMdxImageSrc("/", "/images/photo.png")).toBe(
-      "/images/photo.png"
+      "/images/photo.png",
     );
   });
 
   it("prepends base to absolute src paths", () => {
     expect(resolveMdxImageSrc("/mysite", "/images/photo.png")).toBe(
-      "/mysite/images/photo.png"
+      "/mysite/images/photo.png",
     );
   });
 
   it("returns relative src unchanged", () => {
     expect(resolveMdxImageSrc("/mysite", "images/photo.png")).toBe(
-      "images/photo.png"
+      "images/photo.png",
     );
   });
 

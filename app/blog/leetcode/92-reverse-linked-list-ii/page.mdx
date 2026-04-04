@@ -40,7 +40,7 @@ We continue until we have exhausted the number of nodes we need to reverse. At t
 function reverseBetween(
   head: ListNode | null,
   left: number,
-  right: number
+  right: number,
 ): ListNode | null {
   //if the head node doesnt exist, or there nothing to reverse return head
   if (!head || left === right) return head;

@@ -23,7 +23,7 @@ export const extractExcerpt = (source: string, fallback: string) => {
   const withoutFrontmatter = stripFrontmatter(source);
   const withoutMetaExport = withoutFrontmatter.replace(
     /export\s+const\s+meta\s*=\s*\{[\s\S]*?\};?/,
-    ""
+    "",
   );
 
   const withoutTopLevelCode = withoutMetaExport
@@ -53,7 +53,7 @@ export const extractExcerpt = (source: string, fallback: string) => {
         Boolean(part) &&
         !part.startsWith("#") &&
         !part.startsWith("```") &&
-        !part.startsWith("<")
+        !part.startsWith("<"),
     );
 
   const normalized = (firstParagraph ?? previewSource)

@@ -3,7 +3,7 @@ import { withBase } from "./with-base";
 
 export const resolveMdxImageSrc = (
   base: string,
-  src: string | undefined
+  src: string | undefined,
 ): string | undefined => {
   if (!src || !src.startsWith("/")) {
     return src;
@@ -26,6 +26,7 @@ const mdxComponents: MDXComponents = {
   ),
   img: ({ src, ...props }) => (
     <img
+      alt=""
       src={resolveMdxImageSrc(base, typeof src === "string" ? src : undefined)}
       {...props}
     />

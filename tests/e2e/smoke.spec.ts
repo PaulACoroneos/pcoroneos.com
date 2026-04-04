@@ -7,20 +7,20 @@ test.describe("Site smoke tests", () => {
     // Navigation links are visible (scoped to header nav)
     const nav = page.locator("header nav");
     await expect(
-      nav.getByRole("link", { name: "Blog", exact: true })
+      nav.getByRole("link", { name: "Blog", exact: true }),
     ).toBeVisible();
     await expect(
-      nav.getByRole("link", { name: "Leetcode", exact: true })
+      nav.getByRole("link", { name: "Leetcode", exact: true }),
     ).toBeVisible();
     await expect(
-      nav.getByRole("link", { name: "Portfolio", exact: true })
+      nav.getByRole("link", { name: "Portfolio", exact: true }),
     ).toBeVisible();
     await expect(
-      nav.getByRole("link", { name: "About", exact: true })
+      nav.getByRole("link", { name: "About", exact: true }),
     ).toBeVisible();
     // The page has a heading
     await expect(
-      page.getByRole("heading", { name: "Latest Blog Posts" })
+      page.getByRole("heading", { name: "Latest Blog Posts" }),
     ).toBeVisible();
   });
 
@@ -28,7 +28,7 @@ test.describe("Site smoke tests", () => {
     await page.goto("/blog");
     await expect(page).toHaveTitle(/Blog.*Paul Coroneos/);
     await expect(
-      page.getByRole("heading", { name: "Latest Blog Posts" })
+      page.getByRole("heading", { name: "Latest Blog Posts" }),
     ).toBeVisible();
   });
 
@@ -56,7 +56,7 @@ test.describe("Site smoke tests", () => {
       .click();
     await expect(page).toHaveURL(/\/blog/);
     await expect(
-      page.getByRole("heading", { name: "Latest Blog Posts" })
+      page.getByRole("heading", { name: "Latest Blog Posts" }),
     ).toBeVisible();
   });
 

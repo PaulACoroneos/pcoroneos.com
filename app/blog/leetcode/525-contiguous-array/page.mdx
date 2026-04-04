@@ -94,7 +94,7 @@ function findMaxLength(nums: number[]): number {
     if (numMap.has(runningSum)) {
       maxContiguousLen = Math.max(
         maxContiguousLen,
-        idx - numMap.get(runningSum)
+        idx - numMap.get(runningSum),
       );
     } else {
       numMap.set(runningSum, idx);
