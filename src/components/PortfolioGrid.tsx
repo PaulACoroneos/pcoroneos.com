@@ -90,7 +90,7 @@ export default function PortfolioGrid({ projects, base }: Props) {
         );
 
   return (
-    <div className="mt-2 space-y-6">
+    <div className="mt-8 space-y-6">
       <div
         className="flex flex-wrap gap-2"
         role="group"
