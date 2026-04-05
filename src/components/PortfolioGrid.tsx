@@ -80,39 +80,57 @@ function Card({
 }
 
 export default function PortfolioGrid({ projects, base }: Props) {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [activeFilters, setActiveFilters] = useState<Set<string>>(new Set());
 
   const filtered =
-    activeFilter === "all"
+    activeFilters.size === 0
       ? projects
-      : projects.filter((p) =>
-          p.tags.some((t) => t.toLowerCase() === activeFilter.toLowerCase()),
-        );
+      : projects.filter((p) => p.tags.some((t) => activeFilters.has(t)));
+
+  function toggleFilter(tag: string) {
+    setActiveFilters((prev) => {
+      const next = new Set(prev);
+      if (next.has(tag)) {
+        next.delete(tag);
+      } else {
+        next.add(tag);
+      }
+      return next;
+    });
+  }
 
   return (
     <div className="mt-8 space-y-6">
-      <div
-        className="flex flex-wrap gap-2"
-        role="group"
-        aria-label="Filter projects by technology"
-      >
-        {["all", ...TECH_TAGS].map((tag) => {
-          const active = activeFilter === tag;
-          return (
-            <button
-              key={tag}
-              onClick={() => setActiveFilter(tag)}
-              aria-pressed={active}
-              className={`rounded-full border border-border px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
-                active
-                  ? "bg-primary text-white hover:bg-primary-hover"
-                  : "bg-surface text-text-muted hover:bg-primary hover:text-white"
-              }`}
-            >
-              {tag}
-            </button>
-          );
-        })}
+      <div className="space-y-2">
+        <p
+          id="filter-label"
+          className="text-sm font-semibold uppercase tracking-wide text-text-muted"
+        >
+          Filter by technology used
+        </p>
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-labelledby="filter-label"
+        >
+          {TECH_TAGS.map((tag) => {
+            const active = activeFilters.has(tag);
+            return (
+              <button
+                key={tag}
+                onClick={() => toggleFilter(tag)}
+                aria-pressed={active}
+                className={`rounded-full border border-border px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+                  active
+                    ? "bg-primary text-white hover:bg-primary-hover"
+                    : "bg-surface text-text-muted hover:bg-primary hover:text-white"
+                }`}
+              >
+                {tag}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {filtered.map((project) => (
