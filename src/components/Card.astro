@@ -28,6 +28,8 @@ const base = import.meta.env.BASE_URL;
         class="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
         title={githubTitle}
         href={githubLink}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <img class="h-5 w-5 shrink-0" src={withBase(base, "/github.png")} alt="" />
         <span>GitHub</span>
@@ -37,6 +39,8 @@ const base = import.meta.env.BASE_URL;
           class="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
           title={deployedTitle}
           href={deployedLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <img class="h-5 w-5 shrink-0" src={withBase(base, "/deploy.png")} alt="" />
           <span>Deploy</span>
