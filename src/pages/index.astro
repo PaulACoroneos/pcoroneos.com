@@ -1,6 +1,7 @@
 ---
 import { format, parseISO } from "date-fns";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
 import TagBadge from "../components/TagBadge.astro";
 import { getAllPosts } from "../lib/posts";
 import { withBase } from "../lib/with-base";
@@ -16,10 +17,12 @@ const remainingPosts = posts.slice(7);
 <BaseLayout title="Paul Coroneos" description="A blog and portfolio by Paul Coroneos">
   {posts.length ? (
     <div class="space-y-8 py-6 md:py-10">
+      <Hero />
+
       <div class="space-y-2">
-        <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+        <h2 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
           Latest Blog Posts
-        </h1>
+        </h2>
         <p class="text-lg text-text-muted">
           Most recent post: {format(parseISO(posts[0].module.meta.date), "MMMM dd, yyyy")}
         </p>

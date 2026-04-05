@@ -1,0 +1,38 @@
+---
+import { withBase } from "../lib/with-base";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="border-b border-border pb-8 md:pb-12">
+  <div class="flex flex-col gap-8 md:flex-row md:items-center">
+    <div class="flex-1 space-y-4">
+      <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+        Hey, I'm Paul Coroneos
+      </h1>
+      <p class="font-display text-lg font-medium text-primary md:text-xl">
+        Building platforms, chasing finish lines, and playing trombone.
+      </p>
+      <p class="max-w-2xl leading-relaxed text-text-muted">
+        I'm a Principal Platform Architect at Hilton who also happens to be a
+        triathlete and a trombonist. I write about software engineering, platform
+        thinking, and whatever else I'm learning along the way.
+      </p>
+      <a
+        href={withBase(base, "/about")}
+        class="group inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary-hover"
+      >
+        Learn more about me
+        <span class="ml-1 transition-transform group-hover:translate-x-0.5">&rarr;</span>
+      </a>
+    </div>
+
+    <div class="w-full md:w-72 lg:w-80">
+      <img
+        src="/perfoming-jazz.jpg"
+        alt="Paul Coroneos playing trombone with the Jazz Wylie band"
+        class="h-80 w-full rounded-2xl object-cover object-top shadow-md md:h-96"
+      />
+    </div>
+  </div>
+</section>
