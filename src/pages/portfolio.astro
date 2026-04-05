@@ -70,7 +70,7 @@ const data = [
       {TECH_TAGS.map((tag) => (
         <button
           class="filter-btn rounded-full border border-border bg-surface px-4 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-primary hover:text-white"
-          data-filter={tag}
+          data-filter={tag.toLowerCase()}
           aria-pressed="false"
         >
           {tag}
@@ -109,7 +109,7 @@ const data = [
 
       cards.forEach((card) => {
         const tags = card.dataset.tags ?? "";
-        const visible = filter === "all" || tags.split(",").includes(filter.toLowerCase());
+        const visible = filter === "all" || tags.split(",").includes(filter);
         card.hidden = !visible;
       });
     });
