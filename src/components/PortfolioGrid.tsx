@@ -31,7 +31,7 @@ function Card({
 }: Project & { base: string }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-4">
         <h2 className="font-display text-lg font-bold text-text-primary md:text-xl">
           {title}
         </h2>
@@ -90,7 +90,7 @@ export default function PortfolioGrid({ projects, base }: Props) {
         );
 
   return (
-    <div className="space-y-6">
+    <div className="mt-2 space-y-6">
       <div
         className="flex flex-wrap gap-2"
         role="group"
