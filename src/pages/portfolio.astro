@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Card from "../components/Card.astro";
-import { TECH_TAGS } from "../lib/constants";
+import PortfolioGrid from "../components/PortfolioGrid";
 
-const data = [
+const base = import.meta.env.BASE_URL;
+
+const projects = [
   {
     title: "Barbeque Survey Form",
     githubLink: "https://github.com/PaulACoroneos/survey-form",
@@ -59,59 +60,6 @@ const data = [
     <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
       Portfolio
     </h1>
-    <div class="flex flex-wrap gap-2" role="group" aria-label="Filter projects by technology">
-      <button
-        class="filter-btn rounded-full border border-border bg-primary px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All
-      </button>
-      {TECH_TAGS.map((tag) => (
-        <button
-          class="filter-btn rounded-full border border-border bg-surface px-4 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-primary hover:text-white"
-          data-filter={tag.toLowerCase()}
-          aria-pressed="false"
-        >
-          {tag}
-        </button>
-      ))}
-    </div>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2" id="portfolio-grid">
-      {data.map((cardData) => (
-        <div class="portfolio-card" data-tags={cardData.tags.map((t) => t.toLowerCase()).join(",")}>
-          <Card {...cardData} />
-        </div>
-      ))}
-    </div>
+    <PortfolioGrid client:load projects={projects} base={base} />
   </div>
 </BaseLayout>
-
-<script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-  const cards = document.querySelectorAll<HTMLElement>(".portfolio-card");
-
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter ?? "all";
-
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.setAttribute("aria-pressed", String(active));
-        if (active) {
-          b.classList.add("bg-primary", "text-white");
-          b.classList.remove("bg-surface", "text-text-muted");
-        } else {
-          b.classList.remove("bg-primary", "text-white");
-          b.classList.add("bg-surface", "text-text-muted");
-        }
-      });
-
-      cards.forEach((card) => {
-        const tags = card.dataset.tags ?? "";
-        const visible = filter === "all" || tags.split(",").includes(filter);
-        card.hidden = !visible;
-      });
-    });
-  });
-</script>
