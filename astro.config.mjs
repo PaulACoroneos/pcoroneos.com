@@ -7,11 +7,15 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import tealSlateTheme from "./src/lib/shiki-theme.mjs";
+import tailwindcss from "@tailwindcss/vite";
 
 const site = "https://www.pcoroneos.com";
 
 export default defineConfig({
   site,
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     shikiConfig: {
       theme: tealSlateTheme,
