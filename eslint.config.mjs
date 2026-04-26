@@ -4,6 +4,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import * as mdxPlugin from "eslint-plugin-mdx";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
+import tailwindcss from "eslint-plugin-tailwindcss";
 
 export default tseslint.config(
   {
@@ -14,6 +15,12 @@ export default tseslint.config(
   reactHooksPlugin.configs.flat["recommended-latest"],
   jsxA11y.flatConfigs.recommended,
   mdxPlugin.flat,
+  ...tailwindcss.configs["flat/recommended"],
+  {
+    rules: {
+      "tailwindcss/no-custom-classname": "off",
+    },
+  },
   prettierRecommended,
   {
     files: ["**/*.ts", "**/*.tsx"],
@@ -49,6 +56,9 @@ export default tseslint.config(
     settings: {
       react: {
         version: "detect",
+      },
+      tailwindcss: {
+        cssFiles: ["css/tailwind.css"],
       },
     },
   },
