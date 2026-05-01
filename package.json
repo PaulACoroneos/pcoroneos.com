@@ -28,7 +28,7 @@
     "astro": "^6.1.9",
     "autoprefixer": "^10.5.0",
     "date-fns": "^4.1.0",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.13",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "rehype-autolink-headings": "^7.1.0",
@@ -65,7 +65,7 @@
     "rss": "^1.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.59.0",
+    "typescript-eslint": "^8.59.1",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
   },
