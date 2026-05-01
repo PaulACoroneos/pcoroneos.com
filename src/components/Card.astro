@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
 
 <div class="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
   <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-    <h2 class="font-display text-lg font-bold text-text-primary md:text-xl">{title}</h2>
+    <h2 class="font-display text-lg font-bold text-text md:text-xl">{title}</h2>
     <ul class="flex flex-wrap gap-2">
       {tags.map((tag) => (
         <li><TagBadge tag={tag} /></li>

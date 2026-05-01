@@ -32,7 +32,7 @@ function Card({
   return (
     <div className="border-border bg-surface rounded-2xl border p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex flex-col gap-4">
-        <h2 className="font-display text-text-primary text-lg font-bold md:text-xl">
+        <h2 className="font-display text-text text-lg font-bold md:text-xl">
           {title}
         </h2>
         <ul className="flex flex-wrap gap-2">
