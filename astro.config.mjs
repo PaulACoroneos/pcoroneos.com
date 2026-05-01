@@ -15,6 +15,12 @@ export default defineConfig({
   site,
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      // Workaround for @tailwindcss/vite@4.x incompatibility with rolldown (vite@8).
+      // Without this, rolldown's BindingViteResolvePlugin receives `tsconfigPaths: undefined`
+      // instead of a boolean, causing: "Missing field `tsconfigPaths` on BindingViteResolvePluginConfig"
+      tsconfigPaths: false,
+    },
   },
   markdown: {
     shikiConfig: {
