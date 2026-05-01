@@ -16,7 +16,7 @@ interface Props {
 
 function TagBadge({ tag }: { tag: string }) {
   return (
-    <span className="inline-block rounded-full border border-border bg-border px-3 py-1 text-xs font-medium capitalize text-text-muted">
+    <span className="border-border bg-border text-text-muted inline-block rounded-full border px-3 py-1 text-xs font-medium capitalize">
       {tag}
     </span>
   );
@@ -30,9 +30,9 @@ function Card({
   base,
 }: Project & { base: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="border-border bg-surface rounded-2xl border p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex flex-col gap-4">
-        <h2 className="font-display text-lg font-bold text-text-primary md:text-xl">
+        <h2 className="font-display text-text-primary text-lg font-bold md:text-xl">
           {title}
         </h2>
         <ul className="flex flex-wrap gap-2">
@@ -44,7 +44,7 @@ function Card({
         </ul>
         <div className="flex shrink-0 gap-2">
           <a
-            className="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+            className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors"
             title={`GitHub link for ${title}`}
             href={githubLink}
             target="_blank"
@@ -59,7 +59,7 @@ function Card({
           </a>
           {deployedLink ? (
             <a
-              className="inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-hover"
+              className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors"
               title={`Deployed link for ${title}`}
               href={deployedLink}
               target="_blank"
@@ -104,7 +104,7 @@ export default function PortfolioGrid({ projects, base }: Props) {
       <div className="space-y-2">
         <p
           id="filter-label"
-          className="text-sm font-semibold uppercase tracking-wide text-text-muted"
+          className="text-text-muted text-sm font-semibold tracking-wide uppercase"
         >
           Filter by technology used
         </p>
@@ -120,9 +120,9 @@ export default function PortfolioGrid({ projects, base }: Props) {
                 key={tag}
                 onClick={() => toggleFilter(tag)}
                 aria-pressed={active}
-                className={`rounded-full border border-border px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+                className={`border-border rounded-full border px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
                   active
-                    ? "bg-primary text-white hover:bg-primary-hover"
+                    ? "bg-primary hover:bg-primary-hover text-white"
                     : "bg-surface text-text-muted hover:bg-primary hover:text-white"
                 }`}
               >

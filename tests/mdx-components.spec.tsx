@@ -36,7 +36,6 @@ describe("resolveMdxImageSrc", () => {
 
 describe("pre MDX component", () => {
   it("renders with overflow and rounded classes", () => {
-    // eslint-disable-next-line tailwindcss/no-custom-classname
     render(<Pre className="language-ts">code here</Pre>);
     const pre = screen.getByText("code here");
     expect(pre.tagName).toBe("PRE");
