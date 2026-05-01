@@ -20,7 +20,7 @@ const remainingPosts = posts.slice(7);
       <Hero />
 
       <div class="space-y-2">
-        <h2 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+        <h2 class="font-display text-3xl font-extrabold tracking-tight text-text sm:text-4xl md:text-5xl">
           Latest Blog Posts
         </h2>
         <p class="text-lg text-text-muted">
@@ -42,7 +42,7 @@ const remainingPosts = posts.slice(7);
                   </time>
                 </dd>
               </dl>
-              <h2 class="font-display text-2xl font-bold tracking-tight text-text-primary md:text-3xl">
+              <h2 class="font-display text-2xl font-bold tracking-tight text-text md:text-3xl">
                 <a href={withBase(base, featuredPost.link)} transition:name={`post-title-${featuredPost.module.meta.title}`}>
                   {featuredPost.module.meta.title}
                 </a>
@@ -80,7 +80,7 @@ const remainingPosts = posts.slice(7);
                     </time>
                   </dd>
                 </dl>
-                <h2 class="font-display text-lg font-bold tracking-tight text-text-primary">
+                <h2 class="font-display text-lg font-bold tracking-tight text-text">
                   <a href={withBase(base, post.link)} transition:name={`post-title-${post.module.meta.title}`}>
                     {post.module.meta.title}
                   </a>
@@ -110,14 +110,14 @@ const remainingPosts = posts.slice(7);
       {/* Remaining posts in a simpler list */}
       {remainingPosts.length > 0 && (
         <div class="space-y-4">
-          <h2 class="font-display text-xl font-bold text-text-primary">Older Posts</h2>
+          <h2 class="font-display text-xl font-bold text-text">Older Posts</h2>
           <div class="space-y-3">
             {remainingPosts.map((post) => (
               <article class="scroll-reveal flex items-baseline gap-4 rounded-xl border border-border bg-surface px-5 py-4 transition-all duration-200 hover:shadow-sm">
                 <time class="shrink-0 text-sm text-text-muted" dateTime={post.module.meta.date}>
                   {format(parseISO(post.module.meta.date), "MMM dd, yyyy")}
                 </time>
-                <h3 class="font-medium text-text-primary">
+                <h3 class="font-medium text-text">
                   <a href={withBase(base, post.link)} class="hover:text-primary transition-colors">
                     {post.module.meta.title}
                   </a>

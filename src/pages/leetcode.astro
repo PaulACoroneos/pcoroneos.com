@@ -11,16 +11,16 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Leetcode - Paul Coroneos" description="Leetcode solutions by Paul Coroneos">
   <div class="space-y-8 py-6 md:py-10">
-    <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+    <h1 class="font-display text-3xl font-extrabold tracking-tight text-text sm:text-4xl md:text-5xl">
       Latest Leetcode Solutions
     </h1>
 
     <div role="search" class="flex justify-end">
       <label class="flex items-center gap-2">
-        <span class="text-base font-medium text-text-primary">Search Solutions</span>
+        <span class="text-base font-medium text-text">Search Solutions</span>
         <input
           id="leetcode-filter"
-          class="rounded-xl border border-border bg-surface px-4 py-3 text-text-primary shadow-sm transition-colors focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
+          class="rounded-xl border border-border bg-surface px-4 py-3 text-text shadow-sm transition-colors focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
           type="text"
           placeholder="Type to filter titles"
         />
@@ -42,7 +42,7 @@ const base = import.meta.env.BASE_URL;
               </dd>
             </dl>
             <div class="space-y-3">
-              <h2 class="font-display text-xl font-bold tracking-tight text-text-primary">
+              <h2 class="font-display text-xl font-bold tracking-tight text-text">
                 <a href={withBase(base, link)}>{meta.title}</a>
               </h2>
               <p class="text-sm text-text-muted leading-relaxed">{excerpt}</p>

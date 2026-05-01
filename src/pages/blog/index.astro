@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL;
   {posts.length ? (
     <div class="space-y-8 py-6 md:py-10">
       <div class="space-y-2">
-        <h1 class="font-display text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl md:text-5xl">
+        <h1 class="font-display text-3xl font-extrabold tracking-tight text-text sm:text-4xl md:text-5xl">
           Latest Blog Posts
         </h1>
         <p class="text-lg text-text-muted">
@@ -31,7 +31,7 @@ const base = import.meta.env.BASE_URL;
                 </dd>
               </dl>
               <div class="space-y-3">
-                <h2 class="font-display text-xl font-bold tracking-tight text-text-primary">
+                <h2 class="font-display text-xl font-bold tracking-tight text-text">
                   <a href={withBase(base, link)} transition:name={`post-title-${meta.title}`}>{meta.title}</a>
                 </h2>
                 <p class="text-sm text-text-muted leading-relaxed">{excerpt}</p>
