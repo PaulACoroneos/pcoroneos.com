@@ -3670,10 +3670,6 @@ packages:
     resolution: {integrity: sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==}
     engines: {node: '>=6'}
 
-  prismjs@1.29.0:
-    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
-    engines: {node: '>=6'}
-
   prismjs@1.30.0:
     resolution: {integrity: sha512-DEvV2ZF2r2/63V+tK8hQvrR2ZGn10srHbXviTlcv7Kpzw8jWiNTqbVgjO3IY8RxrrOUF8VPMQQFysYYYv0YZxw==}
     engines: {node: '>=6'}
@@ -9046,8 +9042,6 @@ snapshots:
 
   prismjs@1.27.0: {}
 
-  prismjs@1.29.0: {}
-
   prismjs@1.30.0: {}
 
   proc-log@4.2.0: {}
@@ -9281,7 +9275,7 @@ snapshots:
       parse-numeric-range: 1.3.0
       parse5: 6.0.1
       parse5-htmlparser2-tree-adapter: 6.0.1
-      prismjs: 1.29.0
+      prismjs: 1.30.0
       unist-util-map: 2.0.1
     transitivePeerDependencies:
       - bufferutil
