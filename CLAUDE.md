@@ -10,6 +10,7 @@ pnpm run build        # Production build (outputs to /dist)
 pnpm run start        # Preview production build
 pnpm run lint         # Run oxlint (type-aware, via oxlint-tsgolint)
 pnpm run lint:fix     # oxlint with auto-fix
+pnpm run typecheck    # tsc --noEmit (TypeScript 7 native, strict)
 pnpm run format       # oxfmt formatting
 pnpm run format:check # oxfmt check (runs in CI)
 pnpm run test         # Run Vitest (all tests)
@@ -17,7 +18,9 @@ pnpm run test         # Run Vitest (all tests)
 
 Run a single test file: `pnpm run test tests/post-parsing.spec.ts`
 
-The pre-commit hook runs lint-staged and all tests automatically.
+The pre-commit hook runs lint-staged, typecheck, and all tests automatically.
+
+TypeScript 7 (native) is used for type checking. `tsc` does not yet check `.astro` or `.mdx` files; Astro support for TS 7 is pending TypeScript 7.1 (see withastro/astro#17268). Don't add `@astrojs/check` — it only supports TypeScript 5/6. In VS Code, `.ts`/`.tsx` use the TypeScript Native Preview extension; the Astro extension falls back to VS Code's bundled TypeScript because the TS 7 package ships no `typescript.js`.
 
 ## Architecture
 
@@ -65,4 +68,4 @@ export const meta = {
 
 ## Deployment
 
-Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow which builds and deploys to GitHub Pages automatically. The `main-ci.yml` workflow runs lint, format check, unit tests, build, and E2E tests on all PRs.
+Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow which builds and deploys to GitHub Pages automatically. The `main-ci.yml` workflow runs lint, typecheck, format check, unit tests, build, and E2E tests on all PRs.

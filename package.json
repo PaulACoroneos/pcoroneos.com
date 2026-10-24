@@ -12,6 +12,7 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "typecheck": "tsc --noEmit",
     "start": "astro preview",
     "test": "vitest",
     "test:e2e": "playwright test",
@@ -57,8 +58,7 @@
     "oxlint": "1.88.0",
     "oxlint-tsgolint": "7.0.2004",
     "rss": "^1.2.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vite": "^8.3.5",
     "vitest": "^4.1.11"
   },

@@ -1,5 +1,9 @@
 {
-  "recommendations": ["oxc.oxc-vscode", "astro-build.astro-vscode"],
+  "recommendations": [
+    "oxc.oxc-vscode",
+    "astro-build.astro-vscode",
+    "TypeScriptTeam.native-preview"
+  ],
   "unwantedRecommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint"
