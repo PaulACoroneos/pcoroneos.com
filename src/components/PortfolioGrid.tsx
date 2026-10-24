@@ -101,18 +101,11 @@ export default function PortfolioGrid({ projects, base }: Props) {
 
   return (
     <div className="mt-8 space-y-6">
-      <div className="space-y-2">
-        <p
-          id="filter-label"
-          className="text-text-muted text-sm font-semibold tracking-wide uppercase"
-        >
+      <fieldset>
+        <legend className="text-text-muted mb-2 text-sm font-semibold tracking-wide uppercase">
           Filter by technology used
-        </p>
-        <div
-          className="flex flex-wrap gap-2"
-          role="group"
-          aria-labelledby="filter-label"
-        >
+        </legend>
+        <div className="flex flex-wrap gap-2">
           {TECH_TAGS.map((tag) => {
             const active = activeFilters.has(tag);
             return (
@@ -131,7 +124,7 @@ export default function PortfolioGrid({ projects, base }: Props) {
             );
           })}
         </div>
-      </div>
+      </fieldset>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {filtered.map((project) => (
           <Card key={project.title} {...project} base={base} />

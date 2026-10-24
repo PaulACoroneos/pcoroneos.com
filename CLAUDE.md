@@ -8,9 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pnpm run dev          # Start dev server
 pnpm run build        # Production build (outputs to /dist)
 pnpm run start        # Preview production build
-pnpm run lint         # Run ESLint
-pnpm run lint:fix     # ESLint with auto-fix
-pnpm run format       # Prettier formatting
+pnpm run lint         # Run oxlint (type-aware, via oxlint-tsgolint)
+pnpm run lint:fix     # oxlint with auto-fix
+pnpm run format       # oxfmt formatting
+pnpm run format:check # oxfmt check (runs in CI)
 pnpm run test         # Run Vitest (all tests)
 ```
 
