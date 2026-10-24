@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
@@ -18,14 +19,14 @@ export default defineConfig({
     },
   ],
   webServer: {
+    // --ignore-lock: Astro 7 detaches `astro preview` when run under an AI
+    // coding agent (Playwright sees the server exit early) and refuses to start
+    // if another preview holds the lock. This forces a one-off foreground server.
     command: process.env.CI
-      ? "pnpm run start"
-      : "pnpm run build && pnpm run start",
+      ? "pnpm run start --ignore-lock"
+      : "pnpm run build && pnpm run start --ignore-lock",
     url: "http://localhost:4321",
     reuseExistingServer: !process.env.CI,
-    // Astro 7 detaches `astro preview` when run under an AI coding agent,
-    // which Playwright sees as the server exiting early.
-    env: { ASTRO_PREVIEW_BACKGROUND: "0" },
     timeout: 120_000,
   },
 });

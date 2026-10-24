@@ -4,7 +4,6 @@ import react from "@astrojs/react";
 import { unified } from "@astrojs/markdown-remark";
 import remarkImages from "remark-images";
 import remarkEmoji from "remark-emoji";
-import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import tealSlateTheme from "./src/lib/shiki-theme.mjs";
@@ -30,8 +29,9 @@ export default defineConfig({
   markdown: {
     // Astro 7 defaults to the Sätteri processor, which doesn't run remark/rehype
     // plugins. Opt back into the unified pipeline so the plugins below keep working.
+    // GFM is enabled by unified() by default, so remark-gfm isn't listed here.
     processor: unified({
-      remarkPlugins: [remarkImages, remarkEmoji, remarkGfm],
+      remarkPlugins: [remarkImages, remarkEmoji],
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: "append" }],
