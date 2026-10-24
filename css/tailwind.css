@@ -6,8 +6,10 @@
 
 @theme {
   /* Core palette */
-  --color-primary: #c45d3e;
-  --color-primary-hover: #a84830;
+  /* Primary meets WCAG AA (4.5:1) as text on bg/surface and under on-primary. */
+  --color-primary: #a95035;
+  --color-primary-hover: #95462f;
+  --color-on-primary: #fff;
   --color-secondary: #1a3a3a;
   --color-tertiary: #121a1a;
   --color-quaternary: #243838;
@@ -55,6 +57,7 @@
 .dark {
   --color-primary: #d4734f;
   --color-primary-hover: #e8886a;
+  --color-on-primary: #0f1414;
   --color-secondary: #5a9e9e;
   --color-tertiary: #0f1414;
   --color-quaternary: #1e2e2e;
@@ -63,7 +66,7 @@
   --color-bg: #0f1414;
   --color-surface: #182424;
   --color-text: #e8e4e0;
-  --color-text-muted: #9a9590;
+  --color-text-muted: #a5a19c;
   --color-border: #2a3a3a;
   --color-white: #e8e4e0;
   --color-header: #0a1a1a;
@@ -86,6 +89,7 @@
   --tw-prose-bold: var(--color-text);
   --tw-prose-headings: var(--color-text);
   --tw-prose-quotes: var(--color-text-muted);
+  --tw-prose-captions: var(--color-text-muted);
   --tw-prose-quote-borders: var(--color-primary);
   --tw-prose-code: var(--color-text);
   --tw-prose-counters: var(--color-text-muted);
