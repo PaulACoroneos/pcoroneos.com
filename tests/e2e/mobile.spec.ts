@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { clientNavigate } from "./navigation";
 
 test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 
@@ -51,9 +52,10 @@ test.describe("Mobile navigation", () => {
   test("navigates and closes when a link is tapped", async ({ page }) => {
     await page.goto("/");
     await menuButton(page).click();
-    await mobileNav(page)
-      .getByRole("link", { name: "Leetcode", exact: true })
-      .click();
+    await clientNavigate(
+      page,
+      mobileNav(page).getByRole("link", { name: "Leetcode", exact: true }),
+    );
 
     await expect(page).toHaveURL(/\/leetcode$/);
     await expect(mobileNav(page)).toBeHidden();

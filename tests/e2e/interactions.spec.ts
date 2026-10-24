@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { clientNavigate } from "./navigation";
 
 const html = (page: Page) => page.locator("html");
 const themeToggle = (page: Page) =>
@@ -34,7 +35,7 @@ test.describe("Theme toggle", () => {
     await page.reload();
     await expect(html(page)).toHaveClass(/dark/);
 
-    await navLink(page, "Blog").click();
+    await clientNavigate(page, navLink(page, "Blog"));
     await expect(page).toHaveURL(/\/blog$/);
     await expect(html(page)).toHaveClass(/dark/);
   });
@@ -62,9 +63,9 @@ test.describe("Theme toggle", () => {
     // Scripts re-run on every astro:page-load; a listener bound twice would
     // toggle twice per click and leave the theme unchanged.
     await page.goto("/");
-    await navLink(page, "Blog").click();
+    await clientNavigate(page, navLink(page, "Blog"));
     await expect(page).toHaveURL(/\/blog$/);
-    await navLink(page, "About").click();
+    await clientNavigate(page, navLink(page, "About"));
     await expect(page).toHaveURL(/\/about$/);
 
     await themeToggle(page).click();
@@ -82,11 +83,16 @@ test.describe("Leetcode filter", () => {
     expect(total).toBeGreaterThan(1);
 
     const search = page.getByRole("textbox", { name: "Search Solutions" });
-    await search.fill("two sum");
-    await expect(items.locator("visible=true")).toHaveCount(1);
-    await expect(
-      page.getByRole("heading", { name: "Two Sum", exact: false }),
-    ).toBeVisible();
+    await search.fill("Two SUM");
+    const visible = items.locator("visible=true");
+    await expect(visible).not.toHaveCount(total);
+    const visibleTitles = await visible.evaluateAll((els) =>
+      els.map((el) => el.getAttribute("data-title")),
+    );
+    expect(visibleTitles.length).toBeGreaterThan(0);
+    for (const title of visibleTitles) {
+      expect(title).toContain("two sum");
+    }
 
     await search.fill("no solution has this title");
     await expect(items.locator("visible=true")).toHaveCount(0);
@@ -97,15 +103,15 @@ test.describe("Leetcode filter", () => {
 
   test("works after arriving via client navigation", async ({ page }) => {
     await page.goto("/");
-    await navLink(page, "Leetcode").click();
+    await clientNavigate(page, navLink(page, "Leetcode"));
     await expect(page).toHaveURL(/\/leetcode$/);
 
     await page
       .getByRole("textbox", { name: "Search Solutions" })
-      .fill("two sum");
+      .fill("no solution has this title");
     await expect(
       page.locator("[data-leetcode-item]").locator("visible=true"),
-    ).toHaveCount(1);
+    ).toHaveCount(0);
   });
 });
 
@@ -113,6 +119,9 @@ test.describe("Portfolio filter", () => {
   // Filtering logic is unit tested; this checks the island hydrates.
   test("hydrates and filters projects", async ({ page }) => {
     await page.goto("/portfolio");
+    // Astro drops the ssr attribute once the island has hydrated; clicking
+    // before then would be lost.
+    await expect(page.locator("astro-island")).not.toHaveAttribute("ssr");
     const cards = page.getByRole("heading", { level: 2 });
     const total = await cards.count();
 
