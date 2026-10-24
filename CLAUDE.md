@@ -56,7 +56,8 @@ export const meta = {
 - `app/blog/` — All MDX blog post content
 - `css/` — Global styles (Tailwind directives + Night Owl syntax theme)
 - `public/blog-assets/` — Images used in blog posts
-- `tests/` — Vitest unit tests
+- `tests/` — Vitest unit tests (pure logic and the React `PortfolioGrid` island)
+- `tests/e2e/` — Playwright tests against the built site (`pnpm run test:e2e`): smoke, interactive scripts (theme, mobile nav, Leetcode filter), every post route, redirects and metadata
 
 ### MDX Components
 
@@ -64,7 +65,7 @@ export const meta = {
 
 ### Redirects
 
-`astro.config.mjs` contains 40+ URL redirects mapping old routes to the current blog structure. Add new redirects there when moving/renaming posts.
+`src/lib/redirects.mts` holds the 40+ URL redirects (old route → current blog post) that `astro.config.mjs` passes to Astro. Add new redirects there when moving/renaming posts; `tests/redirects.spec.ts` fails if a target isn't an existing post. It's `.mts` because Node loads the Astro config natively.
 
 ## Deployment
 

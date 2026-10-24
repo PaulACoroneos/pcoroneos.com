@@ -1,3 +1,22 @@
+type PostMeta = {
+  title: string;
+  description: string;
+  date: string;
+  tags?: string[];
+  discussion?: string;
+};
+
+export type PostModule = {
+  default: unknown;
+  meta: PostMeta;
+};
+
+export type PostEntry = {
+  link: string;
+  module: PostModule;
+  excerpt: string;
+};
+
 export const normalizePostLink = (sourcePath: string) => {
   const withoutPrefix = sourcePath.replace("../../app", "");
   const withoutPageFile = withoutPrefix.replace(/\/page\.mdx$/, "");
@@ -67,4 +86,26 @@ export const extractExcerpt = (source: string, fallback: string) => {
   }
 
   return fallback;
+};
+
+// Turns glob results (keyed by source path) into dated posts, newest first.
+export const buildPostEntries = (
+  modules: Record<string, PostModule>,
+  rawModules: Record<string, string>,
+): PostEntry[] => {
+  return Object.entries(modules)
+    .filter(([, module]) => Boolean(module.meta?.date))
+    .map(([sourcePath, module]) => ({
+      link: normalizePostLink(sourcePath),
+      module,
+      excerpt: extractExcerpt(
+        rawModules[sourcePath] ?? "",
+        module.meta?.description ?? "",
+      ),
+    }))
+    .sort(
+      (a, b) =>
+        new Date(b.module.meta.date).getTime() -
+        new Date(a.module.meta.date).getTime(),
+    );
 };
