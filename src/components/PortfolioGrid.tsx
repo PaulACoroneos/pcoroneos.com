@@ -44,7 +44,7 @@ function Card({
         </ul>
         <div className="flex shrink-0 gap-2">
           <a
-            className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors"
+            className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-on-primary transition-colors"
             title={`GitHub link for ${title}`}
             href={githubLink}
             target="_blank"
@@ -59,7 +59,7 @@ function Card({
           </a>
           {deployedLink ? (
             <a
-              className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors"
+              className="bg-primary hover:bg-primary-hover inline-flex min-h-[44px] w-auto items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-on-primary transition-colors"
               title={`Deployed link for ${title}`}
               href={deployedLink}
               target="_blank"
@@ -115,8 +115,8 @@ export default function PortfolioGrid({ projects, base }: Props) {
                 aria-pressed={active}
                 className={`border-border rounded-full border px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
                   active
-                    ? "bg-primary hover:bg-primary-hover text-white"
-                    : "bg-surface text-text-muted hover:bg-primary hover:text-white"
+                    ? "bg-primary hover:bg-primary-hover text-on-primary"
+                    : "bg-surface text-text-muted hover:bg-primary hover:text-on-primary"
                 }`}
               >
                 {tag}

@@ -12,7 +12,7 @@ const tealSlateTheme = {
   tokenColors: [
     {
       scope: ["comment", "punctuation.definition.comment", "string.comment"],
-      settings: { foreground: "#6b8a8a", fontStyle: "italic" },
+      settings: { foreground: "#6f8e8e", fontStyle: "italic" },
     },
     {
       scope: [

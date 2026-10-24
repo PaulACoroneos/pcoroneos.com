@@ -57,7 +57,7 @@ export const meta = {
 - `css/` — Global styles (Tailwind directives + Night Owl syntax theme)
 - `public/blog-assets/` — Images used in blog posts
 - `tests/` — Vitest unit tests (pure logic and the React `PortfolioGrid` island)
-- `tests/e2e/` — Playwright tests against the built site (`pnpm run test:e2e`): smoke, interactive scripts (theme, mobile nav, Leetcode filter), every post route, redirects and metadata
+- `tests/e2e/` — Playwright tests against the built site (`pnpm run test:e2e`): smoke, interactive scripts (theme, mobile nav, Leetcode filter), every post route, redirects, metadata, the 404 page, and axe WCAG A/AA scans in light and dark themes
 
 ### MDX Components
 
