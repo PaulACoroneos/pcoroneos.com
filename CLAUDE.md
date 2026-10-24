@@ -65,4 +65,4 @@ export const meta = {
 
 ## Deployment
 
-Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow which builds and deploys to GitHub Pages automatically. The `main-ci.yml` workflow runs lint + build on all PRs.
+Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow which builds and deploys to GitHub Pages automatically. The `main-ci.yml` workflow runs lint, format check, unit tests, build, and E2E tests on all PRs.

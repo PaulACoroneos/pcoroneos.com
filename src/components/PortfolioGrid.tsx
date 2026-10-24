@@ -102,10 +102,10 @@ export default function PortfolioGrid({ projects, base }: Props) {
   return (
     <div className="mt-8 space-y-6">
       <fieldset>
-        <legend className="text-text-muted mb-2 text-sm font-semibold tracking-wide uppercase">
+        <legend className="text-text-muted text-sm font-semibold tracking-wide uppercase">
           Filter by technology used
         </legend>
-        <div className="flex flex-wrap gap-2">
+        <div className="mt-2 flex flex-wrap gap-2">
           {TECH_TAGS.map((tag) => {
             const active = activeFilters.has(tag);
             return (

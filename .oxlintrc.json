@@ -7,15 +7,8 @@
   "options": {
     "typeAware": true
   },
-  "settings": {
-    "react": {
-      "version": "19"
-    }
-  },
-  "ignorePatterns": [
-    "dist/**",
-    ".astro/**",
-    "node_modules/**",
-    "test-results/**"
-  ]
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn"
+  }
 }
