@@ -23,6 +23,9 @@ export default defineConfig({
       : "pnpm run build && pnpm run start",
     url: "http://localhost:4321",
     reuseExistingServer: !process.env.CI,
+    // Astro 7 detaches `astro preview` when run under an AI coding agent,
+    // which Playwright sees as the server exiting early.
+    env: { ASTRO_PREVIEW_BACKGROUND: "0" },
     timeout: 120_000,
   },
 });
