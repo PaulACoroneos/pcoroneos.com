@@ -1,4 +1,4 @@
-/** @type {import('shiki').ThemeRegistration} */
+/** @type {import('@astrojs/markdown-remark').ShikiConfig['theme']} */
 const tealSlateTheme = {
   name: "teal-slate",
   type: "dark",
