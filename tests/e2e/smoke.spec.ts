@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { collectPageErrors } from "./console-errors";
 
 test.describe("Site smoke tests", () => {
   test("home page loads and shows blog posts", async ({ page }) => {
@@ -77,24 +78,13 @@ test.describe("Site smoke tests", () => {
   });
 
   test("pages have no console errors", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") {
-        errors.push(msg.text());
-      }
-    });
-    page.on("pageerror", (error) => {
-      errors.push(`pageerror: ${error.message}`);
-    });
-    page.on("requestfailed", (request) => {
-      const failure = request.failure();
-      const reason = failure?.errorText ?? "unknown error";
-      errors.push(`requestfailed: ${request.url()} - ${reason}`);
-    });
+    const errors = collectPageErrors(page);
 
     await page.goto("/");
     await page.goto("/blog");
     await page.goto("/about");
+    await page.goto("/leetcode");
+    await page.goto("/portfolio");
 
     expect(errors).toHaveLength(0);
   });
