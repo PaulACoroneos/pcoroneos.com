@@ -1,0 +1,7 @@
+{
+  "recommendations": ["oxc.oxc-vscode", "astro-build.astro-vscode"],
+  "unwantedRecommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
