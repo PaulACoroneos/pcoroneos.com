@@ -54,7 +54,7 @@ export const meta = {
 ### Key directories
 
 - `src/layouts/` — BaseLayout (HTML shell) and PostLayout (blog post wrapper)
-- `src/components/` — Shared Astro components (Header, Footer, Card, etc.)
+- `src/components/` — Shared Astro components (Header, Footer, TagBadge, etc.) and the React `PortfolioGrid` island
 - `src/lib/` — TypeScript utilities for post discovery and parsing
 - `app/blog/` — All MDX blog post content
 - `css/` — Global styles (Tailwind directives + Night Owl syntax theme)
