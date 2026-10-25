@@ -14,9 +14,12 @@ pnpm run typecheck    # tsc --noEmit (TypeScript 7 native, strict)
 pnpm run format       # oxfmt formatting
 pnpm run format:check # oxfmt check (runs in CI)
 pnpm run test         # Run Vitest (all tests)
+pnpm run test:e2e     # Build, preview, and run Playwright against the built site
 ```
 
-Run a single test file: `pnpm run test tests/post-parsing.spec.ts`
+Run a single test file: `pnpm run test tests/post-parsing.spec.ts` (Vitest) or `pnpm run test:e2e tests/e2e/smoke.spec.ts` (Playwright).
+
+Astro and the E2E suite need the Node version in `.nvmrc` (engines: `>=22.23.4`). Run `pnpm exec playwright install chromium` once before the first E2E run.
 
 The pre-commit hook runs lint-staged, typecheck, and all tests automatically.
 
@@ -51,7 +54,7 @@ export const meta = {
 ### Key directories
 
 - `src/layouts/` — BaseLayout (HTML shell) and PostLayout (blog post wrapper)
-- `src/components/` — Shared Astro components (Header, Footer, Card, etc.)
+- `src/components/` — Shared Astro components (Header, Footer, TagBadge, etc.) and the React `PortfolioGrid` island
 - `src/lib/` — TypeScript utilities for post discovery and parsing
 - `app/blog/` — All MDX blog post content
 - `css/` — Global styles (Tailwind directives + Night Owl syntax theme)
@@ -61,7 +64,7 @@ export const meta = {
 
 ### MDX Components
 
-`mdx-components.tsx` (root) and `src/lib/mdx-components.tsx` provide custom element handlers for code blocks and images used within MDX content.
+`src/lib/mdx-components.tsx` provides custom element handlers for code blocks and images used within MDX content; pages pass it to `<Content components={...} />`.
 
 ### Redirects
 
@@ -69,4 +72,4 @@ export const meta = {
 
 ## Deployment
 
-Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow which builds and deploys to GitHub Pages automatically. The `main-ci.yml` workflow runs lint, typecheck, format check, unit tests, build, and E2E tests on all PRs.
+`main-ci.yml` runs lint, typecheck, format check, unit tests, build, and E2E tests on every PR and push to `main`. On `main` (push or manual run), the `deploy` job publishes the exact `dist/` that passed those checks to GitHub Pages, so a failing check blocks the deploy. When E2E fails, Playwright traces are uploaded as the `playwright-test-results` artifact.
